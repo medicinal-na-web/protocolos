@@ -201,11 +201,22 @@ body {
   height: 6.6mm;
 }
 .ativos .n { font-weight: 700; white-space: nowrap; }
+/* Pontilhado feito com pontos de texto: sai idêntico em qualquer leitor de PDF
+   (borda "dotted" muda de densidade conforme a escala e o comprimento). */
 .ativos .pont {
   flex: 1;
+  min-width: 3mm;
   margin: 0 1mm;
-  border-bottom: 0.25mm dotted #555;
-  transform: translateY(-0.6mm);
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 6pt;
+  font-weight: 400;
+  letter-spacing: 0.32mm;
+  color: #555;
+  direction: rtl; /* corta o excesso no início, então os pontos sempre encostam na dose */
+}
+.ativos .pont::before {
+  content: "................................................................................................................................................";
 }
 .ativos .d { white-space: nowrap; }
 .modo { font-size: 7.4pt; margin: 4mm 0 0 0; max-width: 82mm; line-height: 1.45; }
