@@ -77,7 +77,7 @@ function blocoDestaques(b, ctx) {
   if (!arte) return `<div class="bloco"><div class="destaques">${itens}</div></div>`;
   return `<div class="bloco"><div class="destaques-com-arte">
     <div class="destaques">${itens}</div>
-    <img class="arte-destaques" src="${ctx.artes}/${esc(arte.src)}" style="width:${mm(arte.largura ?? 55)}">
+    <img class="arte-destaques${arte.fundir === false ? " sem-mascara" : ""}" src="${ctx.artes}/${esc(arte.src)}" style="width:${mm(arte.largura ?? 55)}">
   </div></div>`;
 }
 

@@ -335,3 +335,6 @@ body {
 }
 .etiqueta span:first-child { transform: rotate(-3deg); width: fit-content; }
 .etiqueta span + span { margin-top: -1mm; transform: rotate(-2deg); }
+
+/* fundir: false — foto já em fundo branco puro, sem esfumar as bordas */
+.arte-destaques.sem-mascara { -webkit-mask-image: none; mask-image: none; align-self: center; }
