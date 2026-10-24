@@ -265,6 +265,15 @@ body {
 }
 .destaque p strong, .texto p strong { color: var(--texto); font-weight: 700; }
 
+.destaques-com-arte { display: flex; align-items: flex-start; gap: 2mm; margin-right: -14mm; }
+.destaques-com-arte .destaques { flex: 1; padding-right: 0; }
+.arte-destaques {
+  flex: none;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+
 /* Conectores desenhados por script após o layout */
 .conectores {
   position: absolute;

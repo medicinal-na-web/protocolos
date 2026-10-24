@@ -68,10 +68,17 @@ async function blocoFormula(b, ctx) {
   </div>`;
 }
 
-function blocoDestaques(b) {
-  return `<div class="bloco"><div class="destaques">${b.itens
+// destaques: lista de itens, ou { itens, arte } para ter uma foto ao lado do texto
+function blocoDestaques(b, ctx) {
+  const itens = (Array.isArray(b) ? b : b.itens)
     .map((d) => `<div class="destaque"><h4>${esc(d.nome)}</h4><p>${rico(d.texto)}</p></div>`)
-    .join("")}</div></div>`;
+    .join("");
+  const arte = !Array.isArray(b) && b.arte;
+  if (!arte) return `<div class="bloco"><div class="destaques">${itens}</div></div>`;
+  return `<div class="bloco"><div class="destaques-com-arte">
+    <div class="destaques">${itens}</div>
+    <img class="arte-destaques" src="${ctx.artes}/${esc(arte.src)}" style="width:${mm(arte.largura ?? 55)}">
+  </div></div>`;
 }
 
 // Imagem de margem a margem que some no branco da página (sem recortes aparentes)
@@ -117,7 +124,7 @@ async function renderizar(slug) {
     const blocos = [];
     for (const b of pag) {
       if (b.formula) blocos.push(await blocoFormula(b.formula, ctx));
-      else if (b.destaques) blocos.push(blocoDestaques({ itens: b.destaques }));
+      else if (b.destaques) blocos.push(blocoDestaques(b.destaques, ctx));
       else if (b.faixa) blocos.push(blocoFaixa(b.faixa, ctx));
       else if (b.texto) blocos.push(blocoTexto(b.texto, ctx));
       else if (b.espaco !== undefined) blocos.push(ESPACO({ altura: b.espaco }));

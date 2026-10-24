@@ -1,0 +1,97 @@
+# Guia de Formulações — Bem-Estar na Menopausa
+# Destaque: Estradiol Spray Transdermal (referência Lenzetto®)
+#
+# RASCUNHO: fórmulas, doses e textos precisam de validação do farmacêutico
+# responsável. Concentração do spray assume a embalagem dosimetrada de 90 µL/jato
+# (1,53 mg de estradiol por jato = 1,7% p/v), como no medicamento de referência.
+# Uso da marca Lenzetto® e reprodução da concentração: confirmar com regulatório.
+
+titulo: Bem-Estar na Menopausa
+cor:
+  escura: "#7a1f4b"
+  clara: "#e2879f"
+qr: https://medicinal.vip/protoc_Menopausa?r=qr   # link a criar no medicinal.vip
+capa: capa.jpg
+capa_posicao: "center 60%"
+
+paginas:
+  # Página 2 — Fórmula destaque: estradiol transdermal
+  - - formula:
+        nome: Estradiol Spray Transdermal
+        subtitulo: referência Lenzetto®
+        via: OUT
+        periodo: dia
+        ativos:
+          - { nome: Estradiol (hemi-hidratado), dose: "1,53mg/jato", destaque: true }
+          - { nome: Octisalato, dose: 5%, destaque: true }
+          - { nome: Álcool etílico 95%, dose: q.s.p. }
+          - { nome: Spray dosimetrado 90µL, dose: "8,1ml (56 jatos)" }
+        modo_de_uso: Aplicar 1 jato pela manhã na face interna do antebraço, com a pele limpa e seca. Deixar secar por 2 minutos e não lavar o local por 1 hora. A dose pode ser ajustada para 2 ou 3 jatos ao dia, conforme resposta clínica.
+    - destaques:
+        arte: { src: spray.jpg, largura: 58 }
+        itens:
+        - nome: Estradiol
+          texto: Hormônio **bioidêntico**, igual ao produzido pelos ovários. É a terapia mais eficaz contra **fogachos e suores noturnos** e também atua no **sono**, no **humor**, no **ressecamento vaginal** e na **prevenção da perda óssea**. A via **transdermal** evita a primeira passagem pelo fígado, com **menor impacto sobre a coagulação** e os triglicerídeos.
+        - nome: Octisalato
+          texto: '**Promotor de permeação** que forma um reservatório na camada córnea e garante **absorção contínua** do estradiol ao longo do dia. Em veículo alcoólico, o spray **seca em cerca de 2 minutos**, sem resíduo, com **dose exata a cada jato**.'
+    - faixa:
+        src: antebraco.jpg
+        altura: 78
+        posicao: "center 50%"
+
+  # Página 3 — Proteção endometrial e saúde íntima
+  - - formula:
+        nome: Progesterona Micronizada
+        subtitulo: proteção endometrial
+        via: IN
+        periodo: noite
+        ativos:
+          - { nome: Progesterona micronizada, dose: 100mg, destaque: true }
+          - { nome: Excipiente oleoso, dose: q.s.p. }
+        modo_de_uso: Tomar 1 cápsula à noite, ao deitar, em uso contínuo. Indicada para mulheres com útero, em associação ao estradiol.
+    - destaques:
+        arte: { src: capsulas.jpg, largura: 52 }
+        itens:
+        - nome: Progesterona micronizada
+          texto: '**Bioidêntica**, protege o **endométrio** do estímulo do estradiol em mulheres com útero. Tomada à noite, seus metabólitos têm efeito **calmante**, contribuindo para a **qualidade do sono**.'
+    - espaco: 4
+    - formula:
+        nome: Creme Vaginal Trófico
+        subtitulo: saúde íntima
+        via: OUT
+        periodo: noite
+        qr: false
+        ativos:
+          - { nome: Estriol, dose: "1mg/g", destaque: true }
+          - { nome: Ácido Hialurônico, dose: "0,2%" }
+          - { nome: Creme vaginal, dose: 30g com aplicador }
+        modo_de_uso: Aplicar 1 aplicador (1g) via vaginal à noite por 2 semanas. Depois, 2 vezes por semana.
+    - destaques:
+        - nome: Estriol
+          texto: Estrogênio de **ação local** que restaura a espessura, a **lubrificação** e a elasticidade da mucosa vaginal, aliviando **ressecamento**, **dor na relação** e **sintomas urinários** da síndrome geniturinária da menopausa. Associado ao **ácido hialurônico**, potencializa a hidratação.
+
+  # Página 4 — Saúde óssea + educativo
+  - - formula:
+        nome: Cápsulas Saúde Óssea
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: Vitamina K2 (MK-7), dose: 100mcg, destaque: true }
+          - { nome: Vitamina D3, dose: 2.000UI }
+          - { nome: Magnésio Bisglicinato, dose: 300mg, destaque: true }
+          - { nome: Boro Quelato, dose: 3mg }
+        modo_de_uso: Tomar 1 dose ao dia, após o almoço.
+    - destaques:
+        - nome: Vitamina K2 (MK-7)
+          texto: Ativa a **osteocalcina**, direcionando o cálcio para os **ossos** e não para as artérias. Em sinergia com a **vitamina D3**, contribui para a **densidade óssea**, que cai de forma acelerada após a menopausa.
+        - nome: Magnésio Bisglicinato
+          texto: Forma quelada de **alta absorção** e boa tolerância gastrointestinal, que participa da **mineralização óssea** e auxilia no **relaxamento muscular** e na **qualidade do sono**.
+    - faixa:
+        src: mulher.jpg
+        altura: 70
+        posicao: "center 35%"
+        etiqueta: [Menopausa, Em equilíbrio]
+    - texto:
+        paragrafos:
+          - A **menopausa** marca a queda dos hormônios ovarianos e pode trazer **fogachos**, **suores noturnos**, **insônia**, **alterações de humor**, **ressecamento vaginal** e **perda de massa óssea**. Iniciada na **janela de oportunidade** — antes dos 60 anos ou nos primeiros 10 anos após a última menstruação — a terapia com **estradiol transdermal** é a estratégia mais eficaz para devolver qualidade de vida, sempre com **avaliação individual** e acompanhamento do prescritor.
+          - '**Contraindicações:** câncer de mama ou de endométrio, sangramento vaginal não esclarecido, trombose venosa ou arterial e doença hepática ativa.'
