@@ -26,7 +26,7 @@ paginas:
           - { nome: Octisalato, dose: 5%, destaque: true }
           - { nome: Álcool etílico 95%, dose: q.s.p. }
           - { nome: Spray dosimetrado 90µL, dose: "8,1ml (56 jatos)" }
-        modo_de_uso: Aplicar 1 jato pela manhã na face interna do antebraço, com a pele limpa e seca. Deixar secar por 2 minutos e não lavar o local por 1 hora. A dose pode ser ajustada para 2 ou 3 jatos ao dia, conforme resposta clínica.
+        modo_de_uso: Apoiar o aplicador em cone na face interna do antebraço, com a pele limpa e seca, e aplicar 1 jato pela manhã. Deixar secar por 2 minutos e não lavar o local por 1 hora. A dose pode ser ajustada para 2 ou 3 jatos ao dia, conforme resposta clínica.
     - destaques:
         arte: { src: spray.jpg, largura: 58 }
         itens:
