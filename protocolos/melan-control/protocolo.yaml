@@ -90,7 +90,7 @@ paginas:
         qr: false
         arte: { src: conta-gotas.png, topo: 10, direita: 6, largura: 42 }
         ativos:
-          - { nome: Óleo HT10, dose: 1%, destaque: true }
+          - { nome: Ólea HT10, dose: 1%, destaque: true }
           - { nome: Vitamina B12, dose: "0,1%" }
           - { nome: Niacinamida, dose: 4% }
           - { nome: Alfa Arbutin, dose: 4% }
