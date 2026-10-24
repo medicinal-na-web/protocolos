@@ -1,0 +1,127 @@
+# Guia de Formulações — Melan Control (Melasma)
+# Recriação do guia original no padrão de protocolos.
+
+titulo: Melan Control
+cor:
+  escura: "#5a2a82"
+  clara: "#b072e0"
+qr: https://medicinal.vip/protoc_Melasma?r=qr
+capa: capa.png
+
+paginas:
+  # Página 2
+  - - formula:
+        nome: Melan Control Cream
+        subtitulo: com hidroquinona
+        via: OUT
+        periodo: noite
+        ativos:
+          - { nome: Nikkol VC-IP, dose: 5%, destaque: true }
+          - { nome: Hidroquinona, dose: 4% }
+          - { nome: Tretinoína, dose: "0,025%" }
+          - { nome: Fluocinolona, dose: "0,025%" }
+          - { nome: Ácido Glicólico, dose: 8% }
+          - { nome: Vitamina E, dose: 3% }
+          - { nome: Creme clareador, dose: 30g }
+        modo_de_uso: Aplicar na face à noite após higienização.
+    - espaco: 2
+    - formula:
+        nome: Melan Control Cream
+        subtitulo: sem hidroquinona
+        via: OUT
+        periodo: noite
+        qr: false
+        arte: { src: creme.png, topo: -6, direita: 0, largura: 82 }
+        ativos:
+          - { nome: Nikkol VC-IP, dose: 5% }
+          - { nome: 4-HR (Hexilresorcinol), dose: 1%, destaque: true }
+          - { nome: POMC-BlocK, dose: 3%, destaque: true }
+          - { nome: Ácido Tranexâmico, dose: 5% }
+          - { nome: Fluocinolona, dose: "0,025%" }
+          - { nome: Tretinoína, dose: "0,025%" }
+          - { nome: Vitamina E, dose: 3% }
+          - { nome: Creme clareador, dose: 30g }
+        modo_de_uso: Aplicar na face à noite após higienização.
+    - destaques:
+        - nome: Nikkol VC-IP®
+          texto: É o derivado **lipossolúvel da Vitamina C** na forma de éster que apresenta **alta estabilidade** e **excelente absorção percutânea**, possui potente ação antioxidante, contribuindo para a **uniformização do tom da pele**, por **inibir** a atividade da **tirosinase**.
+        - nome: 4-HR (Hexilresorcinol)®
+          texto: Atua como inibidor da **tirosinase**, a enzima chave na **produção de melanina**, com eficácia no **clareamento** e **uniformização do tom da pele**. Essa abordagem, aliada à sua capacidade **antioxidante**.
+        - nome: POMC-BlocK®
+          texto: Atua na **inibição** da **expressão gênica** da **POMC** e da **tirosinase**, suprimindo a **melanogênese** para impedir a síntese e a transferência da melanina, **reduzindo as hiperpigmentações cutâneas**.
+
+  # Página 3
+  - - formula:
+        nome: Cápsulas Despigmentantes
+        via: IN
+        ativos:
+          - { nome: MintyBright™ Nu, dose: 150mg, destaque: true }
+          - { nome: Oli-Olá, dose: 250mg, destaque: true }
+          - { nome: Pinus Pinaster, dose: 100mg }
+          - { nome: Polypodium Leucotomos, dose: 250mg }
+          - { nome: Luteína, dose: 10mg }
+          - { nome: Vit C Revestida, dose: 500mg }
+          - { nome: Acetato de Tocoferol, dose: 400UI }
+          - { nome: Licopeno, dose: 10mg }
+          - { nome: Astaxantina, dose: 5mg }
+        modo_de_uso: Tomar 1 dose pela manhã.
+    - destaques:
+        - nome: MintyBright™ Nu
+          texto: Atua com **tripla ação**, desenvolvido para ajudar na redução das hiperpigmentações dérmicas e uniformização do tom da pele, atuando de dentro pra fora. **Tratamento 360°** que age na raiz do melasma — **clareia, uniformiza e protege**.
+        - nome: Oli-Ola®
+          texto: Devido à potente ação antioxidante do hidroxitirosol, Oli-Ola™ auxilia na **diminuição da hiperpigmentação**, promovendo **uniformidade do tom da pele**, estímulo da renovação celular e a síntese de **colágeno e elastina**.
+
+  # Página 4
+  - - formula:
+        nome: Foam Ácido Mandélico
+        via: OUT
+        periodo: [dia, noite]
+        ativos:
+          - { nome: Ácido Mandélico, dose: "3,5%" }
+          - { nome: Oliven300, dose: 5% }
+          - { nome: Glicerina, dose: 3% }
+          - { nome: Foam, dose: 150ml }
+        modo_de_uso: Lavar o rosto pela manhã e à noite.
+    - faixa: { src: espuma.png, altura: 62 }
+    - formula:
+        nome: Sérum Protetor
+        via: OUT
+        periodo: dia
+        qr: false
+        arte: { src: conta-gotas.png, topo: 10, direita: 6, largura: 42 }
+        ativos:
+          - { nome: Óleo HT10, dose: 1%, destaque: true }
+          - { nome: Vitamina B12, dose: "0,1%" }
+          - { nome: Niacinamida, dose: 4% }
+          - { nome: Alfa Arbutin, dose: 4% }
+          - { nome: Ceramides 3, dose: "0,5%" }
+          - { nome: Ácido Glicirrízico, dose: "0,5%" }
+          - { nome: Sérum fluido, dose: 50ml }
+        modo_de_uso: Aplicar na face 5 gotas pela manhã após higienização e antes do filtro solar.
+    - destaques:
+        - nome: Olea HT™
+          texto: Proporciona **proteção à pele** frente aos danos induzidos pela **luz azul**.
+
+  # Página 5
+  - - formula:
+        nome: Modulador da Microbiota
+        via: IN
+        ativos:
+          - { nome: DERMMA Biotic, dose: 100mg, destaque: true }
+          - { nome: Newbiome, dose: 200mg, destaque: true }
+          - { nome: Bifidum Adolescentis, dose: 1BLH }
+          - { nome: Lactobacillus Johnsonii, dose: 1BLH }
+          - { nome: Lactobacillus Paracasei, dose: 1BLH }
+          - { nome: Lactobacillus Rhamnosus, dose: 1BLH }
+          - { nome: Lactobacillus Salivarius, dose: 1BLH }
+        modo_de_uso: Tomar 1 dose à noite.
+    - destaques:
+        - nome: Newbiome®
+          texto: É um **posbiótico avançado**, padronizado em 50% de tributirina microencapsulada em pó, que serve como uma **fonte de butirato** altamente biodisponível e **sem odor** para a **saúde intestinal**. Atua de forma sinérgica no manejo da distensão abdominal, abordando mecanismos centrais como **disbiose intestinal, inflamação de baixo grau e disfunção da barreira intestinal**.
+        - nome: DERMMA Biotic®
+          texto: É a combinação de **8 cepas probióticas** selecionadas em concentrações balanceadas, desenvolvidas para atuarem no **eixo intestino-pele**, promovendo a **saúde cutânea e capilar**.
+    - texto:
+        etiqueta: [Eixo, Intestino - Pele]
+        imagem: { src: eixo-intestino-pele.png, largura: 112 }
+        paragrafos:
+          - O **eixo intestino–pele** é a conexão direta entre a saúde intestinal e a saúde da pele. Ele envolve microbiota, sistema imunológico, **inflamação**, **metabolismo hormonal** e até **estresse oxidativo**, todos fatores que influenciam o **melasma**. No caso do melasma, essa relação é especialmente importante porque estamos falando de uma condição **inflamatória e multifatorial**, não apenas estética.

@@ -1,0 +1,77 @@
+# Guia de Formulações — Disbiose Intestinal
+# RASCUNHO: fórmulas, doses e textos precisam de validação do farmacêutico
+# responsável antes de publicar.
+
+titulo: Disbiose Intestinal
+cor:
+  escura: "#0b5c55"
+  clara: "#3db89a"
+qr: https://medicinal.vip/protoc_Disbiose?r=qr   # link a criar no medicinal.vip
+capa: capa.jpg
+
+paginas:
+  # Página 2 — Remover: reduzir o supercrescimento de microrganismos indesejados
+  - - formula:
+        nome: Cápsulas Equilíbrio Intestinal
+        subtitulo: fase 1 · remover
+        via: IN
+        periodo: [dia, noite]
+        arte: { src: capsulas.jpg, topo: 42, direita: -4, largura: 78 }
+        ativos:
+          - { nome: Berberina, dose: 500mg, destaque: true }
+          - { nome: Óleo de Orégano, dose: 150mg, destaque: true }
+          - { nome: Extrato de Alho (Alicina), dose: 200mg }
+          - { nome: Cravo-da-índia, dose: 100mg }
+        modo_de_uso: Tomar 1 dose após o almoço e 1 dose após o jantar, por 30 dias.
+    - destaques:
+        - nome: Berberina
+          texto: Alcaloide vegetal com **ação antimicrobiana seletiva**, que ajuda a **reduzir o supercrescimento** de bactérias indesejadas sem eliminar a flora benéfica, além de contribuir para o **controle glicêmico** e da **inflamação intestinal**.
+        - nome: Óleo de Orégano
+          texto: Rico em **carvacrol e timol**, compostos com **amplo espectro antimicrobiano e antifúngico**, que auxiliam no controle de **fungos e bactérias oportunistas** envolvidos na disbiose.
+
+  # Página 3 — Reparar: restaurar a barreira intestinal
+  - - formula:
+        nome: Sachê Reparador da Mucosa
+        subtitulo: fase 2 · reparar
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: L-Glutamina, dose: 5g, destaque: true }
+          - { nome: Zinco Carnosina, dose: 75mg, destaque: true }
+          - { nome: Sunfiber® (PHGG), dose: 5g, destaque: true }
+          - { nome: N-Acetilglucosamina, dose: 500mg }
+          - { nome: Sachê sabor limão, dose: 1 un }
+        modo_de_uso: Diluir 1 sachê em 200ml de água e tomar em jejum, pela manhã.
+    - faixa: { src: sache.jpg, altura: 58, posicao: "center 60%" }
+    - destaques:
+        - nome: L-Glutamina
+          texto: Principal **fonte de energia dos enterócitos**, as células que revestem o intestino. Auxilia na **regeneração da mucosa** e no fortalecimento das **junções firmes**, reduzindo a **permeabilidade intestinal**.
+        - nome: Zinco Carnosina
+          texto: Complexo de zinco e L-carnosina que **adere à mucosa gastrointestinal**, promovendo **proteção e cicatrização** do revestimento intestinal e gástrico.
+        - nome: Sunfiber® (PHGG)
+          texto: Fibra prebiótica de goma guar parcialmente hidrolisada, **bem tolerada** e sem gerar distensão, que **alimenta as bactérias benéficas** e estimula a produção de **ácidos graxos de cadeia curta**.
+
+  # Página 4 — Reinocular + educativo
+  - - formula:
+        nome: Modulador da Microbiota
+        subtitulo: fase 3 · reinocular
+        via: IN
+        periodo: noite
+        ativos:
+          - { nome: Newbiome, dose: 200mg, destaque: true }
+          - { nome: Saccharomyces boulardii, dose: 250mg, destaque: true }
+          - { nome: Lactobacillus Acidophilus, dose: 1BLH }
+          - { nome: Lactobacillus Rhamnosus, dose: 1BLH }
+          - { nome: Bifidobacterium Lactis, dose: 1BLH }
+          - { nome: Bifidobacterium Longum, dose: 1BLH }
+        modo_de_uso: Tomar 1 dose à noite, por 60 dias.
+    - destaques:
+        - nome: Newbiome®
+          texto: '**Posbiótico avançado** padronizado em 50% de tributirina microencapsulada, **fonte de butirato** altamente biodisponível e **sem odor**, que atua na **disbiose intestinal**, na **inflamação de baixo grau** e na **disfunção da barreira intestinal**.'
+        - nome: Saccharomyces boulardii
+          texto: '**Levedura probiótica** resistente a antibióticos, que ajuda a **restabelecer o equilíbrio da microbiota**, competindo com patógenos e reduzindo **diarreia e desconforto abdominal**.'
+    - texto:
+        etiqueta: [Microbiota, Em equilíbrio]
+        imagem: { src: microbiota.png, largura: 110 }
+        paragrafos:
+          - A **disbiose** é o desequilíbrio entre as bactérias benéficas e as potencialmente nocivas do intestino. Ela está ligada a **distensão abdominal**, **alterações do trânsito intestinal**, **inflamação de baixo grau** e reflexos na **pele**, na **imunidade** e no **humor**. Por isso o tratamento segue fases — **remover, reparar e reinocular** — para devolver o equilíbrio de forma duradoura.
