@@ -11,8 +11,8 @@ cor:
   escura: "#7a1f4b"
   clara: "#e2879f"
 qr: https://medicinal.vip/protoc_Menopausa?r=qr   # link a criar no medicinal.vip
-capa: capa.jpg
-capa_posicao: "center 60%"
+capa: antebraco.jpg
+capa_posicao: "66% center"
 
 paginas:
   # Página 2 — Fórmula destaque: estradiol transdermal
