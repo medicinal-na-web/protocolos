@@ -277,13 +277,15 @@ body {
   content: "";
   position: absolute;
   left: 0; right: 0;
-  height: 30%;
+  height: 38%;
+  pointer-events: none;
 }
-.faixa::before { top: 0; background: linear-gradient(#fff, rgba(255,255,255,0)); }
-.faixa::after { bottom: 0; background: linear-gradient(rgba(255,255,255,0), #fff); }
+.faixa::before { top: 0; background: linear-gradient(#fff 0%, rgba(255,255,255,0.75) 35%, rgba(255,255,255,0)); }
+.faixa::after { bottom: 0; background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.75) 65%, #fff 100%); }
+.faixa .etiqueta { position: absolute; top: 2mm; left: 50%; transform: translateX(-50%); margin: 0; z-index: 2; }
 
 /* ---------- Texto educativo ---------- */
-.texto { padding: 0 18mm 0 23mm; }
+.texto { padding: 0 25mm 0 23mm; }
 .texto h3 {
   font-size: 13pt;
   margin: 0 0 3mm;

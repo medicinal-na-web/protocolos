@@ -37,7 +37,7 @@ alguma página passou da área útil.
 |---|---|
 | `formula` | Card da fórmula: `nome`, `subtitulo`, `via` (IN oral / OUT tópico), `periodo` (`dia`, `noite` ou ambos), `ativos` (marque `destaque: true` para ligar ao texto explicativo), `modo_de_uso`, `arte` opcional ao lado, `qr: false` para esconder o QR |
 | `destaques` | Textos dos ativos-chave, ligados por linhas aos ativos com `destaque: true` da mesma página |
-| `faixa` | Imagem de largura total com bordas esfumadas |
+| `faixa` | Imagem de margem a margem que some no branco com degradê em cima e embaixo; aceita `etiqueta` por cima |
 | `texto` | Bloco educativo com `etiqueta`, `imagem` e `paragrafos` |
 | `espaco` | Espaço vertical em mm |
 
@@ -50,4 +50,8 @@ Para manter a mesma linguagem visual entre os protocolos:
 - **Capa**: imagem científica (microscopia/histologia) nos tons do protocolo, 3:4.
 - **Produto**: fotografia de estúdio em fundo branco, luz difusa, sem texto.
 - **Faixas**: macro de textura (espuma, pó, gel) em fundo branco, 16:9.
-- **Ilustrações**: 3D médico, fundo transparente.
+- **Ilustrações**: 3D médico em cena que preenche todo o quadro (formato largo, 21:9 ou 16:9), usadas em `faixa`.
+
+**Regra:** nada de imagem recortada com contorno aparente. Ilustrações ocupam a página
+de margem a margem e somem no branco com degradê; fotos ao lado dos cards se fundem
+com a página.

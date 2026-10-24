@@ -74,8 +74,12 @@ function blocoDestaques(b) {
     .join("")}</div></div>`;
 }
 
+// Imagem de margem a margem que some no branco da página (sem recortes aparentes)
 function blocoFaixa(b, ctx) {
-  return `<div class="faixa" style="background-image:url('${ctx.artes}/${esc(b.src)}');--altura:${mm(b.altura ?? 55)};background-position:${b.posicao || "center"}"></div>`;
+  const etiqueta = b.etiqueta
+    ? `<div class="etiqueta">${[].concat(b.etiqueta).map((l) => `<span>${esc(l)}</span>`).join("")}</div>`
+    : "";
+  return `<div class="faixa${b.etiqueta ? " com-etiqueta" : ""}" style="background-image:url('${ctx.artes}/${esc(b.src)}');--altura:${mm(b.altura ?? 55)};background-position:${b.posicao || "center"}">${etiqueta}</div>`;
 }
 
 function blocoTexto(b, ctx) {

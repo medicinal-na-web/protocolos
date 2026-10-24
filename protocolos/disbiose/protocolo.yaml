@@ -71,8 +71,11 @@ paginas:
           texto: '**Posbiótico avançado** padronizado em 50% de tributirina microencapsulada, **fonte de butirato** altamente biodisponível e **sem odor**, que atua na **disbiose intestinal**, na **inflamação de baixo grau** e na **disfunção da barreira intestinal**.'
         - nome: Saccharomyces boulardii
           texto: '**Levedura probiótica** resistente a antibióticos, que ajuda a **restabelecer o equilíbrio da microbiota**, competindo com patógenos e reduzindo **diarreia e desconforto abdominal**.'
-    - texto:
+    - faixa:
+        src: microbiota.jpg
+        altura: 80
+        posicao: "center 60%"
         etiqueta: [Microbiota, Em equilíbrio]
-        imagem: { src: microbiota.png, largura: 96 }
+    - texto:
         paragrafos:
           - A **disbiose** é o desequilíbrio entre as bactérias benéficas e as potencialmente nocivas do intestino. Ela está ligada a **distensão abdominal**, **alterações do trânsito intestinal**, **inflamação de baixo grau** e reflexos na **pele**, na **imunidade** e no **humor**. Por isso o tratamento segue fases — **remover, reparar e reinocular** — para devolver o equilíbrio de forma duradoura.
