@@ -1,10 +1,13 @@
 # Guia de Formulações — Bem-Estar na Menopausa
-# Destaque: Estradiol Spray Transdermal (referência Lenzetto®)
+# Protocolo gerado pelas regras do motor NEXUS (FGTS → NAF → BAC → PAR → validate_protocolo)
+# Banco: supabase_ativos (emzkiemgizgmggthaeia). Sessão: 2026.10.24
 #
-# RASCUNHO: fórmulas, doses e textos precisam de validação do farmacêutico
-# responsável. Concentração do spray assume a embalagem dosimetrada de 90 µL/jato
-# (1,53 mg de estradiol por jato = 1,7% p/v), como no medicamento de referência.
-# Uso da marca Lenzetto® e reprodução da concentração: confirmar com regulatório.
+# RASCUNHO para revisão do prescritor/farmacêutico responsável. Pendências:
+# - Fezolinetanto: sem cadastro no banco (aguardando chegada) — dose de referência 45 mg/dia
+# - Genu-in Skin (17239) e Elibrya (17258): PAR sem registro em FC12110 — cadastrar forma
+# - Estradiol spray: 6161 é "uso interno" — confirmar matéria-prima tópica, volume de 90 µL/jato,
+#   octisalato 5% (não cadastrado) e uso da marca Lenzetto® com o regulatório
+# - Vitamina D3: não encontrada na tabela ativos (GER-04)
 
 titulo: Bem-Estar na Menopausa
 cor:
@@ -15,7 +18,7 @@ capa: antebraco.jpg
 capa_posicao: "66% center"
 
 paginas:
-  # Página 2 — Fórmula destaque: estradiol transdermal
+  # Página 2 — F1 · Estradiol transdermal (fórmula destaque)
   - - formula:
         nome: Estradiol Spray Transdermal
         subtitulo: referência Lenzetto®
@@ -39,59 +42,173 @@ paginas:
         altura: 78
         posicao: "center 50%"
 
-  # Página 3 — Proteção endometrial e saúde íntima
+  # Página 3 — Hormonal: proteção endometrial (F2) e saúde íntima (F4)
   - - formula:
-        nome: Progesterona Micronizada
+        nome: Progesterona Noturna
         subtitulo: proteção endometrial
         via: IN
         periodo: noite
         ativos:
           - { nome: Progesterona micronizada, dose: 100mg, destaque: true }
-          - { nome: Excipiente oleoso, dose: q.s.p. }
         modo_de_uso: Tomar 1 cápsula à noite, ao deitar, em uso contínuo. Indicada para mulheres com útero, em associação ao estradiol.
     - destaques:
-        arte: { src: capsulas.jpg, largura: 52 }
-        itens:
         - nome: Progesterona micronizada
-          texto: '**Bioidêntica**, protege o **endométrio** do estímulo do estradiol em mulheres com útero. Tomada à noite, seus metabólitos têm efeito **calmante**, contribuindo para a **qualidade do sono**.'
-    - espaco: 4
+          texto: '**Bioidêntica**, protege o **endométrio** do estímulo do estradiol em mulheres com útero. Tomada à noite, seus metabólitos têm efeito **calmante** e contribuem para a **qualidade do sono**.'
+    - espaco: 7
     - formula:
         nome: Creme Vaginal Trófico
-        subtitulo: saúde íntima
+        subtitulo: síndrome geniturinária
         via: OUT
         periodo: noite
         qr: false
         ativos:
           - { nome: Estriol, dose: "1mg/g", destaque: true }
-          - { nome: Ácido Hialurônico, dose: "0,2%" }
           - { nome: Creme vaginal, dose: 30g com aplicador }
         modo_de_uso: Aplicar 1 aplicador (1g) via vaginal à noite por 2 semanas. Depois, 2 vezes por semana.
     - destaques:
         - nome: Estriol
-          texto: Estrogênio de **ação local** que restaura a espessura, a **lubrificação** e a elasticidade da mucosa vaginal, aliviando **ressecamento**, **dor na relação** e **sintomas urinários** da síndrome geniturinária da menopausa. Associado ao **ácido hialurônico**, potencializa a hidratação.
+          texto: Estrogênio de **ação local** que restaura a espessura, a **lubrificação** e a elasticidade da mucosa vaginal, aliviando **ressecamento**, **dor na relação** e **sintomas urinários**. Pode ser associado ao estradiol transdermal.
 
-  # Página 4 — Saúde óssea + educativo
+  # Página 4 — Vasomotor não hormonal (F3) e sintomas gerais com S-equol (F12)
   - - formula:
-        nome: Cápsulas Saúde Óssea
+        nome: Fogachos sem Hormônio
+        subtitulo: alternativa não hormonal
         via: IN
         periodo: dia
         ativos:
-          - { nome: Vitamina K2 (MK-7), dose: 100mcg, destaque: true }
-          - { nome: Vitamina D3, dose: 2.000UI }
-          - { nome: Magnésio Bisglicinato, dose: 300mg, destaque: true }
-          - { nome: Boro Quelato, dose: 3mg }
+          - { nome: EVA360®, dose: 200mg, destaque: true }
+          - { nome: Fezolinetanto, dose: 45mg, destaque: true }
+          - { nome: Relora®, dose: 250mg }
+        modo_de_uso: Tomar 1 cápsula ao dia, sempre no mesmo horário.
+    - destaques:
+        - nome: EVA360®
+          texto: Blend patenteado de **shatavarinas** (Asparagus racemosus) que **sensibiliza os receptores estrogênicos**, apoiando o **equilíbrio hormonal feminino** sem conter hormônios.
+        - nome: Fezolinetanto
+          texto: Antagonista do **receptor NK3** que atua diretamente no **centro termorregulador do hipotálamo**, reduzindo a frequência e a intensidade dos **fogachos** — opção para quem **não pode usar hormônios**.
+    - espaco: 7
+    - formula:
+        nome: Equilíbrio da Menopausa
+        subtitulo: sintomas gerais
+        via: IN
+        periodo: dia
+        qr: false
+        ativos:
+          - { nome: S-equol, dose: 10mg, destaque: true }
+          - { nome: Cimicifuga racemosa, dose: 80mg }
+          - { nome: Vitamina E (acetato), dose: 200UI }
+        modo_de_uso: Tomar 1 cápsula ao dia, após a refeição.
+    - destaques:
+        - nome: S-equol
+          texto: Metabólito ativo das isoflavonas de soja, com **alta afinidade pelo receptor ER-β**. Entrega o benefício que só cerca de metade das mulheres consegue produzir no intestino, ajudando nos **fogachos**, no **humor** e no **conforto geral** da menopausa.
+
+  # Página 5 — Sono (F5) e humor/ansiedade (F6)
+  - - formula:
+        nome: Sono Reparador
+        via: IN
+        periodo: noite
+        ativos:
+          - { nome: Magnésio bisglicinato, dose: 200mg, destaque: true }
+          - { nome: Valeriana extrato seco, dose: 200mg }
+          - { nome: Passiflora extrato seco, dose: 200mg }
+        modo_de_uso: Tomar 1 dose 30 minutos antes de dormir.
+    - destaques:
+        - nome: Magnésio bisglicinato
+          texto: Forma **quelada de alta absorção** e boa tolerância. Promove **relaxamento muscular e neural** e favorece o **início e a manutenção do sono**, frequentemente prejudicados pelos suores noturnos.
+    - espaco: 7
+    - formula:
+        nome: Humor em Equilíbrio
+        subtitulo: ansiedade e irritabilidade
+        via: IN
+        periodo: dia
+        qr: false
+        ativos:
+          - { nome: L-teanina, dose: 200mg, destaque: true }
+          - { nome: 5-HTP, dose: 50mg }
+          - { nome: Serenzo™, dose: 250mg }
+        modo_de_uso: Tomar 1 dose pela manhã e 1 dose à tarde.
+    - destaques:
+        - nome: L-teanina
+          texto: Aminoácido do chá-verde que **aumenta as ondas alfa** e modula **GABA, serotonina e dopamina**, trazendo **calma sem sonolência** para a irritabilidade e a oscilação de humor.
+
+  # Página 6 — Ossos (F7) e pele (F8)
+  - - formula:
+        nome: Ossos Fortes
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: Vitamina K2 (MK-7), dose: 120mcg, destaque: true }
+          - { nome: Citrato malato de cálcio, dose: 250mg }
+          - { nome: Boro quelado, dose: 2mg }
         modo_de_uso: Tomar 1 dose ao dia, após o almoço.
     - destaques:
         - nome: Vitamina K2 (MK-7)
-          texto: Ativa a **osteocalcina**, direcionando o cálcio para os **ossos** e não para as artérias. Em sinergia com a **vitamina D3**, contribui para a **densidade óssea**, que cai de forma acelerada após a menopausa.
-        - nome: Magnésio Bisglicinato
-          texto: Forma quelada de **alta absorção** e boa tolerância gastrointestinal, que participa da **mineralização óssea** e auxilia no **relaxamento muscular** e na **qualidade do sono**.
+          texto: Ativa a **osteocalcina**, direcionando o cálcio para os **ossos** e não para as artérias. Fundamental na menopausa, quando a **perda de massa óssea acelera**.
+    - espaco: 7
+    - formula:
+        nome: Pele Firme
+        subtitulo: colágeno e hidratação
+        via: IN
+        periodo: dia
+        qr: false
+        ativos:
+          - { nome: Genu-in Skin®, dose: "2,5g", destaque: true }
+          - { nome: Ácido hialurônico (oral), dose: 100mg }
+          - { nome: Cerasomosides, dose: 40mg }
+          - { nome: SiliciuMax®, dose: 50mg }
+          - { nome: Sachê sabor neutro, dose: 1 un }
+        modo_de_uso: Diluir 1 sachê em 200ml de água e tomar 1 vez ao dia.
+    - destaques:
+        - nome: Genu-in Skin®
+          texto: Peptídeos de colágeno tipo I de **baixo peso molecular** que sinalizam os **fibroblastos** a produzir colágeno, melhorando **firmeza, elasticidade e hidratação** da pele, que perde colágeno rapidamente após a menopausa.
+
+  # Página 7 — Metabolismo (F9) e trato urinário (F10)
+  - - formula:
+        nome: Metabolismo Ativo
+        subtitulo: microbiota e peso
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: Akkermansia muciniphila (Bio MAMPs), dose: 50mg, destaque: true }
+          - { nome: Bifidobacterium lactis, dose: 1 BLH }
+          - { nome: Lactobacillus gasseri, dose: 2 BLH }
+          - { nome: PreticX™ (XOS), dose: "1,4g" }
+        modo_de_uso: Diluir 1 sachê em água e tomar pela manhã, em jejum.
+    - destaques:
+        - nome: Akkermansia muciniphila
+          texto: Bactéria-chave da **barreira intestinal**, ligada à **sensibilidade à insulina** e ao **controle de peso**. Ajuda a conter o **acúmulo de gordura abdominal** típico da menopausa.
+    - espaco: 7
+    - formula:
+        nome: Conforto Urinário
+        via: IN
+        periodo: [dia, noite]
+        qr: false
+        ativos:
+          - { nome: Cranberry extrato seco, dose: 500mg, destaque: true }
+          - { nome: D-manose, dose: 500mg }
+        modo_de_uso: Tomar 1 dose pela manhã e 1 dose à noite.
+    - destaques:
+        - nome: Cranberry
+          texto: Proantocianidinas tipo A que **impedem a adesão da E. coli** ao epitélio urinário. Com a **D-manose**, reduz as **infecções urinárias de repetição**, mais frequentes após a menopausa.
+
+  # Página 8 — Libido (F11) + educativo
+  - - formula:
+        nome: Libido Feminina
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: Elibrya™, dose: a definir, destaque: true }
+          - { nome: Maca peruana, dose: 500mg }
+          - { nome: Tribulus terrestris, dose: 500mg }
+        modo_de_uso: Tomar 1 dose pela manhã.
+    - destaques:
+        - nome: Elibrya™
+          texto: Extrato de Anacyclus pyrethrum padronizado em **amidas graxas**, que atua no **desejo**, na **excitação** e na **satisfação sexual**. Associado à **maca** e ao **tribulus**, apoia a libido feminina de forma não hormonal.
     - faixa:
         src: mulher.jpg
-        altura: 70
+        altura: 58
         posicao: "center 35%"
         etiqueta: [Menopausa, Em equilíbrio]
     - texto:
         paragrafos:
-          - A **menopausa** marca a queda dos hormônios ovarianos e pode trazer **fogachos**, **suores noturnos**, **insônia**, **alterações de humor**, **ressecamento vaginal** e **perda de massa óssea**. Iniciada na **janela de oportunidade** — antes dos 60 anos ou nos primeiros 10 anos após a última menstruação — a terapia com **estradiol transdermal** é a estratégia mais eficaz para devolver qualidade de vida, sempre com **avaliação individual** e acompanhamento do prescritor.
-          - '**Contraindicações:** câncer de mama ou de endométrio, sangramento vaginal não esclarecido, trombose venosa ou arterial e doença hepática ativa.'
+          - A **menopausa** marca a queda dos hormônios ovarianos e pode trazer **fogachos**, **insônia**, **alterações de humor**, **ressecamento vaginal**, **ganho de peso** e **perda óssea**. Iniciada na **janela de oportunidade**, a terapia com **estradiol transdermal** é a estratégia mais eficaz, e as demais fórmulas tratam cada sintoma de forma individualizada.
+          - '**Contraindicações da terapia hormonal:** câncer de mama ou de endométrio, sangramento vaginal não esclarecido, trombose venosa ou arterial e doença hepática ativa.'
