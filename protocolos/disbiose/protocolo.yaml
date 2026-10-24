@@ -8,6 +8,7 @@ cor:
   clara: "#3db89a"
 qr: https://medicinal.vip/protoc_Disbiose?r=qr   # link a criar no medicinal.vip
 capa: capa.jpg
+capa_posicao: "center 70%"
 
 paginas:
   # Página 2 — Remover: reduzir o supercrescimento de microrganismos indesejados
@@ -16,7 +17,7 @@ paginas:
         subtitulo: fase 1 · remover
         via: IN
         periodo: [dia, noite]
-        arte: { src: capsulas.jpg, topo: 42, direita: -4, largura: 78 }
+        arte: { src: capsulas.jpg, topo: 92, direita: 2, largura: 100 }
         ativos:
           - { nome: Berberina, dose: 500mg, destaque: true }
           - { nome: Óleo de Orégano, dose: 150mg, destaque: true }
@@ -42,7 +43,7 @@ paginas:
           - { nome: N-Acetilglucosamina, dose: 500mg }
           - { nome: Sachê sabor limão, dose: 1 un }
         modo_de_uso: Diluir 1 sachê em 200ml de água e tomar em jejum, pela manhã.
-    - faixa: { src: sache.jpg, altura: 58, posicao: "center 60%" }
+    - faixa: { src: sache.jpg, altura: 62, posicao: "center 55%" }
     - destaques:
         - nome: L-Glutamina
           texto: Principal **fonte de energia dos enterócitos**, as células que revestem o intestino. Auxilia na **regeneração da mucosa** e no fortalecimento das **junções firmes**, reduzindo a **permeabilidade intestinal**.
@@ -72,6 +73,6 @@ paginas:
           texto: '**Levedura probiótica** resistente a antibióticos, que ajuda a **restabelecer o equilíbrio da microbiota**, competindo com patógenos e reduzindo **diarreia e desconforto abdominal**.'
     - texto:
         etiqueta: [Microbiota, Em equilíbrio]
-        imagem: { src: microbiota.png, largura: 110 }
+        imagem: { src: microbiota.png, largura: 96 }
         paragrafos:
           - A **disbiose** é o desequilíbrio entre as bactérias benéficas e as potencialmente nocivas do intestino. Ela está ligada a **distensão abdominal**, **alterações do trânsito intestinal**, **inflamação de baixo grau** e reflexos na **pele**, na **imunidade** e no **humor**. Por isso o tratamento segue fases — **remover, reparar e reinocular** — para devolver o equilíbrio de forma duradoura.
