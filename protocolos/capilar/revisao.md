@@ -60,5 +60,5 @@ Ainda não conferidos no banco: tiamina, Nigella sativa, PQQ, riboflavina, vitam
 
 ## Pendências de arte
 
-- Frasco da loção capilar: aguardando as referências de embalagem (a imagem `locao.jpg` é provisória).
+- Frascos da loção: propostas geradas a partir das referências enviadas (sem logo), `locao-bico.jpg` (F4) e `locao-pente.jpg` (F3).
 - Link do QR `medicinal.vip/protoc_Capilar` ainda não foi criado.

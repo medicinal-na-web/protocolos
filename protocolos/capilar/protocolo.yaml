@@ -109,12 +109,13 @@ paginas:
         via: OUT
         periodo: dia
         qr: false
-        arte: { src: locao.jpg, topo: 6, direita: -2, largura: 44 }
         ativos:
           - { nome: Latanoprosta, dose: "0,005%", destaque: true }
           - { nome: Loção capilar, dose: qsp 100ml }
         modo_de_uso: Aplicar nas áreas indicadas **1 vez ao dia, pela manhã**.
     - destaques:
+        arte: { src: locao-pente.jpg, largura: 34, fundir: false }
+        itens:
         - nome: Latanoprosta
           texto: Análogo da **prostaglandina F2α** que estimula o crescimento pelo **receptor FP (PTGFR)**. Quando o PTGFR está alterado, a resposta é baixa — por isso a fórmula **só entra com PTGFR preservado**, o que aconteceu em **13%** dos laudos.
 
@@ -136,7 +137,7 @@ paginas:
           - { nome: TrichoSol®, dose: qsp 100ml }
         modo_de_uso: Aplicar no couro cabeludo **1 vez ao dia, à noite**, com massagens suaves.
     - destaques:
-        arte: { src: locao.jpg, largura: 50 }
+        arte: { src: locao-bico.jpg, largura: 40, fundir: false }
         itens:
         - nome: Alfa-estradiol
           texto: Isômero do estradiol **sem ação estrogênica sistêmica**. Estimula a **aromatase** local, desviando testosterona para estradiol e reduzindo o substrato do DHT. Entra quando o **CYP19A1** indica **baixa aromatase** (71%).
