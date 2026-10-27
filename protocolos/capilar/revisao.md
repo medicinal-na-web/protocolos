@@ -103,7 +103,7 @@ Observações:
 - **TGF-β3 restrito à área doadora.** A família TGF-β (β1 e β2) induz catágeno; o β3 entra só pela ação anticicatricial.
 
 ### Pós-transplante
-- O **Foam Pós-Transplante** segue exatamente a fórmula do prescritor: ácido salicílico 0,5% e óleo essencial de alecrim 0,25%, deixar agir por 5 minutos. A base de foam cadastrada é a **TrichoFoam® (15461, tier D)**; confirmar se é essa a base.
+- O **Foam Pós-Transplante** segue exatamente a fórmula do prescritor: ácido salicílico 0,5% e óleo essencial de alecrim 0,25% em **Base Foam** qsp 100 ml. Aplicar 1 vez ao dia, deixar agir por 5 minutos e enxaguar (confirmado pelo prescritor em 27/10/2026).
 - As variações do foam vêm do NEXUS com as âncoras ácido salicílico (50283 · A) e alecrim (1808 · B), na forma 3:
   - bisabolol 10601 · A · 121
   - alantoína 50416 · A · 86
@@ -114,6 +114,5 @@ Observações:
   - D-pantenol 52553 · A · 41
   - babosa 70154 · B · 16
 - **Mentol a 0,25%:** abaixo da moda da farmácia (0,5%), por causa da sensibilidade do pós-operatório.
-- **Frequência de uso do foam:** o prescritor não informou quantas vezes ao dia. Também confirmar se o foam deve ser enxaguado depois dos 5 minutos.
 - **Sérum calmante:** bisabolol + alantoína (151), camomila + bisabolol (121) e bisabolol + D-pantenol (36).
 - **Sérum reparador da área doadora:** GHK-Cu + TrichoSol (241) e GHK-Cu + D-pantenol (182). EGF e TGF-β3 entram por indicação, com poucas coprescrições na loção.

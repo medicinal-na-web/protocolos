@@ -538,8 +538,8 @@ paginas:
         ativos:
           - { nome: Ácido salicílico, dose: "0,5%", destaque: true }
           - { nome: Óleo essencial de alecrim, dose: "0,25%", destaque: true }
-          - { nome: Foam, dose: qsp 100ml }
-        modo_de_uso: Aplicar nas **sobrancelhas e no couro cabeludo** e **deixar agir por 5 minutos**.
+          - { nome: Base Foam, dose: qsp 100ml }
+        modo_de_uso: Aplicar **1 vez ao dia** nas **sobrancelhas e no couro cabeludo**, **deixar agir por 5 minutos** e enxaguar.
     - destaques:
         arte: { src: foam.jpg, largura: 40, fundir: false }
         itens:
