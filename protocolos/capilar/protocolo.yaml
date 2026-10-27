@@ -263,9 +263,7 @@ paginas:
         qr: false
         ativos:
           - { nome: In.Cell® *, dose: 150mg, destaque: true }
-          - { nome: Vitamina B1 *, dose: 35 · 50mg }
           - { nome: Riboflavina *, dose: 25 · 30mg }
-          - { nome: Piridoxina *, dose: 25 · 35mg }
           - { nome: Vitamina C *, dose: 250 · 350mg }
           - { nome: Magnésio *, dose: 150 · 200mg }
           - { nome: Cobre *, dose: 1mg }

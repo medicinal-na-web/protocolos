@@ -31,7 +31,7 @@ desde jun/2024, na forma farmacêutica correspondente. As formas são 1 = cápsu
 | 17 | F5 | Procapil® | 1,5% | FC 16750 | 1,5% | ✅ | Sem ficha em `ativos` |
 | 18 | F6 | Vitamina D3 | 1.000 UI/gota · 10 gotas | — | — | ⚠️ | Sem cadastro (a mesma pendência do protocolo Menopausa) |
 | 19 | F7 | Biotina | 2 / 5 / 10 mg | FC 38015 | — | ⚠️ | Sem ficha em `ativos` |
-| 20 | F7 | Piridoxal 5-fosfato | 50 / 75 mg | 3331 · S | 50 mg | ✅ | Ver alerta 1 |
+| 20 | F7 | Piridoxal 5-fosfato | 50 / 75 mg | 3331 · S | 50 mg | ✅ | Única fonte de B6 da F7 (ver alerta 1) |
 | 21 | F7 | Zinco quelato | 25 / 35 mg | 15374 · S | 30 mg | ✅ | |
 | 22 | F7 | Pantotenato de cálcio | 150 / 200 mg | 55463 · S | — | ✅ | |
 | 23 | F7 | L-cistina | 20 / 30 mg | 51780 · S | 20 mg | ✅ | |
@@ -50,8 +50,8 @@ Ainda não conferidos no banco: tiamina, Nigella sativa, PQQ, riboflavina, vitam
 
 ## Alertas clínicos para o farmacêutico
 
-1. **A vitamina B6 aparece duas vezes na Fórmula 7.** O bloco obrigatório traz P5P 50–75 mg e o bloco nutricional traz piridoxina 25–35 mg, o que soma até **110 mg/dia de B6 em uso contínuo**. Acima de 50–100 mg/dia por meses, há risco de **neuropatia periférica**. Sugestão: quando os dois blocos entram juntos, usar a menor dose de P5P e tirar a piridoxina.
-2. **A tiamina também aparece duas vezes.** São tiamina 60–75 mg no bloco obrigatório e vitamina B1 35–50 mg no nutricional. O risco é baixo, mas é redundância.
+1. **B6 duplicada: corrigido.** A piridoxina (25–35 mg) saiu do bloco nutricional da F7. A B6 fica só no bloco obrigatório, como P5P 50–75 mg/dia. Acima de 50 mg/dia em uso contínuo por meses, acompanhar sinais de **neuropatia periférica** e preferir 50 mg.
+2. **Tiamina duplicada: corrigido.** A vitamina B1 (35–50 mg) saiu do bloco nutricional da F7. A tiamina fica só no bloco obrigatório, com 60–75 mg.
 3. **Biotina de 5–10 mg interfere em imunoensaios** (TSH, T4, troponina, hormônios). Suspender 72 h antes de exames.
 4. **Vitamina D de 10.000 UI/dia em uso contínuo** está acima do limite superior tolerável (4.000 UI). Exige 25(OH)D e cálcio de controle.
 5. **Minoxidil oral "sempre prescrever".** Em 7% dos laudos a SULT1A1 está **aumentada**, e o laboratório tira o minoxidil da conduta nesses casos. Também exige avaliação cardiovascular.
