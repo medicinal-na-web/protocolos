@@ -57,6 +57,25 @@ paginas:
           - [TNF-α / NQO1, Inflamação e defesa antioxidante, 'F7 bloco antioxidante · F9', 23% / 37%]
         nota: '**Fórmulas sempre presentes:** F2 (Minoxidil oral), F4 (Loção capilar) e F8 (Shampoo). As demais dependem do laudo. Frequência = pacientes com resultado intermediário ou aumentado entre os 70 laudos analisados (SRD5A2 e AR: só resultado aumentado).'
 
+  # Página NEXUS — introdução ao motor
+  - - texto:
+        titulo: Motor NEXUS · âncoras e associações
+        paragrafos:
+          - 'Cada fórmula base pode ser **potencializada** com associações sugeridas pelo **motor NEXUS** da Medicinal. O motor parte do banco de ativos e de **mais de 2 milhões de itens manipulados** e segue sempre a mesma sequência:'
+          - '**1. FGTS** — só entram ativos de relevância **S, A ou B**. **2. Forma farmacêutica** — o ativo precisa ter uso registrado na mesma forma (loção, cápsula, sachê, shampoo). **3. NAF (âncora)** — ativo com **indicação primária** em Alopecia ou Crescimento capilar. **4. BAC (associados)** — ativos com **coprescrição real** com a âncora, ranqueados pelo número de âncoras e pela frequência.'
+          - Nas próximas páginas, cada fórmula ganha **variações**. Cada variação soma um módulo de associados à fórmula base e é escolhida pelo **achado genético** do laudo.
+    - tabela:
+        titulo: Âncoras do motor por fórmula
+        colunas: [Fórmula, Forma, Âncoras (NAF · tier), Associados de maior força (BAC)]
+        linhas:
+          - [F1N, Cápsula, 'Saw palmetto **S** · Pygeum **B** · Androtase® **A**', 'Zinco quelato, Licopeno, Urtiga dioica']
+          - [F4, Loção, 'Minoxidil sulfato **S** · Auxina Tricógena® **A** · Capilia Longa™ **B** · Alfa-estradiol **B**', 'Ciclopirox olamina, GHK-Cu, Cafeína, Nanofactor IGF']
+          - [F5, Soro, 'aFGF **A** · VEGF **A** · IGF **A** · GHK-Cu **A**', 'bFGF, Follicusan™, Kopexyl, Adenosina']
+          - [F7, Cápsula, 'Zinco quelato **S** · Exsynutriment **S** · L-cistina **S** · P5P **S**', 'Riboflavina, L-metionina, Ácido alfa-lipoico, Pinus pinaster']
+          - [F8, Shampoo, 'Piritionato de zinco **B** · Jaborandi **B** · Auxina Tricógena® **A**', 'D-pantenol, Ácido salicílico, Cetoconazol, DefensCalp®']
+          - [F9, Sachê, 'L-glutamina **S** · L. acidophilus **S** · L. rhamnosus **S**', 'Fibregum™ B, Inulina, Akkermansia, L. plantarum']
+        nota: '**Coprescrições** (nas próximas tabelas) = quantas vezes o associado foi manipulado junto com a âncora, na mesma forma, no histórico da Medicinal. F2, F3 e F6 ficam fora do motor porque minoxidil oral, latanoprosta e vitamina D3 ainda não têm cadastro no banco. Para a F6, a associação recomendada é **Vitamina K2 MK-7 100 mcg** (tier S), que direciona o cálcio mobilizado pela vitamina D.'
+
   # Página 4 — Fórmula 1 (antiandrogênico oral)
   - - formula:
         nome: Fórmula 1 · Dutasterida
@@ -88,6 +107,36 @@ paginas:
     - texto:
         paragrafos:
           - '**Escolha entre as opções:** a Fórmula 1 entra sempre que o **SRD5A2 está aumentado** (83% dos laudos). Sem achado androgênico, a Fórmula 1 não é prescrita. Uso masculino; em mulheres, só com indicação médica e contracepção eficaz.'
+
+  # Página F1N — antiandrogênico natural (NEXUS)
+  - - formula:
+        nome: Fórmula 1N · Antiandrogênico Natural
+        subtitulo: associação NEXUS
+        via: IN
+        periodo: [dia, noite]
+        ativos:
+          - { nome: Saw palmetto extrato seco, dose: 160mg, destaque: true }
+          - { nome: Pygeum africanum, dose: 100mg }
+          - { nome: Licopeno 10%, dose: 10mg, destaque: true }
+          - { nome: Urtiga dioica (raiz), dose: 100mg, destaque: true }
+          - { nome: Zinco quelato, dose: 30mg }
+        modo_de_uso: Tomar 01 cápsula **2 vezes ao dia**. Alternativa ou adjuvante à F1 — mulheres, intolerância ou recusa aos inibidores sintéticos.
+    - destaques:
+        - nome: Saw palmetto
+          texto: Ácidos graxos e **β-sitosterol** de Serenoa repens que inibem as **duas isoformas da 5α-redutase** e o acoplamento do DHT ao **receptor androgênico (AR)**. É a âncora tier S do motor nesta forma.
+        - nome: Licopeno
+          texto: Carotenoide que **reduz a expressão da 5α-redutase** e protege o folículo do estresse oxidativo. Coprescrito com o saw palmetto **1.071 vezes**.
+        - nome: Urtiga dioica
+          texto: A raiz **liga a SHBG** e reduz a fração livre de testosterona disponível para virar DHT — sinergia com o saw palmetto no **SRD5A2** aumentado.
+    - espaco: 3
+    - tabela:
+        colunas: [Associado, Tier, Coprescrições com saw palmetto, Gene-alvo]
+        linhas:
+          - [Zinco quelato, S, '2.647', 'SRD5A2 (cofator inibitório da 5α-redutase)']
+          - [Pygeum africanum, B, '1.229', 'AR · inflamação perifolicular']
+          - [Licopeno 10%, A, '1.071', 'SRD5A2 · NQO1']
+          - [Urtiga dioica, B, '468', 'SRD5A2 · AR (SHBG)']
+          - [Androtase® (β-sitosterol), A, '238', 'SRD5A1 e SRD5A2 — opção para potencializar']
 
   # Página 5 — Fórmulas 2 e 3
   - - formula:
@@ -148,6 +197,29 @@ paginas:
         - nome: Capilia Longa™
           texto: '**Fito-exossomas** de Curcuma longa que bloqueiam a queda e estimulam o crescimento. Com a **Auxina Tricógena®**, sobe para a dose maior quando os eixos de **estrutura** ou **crescimento** passam de 50%.'
 
+  # Página F4 — variações NEXUS
+  - - faixa:
+        src: aplicadores.jpg
+        altura: 56
+        posicao: "center 55%"
+        etiqueta: [Loção capilar, Variações NEXUS]
+    - tabela:
+        colunas: [Variação, Gatilho genético, Somar à Fórmula 4, Coprescrições c/ minoxidil]
+        linhas:
+          - ['A · Anti-inflamatória', 'PGD2 · TNF-α', '**Ciclopirox olamina 1%** + Niacinamida PC 4%', '2.945 · 37']
+          - ['B · Regenerativa', 'HDAC9 · PAX1/FOXA2 · LIPH', '**GHK-Cu 1%** + Nanofactor IGF 1% + Capixyl® 3%', '1.100 · 668 · 253']
+          - ['C · Microcirculação', 'ECA · SULT1A1', '**Cafeína 2%** + Adenosina 0,75% + L-arginina 1,5%', '945 · 240 · 267']
+          - ['D · Antiandrogênica tópica', 'AR · SRD5A2', '**Trichoxidil® 3%** + Tintura de Serenoa 1% + Espironolactona 1%', '434 · 217 · 119']
+          - ['E · Energia do bulbo', 'HDAC9 · ECA', '**L-carnitina 0,7%** + Ginkgo biloba glicólico 2%', '171 · 127']
+        nota: 'Escolha **uma ou duas variações** conforme o laudo. As doses são as mais usadas na Medicinal para loção capilar. Associações com **mais de 900 coprescrições** já são rotina da farmácia; as demais são inovação com base de uso real.'
+    - destaques:
+        - nome: Ciclopirox olamina
+          texto: Antifúngico com ação **anti-inflamatória e quelante de ferro** que reduz a microinflamação perifolicular e a **PGD2**. É o associado **mais coprescrito** com o minoxidil em loção (2.945 vezes).
+        - nome: GHK-Cu (Copper Peptide)
+          texto: Tripeptídeo de cobre que **aumenta o tamanho do folículo**, estimula **VEGF** e **colágeno** e prolonga a fase anágena — resposta ao **HDAC9** e ao **LIPH** alterados.
+        - nome: Adenosina
+          texto: Estimula a papila dérmica a produzir **FGF-7** e **VEGF** e **engrossa o fio**. Com a cafeína, reforça a perfusão quando a **ECA** está alterada.
+
   # Página 7 — Fórmula 5 (soro com fatores de crescimento)
   - - formula:
         nome: Fórmula 5 · Soro Capilar
@@ -207,6 +279,29 @@ paginas:
         - nome: Piritionato de Zinco
           texto: Antifúngico e **seborregulador** que controla a **microinflamação** do couro cabeludo. Com o **jaborandi** e a **Auxina Tricógena®**, prepara o couro cabeludo para receber a loção.
     - faixa: { src: espuma.jpg, altura: 38 }
+
+  # Página F5 e F8 — variações NEXUS
+  - - tabela:
+        titulo: Fórmula 5 · Variações do soro
+        colunas: [Variação, Gatilho genético, Somar à Fórmula 5, Coprescrições]
+        linhas:
+          - ['A · Angiogênica plus', 'ECA', '**Nanofactor bFGF 1%** + Cafeína 2%', '493 (VEGF) · 64 (aFGF)']
+          - ['B · Densidade', 'PAX1/FOXA2 · HDAC9', '**Follicusan™ 5%** + Kopexyl 1%', '246 (VEGF) · 44 (VEGF)']
+          - ['C · Matriz e reparo', 'LIPH · NQO1', '**EGF 1%** + Niacinamida PC 4%', '28 (VEGF) · 9 (IGF)']
+        nota: 'Âncoras do soro: **aFGF**, **VEGF**, **IGF** e **GHK-Cu** (tier A). O **Procapil®** da fórmula base segue como ativo da orientação.'
+    - destaques:
+        - nome: Nanofactor bFGF (FGF-2)
+          texto: Fator de crescimento que **recruta células-tronco** do bulge e acelera a entrada em anágeno. É o par mais forte do VEGF no soro (**493** coprescrições).
+        - nome: Follicusan™
+          texto: Complexo com **proteínas do leite, biotina e pantenol** que reduz a apoptose do folículo e aumenta a densidade — indicação primária em Alopecia no banco.
+    - espaco: 4
+    - tabela:
+        titulo: Fórmula 8 · Variações do shampoo
+        colunas: [Variação, Gatilho genético, Somar à Fórmula 8, Coprescrições]
+        linhas:
+          - ['A · Seborreguladora', 'TNF-α · microinflamação', '**Ácido salicílico 2%** + Cetoconazol 2%', '85 · 64 (piritionato)']
+          - ['B · Microbioma do couro cabeludo', 'FUT2 · TNF-α', '**DefensCalp® 1,5%** + Octopirox 1%', '57 · 20 (piritionato)']
+          - ['C · Estimulante', 'ECA', '**Cafeína 1%** + D-pantenol 2%', '51 (piritionato) · 131 (Auxina)']
 
   # Página 9 — Fórmula 7: blocos obrigatório e metilfolato
   - - formula:
@@ -277,6 +372,27 @@ paginas:
         - nome: In.Cell®
           texto: Blend de **aminoácidos, ácido hialurônico e glicosaminoglicanos** que repõe a matriz do folículo quando há **carência nutricional**.
 
+  # Página F7 — variações NEXUS
+  - - tabela:
+        titulo: Fórmula 7 · Variações dos blocos
+        colunas: [Variação, Gatilho genético, Somar à Fórmula 7, Coprescrições]
+        linhas:
+          - ['Estrutural plus', 'LIPH', '**L-metionina 100mg** + Queratina hidrolisada 20mg', '5.016 · 4.076 (zinco)']
+          - ['Metilação reforçada', 'MTHFR', '**Riboflavina 20mg** + Betaína HCl 300mg', '5.387 · 2.326 (P5P)']
+          - ['Mitocondrial', 'NQO1', '**Ubiquinol 10mg** (no lugar da CoQ10) + Ácido alfa-lipoico 300mg', '713 · 4.117 (zinco)']
+          - ['Vascular', 'ECA · TNF-α', '**Pinus pinaster 150mg** + Resveratrol 100mg', '2.524 · 2.022 (zinco)']
+          - ['Lipídica', 'ZPR1', '**Astaxantina 10mg** + Glutationa reduzida 10mg', '1.500 · 1.269 (zinco)']
+        nota: 'Âncoras da cápsula: **zinco quelato**, **Exsynutriment**, **L-cistina** e **P5P** (todos tier S). Na variação de metilação, a riboflavina substitui a do bloco nutricional — não somar as duas. Respeitar o limite de **2.000 mg por dose** (regra GER-07); acima disso, migrar ativos sem sabor para sachê.'
+    - destaques:
+        - nome: Riboflavina
+          texto: Precursora do **FAD**, o cofator da própria **MTHFR**. Na variante C677T, a enzima perde o FAD com facilidade — a riboflavina **recupera a atividade** e reduz a homocisteína, mesmo sem metilfolato.
+        - nome: Ubiquinol
+          texto: Forma **já reduzida** da coenzima Q10. Quando a **NQO1** está alterada, o organismo converte mal a ubiquinona em ubiquinol — por isso a troca é uma escolha **guiada pelo gene**.
+        - nome: Ácido alfa-lipoico
+          texto: Antioxidante **hidro e lipossolúvel** que regenera vitaminas C e E e a glutationa. Par frequente do zinco (**4.117** coprescrições).
+        - nome: Pinus pinaster
+          texto: Proantocianidinas que estimulam a **óxido nítrico sintase**, melhorando a microcirculação do couro cabeludo quando a **ECA** está alterada.
+
   # Página 11 — Fórmula 9 (intestino)
   - - formula:
         nome: Fórmula 9 · Sachê Intestinal
@@ -304,6 +420,26 @@ paginas:
         titulo: Eixo intestino-folículo
         paragrafos:
           - O **FUT2** controla a mucosa protetora do intestino. Quando está alterado (**21%** dos laudos), cresce o risco de **disbiose**, **inflamação crônica** e má absorção de B12 — um caminho para o **eflúvio telógeno secundário**. Prescrever a Fórmula 9 quando o FUT2 ou qualquer gene indicar **inflamação**, **disbiose** ou **eflúvio**.
+
+  # Página F9 — variações NEXUS
+  - - tabela:
+        titulo: Fórmula 9 · Variações do sachê
+        colunas: [Variação, Gatilho genético, Somar à Fórmula 9, Coprescrições]
+        linhas:
+          - ['A · Barreira intestinal', 'FUT2', '**Fibregum™ B 3g** + L. plantarum 3 BLH + CoreBiome® 300mg', '423 · 135 · 9 (glutamina)']
+          - ['B · Microbiota-chave', 'FUT2 · TNF-α', '**Akkermansia (Bio-MAMPs) 50mg** + PreticX™ 1,4g', '145 · 89 (glutamina)']
+          - ['C · Bifidobactérias', 'MTHFR · FUT2', '**B. lactis 1 BLH** + B. longum 1 BLH + Inulina 500mg', '391 · 213 · 241']
+          - ['D · Ferro e eflúvio', 'TMPRSS6', '**Lactoferrina (Bioferrin®) 25mg**', '7 (glutamina)']
+        nota: 'Âncoras do sachê: **L-glutamina**, **L. acidophilus** e **L. rhamnosus** (tier S). Pela regra GER-08, todo probiótico do protocolo fica no sachê.'
+    - destaques:
+        arte: { src: sache.jpg, largura: 42 }
+        itens:
+        - nome: Fibregum™ B
+          texto: Goma acácia de **fermentação lenta**, bem tolerada, que alimenta bifidobactérias e reforça as **junções firmes** — indicação primária em disbiose e **leaky gut**.
+        - nome: Akkermansia muciniphila
+          texto: Bactéria que **regenera o muco intestinal**, a mesma camada que depende do **FUT2**. A forma Bio-MAMPs é pós-biótica, estável em sachê.
+        - nome: Lactoferrina
+          texto: Proteína que **regula a absorção de ferro** e a hepcidina sem irritar o intestino — inovação para o **TMPRSS6** alterado (26% dos laudos), que tende a ferritina baixa e eflúvio.
 
   # Página 12 — Critérios e cuidados
   - - tabela:

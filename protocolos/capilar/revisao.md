@@ -62,3 +62,30 @@ Ainda não conferidos no banco: tiamina, Nigella sativa, PQQ, riboflavina, vitam
 
 - Frascos da loção: propostas geradas a partir das referências enviadas (sem logo), `locao-bico.jpg` (F4) e `locao-pente.jpg` (F3).
 - Link do QR `medicinal.vip/protoc_Capilar` ainda não foi criado.
+
+## Associações do motor NEXUS (rodada de 27/10/2026)
+
+O motor seguiu a ordem obrigatória da GER-02:
+1. **FGTS:** só ativos com tier S, A ou B.
+2. **Pool por forma farmacêutica:** registro em `FC12110` na forma da fórmula.
+3. **NAF:** âncoras com indicação nas categorias 185 Alopecia, 188 Crescimento capilar e 189 Seborregulação. Para o sachê, 264, 268 e 269. Para a cápsula, também 157, 161 e 300.
+4. **BAC:** associados com registro em `associacoes_ativos` na mesma forma, ranqueados pela BAC-02 (nº de âncoras, depois frequência total, depois o par mais forte).
+
+As consultas leram os pares **nas duas direções**. A tabela grava cada par uma única vez, com `codigo_a < codigo_b`, e a mesma falha já tinha sido vista na `validate_protocolo()` do protocolo Menopausa. As doses são a **moda** em `FC12110` na mesma forma, desde jan/2024.
+
+Formas: 1 = cápsula, 3 = loção capilar e soro, 4 = shampoo, 15 = sachê.
+
+| Fórmula | Forma | Âncoras NAF (cdpro · tier) | Associados BAC usados (cdpro · tier · coprescrições com a âncora) |
+|---|---|---|---|
+| F1N (nova) | 1 | Saw palmetto 1619 · S | Zinco quelato 15374 · S · 2.647; Pygeum 4028 · B · 1.229; Licopeno 2319 · A · 1.071; Urtiga dioica 6009 · B · 468; Androtase® 15353 · A · 238 |
+| F4 | 3 | Minoxidil sulfato 1270 · S (+ Auxina 2396, Capilia 10480, Alfa-estradiol 6217, Cetirizina 2433, Tretinoína 1686, D-pantenol 52553) | Ciclopirox 2112 · A · 2.945; GHK-Cu 4603 · A · 1.100; Cafeína 51469 · S · 945; IGF 4601 · A · 668; Trichoxidil 13683 · B · 434; L-arginina 50659 · S · 267; Capixyl 6073 · B · 253; Adenosina 50908 · B · 240; Tintura de Serenoa 14545 · B · 217; L-carnitina 98589 · A · 171; Ginkgo glicólico 781 · B · 127; Espironolactona 52693 · A · 119; Niacinamida PC 6032 · S · 37 |
+| F5 | 3 | aFGF 4526, VEGF 4602, IGF 4601, GHK-Cu 4603 (A) | bFGF 4527 · B · 493 (VEGF); Follicusan 4198 · B · 246 (VEGF); Cafeína · 64 (aFGF); Kopexyl 5592 · B · 44; EGF 4525 · B · 28 |
+| F7 | 1 | Zinco quelato 15374, Exsynutriment 866, L-cistina 51780, P5P 3331 (S) | Riboflavina 56110 · S · 5.387 (P5P); L-metionina 60604 · A · 5.016; Ácido alfa-lipoico 98577 · S · 4.117; Queratina 7148 · A · 4.076; Pinus pinaster 2605 · S · 2.524; Betaína 4134 · A · 2.326; Resveratrol 2671 · S · 2.022; Astaxantina 7219 · A · 1.500; Glutationa 942 · A · 1.269; Ubiquinol 6955 · A · 713 |
+| F8 | 4 | Piritionato de zinco 56042, Jaborandi 9910 (B), Auxina 2396 (A) | D-pantenol 52553 · A · 131 (Auxina); Ácido salicílico 50283 · A · 85; Cetoconazol 54409 · B · 64; DefensCalp 11195 · B · 57; Cafeína · 51; Octopirox 72795 · **C** · 20 |
+| F9 | 15 | L-glutamina 1552, L. acidophilus 999, L. rhamnosus 1144 (S) | Fibregum B 5212 · A · 423; B. lactis 10960 · A · 391 (acidophilus); Inulina 4173 · A · 241; B. longum 9533 · A · 213 (rhamnosus); Akkermansia 14490 · A · 145; L. plantarum 7335 · A · 135; PreticX 10267 · B · 89; CoreBiome 13990 · A · 9; Lactoferrina 12628 · B · 7 |
+
+Observações:
+- **Octopirox (72795) é tier C.** Na F8-B ele entra como PAR, por invocação nominal, e não pelo motor.
+- **CoreBiome e Lactoferrina** têm poucas coprescrições no sachê (9 e 7). São inovação com indicação primária, não rotina.
+- **F2, F3 e F6 ficaram fora do motor**, porque minoxidil oral, latanoprosta e vitamina D3 não têm cadastro. Para a F6, a associação sugerida é a vitamina K2 MK-7 (7040 · S). A moda em gotas é 100 mcg.
+- **Riboflavina:** quem usar a variação de metilação não deve somar a riboflavina do bloco nutricional.
