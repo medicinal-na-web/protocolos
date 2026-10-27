@@ -89,3 +89,31 @@ Observações:
 - **CoreBiome e Lactoferrina** têm poucas coprescrições no sachê (9 e 7). São inovação com indicação primária, não rotina.
 - **F2, F3 e F6 ficaram fora do motor**, porque minoxidil oral, latanoprosta e vitamina D3 não têm cadastro. Para a F6, a associação sugerida é a vitamina K2 MK-7 (7040 · S). A moda em gotas é 100 mcg.
 - **Riboflavina:** quem usar a variação de metilação não deve somar a riboflavina do bloco nutricional.
+
+## Novas seções (27/10/2026)
+
+### Fórmula 4C · Clascosterona (proposta)
+- **Fora do motor.** Não há cadastro em `ativos` nem uso em `FC12110` (busca por clascoster, cortexolon, Winlevi e Breezula). Entra pela camada **PAR**.
+- **Dose:** solução 5%, 2 vezes ao dia, a usada nos estudos de fase 3 em alopecia androgenética. O veículo é anidro, por causa da hidrólise do éster.
+- **Pendências:** fornecedor de matéria-prima com laudo, enquadramento regulatório (não há registro na ANVISA para alopecia), estudo de estabilidade e validade, e definição do monitoramento do eixo HPA em uso prolongado.
+
+### Subseção de fatores de crescimento
+- As doses são a moda em loção capilar (forma 3): aFGF 1,5%, bFGF 1%, VEGF 1%, IGF 1%, KGF 1,5%, IDP-2 0,5%, GHK-Cu 1%, Capilia Longa 1%, EGF 1% e TGF-β3 2%.
+- Os pares mais fortes vêm de `associacoes_ativos` (forma 3): bFGF–IGF 578, aFGF–GHK-Cu 591, VEGF–GHK-Cu 612 e VEGF–minoxidil 779.
+- **TGF-β3 restrito à área doadora.** A família TGF-β (β1 e β2) induz catágeno; o β3 entra só pela ação anticicatricial.
+
+### Pós-transplante
+- O **Foam Pós-Transplante** segue exatamente a fórmula do prescritor: ácido salicílico 0,5% e óleo essencial de alecrim 0,25%, deixar agir por 5 minutos. A base de foam cadastrada é a **TrichoFoam® (15461, tier D)**; confirmar se é essa a base.
+- As variações do foam vêm do NEXUS com as âncoras ácido salicílico (50283 · A) e alecrim (1808 · B), na forma 3:
+  - bisabolol 10601 · A · 121
+  - alantoína 50416 · A · 86
+  - mentol 54719 · B · 145
+  - BioEcolia 8376 · B · 92
+  - niacinamida PC 6032 · S · 71
+  - melaleuca 19940 · B · 118 (alecrim)
+  - D-pantenol 52553 · A · 41
+  - babosa 70154 · B · 16
+- **Mentol a 0,25%:** abaixo da moda da farmácia (0,5%), por causa da sensibilidade do pós-operatório.
+- **Frequência de uso do foam:** o prescritor não informou quantas vezes ao dia. Também confirmar se o foam deve ser enxaguado depois dos 5 minutos.
+- **Sérum calmante:** bisabolol + alantoína (151), camomila + bisabolol (121) e bisabolol + D-pantenol (36).
+- **Sérum reparador da área doadora:** GHK-Cu + TrichoSol (241) e GHK-Cu + D-pantenol (182). EGF e TGF-β3 entram por indicação, com poucas coprescrições na loção.

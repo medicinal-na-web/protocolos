@@ -41,7 +41,7 @@ paginas:
         titulo: Mapa genético-terapêutico
         colunas: [Gene, Achado no laudo, Conduta no protocolo, Frequência]
         linhas:
-          - [AR (rs6152), Maior sensibilidade ao DHT, 'F1 **Dutasterida** · F4 Finasterida **0,15%**', 43%]
+          - [AR (rs6152), Maior sensibilidade ao DHT, 'F1 **Dutasterida** · F4 Finasterida **0,15%** · F4C **Clascosterona**', 43%]
           - [SRD5A2, Alta conversão T → DHT, 'F1 **Finasterida** ou Dutasterida · F4 Finasterida', 83%]
           - [HDAC9, Amplificação da via androgênica, 'F1 Dutasterida · F4 **Tretinoína** · F5', 73%]
           - [CYP19A1, Baixa aromatase, 'F4 **Alfa-estradiol 0,025%**', 71%]
@@ -220,6 +220,33 @@ paginas:
         - nome: Adenosina
           texto: Estimula a papila dérmica a produzir **FGF-7** e **VEGF** e **engrossa o fio**. Com a cafeína, reforça a perfusão quando a **ECA** está alterada.
 
+  # Página F4C — clascosterona (proposta)
+  - - formula:
+        nome: Fórmula 4C · Clascosterona
+        subtitulo: antiandrogênico de receptor · proposta
+        via: OUT
+        periodo: [dia, noite]
+        ativos:
+          - { nome: Clascosterona, dose: 5%, destaque: true }
+          - { nome: Veículo anidro (álcool + propilenoglicol), dose: qsp 60ml }
+        modo_de_uso: Aplicar **1 ml no couro cabeludo seco, 2 vezes ao dia**, em horário diferente da Fórmula 4. Conservar em geladeira.
+    - destaques:
+        - nome: Clascosterona
+          texto: '**Antagonista tópico do receptor androgênico.** Compete com o DHT pelo **AR** dentro do folículo e é hidrolisada na pele a cortexolona, inativa — por isso tem **baixa exposição sistêmica** e não altera o DHT circulante. É a resposta direta ao **AR (rs6152) aumentado** (43% dos laudos), o único achado da orientação sem ativo próprio.'
+    - espaco: 3
+    - tabela:
+        titulo: Avaliação para inclusão
+        colunas: [Critério, Avaliação]
+        linhas:
+          - [Mecanismo, '✔ Bloqueia o **receptor** (AR) — complementa a F1, que reduz a **produção** de DHT. As duas vias juntas cobrem o eixo androgênico inteiro.']
+          - [Gene-alvo, '✔ **AR aumentado** em 43% dos laudos; em 7 pacientes com AR alto o SRD5A2 é normal e o laudo não indica nenhum antiandrogênico.']
+          - [Perfis, '✔ **Mulheres** (sem efeito sistêmico antiandrogênico), homens com **efeitos sexuais** à finasterida ou dutasterida e quem recusa inibidores orais.']
+          - [Evidência, '⚠ Aprovada para **acne** (creme 1%, FDA 2020). Em alopecia androgenética, estudos de **fase 3** com **solução 5%, 2 vezes ao dia**.']
+          - [Segurança, '⚠ Supressão do **eixo HPA** descrita em uso extenso. Evitar em gestantes e em áreas muito grandes; reavaliar em 3 meses.']
+          - [Estabilidade, '⚠ Éster sensível à **hidrólise**: veículo anidro, frasco âmbar, geladeira e validade curta (a definir com estudo da farmácia).']
+          - [Disponibilidade, '✖ **Sem cadastro** no banco de ativos e sem uso na Medicinal. Depende de matéria-prima com laudo e de enquadramento regulatório.']
+        nota: '**Parecer:** incluir como **proposta** para AR aumentado — sozinha (mulheres, intolerância aos inibidores) ou somada à F4 — condicionada à aquisição da matéria-prima e à validação de estabilidade. Entra pela camada **PAR** (invocação nominal), fora do motor NEXUS.'
+
   # Página 7 — Fórmula 5 (soro com fatores de crescimento)
   - - formula:
         nome: Fórmula 5 · Soro Capilar
@@ -246,6 +273,63 @@ paginas:
     - texto:
         paragrafos:
           - '**Ativação automática:** a Fórmula 5 entra sempre que o laudo indica necessidade de **fatores de crescimento**, **peptídeos regeneradores**, **deficiência angiogênica** ou **comprometimento da matriz extracelular** — HDAC9, PAX1/FOXA2 ou ECA alterados apareceram em **95%** dos laudos.'
+
+  # Página FC1 — subseção fatores de crescimento
+  - - faixa:
+        src: fatores.jpg
+        altura: 58
+        posicao: "70% center"
+        etiqueta: [Subseção, Fatores de crescimento]
+    - texto:
+        paragrafos:
+          - Os **fatores de crescimento** são peptídeos sinalizadores que conversam com a **papila dérmica** e com as **células-tronco do bulge**. Na manipulação, chegam ao folículo como **biomiméticos nanoencapsulados**. Cada um age em uma etapa do ciclo — **induzir** o anágeno, **mantê-lo**, **nutrir** o bulbo e **reparar** o tecido —, e o laudo indica qual etapa precisa de reforço.
+    - tabela:
+        colunas: [Fator, Ação no folículo, Gene do laudo, Dose · loção, Par mais forte (coprescrições)]
+        linhas:
+          - ['bFGF (FGF-2)', 'Ativa as células-tronco do bulge e **inicia o anágeno**', 'HDAC9 · PAX1', '1%', 'IGF · 578']
+          - ['aFGF (FGF-1)', 'Proliferação da matriz, **prolonga o anágeno**', 'HDAC9', '1,5%', 'GHK-Cu · 591']
+          - ['KGF (FGF-7)', 'Queratinócitos da bainha — **espessura do fio**', 'LIPH', '1,5%', 'Minoxidil · 62']
+          - ['IGF-1', 'Mantém o anágeno e **bloqueia a apoptose** induzida pelo TGF-β', 'HDAC9 · AR', '1%', 'Minoxidil · 668']
+          - ['VEGF', '**Angiogênese** perifolicular, aumenta o bulbo', 'ECA', '1%', 'Minoxidil · 779']
+          - ['IDP-2 (IGF-2)', 'Proliferação de fibroblastos e **matriz** da papila', 'LIPH', '0,5%', 'Niacinamida · 88']
+          - ['GHK-Cu', 'Aumenta o folículo, estimula **VEGF e colágeno**', 'LIPH · ECA', '1%', 'Minoxidil · 1.100']
+          - ['Capilia Longa™', '**Fito-exossomas** antiqueda e pró-crescimento', 'HDAC9', '1%', 'Minoxidil · 368']
+          - ['EGF', 'Migração e **reparo** epidérmico — uso em ciclos, não contínuo', 'Pós-transplante', '1%', 'IGF · 84']
+          - ['TGF-β3', '**Anticicatricial**; a família TGF-β sinaliza catágeno', 'Só área doadora', '2%', '—']
+        nota: 'Doses = mais usadas na Medicinal em loção capilar. **Atenção:** o TGF-β (β1 e β2) é o principal sinal de **entrada em catágeno** — não usar TGF-β para crescimento; o β3 fica reservado para a **cicatrização da área doadora** no pós-transplante.'
+
+  # Página FC2 — soros por objetivo
+  - - formula:
+        nome: Soro Indutor do Anágeno
+        subtitulo: HDAC9 · PAX1/FOXA2 alterados
+        via: OUT
+        periodo: dia
+        ativos:
+          - { nome: Fator de crescimento bFGF, dose: 1% }
+          - { nome: Fator de crescimento KGF, dose: "1,5%", destaque: true }
+          - { nome: Fator de crescimento IGF, dose: 1% }
+          - { nome: Capilia Longa™, dose: 1% }
+          - { nome: Soro capilar, dose: qsp 60ml }
+        modo_de_uso: Borrifar no couro cabeludo **1 vez ao dia, pela manhã**. Alternativa à Fórmula 5 quando o achado principal é o **ciclo encurtado**.
+    - destaques:
+        - nome: KGF (FGF-7)
+          texto: Produzido pela própria papila dérmica, estimula os **queratinócitos da bainha** e o **calibre do fio**. Com bFGF e IGF — par que já soma **578** coprescrições —, cobre indução e manutenção do anágeno.
+    - espaco: 6
+    - formula:
+        nome: Soro Angiogênico
+        subtitulo: ECA alterada
+        via: OUT
+        periodo: dia
+        qr: false
+        ativos:
+          - { nome: Fator de crescimento VEGF, dose: 1% }
+          - { nome: Fator de crescimento aFGF, dose: "1,5%" }
+          - { nome: GHK-Cu (Copper Peptide), dose: 1%, destaque: true }
+          - { nome: Soro capilar, dose: qsp 60ml }
+        modo_de_uso: Borrifar no couro cabeludo **1 vez ao dia, pela manhã**. Alternativa à Fórmula 5 quando o achado principal é a **perfusão reduzida**.
+    - destaques:
+        - nome: GHK-Cu
+          texto: Liga as duas pontas do soro — é o par mais forte do **aFGF (591)** e do **VEGF (612)** — e, por ser cobre, atua como cofator da **lisil-oxidase**, que firma o colágeno ao redor dos novos capilares.
 
   # Página 8 — Fórmulas 6 e 8
   - - formula:
@@ -440,6 +524,76 @@ paginas:
           texto: Bactéria que **regenera o muco intestinal**, a mesma camada que depende do **FUT2**. A forma Bio-MAMPs é pós-biótica, estável em sachê.
         - nome: Lactoferrina
           texto: Proteína que **regula a absorção de ferro** e a hepcidina sem irritar o intestino — inovação para o **TMPRSS6** alterado (26% dos laudos), que tende a ferritina baixa e eflúvio.
+
+  # Página PT1 — pós-transplante: foam
+  - - texto:
+        titulo: Pós-transplante capilar
+        paragrafos:
+          - Nas semanas após o transplante, as **crostas** dos enxertos e a cicatrização das áreas **doadora e receptora** provocam **coceira**. Coçar desloca enxertos; por isso o cuidado é **aliviar sem friccionar** e com ativos em concentração baixa.
+    - espaco: 5
+    - formula:
+        nome: Foam Pós-Transplante
+        subtitulo: alívio da coceira
+        via: OUT
+        ativos:
+          - { nome: Ácido salicílico, dose: "0,5%", destaque: true }
+          - { nome: Óleo essencial de alecrim, dose: "0,25%", destaque: true }
+          - { nome: Foam, dose: qsp 100ml }
+        modo_de_uso: Aplicar nas **sobrancelhas e no couro cabeludo** e **deixar agir por 5 minutos**.
+    - destaques:
+        arte: { src: foam.jpg, largura: 40, fundir: false }
+        itens:
+        - nome: Ácido salicílico
+          texto: Em **0,5%**, solta as **crostas** e a descamação ao redor dos enxertos sem agredir, e o salicilato tem ação **anti-inflamatória** que reduz o prurido.
+        - nome: Óleo de alecrim
+          texto: '**Anti-inflamatório**, antimicrobiano e **refrescante**. Em estudo comparativo com minoxidil, reduziu a **coceira do couro cabeludo** e ainda estimula o crescimento.'
+    - espaco: 3
+    - tabela:
+        titulo: Variações NEXUS do foam
+        colunas: [Variação, Quando usar, Somar ao foam, Coprescrições]
+        linhas:
+          - ['A · Calmante', 'Coceira com vermelhidão', '**Bisabolol 1%** + Alantoína 1%', '121 · 86 (salicílico)']
+          - ['B · Refrescante', 'Prurido intenso', '**Mentol 0,25%**', '145 (salicílico)']
+          - ['C · Barreira', 'Pele sensível e ressecada', '**BioEcolia® 2%** + Niacinamida 4%', '92 · 71 (salicílico)']
+          - ['D · Antisséptica', 'Crostas e foliculite', '**Óleo de melaleuca 0,5%**', '118 (alecrim)']
+          - ['E · Reparadora', 'Área doadora', '**D-pantenol 2%** + Babosa 5%', '41 · 16 (salicílico)']
+        nota: 'Âncoras: ácido salicílico (tier A) e óleo de alecrim (tier B). Mentol na **menor dose** usada na farmácia (a mais comum é 0,5%), pela sensibilidade do pós-operatório.'
+
+  # Página PT2 — pós-transplante: leave-on
+  - - formula:
+        nome: Sérum Calmante Leave-on
+        subtitulo: áreas doadora e receptora
+        via: OUT
+        periodo: [dia, noite]
+        ativos:
+          - { nome: Bisabolol, dose: 1%, destaque: true }
+          - { nome: Alantoína, dose: 1% }
+          - { nome: D-Pantenol, dose: 2% }
+          - { nome: Camomila extrato glicólico, dose: 5% }
+          - { nome: TrichoSol®, dose: qsp 60ml }
+        modo_de_uso: Aplicar algumas gotas **sem esfregar**, até 2 vezes ao dia, conforme liberação do cirurgião.
+    - destaques:
+        - nome: Bisabolol
+          texto: Ativo da camomila que **inibe mediadores do prurido** e da inflamação. O trio bisabolol + alantoína + camomila é coprescrito na farmácia (**151** e **121** vezes) — calmante sem álcool, sobre a base TrichoSol®.
+    - espaco: 6
+    - formula:
+        nome: Sérum Reparador da Área Doadora
+        subtitulo: cicatrização
+        via: OUT
+        periodo: noite
+        qr: false
+        ativos:
+          - { nome: Fator de crescimento EGF, dose: 1%, destaque: true }
+          - { nome: Fator de crescimento TGF-β3, dose: 2%, destaque: true }
+          - { nome: GHK-Cu (Copper Peptide), dose: 1% }
+          - { nome: D-Pantenol, dose: 2% }
+          - { nome: TrichoSol®, dose: qsp 30ml }
+        modo_de_uso: Aplicar **somente na área doadora**, 1 vez à noite, após a cicatrização inicial. **Não aplicar nos enxertos.**
+    - destaques:
+        - nome: EGF
+          texto: Acelera a **reepitelização** das microincisões da área doadora.
+        - nome: TGF-β3
+          texto: Isoforma **anticicatricial** do TGF-β, que organiza o colágeno e reduz a marca das extrações. Fica longe dos enxertos porque a família TGF-β sinaliza catágeno.
 
   # Página 12 — Critérios e cuidados
   - - tabela:
