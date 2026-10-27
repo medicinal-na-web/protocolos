@@ -36,7 +36,7 @@ alguma página passou da área útil.
 | Bloco | Uso |
 |---|---|
 | `formula` | Card da fórmula: `nome`, `subtitulo`, `via` (IN oral / OUT tópico), `periodo` (`dia`, `noite` ou ambos), `ativos` (marque `destaque: true` para ligar ao texto explicativo), `modo_de_uso`, `arte` opcional ao lado, `qr: false` para esconder o QR |
-| `destaques` | Textos dos ativos-chave, ligados por linhas aos ativos com `destaque: true` da mesma página. Para uma foto de produto ao lado do texto, use `{ arte: { src, largura }, itens: [...] }` |
+| `destaques` | Textos dos ativos-chave, ligados por linhas aos ativos com `destaque: true` da fórmula logo acima (cada fórmula tem seu próprio tronco; com duas fórmulas seguidas, o texto vai para o card que tem o ativo de mesmo nome). Para uma foto de produto ao lado do texto, use `{ arte: { src, largura }, itens: [...] }` |
 | `faixa` | Imagem de margem a margem que some no branco com degradê em cima e embaixo; aceita `etiqueta` por cima |
 | `texto` | Bloco educativo com `etiqueta`, `imagem` e `paragrafos` |
 | `tabela` | `titulo`, `colunas`, `linhas` (lista de listas) e `nota`; células aceitam `**negrito**` |

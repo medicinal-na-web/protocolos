@@ -360,3 +360,11 @@ body {
 .tabela td strong { color: var(--texto); }
 .tabela tbody tr:nth-child(even) td { background: #faf8f5; }
 .tabela .nota { font-size: 7.4pt; line-height: 1.45; color: var(--texto-suave); margin: 2.5mm 0 0; }
+
+/* Explicação dos ativos colada no card da própria fórmula: o card acompanha a
+   altura do QR (sem vão entre o card curto e o texto) e o espaço entre o card
+   e os destaques fica menor que o espaço entre duas fórmulas. */
+.linha-formula .card { align-self: stretch; }
+.bloco:has(.linha-formula) + .bloco:has(> .destaques, > .destaques-com-arte) { margin-top: 3mm; }
+.bloco:has(.linha-formula) + .bloco > .destaques,
+.bloco:has(.linha-formula) + .bloco > .destaques-com-arte > .destaques { margin-top: 2mm; }
