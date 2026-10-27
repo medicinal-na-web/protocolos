@@ -39,6 +39,7 @@ alguma página passou da área útil.
 | `destaques` | Textos dos ativos-chave, ligados por linhas aos ativos com `destaque: true` da mesma página. Para uma foto de produto ao lado do texto, use `{ arte: { src, largura }, itens: [...] }` |
 | `faixa` | Imagem de margem a margem que some no branco com degradê em cima e embaixo; aceita `etiqueta` por cima |
 | `texto` | Bloco educativo com `etiqueta`, `imagem` e `paragrafos` |
+| `tabela` | `titulo`, `colunas`, `linhas` (lista de listas) e `nota`; células aceitam `**negrito**` |
 | `espaco` | Espaço vertical em mm |
 
 Nos textos, `**assim**` vira **negrito**. Se a linha começar com `**`, coloque o texto entre aspas simples.

@@ -338,3 +338,25 @@ body {
 
 /* fundir: false — foto já em fundo branco puro, sem esfumar as bordas */
 .arte-destaques.sem-mascara { -webkit-mask-image: none; mask-image: none; align-self: center; }
+
+/* ---------- Tabela (mapa gene → fórmula, critérios) ---------- */
+.tabela { padding: 0 14mm 0 23mm; }
+.tabela h3 { font-size: 13pt; margin: 0 0 3mm; color: var(--tema-escura); }
+.tabela table { width: 100%; border-collapse: collapse; font-size: 7.6pt; line-height: 1.35; }
+.tabela thead th {
+  text-align: left;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 7pt;
+  letter-spacing: 0.2pt;
+  padding: 2mm 2.2mm;
+  background: linear-gradient(135deg, var(--tema-escura), var(--tema-clara));
+}
+.tabela thead th:first-child { border-radius: 1.5mm 0 0 0; }
+.tabela thead th:last-child { border-radius: 0 1.5mm 0 0; }
+.tabela td { padding: 1.7mm 2.2mm; border-bottom: 0.25mm solid #e3e3e6; vertical-align: top; color: var(--texto-suave); }
+.tabela td:first-child { font-weight: 700; color: var(--texto); white-space: nowrap; }
+.tabela td strong { color: var(--texto); }
+.tabela tbody tr:nth-child(even) td { background: #faf8f5; }
+.tabela .nota { font-size: 7.4pt; line-height: 1.45; color: var(--texto-suave); margin: 2.5mm 0 0; }

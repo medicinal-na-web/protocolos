@@ -1,0 +1,326 @@
+# Guia de Formulações — Protocolo Capilar Genético
+# Fórmulas 1 a 9 da orientação interna da Medicinal para prescrição baseada em teste genético
+# (GeneHair / HairCode — Bioma Genetics, 27 variantes). Frequências calculadas sobre 70 laudos
+# reais de pacientes (65 homens e 5 mulheres, coletas de dez/2025 a ago/2026).
+#
+# Legenda da orientação: * obrigatório · ** restrito (só com indicação genética) · *** complementar.
+# Rastreabilidade dos ativos (cdpro, tier, dose mais usada na farmácia) e pendências: revisao.md.
+
+titulo: Protocolo Capilar
+cor:
+  escura: "#7a4416"
+  clara: "#d39a55"
+qr: https://medicinal.vip/protoc_Capilar?r=qr   # link a criar no medicinal.vip
+capa: capa.jpg
+capa_posicao: "center top"
+
+paginas:
+  # Página 2 — Introdução
+  - - texto:
+        titulo: Do laudo genético à fórmula
+        paragrafos:
+          - A **alopecia androgenética** tem cerca de **80% de herança genética**. O teste capilar analisa **27 variantes** distribuídas em cinco eixos — **sensibilidade androgênica**, **resposta aos tratamentos**, **vitaminas e micronutrientes**, **microcirculação** e **inflamação** — e mostra em quais pontos do ciclo do folículo cada paciente precisa de reforço.
+          - Este guia reúne as **9 fórmulas** do protocolo Medicinal. Cada uma é **ativada, ajustada ou excluída** pelo resultado do laudo. A regra é sempre a mesma — **o laudo genético determina a composição final da prescrição**.
+    - faixa:
+        src: foliculo.jpg
+        altura: 70
+        posicao: "center 40%"
+        etiqueta: [Folículo, Da raiz à genética]
+    - tabela:
+        titulo: Como ler as fórmulas
+        colunas: [Marcação, Classe, Regra de inclusão]
+        linhas:
+          - ["*", Obrigatório, Sempre incluído. Só a dose varia conforme o laudo.]
+          - ["**", Restrito, Só entra com **indicação genética direta** no laudo.]
+          - ["***", Complementar, "Sempre incluído, na **dose mais apropriada** ao perfil."]
+          - ["—", Regenerador, '**Tretinoína 0,015%** entra automaticamente quando o laudo indica estímulo regenerativo.']
+        nota: Base de dados do guia — **70 laudos** de pacientes da Medicinal. As porcentagens das próximas páginas mostram em quantos pacientes cada achado apareceu.
+
+  # Página 3 — Mapa gene → fórmula
+  - - tabela:
+        titulo: Mapa genético-terapêutico
+        colunas: [Gene, Achado no laudo, Conduta no protocolo, Frequência]
+        linhas:
+          - [AR (rs6152), Maior sensibilidade ao DHT, 'F1 **Dutasterida** · F4 Finasterida **0,15%**', 43%]
+          - [SRD5A2, Alta conversão T → DHT, 'F1 **Finasterida** ou Dutasterida · F4 Finasterida', 83%]
+          - [HDAC9, Amplificação da via androgênica, 'F1 Dutasterida · F4 **Tretinoína** · F5', 73%]
+          - [CYP19A1, Baixa aromatase, 'F4 **Alfa-estradiol 0,025%**', 71%]
+          - [PGD2 (GPR44), Forte tendência à regressão folicular, 'F4 **Cetirizina** 1% (intermediário) ou 2% (aumentado)', 73%]
+          - [PTGFR, Baixa eficácia da latanoprosta, 'F3 **só** quando PTGFR preservado', 13% elegíveis]
+          - [SULT1A1, Menor ativação do minoxidil, 'F4 **Tretinoína 0,015%** (induz a SULT1A1)', 59%]
+          - [LIPH, Estrutura e espessura do fio prejudicadas, 'F4 Auxina e Capilia na **dose maior** · F7 bloco obrigatório', 100%]
+          - [ECA, Perfusão folicular reduzida, 'F2 Minoxidil oral · F5 **VEGF + aFGF**', 74%]
+          - [GC + VDR, Vitamina D pouco funcional, 'F6 **Vitamina D 10.000 UI/dia**', 74%]
+          - [MTHFR, Hipometilação + inflamação, 'F7 bloco **Metilfolato + Metilcobalamina**', 69%]
+          - [FUT2, Inflamação intestinal e risco de eflúvio, 'F9 **Sachê intestinal** · F7 Metilcobalamina', 21%]
+          - [ZPR1, Baixa vitamina E + triglicerídeos aumentados, 'F7 bloco **antioxidante** (Vitamina E, PQQ)', 24%]
+          - [TNF-α / NQO1, Inflamação e defesa antioxidante, 'F7 bloco antioxidante · F9', 23% / 37%]
+        nota: '**Fórmulas sempre presentes:** F2 (Minoxidil oral), F4 (Loção capilar) e F8 (Shampoo). As demais dependem do laudo. Frequência = pacientes com resultado intermediário ou aumentado entre os 70 laudos analisados (SRD5A2 e AR: só resultado aumentado).'
+
+  # Página 4 — Fórmula 1 (antiandrogênico oral)
+  - - formula:
+        nome: Fórmula 1 · Dutasterida
+        subtitulo: via androgênica intensa
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: Dutasterida, dose: "0,5mg", destaque: true }
+          - { nome: Preparar, dose: 45 doses }
+        modo_de_uso: Tomar 01 cápsula **3 vezes na semana**.
+    - espaco: 4
+    - formula:
+        nome: Fórmula 1 · Finasterida
+        subtitulo: via androgênica moderada
+        via: IN
+        periodo: dia
+        qr: false
+        arte: { src: capsulas.jpg, topo: -8, direita: 2, largura: 46 }
+        ativos:
+          - { nome: Finasterida, dose: "1,0mg", destaque: true }
+          - { nome: Preparar, dose: 90 doses }
+        modo_de_uso: Tomar 01 cápsula ao dia.
+    - destaques:
+        - nome: Dutasterida
+          texto: Inibe as **duas isoformas da 5α-redutase** (tipos 1 e 2) e reduz o DHT sérico em mais de 90%. Escolha quando o laudo mostra **intensidade androgênica alta** — **SRD5A2 aumentado** somado a **SRD5A1 alterado**, **AR (rs6152) aumentado** ou **HDAC9** alterado. Foi o perfil de **57%** dos 70 pacientes.
+        - nome: Finasterida
+          texto: Inibidor seletivo da **5α-redutase tipo 2**, a isoforma predominante no folículo. Indicada quando o achado androgênico é **isolado no SRD5A2** (alta conversão T → DHT), sem reforço do receptor ou da isoforma tipo 1 — **20%** dos pacientes.
+    - espaco: 3
+    - texto:
+        paragrafos:
+          - '**Escolha entre as opções:** a Fórmula 1 entra sempre que o **SRD5A2 está aumentado** (83% dos laudos). Sem achado androgênico, a Fórmula 1 não é prescrita. Uso masculino; em mulheres, só com indicação médica e contracepção eficaz.'
+
+  # Página 5 — Fórmulas 2 e 3
+  - - formula:
+        nome: Fórmula 2 · Minoxidil Oral
+        subtitulo: sempre prescrever
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: Minoxidil, dose: "2,5mg", destaque: true }
+          - { nome: Preparar, dose: 90 doses }
+        modo_de_uso: Tomar 01 cápsula ao dia.
+    - destaques:
+        - nome: Minoxidil
+          texto: Abre **canais de potássio** na musculatura dos vasos e na papila dérmica, aumenta o fluxo sanguíneo e **prolonga a fase anágena**. Por via oral é ativado pela **SULT1A1** do folículo e compensa a **perfusão reduzida** apontada pela **ECA** (74% dos laudos). Avaliar pressão arterial e frequência cardíaca antes e durante o uso.
+    - espaco: 6
+    - formula:
+        nome: Fórmula 3 · Latanoprosta
+        subtitulo: só com indicação genética
+        via: OUT
+        periodo: dia
+        qr: false
+        arte: { src: locao.jpg, topo: 6, direita: -2, largura: 44 }
+        ativos:
+          - { nome: Latanoprosta, dose: "0,005%", destaque: true }
+          - { nome: Loção capilar, dose: qsp 100ml }
+        modo_de_uso: Aplicar nas áreas indicadas **1 vez ao dia, pela manhã**.
+    - destaques:
+        - nome: Latanoprosta
+          texto: Análogo da **prostaglandina F2α** que estimula o crescimento pelo **receptor FP (PTGFR)**. Quando o PTGFR está alterado, a resposta é baixa — por isso a fórmula **só entra com PTGFR preservado**, o que aconteceu em **13%** dos laudos.
+
+  # Página 6 — Fórmula 4 (loção capilar)
+  - - formula:
+        nome: Fórmula 4 · Loção Capilar
+        subtitulo: minoxidil potencializado
+        via: OUT
+        periodo: noite
+        ativos:
+          - { nome: Minoxidil *, dose: 5% }
+          - { nome: Finasterida *, dose: "0,10% ou 0,15%" }
+          - { nome: Alfa-estradiol **, dose: "0,025%", destaque: true }
+          - { nome: Cetirizina **, dose: 1% ou 2%, destaque: true }
+          - { nome: Tretinoína (regenerador), dose: "0,015%", destaque: true }
+          - { nome: D-Pantenol ***, dose: 2% }
+          - { nome: Auxina Tricógena® ***, dose: 5% ou 10% }
+          - { nome: Capilia Longa™ ***, dose: "2% ou 3,5%", destaque: true }
+          - { nome: TrichoSol®, dose: qsp 100ml }
+        modo_de_uso: Aplicar no couro cabeludo **1 vez ao dia, à noite**, com massagens suaves.
+    - destaques:
+        arte: { src: locao.jpg, largura: 50 }
+        itens:
+        - nome: Alfa-estradiol
+          texto: Isômero do estradiol **sem ação estrogênica sistêmica**. Estimula a **aromatase** local, desviando testosterona para estradiol e reduzindo o substrato do DHT. Entra quando o **CYP19A1** indica **baixa aromatase** (71%).
+        - nome: Cetirizina
+          texto: Reduz a **prostaglandina D2**, sinal que leva o folículo à **regressão**. **1%** com PGD2 intermediário; **2%** com PGD2 aumentado (15% dos laudos).
+        - nome: Tretinoína
+          texto: '**Induz a SULT1A1**, enzima que ativa o minoxidil — reforço para os **59%** com SULT1A1 reduzida — e estimula a **renovação** folicular quando o laudo pede regeneração.'
+        - nome: Capilia Longa™
+          texto: '**Fito-exossomas** de Curcuma longa que bloqueiam a queda e estimulam o crescimento. Com a **Auxina Tricógena®**, sobe para a dose maior quando os eixos de **estrutura** ou **crescimento** passam de 50%.'
+
+  # Página 7 — Fórmula 5 (soro com fatores de crescimento)
+  - - formula:
+        nome: Fórmula 5 · Soro Capilar
+        subtitulo: fatores de crescimento
+        via: OUT
+        periodo: dia
+        ativos:
+          - { nome: ProHairin Complex, dose: "1,5%" }
+          - { nome: Fator de crescimento aFGF, dose: "1,5%", destaque: true }
+          - { nome: Fator de crescimento VEGF, dose: "1,0%", destaque: true }
+          - { nome: Procapil®, dose: "1,5%", destaque: true }
+          - { nome: Soro capilar, dose: qsp 100ml }
+        modo_de_uso: Borrifar diretamente no couro cabeludo **1 vez ao dia, pela manhã**.
+    - destaques:
+        arte: { src: soro.jpg, largura: 48 }
+        itens:
+        - nome: aFGF (FGF-1)
+          texto: Fator de crescimento fibroblástico que ativa a **papila dérmica** e a proliferação das células da matriz, **prolongando a fase anágena**. Resposta ao **HDAC9** e ao **PAX1/FOXA2** alterados, que indicam ciclo encurtado e menor densidade.
+        - nome: VEGF
+          texto: Fator de crescimento endotelial que forma **novos capilares** ao redor do bulbo. Compensa a **perfusão folicular reduzida** da **ECA** e a **deficiência angiogênica**.
+        - nome: Procapil®
+          texto: Biomimético (biotinoil tripeptídeo-1 + apigenina + ácido oleanólico) que **ancora o fio**, melhora a **microcirculação** e reduz a ação do DHT no bulbo.
+    - espaco: 3
+    - texto:
+        paragrafos:
+          - '**Ativação automática:** a Fórmula 5 entra sempre que o laudo indica necessidade de **fatores de crescimento**, **peptídeos regeneradores**, **deficiência angiogênica** ou **comprometimento da matriz extracelular** — HDAC9, PAX1/FOXA2 ou ECA alterados apareceram em **95%** dos laudos.'
+
+  # Página 8 — Fórmulas 6 e 8
+  - - formula:
+        nome: Fórmula 6 · Vitamina D
+        subtitulo: GC + VDR alterados
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: Vitamina D, dose: 1.000 UI/gota, destaque: true }
+          - { nome: Preparar, dose: 50ml }
+        modo_de_uso: Tomar **10 gotas ao dia**.
+    - destaques:
+        arte: { src: gotas.jpg, largura: 40 }
+        itens:
+        - nome: Vitamina D
+          texto: O **receptor de vitamina D (VDR)** é essencial para o início de cada novo ciclo do fio. Com **GC** (transporte) e **VDR** (receptor) alterados — **74%** dos laudos — a vitamina circula menos e age menos no folículo. Acompanhar **25(OH)D** e cálcio.
+    - espaco: 6
+    - formula:
+        nome: Fórmula 8 · Shampoo
+        subtitulo: couro cabeludo saudável
+        via: OUT
+        periodo: [dia, noite]
+        qr: false
+        ativos:
+          - { nome: Piritionato de Zinco, dose: 1%, destaque: true }
+          - { nome: Extrato de Jaborandi, dose: 10% }
+          - { nome: Auxina Tricógena®, dose: 10% }
+          - { nome: Shampoo, dose: qsp 200ml }
+        modo_de_uso: Aplicar durante o banho.
+    - destaques:
+        - nome: Piritionato de Zinco
+          texto: Antifúngico e **seborregulador** que controla a **microinflamação** do couro cabeludo. Com o **jaborandi** e a **Auxina Tricógena®**, prepara o couro cabeludo para receber a loção.
+    - faixa: { src: espuma.jpg, altura: 38 }
+
+  # Página 9 — Fórmula 7: blocos obrigatório e metilfolato
+  - - formula:
+        nome: Fórmula 7 · Bloco Obrigatório
+        subtitulo: presente em todas as formulações
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: Biotina *, dose: 2 · 5 · 10mg, destaque: true }
+          - { nome: Piridoxal 5-fosfato *, dose: 50 · 75mg }
+          - { nome: Zinco quelato *, dose: 25 · 35mg }
+          - { nome: Pantotenato de cálcio *, dose: 150 · 200mg }
+          - { nome: Cistina *, dose: 20 · 30mg, destaque: true }
+          - { nome: Tiamina *, dose: 60 · 75mg }
+        modo_de_uso: Compõe a Fórmula 7 com **mais 2 blocos**, na ordem de prioridade — metilfolato, antioxidante, nutricional.
+    - espaco: 4
+    - formula:
+        nome: Fórmula 7 · Bloco Metilfolato
+        subtitulo: MTHFR, FUT2 ou TCN2 alterados
+        via: IN
+        periodo: dia
+        qr: false
+        ativos:
+          - { nome: Metilfolato **, dose: 1mg, destaque: true }
+          - { nome: Metilcobalamina **, dose: 1mg }
+        modo_de_uso: Sempre que o metilfolato for prescrito, a **metilcobalamina** entra junto.
+    - destaques:
+        - nome: Biotina
+          texto: Cofator das carboxilases e da **síntese de queratina**. Com **cistina**, **zinco** e **pantotenato**, forma a base estrutural para o **LIPH** alterado — presente em **100%** dos laudos, que indica fio mais fino e frágil.
+        - nome: Cistina
+          texto: Aminoácido sulfurado que forma as **pontes dissulfeto** da queratina, dando **resistência e espessura** ao fio.
+        - nome: Metilfolato
+          texto: Forma ativa do folato, que **não depende da MTHFR**. Restaura a **metilação** e reduz a homocisteína e a inflamação — **69%** dos laudos têm MTHFR alterada.
+
+  # Página 10 — Fórmula 7: blocos antioxidante e nutricional
+  - - formula:
+        nome: Fórmula 7 · Bloco Antioxidante
+        subtitulo: ZPR1, TNF-α ou NQO1 alterados
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: CavaCurcumin® **, dose: 50mg, destaque: true }
+          - { nome: CavaQ10® **, dose: 50mg }
+          - { nome: Nigella sativa **, dose: 50mg }
+          - { nome: PQQ *, dose: 1mg }
+          - { nome: Vitamina E *, dose: 200 · 400 · 600UI, destaque: true }
+        modo_de_uso: Entra quando o laudo indica **suplementação antioxidante**.
+    - espaco: 4
+    - formula:
+        nome: Fórmula 7 · Bloco Nutricional
+        subtitulo: carência nutricional
+        via: IN
+        periodo: dia
+        qr: false
+        ativos:
+          - { nome: In.Cell® *, dose: 150mg, destaque: true }
+          - { nome: Vitamina B1 *, dose: 35 · 50mg }
+          - { nome: Riboflavina *, dose: 25 · 30mg }
+          - { nome: Piridoxina *, dose: 25 · 35mg }
+          - { nome: Vitamina C *, dose: 250 · 350mg }
+          - { nome: Magnésio *, dose: 150 · 200mg }
+          - { nome: Cobre *, dose: 1mg }
+          - { nome: Selênio *, dose: 200mcg }
+        modo_de_uso: Preparar **90 doses**. Tomar **01 dose pela manhã**, após a primeira refeição do dia.
+    - destaques:
+        - nome: CavaCurcumin®
+          texto: Curcumina em **γ-ciclodextrina**, de alta absorção, que modula o **TNF-α** e o NF-κB — a **microinflamação** que acelera a miniaturização.
+        - nome: Vitamina E
+          texto: Principal antioxidante das membranas. O **ZPR1** alterado indica **baixa vitamina E** e triglicerídeos aumentados — a dose sobe conforme o achado.
+        - nome: In.Cell®
+          texto: Blend de **aminoácidos, ácido hialurônico e glicosaminoglicanos** que repõe a matriz do folículo quando há **carência nutricional**.
+
+  # Página 11 — Fórmula 9 (intestino)
+  - - formula:
+        nome: Fórmula 9 · Sachê Intestinal
+        subtitulo: eixo intestino-folículo
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: L-Glutamina, dose: 5g, destaque: true }
+          - { nome: Lactobacillus acidophilus, dose: 5 BLH, destaque: true }
+          - { nome: Lactobacillus bifidum, dose: 5 BLH }
+          - { nome: Lactobacillus rhamnosus, dose: 5 BLH }
+          - { nome: Lactobacillus reuteri, dose: 2 BLH }
+          - { nome: Lactobacillus gasseri, dose: 2 BLH }
+          - { nome: Base suco de laranja, dose: qsp 1 sachê }
+        modo_de_uso: Preparar **60 doses**. Dissolver 1 sachê em 100ml de água e tomar **pela manhã, em jejum**.
+    - destaques:
+        arte: { src: sache.jpg, largura: 46 }
+        itens:
+        - nome: L-Glutamina
+          texto: Principal combustível dos **enterócitos**. Restaura as **junções firmes** da mucosa e reduz a **permeabilidade intestinal** — o ponto fraco quando o **FUT2** está alterado.
+        - nome: Probióticos
+          texto: Cinco cepas que reequilibram a **microbiota**, reduzem a **inflamação sistêmica** e melhoram a absorção de **vitamina B12, zinco e ferro**, nutrientes essenciais para o fio.
+    - espaco: 3
+    - texto:
+        titulo: Eixo intestino-folículo
+        paragrafos:
+          - O **FUT2** controla a mucosa protetora do intestino. Quando está alterado (**21%** dos laudos), cresce o risco de **disbiose**, **inflamação crônica** e má absorção de B12 — um caminho para o **eflúvio telógeno secundário**. Prescrever a Fórmula 9 quando o FUT2 ou qualquer gene indicar **inflamação**, **disbiose** ou **eflúvio**.
+
+  # Página 12 — Critérios e cuidados
+  - - tabela:
+        titulo: Regras do protocolo
+        colunas: [Regra, Quando aplicar]
+        linhas:
+          - [Hierarquia da F4, 'Obrigatórios (∗) nunca faltam · Tretinoína entra pelo laudo · Restritos (∗∗) só com indicação genética · Complementares (∗∗∗) sempre presentes.']
+          - ['Tretinoína 0,015%', 'Laudo indica **estímulo regenerativo**, regeneração folicular reduzida, baixa proliferação celular ou turnover epidérmico — e **SULT1A1 reduzida**.']
+          - [Fórmula 5, 'Laudo indica **fatores de crescimento**, peptídeos regeneradores, **deficiência angiogênica** ou comprometimento da matriz extracelular.']
+          - [Fórmula 7, 'Bloco obrigatório + **2 blocos** na ordem: metilfolato → antioxidante → nutricional. Sem indicação de metilfolato, usar antioxidante + nutricional.']
+          - [Fórmula 1, '**Dutasterida** com via androgênica intensa (SRD5A2 + SRD5A1, AR ou HDAC9). **Finasterida** com achado isolado no SRD5A2.']
+          - [Fórmula 3, 'Somente com **PTGFR preservado**.']
+          - [Fórmula 9, '**FUT2** alterado ou qualquer gene indicando inflamação, disbiose ou eflúvio.']
+    - espaco: 4
+    - texto:
+        titulo: Cuidados
+        paragrafos:
+          - '**Minoxidil oral:** avaliar pressão arterial, frequência cardíaca e edema; contraindicado em feocromocitoma e cardiopatia descompensada. **Finasterida e dutasterida:** uso masculino; informar sobre efeitos na libido; mulheres em idade fértil não devem manipular as cápsulas. **Tretinoína e latanoprosta:** contraindicadas na gestação.'
+          - '**Monitoramento laboratorial sugerido:** 25(OH)D e cálcio (GC/VDR), folato, B12 e homocisteína (MTHFR, FUT2), ferritina (TMPRSS6), zinco e perfil lipídico (ZPR1). O laudo indica **predisposição** — a prescrição final depende da avaliação clínica do prescritor.'

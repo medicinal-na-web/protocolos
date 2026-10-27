@@ -102,6 +102,15 @@ function blocoTexto(b, ctx) {
   return `<div class="texto">${b.titulo ? `<h3>${esc(b.titulo)}</h3>` : ""}${antes}${paragrafos}${depois}</div>`;
 }
 
+// Tabela: { titulo?, colunas: [...], linhas: [[...], ...], nota? } — células aceitam **negrito**
+function blocoTabela(b) {
+  const cab = b.colunas.map((c) => `<th>${esc(c)}</th>`).join("");
+  const linhas = b.linhas.map((l) => `<tr>${l.map((c) => `<td>${rico(String(c))}</td>`).join("")}</tr>`).join("");
+  return `<div class="tabela">${b.titulo ? `<h3>${esc(b.titulo)}</h3>` : ""}
+    <table><thead><tr>${cab}</tr></thead><tbody>${linhas}</tbody></table>
+    ${b.nota ? `<p class="nota">${rico(b.nota)}</p>` : ""}</div>`;
+}
+
 const ESPACO = (b) => `<div style="height:${mm(b.altura ?? 6)}"></div>`;
 
 async function renderizar(slug) {
@@ -127,6 +136,7 @@ async function renderizar(slug) {
       else if (b.destaques) blocos.push(blocoDestaques(b.destaques, ctx));
       else if (b.faixa) blocos.push(blocoFaixa(b.faixa, ctx));
       else if (b.texto) blocos.push(blocoTexto(b.texto, ctx));
+      else if (b.tabela) blocos.push(blocoTabela(b.tabela));
       else if (b.espaco !== undefined) blocos.push(ESPACO({ altura: b.espaco }));
       else throw new Error(`${slug}: bloco desconhecido ${JSON.stringify(Object.keys(b))}`);
     }
