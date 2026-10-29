@@ -15,7 +15,7 @@ Para trocar ativos, informe os números com ❌ (ex.: "7 ❌, 15 ❌").
 |---|---|---|---|---|---|---|---|---|
 | 1 | F1 Estradiol Spray | TP2 spray | NAF | Estradiol 1:10 (6161) · B | 1,53 mg/jato | Lenzetto® | ✅ | Cadastro "uso interno": confirmar matéria-prima tópica e a forma spray |
 | 2 | F1 | | veículo | Octisalato 5% | 5% | referência | ⚠️ | Não cadastrado no banco |
-| 3 | F2 Progesterona | TP1 cápsula | NAF | Progesterona (55670) · S | 100 mg | FC12110 (moda) | ✅ | Cadastro diz "não micronizada": uso oral exige a micronizada |
+| 3 | F2 Progesterona | TP1 cápsula | NAF | Progesterona micronizada (55670) · S | 100 mg | FC12110 (moda) | ✅ | **Aprovado:** usar progesterona micronizada (o cadastro 55670 ainda diz "não micronizada", então corrigir a ficha) |
 | 4 | F3 Fogachos s/ hormônio | TP1 | NAF | EVA360® (16552) · A | 200 mg | FC12110 | ✅ | |
 | 5 | F3 | TP1 | PAR | **Fezolinetanto** | 45 mg | referência clínica | ⏳ | Sem cadastro (aguardando chegada) |
 | 6 | F3 | TP1 | BAC | Relora® (10002) · A | 250 mg | FC12110 | ⚠️ | Associação fraca com o foco (1 ocorrência) · P2 |
@@ -44,7 +44,7 @@ Para trocar ativos, informe os números com ❌ (ex.: "7 ❌, 15 ❌").
 | 29 | F11 Libido | TP1 | PAR | **Elibrya™** (17258) | a definir | — | ⏳ | Sem registro em FC12110 e sem dose na ficha |
 | 30 | F11 | TP1 | NAF | Maca peruana (23) · S | 500 mg | FC12110 (moda) | ✅ | Âncora das associações |
 | 31 | F11 | TP1 | BAC | Tribulus terrestris (104) · S | 500 mg | FC12110 (moda) | ✅ | 4.976 associações |
-| 32 | F12 Sintomas gerais | TP1 | NAF | S-equol 1:10 (14034) · B | 10 mg | literatura | ⚠️ | Histórico registra 2,5 mg: confirmar se a dose é do triturado ou do S-equol |
+| 32 | F12 Sintomas gerais | TP1 | NAF | S-equol 1:10 (14034) · B | 10 mg | literatura | ✅ | **Aprovado:** manter 10 mg (o histórico registra 2,5 mg) |
 | 33 | F12 | TP1 | BAC | Cimicifuga racemosa (557) · B | 80 mg | FC12110 | ✅ | |
 | 34 | F12 | TP1 | BAC | Vitamina E acetato (57800) · S | 200 UI | FC12110 | ✅ | P2 |
 
@@ -67,6 +67,6 @@ Para trocar ativos, informe os números com ❌ (ex.: "7 ❌, 15 ❌").
 1. Cadastrar **Fezolinetanto**, **Genu-in Skin** (TP15) e **Elibrya** (TP1 + dose).
 2. Incluir **vitamina D3** na tabela `ativos`.
 3. Corrigir a direção do BAC-01 em `validate_protocolo()`.
-4. Confirmar a dose do S-equol, a progesterona micronizada e a matéria-prima do estradiol tópico.
+4. Confirmar a matéria-prima do estradiol tópico. Progesterona micronizada e S-equol 10 mg já foram aprovados (29/10/2026). Falta ajustar a ficha da 55670 para "micronizada".
 5. Validar com o regulatório o uso da marca Lenzetto® e a concentração do spray.
 6. Registrar em `protocolos_matriz` como `rascunho` v1.0 (GER-05). Ainda não registrei: depende da aprovação de vocês.
