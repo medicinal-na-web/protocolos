@@ -31,7 +31,7 @@ Para trocar ativos, informe os números com ❌ (ex.: "7 ❌, 15 ❌").
 | 16 | F7 | TP1 | BAC | Boro quelado (25460) · A | 2 mg | FC12110 | ✅ | |
 | 17 | F7 | | — | **Vitamina D3** | — | — | ❌ | Não encontrada na tabela `ativos` (GER-04) |
 | 18 | F8 Pele | TP15 sachê | âncora | Verisol® (8194) · A | — | — | ↺ | Âncora das associações, substituída pelo Genu-in Skin |
-| 19 | F8 | TP15 | PAR | Genu-in Skin® (17239) | 2,5 g | ficha (17/10/2026) | ⏳ | Ficha cadastrada; sem tier, sem categorias e sem histórico na FC12110. Existe também o código antigo 16184 "Genu-In" (tier C, 20 sachês até 30/03/2026, dose mais comum 5 g) |
+| 19 | F8 | TP15 | PAR | Genu-in Skin® (17239) | 2,5 g | ficha (17/10/2026) | ⏳ | Ficha cadastrada; categorias vinculadas em 29/10/2026 (Rugas · primária, Hidratação, Flacidez, Antiaging). Ainda sem tier e sem histórico na FC12110. Existe também o código antigo 16184 "Genu-In" (tier C, 20 sachês até 30/03/2026, dose mais comum 5 g) |
 | 20 | F8 | TP15 | BAC | Ácido hialurônico oral (5690) · A | 100 mg | FC12110 | ✅ | P2 |
 | 21 | F8 | TP15 | BAC | Cerasomosides (9425) · B | 40 mg | FC12110 | ✅ | |
 | 22 | F8 | TP15 | BAC | SiliciuMax® (11161) · A | 50 mg | FC12110 | ✅ | P2 |
@@ -66,7 +66,8 @@ Para trocar ativos, informe os números com ❌ (ex.: "7 ❌, 15 ❌").
 
 1. Cadastrar **Fezolinetanto**, **Genu-in Skin** (TP15) e **Elibrya** (TP1 + dose).
 2. Incluir **vitamina D3** na tabela `ativos`.
-3. Corrigir a direção do BAC-01 em `validate_protocolo()`.
+3. Corrigir a direção do BAC-01 em `validate_protocolo()` (script pronto em `nexus/correcao_validate_protocolo_bac01.sql`, aplicar pelo owner).
+7. Reimportar a FC12110 a partir do ERP (última carga: 04/04/2026) e recalcular associações e tiers (scripts locais do owner).
 4. Confirmar a matéria-prima do estradiol tópico. Progesterona micronizada e S-equol 10 mg já foram aprovados (29/10/2026). Falta ajustar a ficha da 55670 para "micronizada".
 5. Validar com o regulatório o uso da marca Lenzetto® e a concentração do spray.
 6. Registrar em `protocolos_matriz` como `rascunho` v1.0 (GER-05). Ainda não registrei: depende da aprovação de vocês.
