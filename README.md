@@ -28,6 +28,9 @@ alguma página passou da área útil.
 2. Edite o `protocolo.yaml`:
    - `cor.escura` / `cor.clara`: cor do protocolo (degradê da capa, selos IN/OUT, selo do canto, logo da capa).
    - `qr`: link do "Copie a fórmula aqui" (padrão `https://medicinal.vip/protoc_<Tema>?r=qr`).
+   - `propositor` (opcional): `{ nome, logo, texto }` para protocolos de parceiro. A logo (em `marca/parceiros/`)
+     vai na capa ("Protocolo proposto por") e no cabeçalho das páginas, e a Medicinal entra só como "Apoio"
+     na última página. Sem o arquivo da logo, o build usa o nome numa caixa tracejada e avisa.
    - `paginas`: cada página é uma lista de blocos, na ordem em que aparecem.
 3. Coloque as artes em `protocolos/<novo>/artes/` e rode o build.
 

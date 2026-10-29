@@ -109,18 +109,32 @@ async function renderizar(slug) {
   const p = yaml.load(fs.readFileSync(path.join(dir, "protocolo.yaml"), "utf8"));
   const ctx = { artes: `../protocolos/${slug}/artes`, qr: p.qr };
 
+  // propositor: logo de quem propõe o protocolo na capa e nos cabeçalhos;
+  // a Medicinal passa a aparecer só como apoio na última página.
+  const prop = p.propositor;
+  let logoProp = "";
+  if (prop) {
+    const arq = prop.logo && path.join(raiz, "marca", "parceiros", prop.logo);
+    if (arq && fs.existsSync(arq)) logoProp = `<img src="../marca/parceiros/${esc(prop.logo)}" alt="${esc(prop.nome)}">`;
+    else {
+      console.warn(`  ⚠ ${slug}: logo do propositor não encontrada (marca/parceiros/${prop.logo || "?"}), usando o nome`);
+      logoProp = `<span class="logo-pendente">${esc(prop.nome)}</span>`;
+    }
+  }
+
   const paginas = [];
   paginas.push(`<section class="pagina capa">
     <div class="capa-faixa">
       <div class="sobretitulo">Guia de Formulações</div>
       <h1>${esc(p.titulo)}</h1>
-      <div class="selo-branco"></div>
+      ${prop ? "" : `<div class="selo-branco"></div>`}
     </div>
     <div class="capa-imagem" style="background-image:url('${ctx.artes}/${esc(p.capa)}');background-position:${p.capa_posicao || "center top"}"></div>
-    <div class="capa-logo"></div>
+    ${prop ? `<div class="capa-propositor"><span>${esc(prop.texto || "Protocolo proposto por")}</span>${logoProp}</div>` : `<div class="capa-logo"></div>`}
   </section>`);
 
-  for (const pag of p.paginas) {
+  for (const [i, pag] of p.paginas.entries()) {
+    const ultima = i === p.paginas.length - 1;
     const blocos = [];
     for (const b of pag) {
       if (b.formula) blocos.push(await blocoFormula(b.formula, ctx));
@@ -133,10 +147,10 @@ async function renderizar(slug) {
     paginas.push(`<section class="pagina interna">
       <div class="cabecalho">
         <span class="nome">${esc(p.titulo)}</span>
-        <div class="marca"><img src="../marca/logo-azul.png"><span>GUIA DE FORMULAÇÕES</span></div>
+        <div class="marca${prop ? " propositor" : ""}">${prop ? logoProp : `<img src="../marca/logo-azul.png">`}<span>GUIA DE FORMULAÇÕES</span></div>
       </div>
       <div class="conteudo">${blocos.join("\n")}</div>
-      <div class="selo-canto selo-tema"></div>
+      ${!prop ? `<div class="selo-canto selo-tema"></div>` : ultima ? `<div class="apoio"><span>Apoio</span><img src="../marca/logo-azul.png" alt="Medicinal"></div>` : ""}
     </section>`);
   }
 

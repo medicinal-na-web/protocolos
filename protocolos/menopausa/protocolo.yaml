@@ -14,6 +14,10 @@ cor:
   escura: "#7a1f4b"
   clara: "#e2879f"
 qr: https://medicinal.vip/protoc_Menopausa?r=qr   # link a criar no medicinal.vip
+# Protocolo proposto pela EndoAcademy; a Medicinal entra como apoio na última página.
+propositor:
+  nome: EndoAcademy
+  logo: endoacademy.png   # marca/parceiros/endoacademy.png (aguardando o arquivo)
 capa: antebraco.jpg
 capa_posicao: "66% center"
 
