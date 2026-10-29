@@ -62,6 +62,28 @@ Para trocar ativos, informe os números com ❌ (ex.: "7 ❌, 15 ❌").
 - **PAR:** Genu-in Skin e Elibrya **FAIL** por não terem registro em FC12110. Precisam de cadastro (SOP §9).
 - **BAC-05:** alertas de Prioridade 2 para Relora, ácido hialurônico, SiliciuMax e vitamina E.
 
+## Revalidação de 29/10/2026
+
+A base **não foi atualizada** antes desta revalidação. Nenhum dos 102 workflows do n8n
+(ricardo-medicinal.app.n8n.cloud) carrega a FC12110 nem recalcula associações e tiers na `supabase_ativos`.
+Os que leem a FC12110 ("Ativação - prescrições", "CMV - margem e markup") gravam em outros projetos
+(formulaCerta e supint). Estado do banco nesta data: FC12110 e `associacoes_ativos` até 04/04/2026, e tiers recalculados
+pela última vez em 08/05/2026. Por isso a revalidação abaixo usa a mesma base da sessão de 24/10.
+
+Rodei a `validate_protocolo()` de novo com as 12 fórmulas da tabela. Ficaram de fora o octisalato,
+o fezolinetanto e a vitamina D3, que não têm cadastro, e o Verisol, que foi substituído.
+
+- **Sem mudança:** FGTS, NAF-01 (12 âncoras), GER-07 (a maior soma agora é 1.150 mg na F11, contando o Elibrya) e GER-08 passam.
+  Os alertas BAC-05 P2 continuam os mesmos.
+- **BAC-01:** reprovou as mesmas 11 associações. Conferi nas duas direções e todas existem (Relora × EVA360® segue com 1 ocorrência). O bug da função continua.
+- **PAR:** Genu-in Skin (17239) e Elibrya (17258) continuam **FAIL** (sem histórico na FC12110, sem tier).
+- **Novo · BAC-05 FAIL no Tribulus (104, F11):** as categorias do ativo são só masculinas (Libido masculina · primária,
+  Fertilidade masculina, Disfunção erétil, Hipogonadismo). Ele não está vinculado a Saúde sexual feminina (236).
+  A revisão de 24/10 não registrou essa falha. É preciso vincular o Tribulus à 236 (se o farmacêutico concordar) ou trocá-lo.
+- **Novo · F8 sem âncora:** as BACs da F8 (ácido hialurônico, Cerasomosides, SiliciuMax) foram ancoradas no Verisol (8194), que saiu da fórmula.
+  O Genu-in Skin entra como PAR e não tem associações. A F8 está hoje sem NAF.
+- **Correção na linha 19:** o código 16184 está cadastrado como "GENU-IN LIFE", e não "Genu-In".
+
 ## Pendências antes da versão oficial
 
 1. Cadastrar **Fezolinetanto**, **Genu-in Skin** (TP15) e **Elibrya** (TP1 + dose).
