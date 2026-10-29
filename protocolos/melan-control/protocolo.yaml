@@ -16,7 +16,7 @@ paginas:
         via: OUT
         periodo: noite
         ativos:
-          - { nome: Nikkol VC-IP, dose: 5%, destaque: true }
+          - { nome: Nikkol VC-IP, dose: 5% }
           - { nome: Hidroquinona, dose: 4% }
           - { nome: Tretinoína, dose: "0,025%" }
           - { nome: Fluocinolona, dose: "0,025%" }
@@ -24,7 +24,6 @@ paginas:
           - { nome: Vitamina E, dose: 3% }
           - { nome: Creme clareador, dose: 30g }
         modo_de_uso: Aplicar na face à noite após higienização.
-    - espaco: 2
     - formula:
         nome: Melan Control Cream
         subtitulo: sem hidroquinona
@@ -33,7 +32,7 @@ paginas:
         qr: false
         arte: { src: creme.png, topo: -6, direita: 0, largura: 82 }
         ativos:
-          - { nome: Nikkol VC-IP, dose: 5% }
+          - { nome: Nikkol VC-IP, dose: 5%, destaque: true }
           - { nome: 4-HR (Hexilresorcinol), dose: 1%, destaque: true }
           - { nome: POMC-BlocK, dose: 3%, destaque: true }
           - { nome: Ácido Tranexâmico, dose: 5% }
@@ -46,7 +45,7 @@ paginas:
         - nome: Nikkol VC-IP®
           texto: É o derivado **lipossolúvel da Vitamina C** na forma de éster que apresenta **alta estabilidade** e **excelente absorção percutânea**, possui potente ação antioxidante, contribuindo para a **uniformização do tom da pele**, por **inibir** a atividade da **tirosinase**.
         - nome: 4-HR (Hexilresorcinol)®
-          texto: Atua como inibidor da **tirosinase**, a enzima chave na **produção de melanina**, com eficácia no **clareamento** e **uniformização do tom da pele**. Essa abordagem, aliada à sua capacidade **antioxidante**.
+          texto: Atua como inibidor da **tirosinase**, a enzima chave na **produção de melanina**, com eficácia no **clareamento** e **uniformização do tom da pele**. Também tem ação **antioxidante**.
         - nome: POMC-BlocK®
           texto: Atua na **inibição** da **expressão gênica** da **POMC** e da **tirosinase**, suprimindo a **melanogênese** para impedir a síntese e a transferência da melanina, **reduzindo as hiperpigmentações cutâneas**.
 

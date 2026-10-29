@@ -39,7 +39,7 @@ paginas:
           texto: '**Promotor de permeação** que forma um reservatório na camada córnea e garante **absorção contínua** do estradiol ao longo do dia. Em veículo alcoólico, o spray **seca em cerca de 2 minutos**, sem resíduo, com **dose exata a cada jato**.'
     - faixa:
         src: antebraco.jpg
-        altura: 78
+        altura: 66
         posicao: "center 50%"
 
   # Página 3 — Hormonal: proteção endometrial (F2) e saúde íntima (F4)
@@ -54,7 +54,6 @@ paginas:
     - destaques:
         - nome: Progesterona micronizada
           texto: '**Bioidêntica**, protege o **endométrio** do estímulo do estradiol em mulheres com útero. Tomada à noite, seus metabólitos têm efeito **calmante** e contribuem para a **qualidade do sono**.'
-    - espaco: 7
     - formula:
         nome: Creme Vaginal Trófico
         subtitulo: síndrome geniturinária
@@ -85,7 +84,6 @@ paginas:
           texto: Blend patenteado de **shatavarinas** (Asparagus racemosus) que **sensibiliza os receptores estrogênicos**, apoiando o **equilíbrio hormonal feminino** sem conter hormônios.
         - nome: Fezolinetanto
           texto: Antagonista do **receptor NK3** que atua diretamente no **centro termorregulador do hipotálamo**, reduzindo a frequência e a intensidade dos **fogachos** — opção para quem **não pode usar hormônios**.
-    - espaco: 7
     - formula:
         nome: Equilíbrio da Menopausa
         subtitulo: sintomas gerais
@@ -114,7 +112,6 @@ paginas:
     - destaques:
         - nome: Magnésio bisglicinato
           texto: Forma **quelada de alta absorção** e boa tolerância. Promove **relaxamento muscular e neural** e favorece o **início e a manutenção do sono**, frequentemente prejudicados pelos suores noturnos.
-    - espaco: 7
     - formula:
         nome: Humor em Equilíbrio
         subtitulo: ansiedade e irritabilidade
@@ -143,7 +140,6 @@ paginas:
     - destaques:
         - nome: Vitamina K2 (MK-7)
           texto: Ativa a **osteocalcina**, direcionando o cálcio para os **ossos** e não para as artérias. Fundamental na menopausa, quando a **perda de massa óssea acelera**.
-    - espaco: 7
     - formula:
         nome: Pele Firme
         subtitulo: colágeno e hidratação
@@ -176,7 +172,6 @@ paginas:
     - destaques:
         - nome: Akkermansia muciniphila
           texto: Bactéria-chave da **barreira intestinal**, ligada à **sensibilidade à insulina** e ao **controle de peso**. Ajuda a conter o **acúmulo de gordura abdominal** típico da menopausa.
-    - espaco: 7
     - formula:
         nome: Conforto Urinário
         via: IN

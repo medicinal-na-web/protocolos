@@ -122,9 +122,15 @@ async function renderizar(slug) {
 
   for (const pag of p.paginas) {
     const blocos = [];
+    // Cada fórmula abre um grupo; os destaques seguintes pertencem a ela.
+    // Os conectores são desenhados por grupo, nunca ligando fórmulas diferentes.
+    let grupo = 0;
+    const comGrupo = (html) => html.replace('<div class="bloco"', `<div class="bloco" data-grupo="${grupo}"`);
     for (const b of pag) {
-      if (b.formula) blocos.push(await blocoFormula(b.formula, ctx));
-      else if (b.destaques) blocos.push(blocoDestaques(b.destaques, ctx));
+      if (b.formula) {
+        grupo++;
+        blocos.push(comGrupo(await blocoFormula(b.formula, ctx)).replace("data-grupo=", "data-formula data-grupo="));
+      } else if (b.destaques) blocos.push(comGrupo(blocoDestaques(b.destaques, ctx)));
       else if (b.faixa) blocos.push(blocoFaixa(b.faixa, ctx));
       else if (b.texto) blocos.push(blocoTexto(b.texto, ctx));
       else if (b.espaco !== undefined) blocos.push(ESPACO({ altura: b.espaco }));

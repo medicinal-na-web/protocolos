@@ -158,13 +158,13 @@ body {
   flex: none;
   border: 0.45mm solid var(--card-borda);
   border-radius: 5mm;
-  padding: 11mm 9mm 7mm 18mm;
+  padding: 12.5mm 9mm 7mm 18mm;
   background: rgba(255,255,255,0.86);
   z-index: 2;
 }
 .pill {
   position: absolute;
-  top: -4mm;
+  top: -5mm;
   left: 12mm;
   background: #fff;
   border: 0.4mm solid var(--card-borda);
@@ -175,9 +175,9 @@ body {
   gap: 2mm;
 }
 .pill .titulos { display: flex; flex-direction: column; line-height: 1.1; }
-.pill b { font-size: 8.5pt; font-weight: 700; text-transform: uppercase; }
-.pill small { font-size: 5.5pt; font-weight: 700; font-style: italic; text-transform: uppercase; }
-.pill svg { width: 4.6mm; height: 4.6mm; flex: none; }
+.pill b { font-size: 11pt; font-weight: 700; text-transform: uppercase; }
+.pill small { font-size: 7pt; font-weight: 700; font-style: italic; text-transform: uppercase; }
+.pill svg { width: 5.6mm; height: 5.6mm; flex: none; }
 
 .via {
   position: absolute;
@@ -198,7 +198,7 @@ body {
   display: flex;
   align-items: baseline;
   font-size: 7.4pt;
-  height: 6.6mm;
+  height: 6.1mm;
 }
 .ativos .n { font-weight: 700; white-space: nowrap; }
 /* Pontilhado feito com pontos de texto: sai idêntico em qualquer leitor de PDF
@@ -251,7 +251,7 @@ body {
 
 /* ---------- Destaques de ativos ---------- */
 .destaques { margin-top: 6mm; padding-left: 8mm; padding-right: 6mm; }
-.destaque + .destaque { margin-top: 4.5mm; }
+.destaque + .destaque { margin-top: 3.5mm; }
 .destaque h4 {
   margin: 0 0 2.5mm 0;
   font-size: 10.5pt;
@@ -260,7 +260,7 @@ body {
 .destaque p {
   margin: 0;
   font-size: 9.6pt;
-  line-height: 1.5;
+  line-height: 1.42;
   color: var(--texto-suave);
 }
 .destaque p strong, .texto p strong { color: var(--texto); font-weight: 700; }
@@ -338,3 +338,16 @@ body {
 
 /* fundir: false — foto já em fundo branco puro, sem esfumar as bordas */
 .arte-destaques.sem-mascara { -webkit-mask-image: none; mask-image: none; align-self: center; }
+
+/* Separação entre fórmulas diferentes na mesma página: respiro + linha fina na cor do protocolo */
+.bloco[data-formula] ~ .bloco[data-formula] { margin-top: 13mm; }
+.bloco[data-formula] ~ .bloco[data-formula]::before {
+  content: "";
+  position: absolute;
+  left: 23mm;
+  right: 14mm;
+  top: -7.5mm;
+  height: 0.35mm;
+  background: linear-gradient(90deg, var(--tema-clara), rgba(255,255,255,0));
+  opacity: 0.7;
+}

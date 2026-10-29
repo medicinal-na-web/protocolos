@@ -11,10 +11,21 @@ window.desenharConectores = function () {
   })();
 
   for (const conteudo of document.querySelectorAll(".pagina .conteudo")) {
+    const grupos = [...new Set([...conteudo.querySelectorAll("[data-grupo]")].map((e) => e.dataset.grupo))];
+    for (const g of grupos) {
+      const blocos = [...conteudo.querySelectorAll(`[data-grupo="${g}"]`)];
+      desenharGrupo(
+        conteudo,
+        blocos.flatMap((b) => [...b.querySelectorAll(".ativo-destaque .n")]),
+        blocos.flatMap((b) => [...b.querySelectorAll(".destaque h4")]),
+      );
+    }
+  }
+
+  // Um tronco por fórmula: liga só os ativos em destaque dela aos seus textos.
+  function desenharGrupo(conteudo, ativos, titulos) {
     const base = conteudo.getBoundingClientRect();
-    const ativos = [...conteudo.querySelectorAll(".ativo-destaque .n")];
-    const titulos = [...conteudo.querySelectorAll(".destaque h4")];
-    if (!ativos.length || !titulos.length) continue;
+    if (!ativos.length || !titulos.length) return;
 
     const tronco = 9 * pxPorMm;
     const ns = "http://www.w3.org/2000/svg";
