@@ -64,8 +64,9 @@ Para trocar ativos, informe os números com ❌ (ex.: "7 ❌, 15 ❌").
 
 ## Revalidação de 29/10/2026
 
-A base **não foi atualizada** antes desta revalidação. Nenhum dos 102 workflows do n8n
-(ricardo-medicinal.app.n8n.cloud) carrega a FC12110 nem recalcula associações e tiers na `supabase_ativos`.
+A base **não foi atualizada** antes desta revalidação. Nenhum dos 102 workflows do n8n self-hosted
+(n8nbmmed.medicinal.far.br) carrega a FC12110 nem recalcula associações e tiers na `supabase_ativos`.
+O n8n cloud (ricardo-medicinal.app.n8n.cloud) **ainda não foi consultado**: o conector estava desconectado.
 Os que leem a FC12110 ("Ativação - prescrições", "CMV - margem e markup") gravam em outros projetos
 (formulaCerta e supint). Estado do banco nesta data: FC12110 e `associacoes_ativos` até 04/04/2026, e tiers recalculados
 pela última vez em 08/05/2026. Por isso a revalidação abaixo usa a mesma base da sessão de 24/10.
