@@ -196,7 +196,7 @@ paginas:
         via: IN
         periodo: dia
         ativos:
-          - { nome: Elibrya™, dose: a definir, destaque: true }
+          - { nome: Elibrya™, dose: 150mg, destaque: true }
           - { nome: Maca peruana, dose: 500mg }
           - { nome: Tribulus terrestris, dose: 500mg }
         modo_de_uso: Tomar 1 dose pela manhã.

@@ -31,7 +31,7 @@ Para trocar ativos, informe os números com ❌ (ex.: "7 ❌, 15 ❌").
 | 16 | F7 | TP1 | BAC | Boro quelado (25460) · A | 2 mg | FC12110 | ✅ | |
 | 17 | F7 | | — | **Vitamina D3** | — | — | ❌ | Não encontrada na tabela `ativos` (GER-04) |
 | 18 | F8 Pele | TP15 sachê | âncora | Verisol® (8194) · A | — | — | ↺ | Âncora das associações, substituída pelo Genu-in Skin |
-| 19 | F8 | TP15 | PAR | Genu-in Skin® (17239) | 2,5 g | ficha | ⏳ | Sem registro em FC12110 → cadastrar forma |
+| 19 | F8 | TP15 | PAR | Genu-in Skin® (17239) | 2,5 g | ficha (17/10/2026) | ⏳ | Ficha cadastrada; sem tier, sem categorias e sem histórico na FC12110. Existe também o código antigo 16184 "Genu-In" (tier C, 20 sachês até 30/03/2026, dose mais comum 5 g) |
 | 20 | F8 | TP15 | BAC | Ácido hialurônico oral (5690) · A | 100 mg | FC12110 | ✅ | P2 |
 | 21 | F8 | TP15 | BAC | Cerasomosides (9425) · B | 40 mg | FC12110 | ✅ | |
 | 22 | F8 | TP15 | BAC | SiliciuMax® (11161) · A | 50 mg | FC12110 | ✅ | P2 |
@@ -41,7 +41,7 @@ Para trocar ativos, informe os números com ❌ (ex.: "7 ❌, 15 ❌").
 | 26 | F9 | TP15 | BAC | PreticX™ XOS (10267) · B | 1,4 g | FC12110 | ✅ | |
 | 27 | F10 Urinário | TP1 | NAF | Cranberry (3376) · A | 500 mg | FC12110 | ✅ | |
 | 28 | F10 | TP1 | BAC | D-manose (10221) · B | 500 mg | FC12110 | ✅ | |
-| 29 | F11 Libido | TP1 | PAR | **Elibrya™** (17258) | a definir | — | ⏳ | Sem registro em FC12110 e sem dose na ficha |
+| 29 | F11 Libido | TP1 | PAR | **Elibrya™** (17258) | 150 mg | ficha (17/10/2026) | ⏳ | Ficha cadastrada; ainda sem tier e sem histórico na FC12110 (base parada em 04/04/2026) |
 | 30 | F11 | TP1 | NAF | Maca peruana (23) · S | 500 mg | FC12110 (moda) | ✅ | Âncora das associações |
 | 31 | F11 | TP1 | BAC | Tribulus terrestris (104) · S | 500 mg | FC12110 (moda) | ✅ | 4.976 associações |
 | 32 | F12 Sintomas gerais | TP1 | NAF | S-equol 1:10 (14034) · B | 10 mg | literatura | ✅ | **Aprovado:** manter 10 mg (o histórico registra 2,5 mg) |
