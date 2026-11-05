@@ -41,6 +41,13 @@ alguma página passou da área útil.
 | `texto` | Bloco educativo com `etiqueta`, `imagem` e `paragrafos` |
 | `espaco` | Espaço vertical em mm |
 
+Na fórmula, `etapa: { numero: "01", nome: Purificar }` coloca o número do passo acima do card.
+
+### Protocolos de parceiros (tema)
+
+- `tema: eternes` carrega `template/temas/eternes/tema.css` (cores, fontes e card próprios) por cima do padrão.
+- `parceiro: { nome, cabecalho, assinatura, lema }` troca a capa com foto por uma capa tipográfica co-assinada. Com ela, `capa_titulo: [linha1, linha2]` define o título, e a 2ª linha sai em itálico.
+
 Nos textos, `**assim**` vira **negrito**. Se a linha começar com `**`, coloque o texto entre aspas simples.
 
 ## Artes (Runway)

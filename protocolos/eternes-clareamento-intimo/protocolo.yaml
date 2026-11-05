@@ -1,0 +1,121 @@
+# Guia de Formulações — ETERNES CLUB · Clareamento Íntimo (Dra. Mariana Amalia)
+# Protocolo gerado pelas regras do motor NEXUS (FGTS → NAF → BAC), banco supabase_ativos. Sessão 2026.11.05
+# Âncoras definidas pelo prescritor (NAF-06 / GER-04):
+#   F1 sabonete  (TP4)  → ácido clareador suave: Ácido mandélico (50210)
+#   F2 creme     (TP2)  → ativo do Pigmentbio Sensitive Areas (azelato de lisina): Azeloglicina (2012)
+#   F3 hidratante (TP2) → Ácido hialurônico (Hyaxel 4889) + estradiol-like de ação local: Promestrieno (14573)
+# RASCUNHO para revisão do prescritor/farmacêutico. Ver revisao.md.
+
+titulo: ETERNES CLUB - Clareamento Íntimo
+tema: eternes
+parceiro:
+  nome: Eternes Club
+  cabecalho: Clareamento Íntimo
+  assinatura: Dra. Mariana Amalia
+  lema: Um ritual de cuidado íntimo em três tempos, para uniformizar o tom, preservar o equilíbrio e devolver viço à pele mais sensível do corpo.
+capa_titulo: [Clareamento, Íntimo]
+cor:
+  escura: "#80003d"
+  clara: "#b8926a"
+qr: https://medicinal.vip/protoc_ClareamentoIntimo?r=qr   # link a criar no medicinal.vip
+
+paginas:
+  # Página 2 — o ritual + 01 Purificar (sabonete)
+  - - texto:
+        titulo: O Ritual
+        paragrafos:
+          - A pele da **região íntima** é mais fina, mais úmida e mais reativa que a do rosto. O escurecimento da virilha, da vulva e do períneo vem do **atrito**, da **depilação**, das **alterações hormonais** e da **inflamação de baixo grau**. Por isso, o cuidado precisa clarear **sem agredir**, respeitando o **pH ácido** e a microbiota da região.
+          - O protocolo segue três tempos, **purificar**, **clarear** e **revitalizar**, que se completam e podem ser usados juntos desde o primeiro dia.
+    - espaco: 4
+    - formula:
+        etapa: { numero: "01", nome: Purificar }
+        nome: Sabonete Íntimo Clareador
+        subtitulo: pH fisiológico 4,5
+        via: OUT
+        periodo: [dia, noite]
+        ativos:
+          - { nome: Ácido mandélico, dose: "2,5%", destaque: true }
+          - { nome: Niacinamida, dose: 2% }
+          - { nome: Ácido kójico, dose: 1%, destaque: true }
+          - { nome: Camomila extrato glicólico, dose: 5% }
+          - { nome: D-pantenol, dose: 2% }
+          - { nome: "Sabonete líquido íntimo pH 4,5", dose: 150ml }
+        modo_de_uso: Lavar a região íntima externa (virilha, vulva e períneo) 1 a 2 vezes ao dia, deixar a espuma agir por 1 minuto e enxaguar bem. Não aplicar no interior da vagina.
+    - destaques:
+        - nome: Ácido mandélico
+          texto: Alfa-hidroxiácido de **molécula grande**, que penetra devagar e por isso é o mais **bem tolerado** pelas áreas sensíveis. Renova a camada superficial da pele, **afina o acúmulo de melanina** e prepara a região para os ativos do creme.
+        - nome: Ácido kójico
+          texto: Inibe a **tirosinase** ao se ligar ao cobre da enzima. No sabonete, atua em **contato breve** e diário, somando ao clareamento sem irritar.
+
+  # Página 3 — 02 Clarear (creme, referência Pigmentbio Sensitive Areas)
+  - - formula:
+        etapa: { numero: "02", nome: Clarear }
+        nome: Creme Clareador Íntimo
+        subtitulo: referência Pigmentbio® Sensitive Areas
+        via: OUT
+        periodo: noite
+        ativos:
+          - { nome: Azeloglicina, dose: 10%, destaque: true }
+          - { nome: Niacinamida, dose: 4%, destaque: true }
+          - { nome: Ácido tranexâmico, dose: 3%, destaque: true }
+          - { nome: Alfa-arbutin, dose: 2% }
+          - { nome: Belides®, dose: 2% }
+          - { nome: Bisabolol, dose: 1% }
+          - { nome: Creme não iônico para áreas sensíveis, dose: 30g }
+        modo_de_uso: À noite, com a pele limpa e seca, aplicar uma camada fina na virilha, na vulva externa, no períneo e na região perianal. Pode ser usado também nas axilas. Evitar mucosas e não usar logo após a depilação.
+    - destaques:
+        - nome: Azeloglicina
+          texto: Derivado **hidrossolúvel do ácido azelaico**, o mesmo princípio do **Pigmentbio® Sensitive Areas** (que usa o azelato de lisina). Inibe a tirosinase de forma **seletiva nos melanócitos hiperativos**, tem ação **anti-inflamatória** e é muito mais **suave** que o ácido azelaico puro, sem ardor.
+        - nome: Niacinamida
+          texto: Bloqueia a **transferência da melanina** do melanócito para as células da superfície e **reforça a barreira** da pele, reduzindo a sensibilidade causada pelo atrito.
+        - nome: Ácido tranexâmico
+          texto: Atua na **inflamação** que estimula o melanócito após depilação e atrito, interrompendo o ciclo de **escurecimento pós-inflamatório**, a principal causa de manchas na virilha.
+    - texto:
+        paragrafos:
+          - Os ativos de apoio completam o creme. A **alfa-arbutin** inibe a tirosinase por outra via, o **Belides®** (Bellis perennis) é uma alternativa natural à hidroquinona, e o **bisabolol** acalma a pele. A fórmula **não usa hidroquinona, retinoides nem ácido glicólico**, que irritam as áreas íntimas.
+
+  # Página 4 — 03 Revitalizar (gel-creme íntimo)
+  - - formula:
+        etapa: { numero: "03", nome: Revitalizar }
+        nome: Gel-Creme Íntimo Revitalizante
+        subtitulo: hidratação e trofismo da mucosa
+        via: OUT
+        periodo: noite
+        ativos:
+          - { nome: Promestrieno, dose: "10mg/g", destaque: true }
+          - { nome: Hyaxel® (ácido hialurônico), dose: 5%, destaque: true }
+          - { nome: Genisteína, dose: 1%, destaque: true }
+          - { nome: D-pantenol, dose: 5% }
+          - { nome: Aroeira extrato glicólico, dose: 5% }
+          - { nome: Vitamina E, dose: 2% }
+          - { nome: Gel-creme vaginal com aplicador, dose: 30g }
+        modo_de_uso: Aplicar 1 aplicador (1g) via vaginal à noite por 21 dias. Depois, 2 a 3 vezes por semana. Uma pequena porção pode ser espalhada na vulva e na entrada da vagina.
+    - destaques:
+        - nome: Promestrieno
+          texto: Estrogênio de **ação exclusivamente local**, com estrutura derivada do estradiol e **absorção sistêmica desprezível**. Restaura a **espessura**, a **lubrificação** e a **elasticidade** da mucosa vaginal, tratando a **atrofia** sem os efeitos de uma terapia hormonal.
+        - nome: Hyaxel®
+          texto: Ácido hialurônico de **baixo peso molecular** vetorizado em xilitol, que retém água nas camadas profundas e **hidrata a mucosa por horas**, aliviando o **ressecamento** e a **dor na relação**.
+        - nome: Genisteína
+          texto: Isoflavona de soja com **ação estrogênica suave** sobre o receptor ER-β da pele, que estimula **colágeno** e **espessura** e potencializa o efeito do promestrieno.
+    - texto:
+        paragrafos:
+          - '**D-pantenol** e **vitamina E** regeneram e protegem o tecido. A **aroeira** tem ação **anti-inflamatória e antimicrobiana**, muito usada na saúde vaginal.'
+
+  # Página 5 — orientações
+  - - texto:
+        titulo: O cuidado no dia a dia
+        paragrafos:
+          - '**Manhã:** sabonete íntimo no banho.'
+          - '**Noite:** sabonete íntimo, depois o creme clareador na região externa e o gel-creme revitalizante via vaginal (nos dias indicados). Se usar os dois na mesma noite, aplicar o gel primeiro e esperar 10 minutos antes do creme.'
+          - Os primeiros resultados no tom da pele aparecem entre **4 e 8 semanas**, e o resultado pleno entre **3 e 4 meses**. A hidratação e o conforto melhoram já nas **primeiras semanas** de gel-creme.
+    - texto:
+        titulo: Para potencializar
+        paragrafos:
+          - Preferir **roupas íntimas de algodão** e peças menos justas, que reduzem o atrito.
+          - Trocar a lâmina por **depilação a laser** sempre que possível. A cada depilação, suspender o creme clareador por **48 horas**.
+          - Manter a região **seca e ventilada** e evitar duchas vaginais e sabonetes comuns, que alteram o pH.
+    - texto:
+        titulo: Atenção
+        paragrafos:
+          - Suspender o uso se houver **ardor persistente**, vermelhidão ou descamação intensa. Não usar sobre **feridas**, fissuras ou durante **infecção vaginal** ativa.
+          - '**Gel-creme com promestrieno:** contraindicado em câncer de mama ou de endométrio, sangramento genital não esclarecido, gestação e amamentação. Uso sob prescrição médica.'

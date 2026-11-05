@@ -1,0 +1,354 @@
+/* Tema ETERNES — protocolos co-assinados com a Dra. Mariana Amalia (ETERNES CLUB)
+   Paleta da marca: bordô #80003d, nude/champagne e dourado; Raleway + serifada de alto contraste.
+   Aplica-se por cima do guia.css quando o protocolo.yaml tem `tema: eternes`. */
+
+@font-face { font-family: "Cormorant"; src: url("fontes/cormorant-400.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "Cormorant"; src: url("fontes/cormorant-500.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Cormorant"; src: url("fontes/cormorant-600.woff2") format("woff2"); font-weight: 600; }
+@font-face { font-family: "Cormorant"; src: url("fontes/cormorant-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "Raleway"; src: url("fontes/raleway-wght.woff2") format("woff2"); font-weight: 100 900; }
+
+.tema-eternes {
+  --bordo: #80003d;
+  --bordo-profundo: #3d0a20;
+  --ouro: #b8926a;
+  --ouro-claro: #dcc3a1;
+  --nude: #f6eee6;
+  --marfim: #fdfaf6;
+  --texto: #2b1a20;
+  --texto-suave: #5b4a50;
+  --conector: #c3a27e;
+  --card-borda: var(--ouro);
+  --serifa: "Cormorant", "Times New Roman", serif;
+  font-family: "Raleway", sans-serif;
+}
+.tema-eternes .pagina { background: var(--marfim); }
+
+/* ---------- Capa co-assinada ---------- */
+.tema-eternes .capa-parceiro {
+  background:
+    radial-gradient(120% 70% at 85% 8%, rgba(220,195,161,0.22), rgba(220,195,161,0) 55%),
+    radial-gradient(90% 60% at 10% 100%, rgba(128,0,61,0.55), rgba(128,0,61,0) 70%),
+    linear-gradient(160deg, #6e0535 0%, #4a0826 48%, #2a0614 100%);
+  color: var(--marfim);
+  text-align: center;
+}
+/* Arcos finos dourados — referência ao círculo do monograma */
+.tema-eternes .capa-parceiro .orn {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 210 297'%3E%3Cg fill='none' stroke='%23dcc3a1' stroke-width='0.18'%3E%3Ccircle cx='105' cy='140' r='62' opacity='.55'/%3E%3Ccircle cx='105' cy='140' r='70' opacity='.32'/%3E%3Ccircle cx='105' cy='140' r='92' opacity='.16'/%3E%3Ccircle cx='170' cy='40' r='48' opacity='.14'/%3E%3Ccircle cx='30' cy='262' r='58' opacity='.12'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 100% 100%;
+}
+.tema-eternes .capa-parceiro::after {
+  /* moldura fina */
+  content: "";
+  position: absolute;
+  inset: 9mm;
+  border: 0.25mm solid rgba(220,195,161,0.45);
+  pointer-events: none;
+}
+.tema-eternes .capa-topo {
+  position: absolute;
+  top: 24mm; left: 0; right: 0;
+}
+.tema-eternes .capa-topo .parceiro {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 10pt;
+  letter-spacing: 6.5pt;
+  padding-left: 6.5pt;
+  color: var(--ouro-claro);
+  text-transform: uppercase;
+}
+.tema-eternes .capa-centro {
+  position: absolute;
+  left: 22mm; right: 22mm;
+  top: 96mm;
+}
+.tema-eternes .capa-centro .sobretitulo {
+  font-weight: 400;
+  font-size: 8.5pt;
+  letter-spacing: 4pt;
+  text-transform: uppercase;
+  color: rgba(253,250,246,0.78);
+}
+.tema-eternes .capa-centro h1 {
+  margin: 7mm 0 0;
+  font-family: var(--serifa);
+  font-weight: 400;
+  font-size: 50pt;
+  line-height: 0.98;
+  letter-spacing: 0.5pt;
+  color: var(--marfim);
+}
+.tema-eternes .capa-centro h1 em {
+  font-style: italic;
+  color: var(--ouro-claro);
+  font-size: 58pt;
+}
+.tema-eternes .filete {
+  position: relative;
+  width: 46mm;
+  height: 0.25mm;
+  margin: 10mm auto 0;
+  background: linear-gradient(90deg, rgba(220,195,161,0), var(--ouro-claro), rgba(220,195,161,0));
+}
+.tema-eternes .filete i {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 2mm; height: 2mm;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: var(--ouro-claro);
+}
+.tema-eternes .capa-centro .lema {
+  margin: 8mm auto 0;
+  max-width: 120mm;
+  font-family: var(--serifa);
+  font-style: italic;
+  font-size: 15pt;
+  line-height: 1.35;
+  color: rgba(253,250,246,0.86);
+}
+.tema-eternes .capa-rodape {
+  position: absolute;
+  left: 0; right: 0; bottom: 22mm;
+}
+.tema-eternes .capa-rodape .assinatura {
+  font-family: var(--serifa);
+  font-size: 17pt;
+  letter-spacing: 1pt;
+  color: var(--marfim);
+}
+.tema-eternes .capa-rodape .farmacia {
+  margin-top: 7mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3mm;
+  font-size: 6.5pt;
+  letter-spacing: 2pt;
+  text-transform: uppercase;
+  color: rgba(220,195,161,0.8);
+}
+.tema-eternes .capa-parceiro .capa-logo {
+  position: static;
+  transform: none;
+  width: 30mm;
+  height: 6mm;
+  background: var(--ouro-claro);
+}
+
+/* ---------- Páginas internas ---------- */
+.tema-eternes .interna::before {
+  /* faixa fina bordô no topo */
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2.2mm;
+  background: linear-gradient(90deg, var(--bordo-profundo), var(--bordo) 60%, #9c2a5a);
+}
+.tema-eternes .cabecalho { padding: 12mm 14mm 0 23mm; align-items: center; }
+.tema-eternes .cabecalho .nome {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1mm;
+  font-family: var(--serifa);
+  font-size: 13pt;
+  font-style: italic;
+  text-transform: none;
+  color: var(--bordo);
+}
+.tema-eternes .cabecalho .nome .parceiro {
+  font-family: "Raleway", sans-serif;
+  font-style: normal;
+  font-size: 7pt;
+  font-weight: 600;
+  letter-spacing: 4pt;
+  text-transform: uppercase;
+  color: var(--ouro);
+}
+.tema-eternes .cabecalho .marca img { display: none; }
+.tema-eternes .cabecalho .marca::before {
+  content: "";
+  width: 34mm;
+  height: 7mm;
+  background: var(--ouro);
+  -webkit-mask: var(--mascara-logo) right center / contain no-repeat;
+  mask: var(--mascara-logo) right center / contain no-repeat;
+}
+.tema-eternes .cabecalho .marca span {
+  font-size: 6pt;
+  letter-spacing: 2.4pt;
+  color: var(--texto-suave);
+}
+.tema-eternes .cabecalho::after {
+  content: "";
+  position: absolute;
+  left: 23mm; right: 14mm; bottom: 1mm;
+  height: 0.2mm;
+  background: linear-gradient(90deg, var(--ouro-claro), rgba(220,195,161,0.15));
+}
+
+/* Selo do canto vira monograma tipográfico discreto */
+.tema-eternes .selo-canto {
+  background: none;
+  -webkit-mask: none;
+  mask: none;
+  width: auto; height: auto;
+  right: 14mm; bottom: 11mm;
+}
+.tema-eternes .selo-canto::before {
+  content: "ETERNES · CLUB";
+  font-size: 6pt;
+  letter-spacing: 3pt;
+  color: var(--ouro);
+}
+
+/* ---------- Etapa do ritual ---------- */
+.tema-eternes .etapa {
+  display: flex;
+  align-items: baseline;
+  gap: 3mm;
+  margin: 0 0 8mm 1mm;
+}
+.tema-eternes .etapa .num {
+  font-family: var(--serifa);
+  font-size: 30pt;
+  line-height: 0.8;
+  color: var(--ouro);
+}
+.tema-eternes .etapa .nome {
+  font-size: 7.5pt;
+  font-weight: 600;
+  letter-spacing: 4pt;
+  text-transform: uppercase;
+  color: var(--bordo);
+}
+
+/* ---------- Card da fórmula ---------- */
+.tema-eternes .card {
+  border: 0.25mm solid var(--ouro);
+  border-radius: 0.8mm;
+  background: #fff;
+  box-shadow: 0 0 0 1.4mm #fff, 0 0 0 1.65mm rgba(184,146,106,0.35);
+  padding: 13mm 9mm 7mm 14mm;
+}
+.tema-eternes .pill {
+  top: -5.5mm;
+  left: 10mm;
+  border: none;
+  border-radius: 0;
+  background: var(--bordo);
+  color: var(--marfim);
+  padding: 2mm 5mm 2mm 5mm;
+}
+.tema-eternes .pill b {
+  font-family: var(--serifa);
+  font-weight: 500;
+  font-size: 14pt;
+  text-transform: none;
+  letter-spacing: 0.3pt;
+}
+.tema-eternes .pill small {
+  margin-top: 0.6mm;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 5.8pt;
+  letter-spacing: 1.8pt;
+  color: var(--ouro-claro);
+}
+.tema-eternes .pill svg { width: 5mm; height: 5mm; }
+.tema-eternes { --sol: #dcc3a1; --lua: #dcc3a1; }
+.tema-eternes .via {
+  top: -1mm;
+  right: -8mm;
+  width: 14mm;
+  height: 14mm;
+  border-radius: 50%;
+  font-family: var(--serifa);
+  font-weight: 500;
+  font-size: 13pt;
+  letter-spacing: 0.5pt;
+  color: var(--ouro-claro);
+  background: var(--bordo-profundo);
+  box-shadow: 0 0 0 0.6mm #fff, 0 0 0 0.85mm var(--ouro);
+}
+.tema-eternes .ativos { width: 82mm; }
+.tema-eternes .ativos li { font-size: 7.6pt; height: 6.2mm; }
+.tema-eternes .ativos .n { font-weight: 600; color: var(--texto); }
+.tema-eternes .ativos .d { color: var(--bordo); font-weight: 600; }
+.tema-eternes .ativos .pont { color: var(--ouro); }
+.tema-eternes .modo { font-size: 7.4pt; max-width: 90mm; color: var(--texto-suave); }
+.tema-eternes .modo b { color: var(--bordo); font-weight: 600; letter-spacing: 0.3pt; }
+
+.tema-eternes .qr-box {
+  border: 0.25mm solid var(--ouro);
+  border-radius: 0.8mm;
+  background: #fff;
+  font-size: 7pt;
+  letter-spacing: 1.6pt;
+  color: var(--bordo);
+}
+
+/* ---------- Destaques ---------- */
+.tema-eternes .destaque h4 {
+  font-family: var(--serifa);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 15pt;
+  margin-bottom: 1.5mm;
+  color: var(--bordo);
+}
+.tema-eternes .destaque p { font-size: 9pt; line-height: 1.55; }
+.tema-eternes .destaque p strong, .tema-eternes .texto p strong { color: var(--bordo); font-weight: 600; }
+
+/* ---------- Texto educativo ---------- */
+.tema-eternes .texto h3 {
+  font-family: var(--serifa);
+  font-weight: 400;
+  font-size: 22pt;
+  color: var(--bordo);
+  margin-bottom: 4mm;
+}
+.tema-eternes .texto p { font-size: 9.2pt; line-height: 1.65; }
+
+.tema-eternes .bloco[data-formula] ~ .bloco[data-formula]::before {
+  background: linear-gradient(90deg, var(--ouro-claro), rgba(220,195,161,0));
+  height: 0.2mm;
+}
+
+/* Números alinhados (a serifada usa algarismos de texto por padrão: "01" viraria "OI") */
+.tema-eternes, .tema-eternes * { font-variant-numeric: lining-nums; }
+
+.tema-eternes .texto p { text-align: left; }
+
+/* Texto logo após os destaques de uma fórmula vira nota em caixa nude */
+.tema-eternes .bloco + .texto {
+  margin: 7mm 14mm 0 31mm;
+  padding: 4.5mm 6mm 1.5mm;
+  background: var(--nude);
+  border-left: 0.6mm solid var(--ouro);
+}
+.tema-eternes .bloco + .texto p { font-size: 8.8pt; }
+
+/* Fecho da última página */
+.tema-eternes .interna:last-of-type .conteudo::after {
+  content: "Dra. Mariana Amalia";
+  position: absolute;
+  left: 0; right: 0; bottom: 14mm;
+  text-align: center;
+  font-family: var(--serifa);
+  font-style: italic;
+  font-size: 18pt;
+  color: var(--bordo);
+}
+.tema-eternes .interna:last-of-type .conteudo::before {
+  content: "";
+  position: absolute;
+  left: 50%; bottom: 27mm;
+  width: 46mm; height: 0.25mm;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, rgba(184,146,106,0), var(--ouro), rgba(184,146,106,0));
+}

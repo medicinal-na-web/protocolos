@@ -28,12 +28,13 @@ window.desenharConectores = function () {
     if (!ativos.length || !titulos.length) return;
 
     const tronco = 9 * pxPorMm;
+    const cor = getComputedStyle(conteudo).getPropertyValue("--conector").trim() || "#6b6b70";
     const ns = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(ns, "svg");
     svg.setAttribute("class", "conectores");
     const traco = (x1, y1, x2, y2) => {
       const l = document.createElementNS(ns, "line");
-      Object.entries({ x1, y1, x2, y2, stroke: "#6b6b70", "stroke-width": 0.3 * pxPorMm }).forEach(([k, v]) =>
+      Object.entries({ x1, y1, x2, y2, stroke: cor, "stroke-width": 0.3 * pxPorMm }).forEach(([k, v]) =>
         l.setAttribute(k, v),
       );
       svg.appendChild(l);
@@ -54,7 +55,7 @@ window.desenharConectores = function () {
       traco(tronco, y, ponta - t, y);
       const seta = document.createElementNS(ns, "path");
       seta.setAttribute("d", `M${ponta - t * 1.5},${y - t} L${ponta},${y} L${ponta - t * 1.5},${y + t} Z`);
-      seta.setAttribute("fill", "#6b6b70");
+      seta.setAttribute("fill", cor);
       svg.appendChild(seta);
       ys.push(y);
     }

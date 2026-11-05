@@ -54,7 +54,12 @@ async function blocoFormula(b, ctx) {
   const arte = b.arte
     ? `<img class="arte-lado" src="${ctx.artes}/${esc(b.arte.src)}" style="top:${mm(b.arte.topo ?? 0)};right:${mm(b.arte.direita ?? 0)};width:${mm(b.arte.largura ?? 70)}">`
     : "";
+  // etapa: rótulo opcional do passo do ritual (ex.: { numero: "01", nome: "Purificar" })
+  const etapa = b.etapa
+    ? `<div class="etapa"><span class="num">${esc(b.etapa.numero)}</span><span class="nome">${esc(b.etapa.nome)}</span></div>`
+    : "";
   return `<div class="bloco">
+    ${etapa}
     ${arte}
     <div class="linha-formula">
       <div class="card">
@@ -104,13 +109,36 @@ function blocoTexto(b, ctx) {
 
 const ESPACO = (b) => `<div style="height:${mm(b.altura ?? 6)}"></div>`;
 
+// Capa co-assinada (protocolo de um parceiro, ex.: ETERNES CLUB): tipográfica, sem foto.
+// parceiro: { nome, assinatura, lema } · capa_titulo: [linha1, linha2] (a 2ª sai em itálico)
+function capaParceiro(p) {
+  const pz = p.parceiro;
+  const linhas = [].concat(p.capa_titulo || p.titulo);
+  const h1 = linhas.map((l, i) => (i ? `<em>${esc(l)}</em>` : esc(l))).join("<br>");
+  return `<section class="pagina capa capa-parceiro">
+    <div class="orn"></div>
+    <div class="capa-topo"><span class="parceiro">${esc(pz.nome)}</span></div>
+    <div class="capa-centro">
+      <div class="sobretitulo">Guia de Formulações</div>
+      <h1>${h1}</h1>
+      <div class="filete"><i></i></div>
+      ${pz.lema ? `<p class="lema">${esc(pz.lema)}</p>` : ""}
+    </div>
+    <div class="capa-rodape">
+      ${pz.assinatura ? `<div class="assinatura">${esc(pz.assinatura)}</div>` : ""}
+      <div class="farmacia"><span>formulado por</span><div class="capa-logo"></div></div>
+    </div>
+  </section>`;
+}
+
 async function renderizar(slug) {
   const dir = path.join(dirProtocolos, slug);
   const p = yaml.load(fs.readFileSync(path.join(dir, "protocolo.yaml"), "utf8"));
   const ctx = { artes: `../protocolos/${slug}/artes`, qr: p.qr };
 
   const paginas = [];
-  paginas.push(`<section class="pagina capa">
+  if (p.parceiro) paginas.push(capaParceiro(p));
+  else paginas.push(`<section class="pagina capa">
     <div class="capa-faixa">
       <div class="sobretitulo">Guia de Formulações</div>
       <h1>${esc(p.titulo)}</h1>
@@ -138,7 +166,7 @@ async function renderizar(slug) {
     }
     paginas.push(`<section class="pagina interna">
       <div class="cabecalho">
-        <span class="nome">${esc(p.titulo)}</span>
+        <span class="nome">${p.parceiro ? `<em class="parceiro">${esc(p.parceiro.nome)}</em>` : ""}${esc(p.parceiro?.cabecalho || p.titulo)}</span>
         <div class="marca"><img src="../marca/logo-azul.png"><span>GUIA DE FORMULAÇÕES</span></div>
       </div>
       <div class="conteudo">${blocos.join("\n")}</div>
@@ -150,8 +178,9 @@ async function renderizar(slug) {
 <html lang="pt-BR"><head><meta charset="utf-8">
 <title>Guia de Formulações — ${esc(p.titulo)}</title>
 <link rel="stylesheet" href="../template/guia.css">
+${p.tema ? `<link rel="stylesheet" href="../template/temas/${esc(p.tema)}/tema.css">` : ""}
 <style>:root{--tema-escura:${p.cor.escura};--tema-clara:${p.cor.clara};--mascara-selo:${dataUri("marca/selo.png")};--mascara-logo:${dataUri("marca/logo-mono.png")};}</style>
-</head><body>
+</head><body${p.tema ? ` class="tema-${esc(p.tema)}"` : ""}>
 ${paginas.join("\n")}
 <script>${fs.readFileSync(path.join(raiz, "template", "conectores.js"), "utf8")}</script>
 </body></html>`;
