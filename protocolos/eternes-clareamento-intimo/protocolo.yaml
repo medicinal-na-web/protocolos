@@ -3,7 +3,8 @@
 # Âncoras definidas pelo prescritor (NAF-06 / GER-04):
 #   F1 sabonete  (TP4)  → ácido clareador suave: Ácido mandélico (50210)
 #   F2 creme     (TP2)  → ativo do Pigmentbio Sensitive Areas (azelato de lisina): Azeloglicina (2012)
-#   F3 hidratante (TP2) → Ácido hialurônico (Hyaxel 4889) + estradiol-like de ação local: Promestrieno (14573)
+#   F3 hidratante (TP2) → Ácido hialurônico (Hyaxel 4889) + fitoestrogênio de ação local: Genisteína (7050)
+#   (promestrieno 14573 descartado: sem estoque. Era o par mais frequente da genisteína em TP2, 545 associações)
 # RASCUNHO para revisão do prescritor/farmacêutico. Ver revisao.md.
 
 titulo: ETERNES CLUB - Clareamento Íntimo
@@ -82,24 +83,23 @@ paginas:
         via: OUT
         periodo: noite
         ativos:
-          - { nome: Promestrieno, dose: "10mg/g", destaque: true }
+          - { nome: Genisteína, dose: 4%, destaque: true }
           - { nome: Hyaxel® (ácido hialurônico), dose: 5%, destaque: true }
-          - { nome: Genisteína, dose: 1%, destaque: true }
+          - { nome: Aroeira extrato glicólico, dose: 5%, destaque: true }
           - { nome: D-pantenol, dose: 5% }
-          - { nome: Aroeira extrato glicólico, dose: 5% }
           - { nome: Vitamina E, dose: 2% }
           - { nome: Gel-creme vaginal com aplicador, dose: 30g }
         modo_de_uso: Aplicar 1 aplicador (1g) via vaginal à noite por 21 dias. Depois, 2 a 3 vezes por semana. Uma pequena porção pode ser espalhada na vulva e na entrada da vagina.
     - destaques:
-        - nome: Promestrieno
-          texto: Estrogênio de **ação exclusivamente local**, com estrutura derivada do estradiol e **absorção sistêmica desprezível**. Restaura a **espessura**, a **lubrificação** e a **elasticidade** da mucosa vaginal, tratando a **atrofia** sem os efeitos de uma terapia hormonal.
+        - nome: Genisteína
+          texto: Isoflavona da soja com estrutura **semelhante à do estradiol**, que se liga de preferência ao **receptor ER-β** da mucosa. Aplicada no local, estimula **colágeno**, **espessura** e **lubrificação** da parede vaginal e melhora a **atrofia** de forma **100% vegetal**, sem hormônio.
         - nome: Hyaxel®
           texto: Ácido hialurônico de **baixo peso molecular** vetorizado em xilitol, que retém água nas camadas profundas e **hidrata a mucosa por horas**, aliviando o **ressecamento** e a **dor na relação**.
-        - nome: Genisteína
-          texto: Isoflavona de soja com **ação estrogênica suave** sobre o receptor ER-β da pele, que estimula **colágeno** e **espessura** e potencializa o efeito do promestrieno.
+        - nome: Aroeira
+          texto: Extrato de Schinus terebinthifolius, tradicional na **saúde vaginal**, com ação **anti-inflamatória**, **antimicrobiana** e **cicatrizante**, que acalma a mucosa sensibilizada.
     - texto:
         paragrafos:
-          - '**D-pantenol** e **vitamina E** regeneram e protegem o tecido. A **aroeira** tem ação **anti-inflamatória e antimicrobiana**, muito usada na saúde vaginal.'
+          - '**D-pantenol** e **vitamina E** regeneram e protegem o tecido. A fórmula é **livre de hormônios**: todo o efeito trófico vem de ativos de origem vegetal.'
 
   # Página 5 — orientações
   - - texto:
@@ -118,4 +118,4 @@ paginas:
         titulo: Atenção
         paragrafos:
           - Suspender o uso se houver **ardor persistente**, vermelhidão ou descamação intensa. Não usar sobre **feridas**, fissuras ou durante **infecção vaginal** ativa.
-          - '**Gel-creme com promestrieno:** contraindicado em câncer de mama ou de endométrio, sangramento genital não esclarecido, gestação e amamentação. Uso sob prescrição médica.'
+          - '**Gel-creme revitalizante:** a genisteína é um fitoestrogênio. Avaliar com a médica em caso de câncer de mama ou de endométrio, sangramento genital não esclarecido, gestação e amamentação.'
