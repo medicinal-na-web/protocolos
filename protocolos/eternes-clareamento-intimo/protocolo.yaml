@@ -3,7 +3,7 @@
 # Âncoras definidas pelo prescritor (NAF-06 / GER-04):
 #   F1 sabonete  (TP4)  → ácido clareador suave: Ácido mandélico (50210)
 #   F2 creme     (TP2)  → ativo do Pigmentbio Sensitive Areas (azelato de lisina): Azeloglicina (2012)
-#   F3 hidratante (TP2) → Ácido hialurônico (Hyaxel 4889) + fitoestrogênio de ação local: Genisteína (7050)
+#   F3 hidratante (TP2) → Ácido hialurônico em pó (5690) 0,5% + fitoestrogênios de ação local: Genisteína (7050) 1,5% e S-equol (14034) 0,02%
 #   (promestrieno 14573 descartado: sem estoque. Era o par mais frequente da genisteína em TP2, 545 associações)
 # RASCUNHO para revisão do prescritor/farmacêutico. Ver revisao.md.
 
@@ -83,9 +83,10 @@ paginas:
         via: OUT
         periodo: noite
         ativos:
-          - { nome: Genisteína, dose: 4%, destaque: true }
-          - { nome: Hyaxel® (ácido hialurônico), dose: 5%, destaque: true }
-          - { nome: Aroeira extrato glicólico, dose: 5%, destaque: true }
+          - { nome: Genisteína, dose: "1,5%", destaque: true }
+          - { nome: S-equol, dose: "0,02%", destaque: true }
+          - { nome: Ácido hialurônico, dose: "0,5%", destaque: true }
+          - { nome: Aroeira extrato glicólico, dose: 5% }
           - { nome: D-pantenol, dose: 5% }
           - { nome: Vitamina E, dose: 2% }
           - { nome: Gel-creme vaginal com aplicador, dose: 30g }
@@ -93,13 +94,13 @@ paginas:
     - destaques:
         - nome: Genisteína
           texto: Isoflavona da soja com estrutura **semelhante à do estradiol**, que se liga de preferência ao **receptor ER-β** da mucosa. Aplicada no local, estimula **colágeno**, **espessura** e **lubrificação** da parede vaginal e melhora a **atrofia** de forma **100% vegetal**, sem hormônio.
-        - nome: Hyaxel®
-          texto: Ácido hialurônico de **baixo peso molecular** vetorizado em xilitol, que retém água nas camadas profundas e **hidrata a mucosa por horas**, aliviando o **ressecamento** e a **dor na relação**.
-        - nome: Aroeira
-          texto: Extrato de Schinus terebinthifolius, tradicional na **saúde vaginal**, com ação **anti-inflamatória**, **antimicrobiana** e **cicatrizante**, que acalma a mucosa sensibilizada.
+        - nome: S-equol
+          texto: Metabólito ativo da daidzeína, com **afinidade pelo ER-β** muito maior que a das isoflavonas de origem. Em microdose, **potencializa a genisteína** e entrega a ação de quem não produz equol no intestino (cerca de metade das mulheres).
+        - nome: Ácido hialurônico
+          texto: Retém até **mil vezes o seu peso em água** e forma um filme que **hidrata e lubrifica a mucosa por horas**, aliviando o **ressecamento** e a **dor na relação**.
     - texto:
         paragrafos:
-          - '**D-pantenol** e **vitamina E** regeneram e protegem o tecido. A fórmula é **livre de hormônios**: todo o efeito trófico vem de ativos de origem vegetal.'
+          - 'A **aroeira**, tradicional na saúde vaginal, é **anti-inflamatória e antimicrobiana**. O **D-pantenol** e a **vitamina E** regeneram e protegem o tecido. A fórmula é **livre de hormônios**: todo o efeito trófico vem de ativos de origem vegetal.'
 
   # Página 5 — orientações
   - - texto:
