@@ -12,8 +12,11 @@ Formas: TP2 = semissólido (creme/gel-creme), TP4 = sabonete/xampu (base com Oli
 Âncoras por instrução do prescritor (NAF-06 / GER-04):
 - **F1 Sabonete (TP4):** ácido clareador que não agrida → **Ácido mandélico** (50210), já usado na casa como "SAB LIQ MANDELICO".
 - **F2 Creme (TP2):** ativo do **Pigmentbio® Sensitive Areas** (Bioderma), que usa **azelato de lisina** + ácido salicílico 0,1% + extrato de Laminaria ochroleuca → **Azeloglicina** (2012), o derivado hidrossolúvel do ácido azelaico disponível no banco.
-- **F3 Hidratante (TP2):** **Ácido hialurônico 0,5%** (5690) + "estradiol-like" fitoquímico → **Genisteína 1,5%** (7050) + **S-equol 0,02%** (14034).
-  O promestrieno (14573) foi a primeira escolha, mas foi **descartado por falta de estoque** (05/11/2026). A genisteína era o par mais frequente dele em TP2 (545 associações) e é o fitoestrogênio com mais uso tópico na casa (1.018 registros em TP2).
+- **F3 Hidratante (TP2, uso externo):** **Ácido hialurônico 0,5%** (5690) + **Madecassoside 0,2%** (8616) + **BioEcolia 1%** (8376).
+  Histórico das trocas: promestrieno (sem estoque) → genisteína + S-equol (retirados por serem isoflavonas de soja) → fórmula sem hormônios nem fitoestrogênios.
+  A prescritora definiu **uso apenas externo** (vulva e entrada da vagina): saíram o aplicador, o lactobacilo e o ácido lático.
+- **BioEcolia** (8376, tier B) entra no **F1** e no **F3** por pedido da prescritora (apelo prebiótico).
+
 
 ## Tabela de revisão
 
@@ -26,6 +29,7 @@ Para trocar ativos, informe os números com ❌ (ex.: "4 ❌, 12 ❌").
 | 3 | F1 | BAC | Ácido kójico (2161) · A | 1% | FC12110 (moda TP4) | 5 (TP4) | |
 | 4 | F1 | BAC | Camomila EG (3326) · B | 5% | FC12110 (moda TP4) | 4 (TP4) | Adjuvante (P2) |
 | 5 | F1 | BAC | D-pantenol (52553) · A | 2% | FC12110 (moda TP4) | 2 (TP4) | |
+| 5b | F1 | NAF-06 | BioEcolia (8376) · B | 1% | FC12110 (moda TP4, 150 reg.) | 22 c/ aroeira (TP4) · sem registro c/ mandélico em TP4 | Pedido da prescritora |
 | 6 | F1 | veículo | Sabonete líquido íntimo pH 4,5 | 150 ml | — | — | Ajustar pH com ácido lático |
 | 7 | F2 Creme | NAF | Azeloglicina (2012) · B | 10% | FC12110 (2ª dose mais comum) | — | Âncora do Pigmentbio (azelato de lisina) |
 | 8 | F2 | BAC | Niacinamida PC (6032) · S | 4% | FC12110 (moda) | 644 | |
@@ -34,28 +38,25 @@ Para trocar ativos, informe os números com ❌ (ex.: "4 ❌, 12 ❌").
 | 11 | F2 | BAC | Belides® (4199) · B | 2% | FC12110 (moda) | 150 | |
 | 12 | F2 | BAC | Bisabolol (10601) · A | 1% | FC12110 (moda) | 313 | Calmante, adjuvante (P2) |
 | 13 | F2 | veículo | Creme não iônico | 30 g | — | — | |
-| 14 | F3 Gel-creme | NAF | Genisteína (7050) · B | 1,5% | definida pela prescritora (moda 1%) | 545 c/ promestrieno (histórico) | Substitui o promestrieno |
-| 15 | F3 | NAF-06 | S-equol 1:10 (14034) · B | 0,02% | FC12110 (moda TP2, 233 reg.) | sem associação registrada com o F3 | **Incluído pela prescritora** (GER-04) |
-| 16 | F3 | NAF | Ácido hialurônico em pó (5690) · A | 0,5% | FC12110 (moda TP2, 209 reg.) | 8 c/ genisteína | **Substitui o Hyaxel 5%** a pedido da prescritora. O cadastro diz "oral": corrigir a ficha para uso tópico também |
-| 17 | F3 | BAC | Aroeira EG (5110) · A | 5% | FC12110 (moda) | 9 c/ genisteína | Indicação primária em Menopausa (232) |
-| 18 | F3 | BAC | D-pantenol (52553) · A | 5% | FC12110 (moda) | 13 c/ ácido hialurônico | |
-| 19 | F3 | BAC | Vitamina E óleo (57794) · S | 2% | FC12110 (moda) | 34 c/ ácido hialurônico · 28 c/ genisteína | |
-| — | F3 | descartado | Promestrieno 10 mg/g (14573) | — | — | — | Sem estoque |
-| — | F3 | descartado | Hyaxel (4889) | — | — | — | Trocado pelo ácido hialurônico 0,5% |
-| 20 | F3 | veículo | Gel-creme vaginal + aplicadores | 30 g | — | — | |
+| 14 | F3 Creme | NAF | Ácido hialurônico em pó (5690) · A | 0,5% | FC12110 (moda TP2, 209 reg.) | — | Cadastro diz "oral": corrigir a ficha para uso tópico |
+| 15 | F3 | NAF | Madecassoside (8616) · B | 0,2% | FC12110 (moda TP2, 251 reg.) | 1 c/ ácido hialurônico | Papel trófico (colágeno) no lugar dos fitoestrogênios |
+| 16 | F3 | NAF-06 | BioEcolia (8376) · B | 1% | FC12110 (moda TP2, 413 reg.) | 60 c/ ácido hialurônico · 4 c/ madecassoside | Pedido da prescritora |
+| 17 | F3 | BAC | D-pantenol (52553) · A | 5% | FC12110 (moda) | 13 c/ AH · 12 c/ BioEcolia | |
+| 18 | F3 | BAC | Aroeira EG (5110) · A | 5% | FC12110 (moda) | 9 c/ BioEcolia | |
+| 19 | F3 | BAC | Vitamina E óleo (57794) · S | 2% | FC12110 (moda) | 34 c/ AH · 11 c/ BioEcolia | |
+| — | F3 | descartados | Promestrieno · Genisteína · S-equol · Hyaxel | — | — | — | Sem estoque / soja / trocado pelo AH 0,5% |
+| 20 | F3 | veículo | Creme hidratante não iônico | 30 g | — | — | Uso externo, sem aplicador |
 
 Descartados de propósito: hidroquinona, ácido retinoico e ácido glicólico (irritantes na área íntima),
 e **prasterona/DHEA** (396 associações com o promestrieno). A DHEA é uma opção aprovada para atrofia
 vaginal, mas é hormônio e Lista C5. Fica como alternativa à escolha da prescritora.
 
-Outra opção para o F3:
-- **Estriol (5004)**: não é fitoquímico, é o estrogênio local mais fraco. Hoje está fora do protocolo para mantê-lo sem hormônio.
 
 ## Pendências antes da versão oficial
 
 1. Rodar a `validate_protocolo()` (não rodei nesta prévia).
 2. Confirmar a dose do mandélico no sabonete (2,5% contra a moda de 5%) e a base de sabonete íntimo pH 4,5.
-3. Confirmar o veículo do F3 (gel-creme vaginal com aplicador) e o regime 21 dias → 2 a 3x/semana.
+3. Confirmar o F3 como creme de uso externo (1 a 2x/dia).
 4. Validar com o regulatório a menção ao Pigmentbio® como referência.
 5. **Identidade ETERNES CLUB:** não encontrei material oficial do clube. A prévia usa a marca da Dra. Mariana
    (bordô #80003d, nude e dourado do monograma MA, Raleway + serifada). Trocar pela identidade oficial do clube quando ela for enviada (logo, cores e fontes).

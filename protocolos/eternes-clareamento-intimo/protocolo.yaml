@@ -3,8 +3,9 @@
 # Âncoras definidas pelo prescritor (NAF-06 / GER-04):
 #   F1 sabonete  (TP4)  → ácido clareador suave: Ácido mandélico (50210)
 #   F2 creme     (TP2)  → ativo do Pigmentbio Sensitive Areas (azelato de lisina): Azeloglicina (2012)
-#   F3 hidratante (TP2) → Ácido hialurônico em pó (5690) 0,5% + fitoestrogênios de ação local: Genisteína (7050) 1,5% e S-equol (14034) 0,02%
-#   (promestrieno 14573 descartado: sem estoque. Era o par mais frequente da genisteína em TP2, 545 associações)
+#   F3 hidratante (TP2, uso externo) → Ácido hialurônico em pó (5690) 0,5% + Madecassoside (8616) 0,2%
+#   (promestrieno: sem estoque · genisteína e S-equol: retirados por serem isoflavonas de soja)
+#   BioEcolia (8376) 1% incluída no F1 e no F3 a pedido da prescritora
 # RASCUNHO para revisão do prescritor/farmacêutico. Ver revisao.md.
 
 titulo: ETERNES CLUB - Clareamento Íntimo
@@ -40,6 +41,7 @@ paginas:
           - { nome: Ácido kójico, dose: 1%, destaque: true }
           - { nome: Camomila extrato glicólico, dose: 5% }
           - { nome: D-pantenol, dose: 2% }
+          - { nome: BioEcolia®, dose: 1%, destaque: true }
           - { nome: "Sabonete líquido íntimo pH 4,5", dose: 150ml }
         modo_de_uso: Lavar a região íntima externa (virilha, vulva e períneo) 1 a 2 vezes ao dia, deixar a espuma agir por 1 minuto e enxaguar bem. Não aplicar no interior da vagina.
     - destaques:
@@ -47,6 +49,8 @@ paginas:
           texto: Alfa-hidroxiácido de **molécula grande**, que penetra devagar e por isso é o mais **bem tolerado** pelas áreas sensíveis. Renova a camada superficial da pele, **afina o acúmulo de melanina** e prepara a região para os ativos do creme.
         - nome: Ácido kójico
           texto: Inibe a **tirosinase** ao se ligar ao cobre da enzima. No sabonete, atua em **contato breve** e diário, somando ao clareamento sem irritar.
+        - nome: BioEcolia®
+          texto: '**Prebiótico** que protege a flora benéfica enquanto limpa: o sabonete higieniza **sem desequilibrar a microbiota** íntima, prevenindo odor e irritação.'
 
   # Página 3 — 02 Clarear (creme, referência Pigmentbio Sensitive Areas)
   - - formula:
@@ -75,40 +79,40 @@ paginas:
         paragrafos:
           - Os ativos de apoio completam o creme. A **alfa-arbutin** inibe a tirosinase por outra via, o **Belides®** (Bellis perennis) é uma alternativa natural à hidroquinona, e o **bisabolol** acalma a pele. A fórmula **não usa hidroquinona, retinoides nem ácido glicólico**, que irritam as áreas íntimas.
 
-  # Página 4 — 03 Revitalizar (gel-creme íntimo)
+  # Página 4 — 03 Revitalizar (creme hidratante vulvar, uso externo)
   - - formula:
         etapa: { numero: "03", nome: Revitalizar }
-        nome: Gel-Creme Íntimo Revitalizante
-        subtitulo: hidratação e trofismo da mucosa
+        nome: Creme Íntimo Revitalizante
+        subtitulo: hidratação e regeneração da vulva
         via: OUT
-        periodo: noite
+        periodo: dia
         ativos:
-          - { nome: Genisteína, dose: "1,5%", destaque: true }
-          - { nome: S-equol, dose: "0,02%", destaque: true }
           - { nome: Ácido hialurônico, dose: "0,5%", destaque: true }
-          - { nome: Aroeira extrato glicólico, dose: 5% }
+          - { nome: Madecassoside, dose: "0,2%", destaque: true }
+          - { nome: BioEcolia®, dose: 1%, destaque: true }
           - { nome: D-pantenol, dose: 5% }
+          - { nome: Aroeira extrato glicólico, dose: 5% }
           - { nome: Vitamina E, dose: 2% }
-          - { nome: Gel-creme vaginal com aplicador, dose: 30g }
-        modo_de_uso: Aplicar 1 aplicador (1g) via vaginal à noite por 21 dias. Depois, 2 a 3 vezes por semana. Uma pequena porção pode ser espalhada na vulva e na entrada da vagina.
+          - { nome: Creme hidratante não iônico, dose: 30g }
+        modo_de_uso: Uso externo. Aplicar uma pequena quantidade nos grandes e pequenos lábios e na entrada da vagina pela manhã, após o banho, e sempre que sentir ressecamento. Não introduzir na vagina.
     - destaques:
-        - nome: Genisteína
-          texto: Isoflavona da soja com estrutura **semelhante à do estradiol**, que se liga de preferência ao **receptor ER-β** da mucosa. Aplicada no local, estimula **colágeno**, **espessura** e **lubrificação** da parede vaginal e melhora a **atrofia** de forma **100% vegetal**, sem hormônio.
-        - nome: S-equol
-          texto: Metabólito ativo da daidzeína, com **afinidade pelo ER-β** muito maior que a das isoflavonas de origem. Em microdose, **potencializa a genisteína** e entrega a ação de quem não produz equol no intestino (cerca de metade das mulheres).
         - nome: Ácido hialurônico
-          texto: Retém até **mil vezes o seu peso em água** e forma um filme que **hidrata e lubrifica a mucosa por horas**, aliviando o **ressecamento** e a **dor na relação**.
+          texto: Retém até **mil vezes o seu peso em água** e forma um filme que **hidrata e dá elasticidade** à pele da vulva por horas, aliviando o **ressecamento**, o **ardor** e o desconforto na relação.
+        - nome: Madecassoside
+          texto: Molécula ativa da **Centella asiatica** que estimula os fibroblastos a produzir **colágeno**, **regenera o tecido** e reduz a **inflamação**. Devolve **firmeza e viço** à pele íntima afinada pelo tempo e pela queda hormonal.
+        - nome: BioEcolia®
+          texto: '**Prebiótico** que alimenta seletivamente as **bactérias benéficas** da pele e dificulta o crescimento das indesejadas, mantendo a **microbiota íntima em equilíbrio**.'
     - texto:
         paragrafos:
-          - 'A **aroeira**, tradicional na saúde vaginal, é **anti-inflamatória e antimicrobiana**. O **D-pantenol** e a **vitamina E** regeneram e protegem o tecido. A fórmula é **livre de hormônios**: todo o efeito trófico vem de ativos de origem vegetal.'
+          - 'O **D-pantenol** e a **vitamina E** reforçam a barreira e protegem o tecido, e a **aroeira** acalma com ação **anti-inflamatória e antimicrobiana**. A fórmula é **livre de hormônios e de fitoestrogênios**.'
 
   # Página 5 — orientações
   - - texto:
         titulo: O cuidado no dia a dia
         paragrafos:
-          - '**Manhã:** sabonete íntimo no banho.'
-          - '**Noite:** sabonete íntimo, depois o creme clareador na região externa e o gel-creme revitalizante via vaginal (nos dias indicados). Se usar os dois na mesma noite, aplicar o gel primeiro e esperar 10 minutos antes do creme.'
-          - Os primeiros resultados no tom da pele aparecem entre **4 e 8 semanas**, e o resultado pleno entre **3 e 4 meses**. A hidratação e o conforto melhoram já nas **primeiras semanas** de gel-creme.
+          - '**Manhã:** sabonete íntimo no banho e, em seguida, o creme revitalizante na vulva.'
+          - '**Noite:** sabonete íntimo e, com a pele seca, o creme clareador nas áreas escurecidas. O creme revitalizante pode ser reaplicado à noite nos lábios, se houver ressecamento.'
+          - Os primeiros resultados no tom da pele aparecem entre **4 e 8 semanas**, e o resultado pleno entre **3 e 4 meses**. A hidratação e o conforto melhoram já nas **primeiras semanas** de creme revitalizante.
     - texto:
         titulo: Para potencializar
         paragrafos:
@@ -119,4 +123,4 @@ paginas:
         titulo: Atenção
         paragrafos:
           - Suspender o uso se houver **ardor persistente**, vermelhidão ou descamação intensa. Não usar sobre **feridas**, fissuras ou durante **infecção vaginal** ativa.
-          - '**Gel-creme revitalizante:** a genisteína é um fitoestrogênio. Avaliar com a médica em caso de câncer de mama ou de endométrio, sangramento genital não esclarecido, gestação e amamentação.'
+          - Todas as fórmulas são de **uso externo** e **livres de hormônios**. Em gestação e amamentação, usar apenas com orientação médica.
