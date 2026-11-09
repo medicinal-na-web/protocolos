@@ -121,16 +121,6 @@ const APP = String.raw`
   .visor-topo b{font-family:var(--disp);font-size:15px}
   .visor-topo .acoes{margin-left:auto;display:flex;gap:8px}
   .bcopiar{border:1px solid var(--linha);background:var(--sup-2);color:var(--tinta);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600}
-  .fbar{display:flex;gap:9px;align-items:center;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:12px max(14px,env(safe-area-inset-left,0px));background:color-mix(in srgb,var(--acc) 7%,var(--sup));border-bottom:1px solid var(--linha);scrollbar-width:thin}
-  .fbar:empty{display:none}
-  .fbar-label{flex:none;display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:var(--tinta);padding-right:2px}
-  .fbar-label svg{width:17px;height:17px;fill:none;stroke:var(--acc);stroke-width:1.9}
-  .fbar-label small{display:block;font-weight:500;font-size:11px;color:var(--tinta-2)}
-  .fchip{flex:none;display:inline-flex;align-items:center;gap:8px;border:0;color:#fff;background:linear-gradient(135deg,var(--acc),var(--acc2));border-radius:11px;padding:10px 15px;font-size:13px;font-weight:600;white-space:nowrap;cursor:pointer;box-shadow:0 1px 2px rgba(20,35,58,.12);transition:transform .08s,filter .15s}
-  .fchip:hover{filter:brightness(1.08)} .fchip:active{transform:translateY(1px)}
-  .fchip svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;flex:none}
-  .fchip.ok{background:var(--ok)}
-
   /* Aviso de cópia */
   .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,12px);background:#15233a;color:#fff;padding:13px 18px;border-radius:13px;font-size:13.5px;font-weight:600;box-shadow:0 10px 34px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:70;display:flex;gap:10px;align-items:center;max-width:min(92vw,420px)}
   .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -142,8 +132,6 @@ const APP = String.raw`
   .palco::-webkit-scrollbar-thumb:hover{background:color-mix(in srgb,var(--tinta-2) 55%,transparent);background-clip:content-box}
   .palco::-webkit-scrollbar-track{background:transparent}
   .palco iframe{border:0;background:#fff;box-shadow:0 10px 40px rgba(20,35,58,.18);display:block;overflow:hidden}
-  /* esconde a barra de rolagem horizontal da faixa de fórmulas (rola por toque/arrasto) */
-  .fbar{scrollbar-width:none} .fbar::-webkit-scrollbar{display:none}
   /* ---- Navegação (admin) ---- */
   .nav{display:flex;gap:4px;background:var(--sup-2);border:1px solid var(--linha);border-radius:999px;padding:4px}
   .nav-b{border:0;background:none;color:var(--tinta-2);font-family:var(--disp);font-weight:600;font-size:13px;padding:7px 14px;border-radius:999px}
@@ -301,7 +289,6 @@ const APP = String.raw`
     <b id="guia-titulo"></b>
     <div class="acoes"><button class="bcopiar" id="guia-copiar">Copiar todas</button></div>
   </div>
-  <div class="fbar" id="fbar" aria-label="Copiar fórmula"></div>
   <div class="palco" id="palco"></div>
 </div>
 
@@ -489,32 +476,53 @@ const APP = String.raw`
     var t=$("toast"); t.querySelector("span").textContent=msg; t.classList.add("show");
     clearTimeout(t._tmr); t._tmr=setTimeout(function(){t.classList.remove("show")},2600);
   }
-  function montaChips(p){
-    var fb=$("fbar"); fb.innerHTML="";
-    if(!(p.formulas||[]).length)return;
-    var lab=document.createElement("div"); lab.className="fbar-label";
-    lab.innerHTML='<svg viewBox="0 0 24 24"><path d="M9 9V5.5A1.5 1.5 0 0 1 10.5 4h8A1.5 1.5 0 0 1 20 5.5v8a1.5 1.5 0 0 1-1.5 1.5H15M4 10.5A1.5 1.5 0 0 1 5.5 9h8A1.5 1.5 0 0 1 15 10.5v8A1.5 1.5 0 0 1 13.5 20h-8A1.5 1.5 0 0 1 4 18.5z"/></svg><span>Copiar fórmula<small>toque e cole na prescrição</small></span>';
-    fb.appendChild(lab);
-    (p.formulas||[]).forEach(function(f){
-      var b=document.createElement("button"); b.className="fchip"; b.type="button";
-      b.innerHTML=ICO_COPIAR+'<span></span>';
-      b.querySelector("span").textContent=f.nome;
-      b.onclick=function(){
-        copiarTexto(textoFormula(f)+"\n\n("+p.titulo+" · Medicinal)",function(){
-          var s=b.querySelector("span"), t=s.textContent;
-          b.classList.add("ok"); s.textContent="Copiada!";
-          showToast("Fórmula “"+f.nome+"” copiada — cole na prescrição (Ctrl+V).");
-          setTimeout(function(){b.classList.remove("ok"); s.textContent=t;},1600);
-        });
-      };
-      fb.appendChild(b);
+  // Copia usando a área de transferência DO GUIA (iframe), com fallback.
+  function copiarNoIframe(ifr,txt){
+    return new Promise(function(res,rej){
+      try{
+        var cw=ifr.contentWindow, cd=ifr.contentDocument;
+        if(cw&&cw.navigator&&cw.navigator.clipboard&&cw.navigator.clipboard.writeText){ cw.navigator.clipboard.writeText(txt).then(res).catch(sel); }
+        else sel();
+        function sel(){ try{ var ta=cd.createElement("textarea"); ta.value=txt; ta.style.position="fixed"; ta.style.opacity="0"; cd.body.appendChild(ta); ta.focus(); ta.select(); cd.execCommand("copy"); cd.body.removeChild(ta); res(); }catch(e){ rej(e); } }
+      }catch(e){ rej(e); }
     });
+  }
+  // Injeta um botão "Copiar fórmula" ao lado de cada card do guia (no espaço livre do QR).
+  function injetarCopias(ifr,p){
+    try{
+      var cd=ifr.contentDocument; if(!cd)return;
+      var st=cd.createElement("style");
+      st.textContent=
+        ".pp-copiar{flex:none;align-self:center;display:inline-flex;align-items:center;gap:2.2mm;cursor:pointer;"+
+        "background:linear-gradient(135deg,var(--tema-escura),var(--tema-clara));color:#fff;border:0;border-radius:3.2mm;"+
+        "padding:3.4mm 5mm;font-family:inherit;font-size:9pt;font-weight:700;white-space:nowrap;box-shadow:0 1mm 3mm rgba(0,0,0,.16)}"+
+        ".pp-copiar:hover{filter:brightness(1.08)} .pp-copiar:active{transform:translateY(0.3mm)}"+
+        ".pp-copiar.ok{background:#1f9d62}"+
+        ".pp-copiar svg{width:4mm;height:4mm;fill:none;stroke:#fff;stroke-width:1.8;flex:none}";
+      cd.head.appendChild(st);
+      var cards=cd.querySelectorAll(".card"), fs=p.formulas||[];
+      [].forEach.call(cards,function(card,i){
+        var f=fs[i]; if(!f)return;
+        var linha=card.closest(".linha-formula")||card.parentNode;
+        if(!linha||linha.querySelector(".pp-copiar"))return;
+        var b=cd.createElement("button"); b.className="pp-copiar"; b.type="button";
+        b.innerHTML=ICO_COPIAR+'<span>Copiar fórmula</span>';
+        b.onclick=function(){
+          copiarNoIframe(ifr,textoFormula(f)+"\n\n("+p.titulo+" · Medicinal)").then(function(){
+            b.classList.add("ok"); var s=b.querySelector("span"); s.textContent="Copiada!";
+            showToast("Fórmula “"+f.nome+"” copiada — cole na prescrição (Ctrl+V).");
+            setTimeout(function(){b.classList.remove("ok"); s.textContent="Copiar fórmula";},1700);
+          }).catch(function(){ showToast("Não foi possível copiar automaticamente. Selecione o texto da fórmula."); });
+        };
+        linha.appendChild(b);
+      });
+      setTimeout(function(){ajustarIframe(ifr)},30);
+    }catch(e){}
   }
   var protoAtual=null;
   async function abrirGuia(p){
     protoAtual=p;
     $("guia-titulo").textContent=p.titulo;
-    montaChips(p);
     $("visor").hidden=false; $("palco").innerHTML='<div class="carregando">Abrindo guia…</div>';
     history.pushState({guia:p.slug},"","#"+p.slug);
     var linha=await api("?select=guia_html&slug=eq."+encodeURIComponent(p.slug)+"&limit=1");
@@ -525,12 +533,13 @@ const APP = String.raw`
     var ifr=document.createElement("iframe");
     ifr.setAttribute("title","Guia "+p.titulo);
     ifr.setAttribute("scrolling","no");
-    ifr.onload=function(){ setTimeout(function(){ajustarIframe(ifr)},250) };
+    ifr.setAttribute("allow","clipboard-write");
+    ifr.onload=function(){ setTimeout(function(){ injetarCopias(ifr,p); ajustarIframe(ifr); },250) };
     $("palco").innerHTML=""; $("palco").appendChild(ifr);
     ifr.srcdoc=html;
     window.addEventListener("resize",function(){ajustarIframe(ifr)});
   }
-  function fecharGuia(){$("visor").hidden=true;$("palco").innerHTML="";$("fbar").innerHTML="";protoAtual=null;if(location.hash)history.pushState("","",location.pathname)}
+  function fecharGuia(){$("visor").hidden=true;$("palco").innerHTML="";protoAtual=null;if(location.hash)history.pushState("","",location.pathname)}
   $("guia-voltar").onclick=fecharGuia;
   window.addEventListener("popstate",function(){ if($("visor").hidden===false) fecharGuia(); });
 
