@@ -133,6 +133,46 @@ const APP = String.raw`
   .bcopiar{border:1px solid var(--linha);background:var(--sup-2);color:var(--tinta);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600}
   .palco{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;display:flex;justify-content:center;padding:18px 10px 40px}
   .palco iframe{border:0;background:#fff;box-shadow:0 10px 40px rgba(20,35,58,.18);display:block}
+  /* ---- Navegação (admin) ---- */
+  .nav{display:flex;gap:4px;background:var(--sup-2);border:1px solid var(--linha);border-radius:999px;padding:4px}
+  .nav-b{border:0;background:none;color:var(--tinta-2);font-family:var(--disp);font-weight:600;font-size:13px;padding:7px 14px;border-radius:999px}
+  .nav-b.ativo{background:var(--sup);color:var(--acc);box-shadow:var(--sombra)}
+
+  /* ---- Admin ---- */
+  .adm-lista{margin-top:22px;display:flex;flex-direction:column;gap:12px}
+  .adm-row{background:var(--sup);border:1px solid var(--linha);border-radius:16px;box-shadow:var(--sombra);padding:15px 16px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center}
+  .adm-info{min-width:0}
+  .adm-info h3{font-family:var(--disp);font-size:16px;font-weight:600;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .adm-badge{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px}
+  .adm-badge.pub{background:color-mix(in srgb,var(--ok) 14%,transparent);color:var(--ok)}
+  .adm-badge.res{background:color-mix(in srgb,var(--acc) 14%,transparent);color:var(--acc)}
+  .adm-badge.off{background:color-mix(in srgb,var(--tinta-2) 16%,transparent);color:var(--tinta-2)}
+  .adm-meta{color:var(--tinta-2);font-size:12.5px;margin-top:5px}
+  .adm-ctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+  .seg{display:flex;background:var(--sup-2);border:1px solid var(--linha);border-radius:10px;overflow:hidden}
+  .seg button{border:0;background:none;color:var(--tinta-2);font-size:12.5px;font-weight:600;padding:8px 12px}
+  .seg button.on{background:var(--acc);color:#fff}
+  .mini{border:1px solid var(--linha);background:var(--sup-2);color:var(--tinta);border-radius:10px;padding:8px 12px;font-size:12.5px;font-weight:600}
+  .mini.ghost{opacity:.55}
+  .adm-sel{border:1px solid var(--linha);background:var(--sup-2);color:var(--tinta);border-radius:10px;padding:8px 10px;font:inherit;font-size:12.5px}
+
+  /* ---- Modal de liberação ---- */
+  .modal{position:fixed;inset:0;z-index:60;background:rgba(10,18,32,.55);display:flex;align-items:flex-end;justify-content:center;padding:0}
+  @media (min-width:640px){.modal{align-items:center;padding:20px}}
+  .modal-card{background:var(--sup);width:min(560px,100%);max-height:88svh;display:flex;flex-direction:column;border-radius:20px 20px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.3)}
+  @media (min-width:640px){.modal-card{border-radius:20px}}
+  .modal-top{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--linha)}
+  .modal-top h3{font-family:var(--disp);font-size:16px;font-weight:600}
+  .modal-top .x{margin-left:auto;border:0;background:var(--sup-2);color:var(--tinta);width:32px;height:32px;border-radius:9px;font-size:18px;line-height:1}
+  .modal-body{padding:16px 18px;overflow:auto}
+  .busca-in{display:flex;align-items:center;gap:9px;background:var(--sup-2);border:1px solid var(--linha);border-radius:12px;padding:10px 14px;margin-bottom:12px}
+  .busca-in input{border:0;background:none;color:var(--tinta);font:inherit;font-size:14px;width:100%;outline:none}
+  .pr-item{display:flex;align-items:center;gap:10px;padding:10px 2px;border-bottom:1px dashed var(--linha)}
+  .pr-item:last-child{border-bottom:0}
+  .pr-item .n{font-size:13.5px;font-weight:600}
+  .pr-item .c{font-size:11.5px;color:var(--tinta-2);font-family:var(--mono)}
+  .pr-item .ac{margin-left:auto}
+  .rotulo{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-2);margin:16px 0 6px}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head><body>
@@ -195,17 +235,52 @@ const APP = String.raw`
   <header class="topo"><div class="topo-in env">
     <img class="logo-img" src="${LOGO}" alt="Medicinal">
     <span class="topo-sub">Portal do<br>Prescritor</span>
+    <nav class="nav" id="nav" hidden style="margin-left:18px">
+      <button class="nav-b ativo" data-view="protocolos" type="button">Protocolos</button>
+      <button class="nav-b" data-view="admin" type="button">Administração</button>
+    </nav>
     <div class="quem"><span id="quem-nome"></span><button class="sair" id="sair">Sair</button></div>
   </div></header>
 
   <main class="env">
-    <div class="intro">
-      <h1>Protocolos da Medicinal</h1>
-      <p>Toque em um protocolo para ver o guia completo e copiar as fórmulas prontas para a prescrição.</p>
+    <div id="view-protocolos">
+      <div class="intro">
+        <h1>Protocolos da Medicinal</h1>
+        <p>Toque em um protocolo para ver o guia completo e copiar as fórmulas prontas para a prescrição.</p>
+      </div>
+      <div id="grade" class="mosaico" aria-live="polite"></div>
+      <div class="carregando" id="carregando">Carregando protocolos…</div>
     </div>
-    <div id="grade" class="mosaico" aria-live="polite"></div>
-    <div class="carregando" id="carregando">Carregando protocolos…</div>
+
+    <div id="view-admin" hidden>
+      <div class="intro">
+        <h1>Administração</h1>
+        <p>Controle a visibilidade de cada protocolo, o destaque no mosaico e quem pode ver os protocolos restritos.</p>
+      </div>
+      <div id="adm-lista" class="adm-lista"></div>
+      <div class="carregando" id="adm-carregando">Carregando…</div>
+    </div>
   </main>
+</div>
+
+<!-- Modal: liberar protocolo restrito a prescritores -->
+<div class="modal" id="modal-acesso" hidden>
+  <div class="modal-card">
+    <div class="modal-top">
+      <h3>Liberar acesso</h3>
+      <button class="x" id="modal-fechar" type="button" aria-label="Fechar">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p class="adm-meta" id="modal-sub" style="margin:0 0 12px"></p>
+      <label class="busca-in">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--tinta-2)"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+        <input id="pr-busca" type="search" placeholder="Buscar prescritor por nome, registro ou e-mail…" autocomplete="off">
+      </label>
+      <div id="pr-resultados"></div>
+      <div class="rotulo">Com acesso liberado</div>
+      <div id="pr-liberados"></div>
+    </div>
+  </div>
 </div>
 
 <!-- ===================== VISOR DO GUIA ===================== -->
@@ -314,14 +389,33 @@ const APP = String.raw`
     if(r.status===401){ sair(); return null; }
     return r.ok?r.json():null;
   }
+  async function rpc(fn,body){
+    var url=NEXUS_URL+"/rest/v1/rpc/"+fn;
+    function opt(){return {method:"POST",headers:{apikey:ANON,Authorization:"Bearer "+sessao.access_token,"Content-Type":"application/json"},body:JSON.stringify(body||{})}}
+    var r=await fetch(url,opt());
+    if(r.status===401){ if(await refrescar()) r=await fetch(url,opt()); }
+    if(r.status===401){ sair(); return null; }
+    return r.ok?r.json():null;
+  }
 
   // ---------- App ----------
   function entrarNoApp(){
     $("tela-login").hidden=true; $("app").hidden=false;
     var q=sessao.nome?("Dr(a). "+sessao.nome):(sessao.crm||"");
     $("quem-nome").textContent=q;
+    $("nav").hidden=!sessao.admin;
     carregarProtocolos();
   }
+  // Navegação Protocolos / Administração (admin)
+  var viewAtual="protocolos", adminCarregado=false;
+  [].forEach.call(document.querySelectorAll(".nav-b"),function(bt){
+    bt.onclick=function(){
+      var v=bt.dataset.view; if(v===viewAtual)return; viewAtual=v;
+      document.querySelectorAll(".nav-b").forEach(function(x){x.classList.toggle("ativo",x.dataset.view===v)});
+      $("view-protocolos").hidden=v!=="protocolos"; $("view-admin").hidden=v!=="admin";
+      if(v==="admin"&&!adminCarregado){adminCarregado=true;carregarAdmin();}
+    };
+  });
   async function carregarProtocolos(){
     var dados=await api("?select=slug,titulo,cor,ordem,capa,formulas,destaque,novo&ativo=eq.true&order=destaque.desc,ordem");
     if(!dados){$("carregando").textContent="Não foi possível carregar os protocolos.";return}
@@ -401,8 +495,72 @@ const APP = String.raw`
     function sel(){var ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");ok()}catch(_){}document.body.removeChild(ta)}
   };
 
+  // ---------- Administração ----------
+  async function carregarAdmin(){
+    var dados=await rpc("admin_protocolos",{});
+    $("adm-carregando").hidden=true;
+    if(!dados){$("adm-lista").innerHTML='<p class="adm-meta">Não foi possível carregar (apenas administradores).</p>';return}
+    var L=$("adm-lista"); L.innerHTML="";
+    dados.forEach(function(p){ L.appendChild(linhaAdmin(p)); });
+  }
+  function linhaAdmin(p){
+    var row=document.createElement("div"); row.className="adm-row";
+    function badges(){
+      var b = p.visibilidade==="restrito" ? '<span class="adm-badge res">Restrito</span>' : '<span class="adm-badge pub">Público</span>';
+      if(!p.ativo) b+='<span class="adm-badge off">Inativo</span>';
+      if(p.novo) b+='<span class="adm-badge res">Novo</span>';
+      return b;
+    }
+    function meta(){ return p.n_formulas+' fórmulas'+(p.visibilidade==="restrito"?' · '+p.n_liberados+' com acesso':''); }
+    row.innerHTML='<div class="adm-info"><h3><span class="t"></span></h3><div class="adm-meta"></div></div><div class="adm-ctrl"></div>';
+    row.querySelector(".t").textContent=p.titulo;
+    var ctrl=row.querySelector(".adm-ctrl");
+    var seg=document.createElement("div"); seg.className="seg";
+    [["publico","Público"],["restrito","Restrito"]].forEach(function(o){
+      var bt=document.createElement("button"); bt.textContent=o[1]; if(p.visibilidade===o[0])bt.classList.add("on");
+      bt.onclick=async function(){ if(p.visibilidade===o[0])return; await rpc("admin_protocolo_flags",{p_slug:p.slug,p_visibilidade:o[0]}); p.visibilidade=o[0]; seg.querySelectorAll("button").forEach(function(x,i){x.classList.toggle("on",(i===0)===(o[0]==="publico"))}); atualiza(); };
+      seg.appendChild(bt);
+    });
+    ctrl.appendChild(seg);
+    var sel=document.createElement("select"); sel.className="adm-sel";
+    [[1,"Normal"],[2,"Grande"],[3,"Herói"]].forEach(function(o){ var op=document.createElement("option"); op.value=o[0]; op.textContent="Tam.: "+o[1]; if(p.destaque===o[0])op.selected=true; sel.appendChild(op); });
+    sel.onchange=async function(){ await rpc("admin_protocolo_flags",{p_slug:p.slug,p_destaque:parseInt(sel.value,10)}); p.destaque=parseInt(sel.value,10); };
+    ctrl.appendChild(sel);
+    var bn=document.createElement("button"); bn.textContent="Novo";
+    function pintaNovo(){bn.className="mini"+(p.novo?"":" ghost")} pintaNovo();
+    bn.onclick=async function(){ await rpc("admin_protocolo_flags",{p_slug:p.slug,p_novo:!p.novo}); p.novo=!p.novo; pintaNovo(); atualiza(); }; ctrl.appendChild(bn);
+    var ba=document.createElement("button");
+    function pintaAtivo(){ba.className="mini"+(p.ativo?"":" ghost");ba.textContent=p.ativo?"Ativo":"Inativo"} pintaAtivo();
+    ba.onclick=async function(){ await rpc("admin_protocolo_flags",{p_slug:p.slug,p_ativo:!p.ativo}); p.ativo=!p.ativo; pintaAtivo(); atualiza(); }; ctrl.appendChild(ba);
+    var bg=document.createElement("button"); bg.className="mini"; bg.textContent="Acesso"; bg.onclick=function(){abrirAcesso(p)}; ctrl.appendChild(bg);
+    function atualiza(){ row.querySelector("h3").innerHTML='<span class="t"></span>'+badges(); row.querySelector(".t").textContent=p.titulo; row.querySelector(".adm-meta").textContent=meta(); bg.style.display=p.visibilidade==="restrito"?"":"none"; }
+    atualiza();
+    return row;
+  }
+  // Modal de liberação por prescritor
+  var modalSlug=null, tBusca=null;
+  function abrirAcesso(p){ modalSlug=p.slug; $("modal-sub").textContent='“'+p.titulo+'” — restrito. Escolha quem pode ver.'; $("pr-busca").value=""; $("pr-resultados").innerHTML=""; $("modal-acesso").hidden=false; carregarLiberados(); setTimeout(function(){$("pr-busca").focus()},50); }
+  function fecharAcesso(){ $("modal-acesso").hidden=true; if(adminCarregado)carregarAdmin(); }
+  $("modal-fechar").onclick=fecharAcesso;
+  $("modal-acesso").addEventListener("click",function(e){ if(e.target===$("modal-acesso"))fecharAcesso(); });
+  async function carregarLiberados(){ var d=await rpc("admin_acesso_list",{p_slug:modalSlug})||[]; renderPr($("pr-liberados"),d,true); }
+  $("pr-busca").addEventListener("input",function(){ clearTimeout(tBusca); tBusca=setTimeout(async function(){ var q=$("pr-busca").value.trim(); if(q.length<2){$("pr-resultados").innerHTML="";return} var d=await rpc("admin_prescritores",{p_busca:q,p_limite:15})||[]; renderPr($("pr-resultados"),d,false); },260); });
+  function renderPr(cont,lista,liberado){
+    cont.innerHTML="";
+    if(!lista.length){cont.innerHTML='<p class="adm-meta">'+(liberado?"Ninguém com acesso ainda.":"Nenhum prescritor encontrado.")+'</p>';return}
+    lista.forEach(function(pr){
+      var el=document.createElement("div"); el.className="pr-item";
+      el.innerHTML='<div><div class="n"></div><div class="c"></div></div><div class="ac"></div>';
+      el.querySelector(".n").textContent=pr.nome||"—";
+      el.querySelector(".c").textContent=(pr.chave||"")+(pr.email?" · "+pr.email:"");
+      var b=document.createElement("button"); b.className="mini"; b.textContent=liberado?"Remover":"Liberar";
+      b.onclick=async function(){ b.disabled=true; await rpc("admin_acesso_set",{p_slug:modalSlug,p_prescritor:pr.id,p_liberar:!liberado}); if(liberado){carregarLiberados()}else{b.textContent="Liberado";b.classList.add("ghost");carregarLiberados()} };
+      el.querySelector(".ac").appendChild(b); cont.appendChild(el);
+    });
+  }
+
   // ---------- Sair ----------
-  function sair(){limparSessao();sessao=null;location.hash="";$("app").hidden=true;$("visor").hidden=true;$("tela-login").hidden=false;$("passo-cod").hidden=true;$("passo-id").hidden=false}
+  function sair(){limparSessao();sessao=null;location.hash="";$("app").hidden=true;$("visor").hidden=true;$("modal-acesso").hidden=true;$("nav").hidden=true;$("view-admin").hidden=true;$("view-protocolos").hidden=false;viewAtual="protocolos";adminCarregado=false;$("tela-login").hidden=false;$("passo-cod").hidden=true;$("passo-id").hidden=false}
   $("sair").onclick=sair;
 
   // ---------- Início ----------
