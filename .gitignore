@@ -3,4 +3,5 @@ saida/*.html
 saida/*.txt
 saida/*.sql
 saida/*.zip
+saida/*.b64
 saida/*/
