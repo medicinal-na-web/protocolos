@@ -459,11 +459,20 @@ const APP = String.raw`
       ifr.style.marginBottom=(alturaTotal*escala-alturaTotal)+"px";
     }catch(e){}
   }
-  // Texto de uma fórmula, pronto para colar na prescrição
+  // Texto de uma fórmula, pronto para colar na prescrição —
+  // com pontilhado entre o ativo e a dose (como na tabela impressa) e posologia destacada.
   function textoFormula(f){
-    var L=[f.nome+(f.via?" — "+f.via:"")];
-    (f.ativos||[]).forEach(function(a){L.push(a.nome+(a.dose?"  "+a.dose:""))});
-    if(f.modo)L.push("Posologia: "+f.modo);
+    var ALVO=46; // coluna onde a dose começa
+    var L=[(f.nome||"").toUpperCase()+(f.via?"  ·  "+f.via:"")];
+    L.push("");
+    (f.ativos||[]).forEach(function(a){
+      var nome=(a.nome||"").trim(), dose=(a.dose||"").trim();
+      if(!dose){ L.push(nome); return; }
+      var esq=nome+" ";
+      var n=ALVO-esq.length;
+      L.push(esq+(n>1?new Array(n).join("."):"")+" "+dose);
+    });
+    if(f.modo){ L.push(""); L.push("Posologia: "+f.modo); }
     return L.join("\n");
   }
   function copiarTexto(txt,cb){
