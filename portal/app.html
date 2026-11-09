@@ -99,7 +99,7 @@
   .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,12px);background:#15233a;color:#fff;padding:13px 18px;border-radius:13px;font-size:13.5px;font-weight:600;box-shadow:0 10px 34px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:70;display:flex;gap:10px;align-items:center;max-width:min(92vw,420px)}
   .toast.show{opacity:1;transform:translate(-50%,0)}
   .toast svg{width:20px;height:20px;fill:none;stroke:#4ade80;stroke-width:2.2;flex:none}
-  .palco{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;display:flex;justify-content:center;padding:18px 10px 40px;
+  .palco{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;display:flex;justify-content:center;padding:16px 6px 40px;
     scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--tinta-2) 38%,transparent) transparent}
   .palco::-webkit-scrollbar{width:9px}
   .palco::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--tinta-2) 32%,transparent);border-radius:8px;border:2px solid transparent;background-clip:content-box}
@@ -423,7 +423,8 @@
     try{
       var doc=ifr.contentDocument; if(!doc)return;
       var larguraA4=794; // 210mm @ 96dpi
-      var disp=Math.min($("palco").clientWidth-20,larguraA4);
+      // Ocupa a largura disponível (amplia além do A4 em telas largas), com um teto para leitura
+      var disp=Math.min($("palco").clientWidth-10,1400);
       var escala=disp/larguraA4;
       var alturaTotal=doc.body.scrollHeight;
       ifr.style.width=larguraA4+"px";
@@ -449,26 +450,37 @@
     if(f.modo){ L.push(""); L.push("Posologia: "+f.modo); }
     return L.join("\n");
   }
-  function copiarTexto(txt,cb){
-    function ok(){cb&&cb()}
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(ok).catch(sel)}else sel();
-    function sel(){var ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");ok()}catch(_){}document.body.removeChild(ta)}
+  function escH(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+  // Tabela HTML de uma fórmula (cola alinhada no Word/Docs/formulários)
+  function htmlFormula(f){
+    var ls=(f.ativos||[]).map(function(a){
+      return '<tr><td style="padding:2px 30px 2px 0;white-space:nowrap">'+escH(a.nome)+'</td>'
+           +'<td style="padding:2px 0;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums">'+escH(a.dose||"")+'</td></tr>';
+    }).join("");
+    return '<div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#15233a;line-height:1.45">'
+      +'<div style="font-weight:700;text-transform:uppercase;letter-spacing:.3px">'+escH(f.nome)+(f.via?' &middot; '+escH(f.via):'')+'</div>'
+      +'<table style="border-collapse:collapse;margin:4px 0 6px">'+ls+'</table>'
+      +(f.modo?'<div><b>Posologia:</b> '+escH(f.modo)+'</div>':'')+'</div>';
+  }
+  function rodapeHtml(p){return '<div style="color:#667;font-size:12px;margin-top:6px">('+escH(p.titulo)+' &middot; Medicinal)</div>'}
+  // Copia HTML (tabela) + texto puro de reserva, na janela indicada (guia ou app)
+  function copiarRico(win,doc,html,plain){
+    return new Promise(function(res,rej){
+      try{
+        var nav=win.navigator;
+        if(win.ClipboardItem&&nav.clipboard&&nav.clipboard.write){
+          var item=new win.ClipboardItem({"text/html":new Blob([html],{type:"text/html"}),"text/plain":new Blob([plain],{type:"text/plain"})});
+          nav.clipboard.write([item]).then(res).catch(txt);
+        } else txt();
+        function txt(){ if(nav.clipboard&&nav.clipboard.writeText){nav.clipboard.writeText(plain).then(res).catch(sel)} else sel(); }
+        function sel(){ try{var ta=doc.createElement("textarea");ta.value=plain;ta.style.position="fixed";ta.style.opacity="0";doc.body.appendChild(ta);ta.focus();ta.select();doc.execCommand("copy");doc.body.removeChild(ta);res()}catch(e){rej(e)} }
+      }catch(e){rej(e)}
+    });
   }
   var ICO_COPIAR='<svg viewBox="0 0 24 24"><path d="M9 9V5.5A1.5 1.5 0 0 1 10.5 4h8A1.5 1.5 0 0 1 20 5.5v8a1.5 1.5 0 0 1-1.5 1.5H15M4 10.5A1.5 1.5 0 0 1 5.5 9h8A1.5 1.5 0 0 1 15 10.5v8A1.5 1.5 0 0 1 13.5 20h-8A1.5 1.5 0 0 1 4 18.5z"/></svg>';
   function showToast(msg){
     var t=$("toast"); t.querySelector("span").textContent=msg; t.classList.add("show");
     clearTimeout(t._tmr); t._tmr=setTimeout(function(){t.classList.remove("show")},2600);
-  }
-  // Copia usando a área de transferência DO GUIA (iframe), com fallback.
-  function copiarNoIframe(ifr,txt){
-    return new Promise(function(res,rej){
-      try{
-        var cw=ifr.contentWindow, cd=ifr.contentDocument;
-        if(cw&&cw.navigator&&cw.navigator.clipboard&&cw.navigator.clipboard.writeText){ cw.navigator.clipboard.writeText(txt).then(res).catch(sel); }
-        else sel();
-        function sel(){ try{ var ta=cd.createElement("textarea"); ta.value=txt; ta.style.position="fixed"; ta.style.opacity="0"; cd.body.appendChild(ta); ta.focus(); ta.select(); cd.execCommand("copy"); cd.body.removeChild(ta); res(); }catch(e){ rej(e); } }
-      }catch(e){ rej(e); }
-    });
   }
   // Injeta um botão "Copiar fórmula" ao lado de cada card do guia (no espaço livre do QR).
   function injetarCopias(ifr,p){
@@ -491,7 +503,7 @@
         var b=cd.createElement("button"); b.className="pp-copiar"; b.type="button";
         b.innerHTML=ICO_COPIAR+'<span>Copiar fórmula</span>';
         b.onclick=function(){
-          copiarNoIframe(ifr,textoFormula(f)+"\n\n("+p.titulo+" · Medicinal)").then(function(){
+          copiarRico(ifr.contentWindow, cd, htmlFormula(f)+rodapeHtml(p), textoFormula(f)+"\n\n("+p.titulo+" · Medicinal)").then(function(){
             b.classList.add("ok"); var s=b.querySelector("span"); s.textContent="Copiada!";
             showToast("Fórmula “"+f.nome+"” copiada — cole na prescrição (Ctrl+V).");
             setTimeout(function(){b.classList.remove("ok"); s.textContent="Copiar fórmula";},1700);
@@ -529,11 +541,14 @@
   // Copiar TODAS as fórmulas do protocolo
   $("guia-copiar").onclick=function(){
     if(!protoAtual)return;
-    var linhas=[protoAtual.titulo,""];
-    (protoAtual.formulas||[]).forEach(function(f){ linhas.push(textoFormula(f)); linhas.push(""); });
-    linhas.push("(Medicinal Farmácia e Manipulação)");
+    var p=protoAtual, fs=p.formulas||[];
+    var plain=[p.titulo,""].concat(fs.map(textoFormula)).join("\n\n")+"\n\n(Medicinal Farmácia e Manipulação)";
+    var html='<div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#15233a">'
+      +'<div style="font-weight:700;font-size:15px;margin-bottom:8px">'+escH(p.titulo)+'</div>'
+      +fs.map(htmlFormula).join('<div style="border-top:1px solid #e2e8f0;margin:10px 0"></div>')
+      +rodapeHtml(p)+'</div>';
     var btn=$("guia-copiar");
-    copiarTexto(linhas.join("\n"),function(){ btn.textContent="Copiado!"; setTimeout(function(){btn.textContent="Copiar todas"},1600); });
+    copiarRico(window, document, html, plain).then(function(){ btn.textContent="Copiado!"; setTimeout(function(){btn.textContent="Copiar todas"},1600); });
   };
 
   // ---------- Administração ----------
