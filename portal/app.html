@@ -112,6 +112,14 @@
   .nav-b.ativo{background:var(--sup);color:var(--acc);box-shadow:var(--sombra)}
 
   /* ---- Admin ---- */
+  .subnav{display:inline-flex;gap:4px;background:var(--sup-2);border:1px solid var(--linha);border-radius:999px;padding:4px;margin-top:18px}
+  .subnav-b{border:0;background:none;color:var(--tinta-2);font-family:var(--disp);font-weight:600;font-size:13px;padding:7px 15px;border-radius:999px;cursor:pointer}
+  .subnav-b.ativo{background:var(--sup);color:var(--acc);box-shadow:var(--sombra)}
+  .pr-ctrl{display:flex;gap:10px;align-items:center;margin:18px 0 8px;flex-wrap:wrap}
+  .pr-resumo{color:var(--tinta-2);font-size:13px;margin-bottom:12px;font-variant-numeric:tabular-nums}
+  .pr-email{border:1px solid var(--linha);background:var(--sup-2);color:var(--tinta);border-radius:9px;padding:8px 11px;font:inherit;font-size:12.5px;width:210px;max-width:46vw}
+  .pr-email:focus{outline:none;border-color:var(--acc)}
+  .mini.on{background:var(--ok);color:#fff;border-color:var(--ok)}
   .adm-lista{margin-top:22px;display:flex;flex-direction:column;gap:12px}
   .adm-row{background:var(--sup);border:1px solid var(--linha);border-radius:16px;box-shadow:var(--sombra);padding:15px 16px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center}
   .adm-info{min-width:0}
@@ -228,10 +236,35 @@
     <div id="view-admin" hidden>
       <div class="intro">
         <h1>Administração</h1>
-        <p>Controle a visibilidade de cada protocolo, o destaque no mosaico e quem pode ver os protocolos restritos.</p>
+        <p>Libere o acesso dos prescritores ao portal e controle a visibilidade de cada protocolo.</p>
       </div>
-      <div id="adm-lista" class="adm-lista"></div>
-      <div class="carregando" id="adm-carregando">Carregando…</div>
+      <div class="subnav">
+        <button class="subnav-b ativo" data-sub="protocolos" type="button">Protocolos</button>
+        <button class="subnav-b" data-sub="prescritores" type="button">Prescritores</button>
+      </div>
+
+      <div id="sub-protocolos">
+        <div id="adm-lista" class="adm-lista"></div>
+        <div class="carregando" id="adm-carregando">Carregando…</div>
+      </div>
+
+      <div id="sub-prescritores" hidden>
+        <div class="pr-ctrl">
+          <label class="busca-in" style="flex:1;min-width:220px;margin:0">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--tinta-2)"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+            <input id="pr-q" type="search" placeholder="Buscar por nome, registro ou e-mail…" autocomplete="off">
+          </label>
+          <select id="pr-filtro" class="adm-sel">
+            <option value="todos">Todos</option>
+            <option value="autorizados">Autorizados</option>
+            <option value="pendentes">Não autorizados</option>
+            <option value="sem_email">Sem e-mail</option>
+          </select>
+        </div>
+        <div class="pr-resumo" id="pr-resumo"></div>
+        <div id="pr-lista" class="adm-lista"></div>
+        <div class="carregando" id="pr-carregando">Carregando…</div>
+      </div>
     </div>
   </main>
 </div>
@@ -563,6 +596,64 @@
   };
 
   // ---------- Administração ----------
+  // Sub-abas: Protocolos / Prescritores
+  var prCarregado=false, tPr=null;
+  [].forEach.call(document.querySelectorAll(".subnav-b"),function(bt){
+    bt.onclick=function(){
+      var v=bt.dataset.sub;
+      document.querySelectorAll(".subnav-b").forEach(function(x){x.classList.toggle("ativo",x.dataset.sub===v)});
+      $("sub-protocolos").hidden=v!=="protocolos"; $("sub-prescritores").hidden=v!=="prescritores";
+      if(v==="prescritores"&&!prCarregado){prCarregado=true;carregarPrescritores();}
+    };
+  });
+  $("pr-q").addEventListener("input",function(){ clearTimeout(tPr); tPr=setTimeout(carregarPrescritores,260); });
+  $("pr-filtro").addEventListener("change",carregarPrescritores);
+
+  async function carregarPrescritores(){
+    $("pr-carregando").hidden=false;
+    var d=await rpc("admin_prescritor_listar",{p_busca:$("pr-q").value.trim(),p_filtro:$("pr-filtro").value,p_limite:60});
+    $("pr-carregando").hidden=true;
+    if(!d){$("pr-lista").innerHTML='<p class="adm-meta">Não foi possível carregar.</p>';return}
+    var r=d.resumo||{};
+    $("pr-resumo").textContent=(r.total||0)+" prescritores · "+(r.autorizados||0)+" com acesso liberado · "+(r.pendentes||0)+" sem acesso";
+    var L=$("pr-lista"); L.innerHTML="";
+    (d.itens||[]).forEach(function(pr){ L.appendChild(linhaPrescritor(pr)); });
+    if(!(d.itens||[]).length)L.innerHTML='<p class="adm-meta">Nenhum prescritor encontrado.</p>';
+  }
+  function linhaPrescritor(pr){
+    var row=document.createElement("div"); row.className="adm-row";
+    row.innerHTML='<div class="adm-info"><h3><span class="t"></span></h3><div class="adm-meta"></div></div>'
+      +'<div class="adm-ctrl"><input class="pr-email" type="email" placeholder="e-mail de login"><button class="mini lib" type="button"></button></div>';
+    row.querySelector(".t").textContent=pr.nome||"—";
+    function badge(){ return pr.autorizado?' <span class="adm-badge pub">Autorizado</span>':' <span class="adm-badge off">Sem acesso</span>'; }
+    function meta(){ return (pr.chave||"")+(pr.crm?" · CRM "+pr.crm:"")+(pr.tem_conta?" · já acessou":""); }
+    var inp=row.querySelector(".pr-email"); inp.value=pr.email||"";
+    var bt=row.querySelector(".lib");
+    function pinta(){ row.querySelector("h3").innerHTML='<span class="t"></span>'+badge(); row.querySelector(".t").textContent=pr.nome||"—"; row.querySelector(".adm-meta").textContent=meta(); bt.textContent=pr.autorizado?"Revogar":"Liberar acesso"; bt.className="mini lib"+(pr.autorizado?" on":""); }
+    pinta();
+    // salva e-mail ao sair do campo (se mudou)
+    inp.addEventListener("blur",async function(){
+      var v=inp.value.trim(); if(v===(pr.email||""))return;
+      var res=await rpc("admin_prescritor_set",{p_id:pr.id,p_email:v});
+      if(res&&res.ok){ pr.email=res.email||v; showToast("E-mail salvo."); } else { showToast("E-mail inválido."); inp.value=pr.email||""; }
+    });
+    bt.onclick=async function(){
+      bt.disabled=true;
+      var liberar=!pr.autorizado;
+      var res=await rpc("admin_prescritor_set",{p_id:pr.id,p_autorizado:liberar,p_email:inp.value.trim()||null});
+      bt.disabled=false;
+      if(!res||!res.ok){
+        if(res&&res.motivo==="sem_email"){ showToast("Informe o e-mail antes de liberar."); inp.focus(); }
+        else if(res&&res.motivo==="email_invalido"){ showToast("E-mail inválido."); inp.focus(); }
+        else showToast("Não foi possível atualizar.");
+        return;
+      }
+      pr.autorizado=res.autorizado; pr.email=res.email||pr.email; pinta();
+      showToast(liberar?("Acesso liberado para "+(pr.nome||"o prescritor")+"."):"Acesso revogado.");
+    };
+    return row;
+  }
+
   async function carregarAdmin(){
     var dados=await rpc("admin_protocolos",{});
     $("adm-carregando").hidden=true;
