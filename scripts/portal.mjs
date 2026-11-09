@@ -14,20 +14,9 @@ import { fileURLToPath } from "node:url";
 const raiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dirSaida = path.join(raiz, "saida");
 
-// Logo oficial da Medicinal, embutida (POR-017: símbolo + wordmark, nunca recortada).
-function logoDataUri() {
-  const src = path.join(raiz, "marca", "logo-azul.png");
-  try {
-    const out = path.join(os.tmpdir(), "pp_logo.webp");
-    execSync(`convert ${JSON.stringify(src)} -resize 700x -strip -quality 88 ${JSON.stringify(out)}`, { stdio: "ignore" });
-    const u = "data:image/webp;base64," + fs.readFileSync(out).toString("base64");
-    fs.rmSync(out, { force: true });
-    return u;
-  } catch {
-    return "data:image/png;base64," + fs.readFileSync(src).toString("base64");
-  }
-}
-const LOGO = logoDataUri();
+// Logo oficial da Medicinal servida por URL (/artes/_marca/logo-azul.webp, gerada pelo portal-sync).
+// POR-017: símbolo + wordmark, nunca recortada. Mantém o app leve (nada embutido em base64).
+const LOGO = "/artes/_marca/logo-azul.webp";
 
 // ---- Configuração do backend (projeto nexusPrescricao) ----
 const NEXUS_URL = "https://uahbcelcjmjcljogfilh.supabase.co";
@@ -577,6 +566,11 @@ const APP = String.raw`
 
 fs.mkdirSync(dirSaida, { recursive: true });
 fs.writeFileSync(path.join(dirSaida, "index.html"), APP);
+// App versionado no repositório: a Edge Function portal-app serve este arquivo,
+// então atualizar o portal é só `git push` (o site tem apenas o carregador).
+const dirPortal = path.join(raiz, "portal");
+fs.mkdirSync(dirPortal, { recursive: true });
+fs.writeFileSync(path.join(dirPortal, "app.html"), APP);
 
 // robots.txt — portal restrito à classe prescritora
 fs.writeFileSync(
