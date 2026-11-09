@@ -294,12 +294,19 @@ const standalone = `<!doctype html>
 <html lang="pt-BR"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
 <title>Portal do Prescritor — Medicinal</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 ${estilo}
 </head><body>${corpo}</body></html>`;
 fs.writeFileSync(path.join(dirSaida, "portal.html"), standalone);
+
+// robots.txt — portal restrito à classe prescritora, fora dos buscadores
+fs.writeFileSync(
+  path.join(dirSaida, "robots.txt"),
+  "# Portal do Prescritor — Medicinal (acesso restrito à classe prescritora)\nUser-agent: *\nDisallow: /\n",
+);
 
 // Conteúdo para publicar como Artifact (sem <head>/<body>; o host adiciona o esqueleto)
 const artifact = `<meta name="claude:viewport-fit-sides" content="cover">
