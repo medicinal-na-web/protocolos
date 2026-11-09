@@ -1,3 +1,4 @@
 node_modules/
 saida/*.html
+saida/*.txt
 saida/*/
