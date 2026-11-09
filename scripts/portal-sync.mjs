@@ -69,13 +69,16 @@ for (let i = 0; i < slugs.length; i++) {
   const formulas = formulasDe(p);
   const cor = { escura: p.cor?.escura || "#2A62AC", clara: p.cor?.clara || "#5b8fd6" };
 
+  const destaque = Math.max(1, Math.min(3, parseInt(p.destaque, 10) || 1));
+  const novo = p.novo === true;
   const sql = `-- ${p.titulo} (${slug}) — gerado por scripts/portal-sync.mjs
-insert into public.portal_protocolo (slug, titulo, cor, ordem, formulas, capa, guia_html, ativo, atualizado_em) values
+insert into public.portal_protocolo (slug, titulo, cor, ordem, formulas, capa, guia_html, destaque, novo, ativo, atualizado_em) values
   (${dq("s", slug)}, ${dq("t", p.titulo)}, ${dq("c", cor)}::jsonb, ${i + 1},
-   ${dq("f", formulas)}::jsonb, ${dq("u", capaUrl)}, ${dq("g", guiaGz)}, true, now())
+   ${dq("f", formulas)}::jsonb, ${dq("u", capaUrl)}, ${dq("g", guiaGz)}, ${destaque}, ${novo}, true, now())
 on conflict (slug) do update set
   titulo=excluded.titulo, cor=excluded.cor, ordem=excluded.ordem,
   formulas=excluded.formulas, capa=excluded.capa, guia_html=excluded.guia_html,
+  destaque=excluded.destaque, novo=excluded.novo,
   ativo=true, atualizado_em=now();
 `;
   fs.writeFileSync(path.join(dirSync, `${slug}.sql`), sql);

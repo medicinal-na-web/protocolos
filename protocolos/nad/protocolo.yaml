@@ -17,6 +17,8 @@ cor:
 qr: https://portalprescritor.medicinalnaweb.com.br/#nad   # Portal do Prescritor (deep-link por protocolo)
 capa: capa.jpg
 capa_posicao: "center center"
+destaque: 3
+novo: true
 
 paginas:
   # Página 2 — DESTAQUE: NAD+ Nasal (nariz → cérebro)

@@ -6,11 +6,28 @@
 // Uso: node scripts/portal.mjs   (ou npm run portal)
 
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
+import { execSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const raiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dirSaida = path.join(raiz, "saida");
+
+// Logo oficial da Medicinal, embutida (POR-017: símbolo + wordmark, nunca recortada).
+function logoDataUri() {
+  const src = path.join(raiz, "marca", "logo-azul.png");
+  try {
+    const out = path.join(os.tmpdir(), "pp_logo.webp");
+    execSync(`convert ${JSON.stringify(src)} -resize 700x -strip -quality 88 ${JSON.stringify(out)}`, { stdio: "ignore" });
+    const u = "data:image/webp;base64," + fs.readFileSync(out).toString("base64");
+    fs.rmSync(out, { force: true });
+    return u;
+  } catch {
+    return "data:image/png;base64," + fs.readFileSync(src).toString("base64");
+  }
+}
+const LOGO = logoDataUri();
 
 // ---- Configuração do backend (projeto nexusPrescricao) ----
 const NEXUS_URL = "https://uahbcelcjmjcljogfilh.supabase.co";
@@ -54,16 +71,19 @@ const APP = String.raw`
   /* ---- Login ---- */
   .login{min-height:100svh;display:grid;place-items:center;padding:28px 0}
   .login-card{width:min(420px,92vw);background:var(--sup);border:1px solid var(--linha);border-radius:20px;box-shadow:var(--sombra);padding:30px 26px}
-  .brand{display:flex;align-items:center;gap:12px;margin-bottom:22px}
-  .brand .ico{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--marca),var(--marca-esc));display:grid;place-items:center;flex:none}
-  .brand .ico svg{width:23px;height:23px;fill:#fff}
-  .brand b{font-family:var(--disp);font-weight:700;font-size:17px;display:block;line-height:1.1}
-  .brand span{font-size:11px;color:var(--tinta-2);letter-spacing:.14em;text-transform:uppercase}
+  .brand{display:flex;align-items:center;gap:13px;margin-bottom:24px}
+  .brand .logo-img{height:42px;width:auto;display:block}
+  .brand .brand-sub{font-size:10.5px;color:var(--tinta-2);letter-spacing:.14em;text-transform:uppercase;line-height:1.25;border-left:1px solid var(--linha);padding-left:13px;max-width:92px}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo-img{filter:brightness(0) invert(1)}}
+  :root[data-theme="dark"] .logo-img{filter:brightness(0) invert(1)}
   .login h1{font-size:21px;font-weight:600;margin-bottom:6px}
   .login p.sub{color:var(--tinta-2);font-size:14px;margin:0 0 20px}
   label.campo{display:block;font-size:12.5px;font-weight:600;color:var(--tinta-2);margin:0 0 6px}
   .in{width:100%;background:var(--sup-2);border:1px solid var(--linha);border-radius:12px;padding:13px 15px;color:var(--tinta);font:inherit;font-size:15px;outline:none}
   .in:focus{border-color:var(--acc)}
+  select.in{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2351607a' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 12px center;padding-right:38px}
+  .dois{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .campo2{display:block;font-size:12.5px;font-weight:600;color:var(--tinta-2);margin:14px 0 6px}
   #codigo{font-family:var(--mono);letter-spacing:.3em;text-align:center;font-size:20px}
   .btn{width:100%;margin-top:16px;border:0;border-radius:12px;padding:13px;color:#fff;font-family:var(--disp);font-weight:600;font-size:15px;background:linear-gradient(135deg,var(--acc),var(--acc2));transition:filter .15s}
   .btn:hover{filter:brightness(1.07)} .btn:disabled{opacity:.6;cursor:default;filter:none}
@@ -77,24 +97,31 @@ const APP = String.raw`
   .topo{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--sup) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--linha)}
   body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--sup)}
   .topo-in{max-width:1120px;margin:0 auto;padding-block:12px;display:flex;align-items:center;gap:14px}
-  .topo .ico{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--marca),var(--marca-esc));display:grid;place-items:center;flex:none}
-  .topo .ico svg{width:19px;height:19px;fill:#fff}
-  .topo b{font-family:var(--disp);font-size:15px;line-height:1.05;display:block}
-  .topo small{font-size:10.5px;color:var(--tinta-2);letter-spacing:.12em;text-transform:uppercase}
+  .topo .logo-img{height:30px;width:auto;display:block}
+  .topo .topo-sub{font-size:10px;color:var(--tinta-2);letter-spacing:.12em;text-transform:uppercase;border-left:1px solid var(--linha);padding-left:11px;line-height:1.2}
   .quem{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--tinta-2)}
   .sair{border:1px solid var(--linha);background:var(--sup-2);color:var(--tinta);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600}
   main{max-width:1120px;margin:0 auto;padding-block:26px 64px}
   .intro h1{font-size:clamp(23px,4vw,32px);font-weight:700}
   .intro p{color:var(--tinta-2);max-width:60ch;margin:8px 0 0;font-size:15px}
 
-  .grade{margin-top:26px;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
-  .pcard{text-align:left;background:var(--sup);border:1px solid var(--linha);border-radius:16px;overflow:hidden;box-shadow:var(--sombra);padding:0;display:flex;flex-direction:column;transition:transform .1s,box-shadow .15s}
-  .pcard:hover{transform:translateY(-2px);box-shadow:0 2px 6px rgba(20,35,58,.1),0 16px 36px rgba(20,35,58,.12)}
-  .pcard .capa{height:132px;background:linear-gradient(135deg,var(--acc),var(--acc2));background-size:cover;background-position:center}
-  .pcard .corpo{padding:15px 16px 17px}
-  .pcard .tag{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
-  .pcard h3{font-size:17px;font-weight:600;margin:4px 0 0}
-  .pcard .meta{color:var(--tinta-2);font-size:12.5px;margin-top:8px;font-variant-numeric:tabular-nums}
+  /* Mosaico (bento): a capa compõe cada bloco; os mais importantes ocupam mais espaço */
+  .mosaico{margin-top:24px;display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:118px;gap:14px;grid-auto-flow:dense}
+  .pcard{position:relative;overflow:hidden;border-radius:18px;border:0;padding:0;cursor:pointer;box-shadow:var(--sombra);
+    background:linear-gradient(135deg,var(--acc),var(--acc2));background-size:cover;background-position:center;
+    grid-column:span 2;grid-row:span 2;transition:transform .12s,box-shadow .18s;isolation:isolate}
+  .pcard.d2{grid-column:span 2;grid-row:span 2}
+  .pcard.d3{grid-column:span 2;grid-row:span 3}
+  .pcard:hover{transform:translateY(-3px);box-shadow:0 3px 8px rgba(20,35,58,.14),0 20px 44px rgba(20,35,58,.2)}
+  .pcard::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,18,32,.86) 0%,rgba(10,18,32,.5) 32%,rgba(10,18,32,.08) 62%,rgba(10,18,32,.18) 100%);z-index:1}
+  .pcard .leg{position:absolute;inset:auto 0 0 0;z-index:2;padding:16px 17px;text-align:left;color:#fff}
+  .pcard .tag{font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+  .pcard h3{font-family:var(--disp);font-size:17px;font-weight:600;margin:3px 0 0;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.35);line-height:1.15}
+  .pcard.d3 h3{font-size:22px}
+  .pcard .meta{font-size:12px;margin-top:6px;opacity:.9;font-variant-numeric:tabular-nums}
+  .pcard .novo{position:absolute;top:12px;left:12px;z-index:2;background:#fff;color:#0f6b3a;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+  @media (max-width:760px){.mosaico{grid-template-columns:repeat(2,1fr);grid-auto-rows:104px}.pcard,.pcard.d2{grid-column:span 1;grid-row:span 2}.pcard.d3{grid-column:span 2;grid-row:span 2}}
+  @media (max-width:430px){.pcard h3{font-size:15.5px}.pcard.d3 h3{font-size:19px}}
   .carregando{color:var(--tinta-2);padding:50px 0;text-align:center}
 
   /* ---- Visor do guia ---- */
@@ -114,23 +141,39 @@ const APP = String.raw`
 <section class="login" id="tela-login">
   <div class="login-card">
     <div class="brand">
-      <span class="ico"><svg viewBox="0 0 24 24"><path d="M3 14c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 3 2"/><path d="M3 9c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 3 2" opacity=".55"/><path d="M3 19c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 3 2" opacity=".3"/></svg></span>
-      <span><b>Medicinal</b><span>Portal do Prescritor</span></span>
+      <img class="logo-img" src="${LOGO}" alt="Medicinal Farmácia e Manipulação">
+      <span class="brand-sub">Portal do<br>Prescritor</span>
     </div>
 
     <div id="passo-id">
       <h1>Acesse o portal</h1>
-      <p class="sub">Entre com sua chave profissional ou o e-mail cadastrado. Enviaremos um código de acesso.</p>
+      <p class="sub">Informe sua profissão, estado e número do registro. Enviaremos um código de acesso ao seu e-mail cadastrado.</p>
       <div id="modo-chave">
-        <label class="campo" for="chave">Chave profissional</label>
-        <input class="in" id="chave" inputmode="text" autocomplete="off" placeholder="ex.: 1-PR-20696">
+        <div class="dois">
+          <div>
+            <label class="campo" for="prof">Profissão</label>
+            <select class="in" id="prof">
+              <option value="1">Médico(a)</option>
+              <option value="2">Nutricionista</option>
+            </select>
+          </div>
+          <div>
+            <label class="campo" for="uf">Estado</label>
+            <select class="in" id="uf">
+              <option value="" disabled selected>UF</option>
+              <option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option>
+            </select>
+          </div>
+        </div>
+        <label class="campo2" for="reg" id="reg-label">Número do CRM</label>
+        <input class="in" id="reg" inputmode="numeric" autocomplete="off" placeholder="ex.: 20696">
       </div>
       <div id="modo-email" hidden>
         <label class="campo" for="email">E-mail</label>
         <input class="in" id="email" type="email" autocomplete="email" placeholder="voce@exemplo.com">
       </div>
       <button class="btn" id="btn-enviar">Enviar código</button>
-      <button class="link" id="troca-modo">Não tenho chave — entrar com e-mail</button>
+      <button class="link" id="troca-modo">Não tenho registro — entrar com e-mail</button>
       <div class="aviso" id="aviso-id"></div>
     </div>
 
@@ -150,8 +193,8 @@ const APP = String.raw`
 <!-- ===================== APP ===================== -->
 <div id="app" hidden>
   <header class="topo"><div class="topo-in env">
-    <span class="ico"><svg viewBox="0 0 24 24"><path d="M3 14c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 3 2"/><path d="M3 9c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 3 2" opacity=".55"/></svg></span>
-    <span><b>Portal do Prescritor</b><small>Medicinal</small></span>
+    <img class="logo-img" src="${LOGO}" alt="Medicinal">
+    <span class="topo-sub">Portal do<br>Prescritor</span>
     <div class="quem"><span id="quem-nome"></span><button class="sair" id="sair">Sair</button></div>
   </div></header>
 
@@ -160,7 +203,7 @@ const APP = String.raw`
       <h1>Protocolos da Medicinal</h1>
       <p>Toque em um protocolo para ver o guia completo e copiar as fórmulas prontas para a prescrição.</p>
     </div>
-    <div id="grade" class="grade" aria-live="polite"></div>
+    <div id="grade" class="mosaico" aria-live="polite"></div>
     <div class="carregando" id="carregando">Carregando protocolos…</div>
   </main>
 </div>
@@ -197,18 +240,26 @@ const APP = String.raw`
     var r=await fetch(FN,{method:"POST",headers:{apikey:ANON,Authorization:"Bearer "+ANON,"Content-Type":"application/json"},body:JSON.stringify(body)});
     return r.json();
   }
-  function idAtual(){return modoEmail?{email:($("email").value||"").trim()}:{chave:($("chave").value||"").trim().toUpperCase()}}
+  function idAtual(){
+    if(modoEmail)return {email:($("email").value||"").trim()};
+    var prof=$("prof").value, uf=$("uf").value, reg=($("reg").value||"").replace(/\D/g,"");
+    return {chave:(prof&&uf&&reg)?(prof+"-"+uf+"-"+reg):""};
+  }
+  // CRM para médico, CRN para nutricionista
+  $("prof").addEventListener("change",function(){
+    $("reg-label").textContent="Número do "+($("prof").value==="2"?"CRN":"CRM");
+  });
 
   $("troca-modo").onclick=function(){
     modoEmail=!modoEmail;
     $("modo-chave").hidden=modoEmail; $("modo-email").hidden=!modoEmail;
-    $("troca-modo").textContent=modoEmail?"Tenho chave profissional":"Não tenho chave — entrar com e-mail";
+    $("troca-modo").textContent=modoEmail?"Entrar com registro profissional":"Não tenho registro — entrar com e-mail";
     limpaAviso($("aviso-id"));
   };
 
   $("btn-enviar").onclick=async function(){
     var id=idAtual();
-    if(!id.chave && !id.email){return aviso($("aviso-id"),"Informe a chave ou o e-mail.")}
+    if(!id.chave && !id.email){return aviso($("aviso-id"),modoEmail?"Informe o e-mail.":"Selecione profissão e estado e informe o número do registro.")}
     $("btn-enviar").disabled=true; aviso($("aviso-id"),"Enviando código…","ok");
     try{
       var d=await chamarFn(Object.assign({acao:"enviar"},id));
@@ -241,7 +292,7 @@ const APP = String.raw`
     }catch(e){aviso($("aviso-cod"),"Sem conexão com o servidor.");$("btn-verificar").disabled=false}
   };
   $("codigo").addEventListener("keydown",function(e){if(e.key==="Enter")$("btn-verificar").click()});
-  $("chave").addEventListener("keydown",function(e){if(e.key==="Enter")$("btn-enviar").click()});
+  $("reg").addEventListener("keydown",function(e){if(e.key==="Enter")$("btn-enviar").click()});
   $("email").addEventListener("keydown",function(e){if(e.key==="Enter")$("btn-enviar").click()});
 
   // ---------- Sessão / REST ----------
@@ -272,16 +323,17 @@ const APP = String.raw`
     carregarProtocolos();
   }
   async function carregarProtocolos(){
-    var dados=await api("?select=slug,titulo,cor,ordem,capa,formulas&ativo=eq.true&order=ordem");
+    var dados=await api("?select=slug,titulo,cor,ordem,capa,formulas,destaque,novo&ativo=eq.true&order=destaque.desc,ordem");
     if(!dados){$("carregando").textContent="Não foi possível carregar os protocolos.";return}
     protocolos=dados; $("carregando").hidden=true;
     var g=$("grade"); g.innerHTML="";
     dados.forEach(function(p){
-      var cor=p.cor||{}, capa=p.capa?("background-image:url('"+p.capa+"')"):("background:linear-gradient(135deg,"+(cor.escura||"#2A62AC")+","+(cor.clara||"#5b8fd6")+")");
-      var n=(p.formulas||[]).length;
+      var cor=p.cor||{}, n=(p.formulas||[]).length, d=p.destaque||1;
       var b=document.createElement("button");
-      b.className="pcard"; b.style.setProperty("--acc",cor.escura||"#2A62AC"); b.style.setProperty("--acc2",cor.clara||"#5b8fd6");
-      b.innerHTML='<div class="capa" style="'+capa+'"></div><div class="corpo"><span class="tag">Protocolo</span><h3></h3><div class="meta">'+n+(n===1?" fórmula":" fórmulas")+'</div></div>';
+      b.className="pcard"+(d>=3?" d3":d===2?" d2":"");
+      b.style.background="linear-gradient(135deg,"+(cor.escura||"#2A62AC")+","+(cor.clara||"#5b8fd6")+")";
+      if(p.capa){var im=new Image();im.onload=function(){b.style.backgroundImage="url('"+p.capa+"')"};im.src=p.capa;}
+      b.innerHTML=(p.novo?'<span class="novo">Novo</span>':'')+'<div class="leg"><span class="tag">Protocolo</span><h3></h3><div class="meta">'+n+(n===1?" fórmula":" fórmulas")+'</div></div>';
       b.querySelector("h3").textContent=p.titulo;
       b.onclick=function(){abrirGuia(p)};
       g.appendChild(b);
