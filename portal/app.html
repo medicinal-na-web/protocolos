@@ -493,7 +493,11 @@
         "padding:3.4mm 5mm;font-family:inherit;font-size:9pt;font-weight:700;white-space:nowrap;box-shadow:0 1mm 3mm rgba(0,0,0,.16)}"+
         ".pp-copiar:hover{filter:brightness(1.08)} .pp-copiar:active{transform:translateY(0.3mm)}"+
         ".pp-copiar.ok{background:#1f9d62}"+
-        ".pp-copiar svg{width:4mm;height:4mm;fill:none;stroke:#fff;stroke-width:1.8;flex:none}";
+        ".pp-copiar svg{width:4mm;height:4mm;fill:none;stroke:#fff;stroke-width:1.8;flex:none}"+
+        /* Fluxo contínuo: páginas internas crescem com o conteúdo; sem cabeçalho/selo repetidos */
+        ".pagina.interna{height:auto!important;min-height:0!important;overflow:visible!important}"+
+        ".pagina.interna .cabecalho,.pagina.interna .selo-canto{display:none!important}"+
+        ".pagina.interna .conteudo{position:static!important;inset:auto!important;padding:10mm 0 6mm!important}";
       cd.head.appendChild(st);
       var cards=cd.querySelectorAll(".card"), fs=p.formulas||[];
       [].forEach.call(cards,function(card,i){
@@ -511,7 +515,14 @@
         };
         linha.appendChild(b);
       });
-      setTimeout(function(){ajustarIframe(ifr)},30);
+      // O layout mudou (fluxo contínuo) → redesenha os conectores e reajusta a altura.
+      setTimeout(function(){
+        try{
+          [].forEach.call(cd.querySelectorAll(".conectores"),function(s){ s.parentNode&&s.parentNode.removeChild(s); });
+          if(ifr.contentWindow&&ifr.contentWindow.desenharConectores) ifr.contentWindow.desenharConectores();
+        }catch(e){}
+        ajustarIframe(ifr);
+      },50);
     }catch(e){}
   }
   var protoAtual=null;
