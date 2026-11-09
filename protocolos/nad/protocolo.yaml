@@ -1,0 +1,178 @@
+# Guia de Formulações — NAD+ · Energia Celular
+# Material de divulgação para prescritores médicos.
+# Fórmulas geradas pelas regras do motor NEXUS (FGTS → NAF → BAC → validate_protocolo)
+# Âncora (NAF) no banco: NADH (cdpro 2157). No material, o ativo é apresentado como NAD+ (LipoAvail®).
+# Banco: supabase_ativos (emzkiemgizgmggthaeia). Sessão: 2026.11.09
+# Base técnica da tecnologia lipossomal: material LipoAvail® NAD+ (EffePharm / Nexpure).
+#
+# RASCUNHO para revisão do farmacêutico responsável. Pendências em revisao.md:
+# - LipoAvail® NAD+ não tem cadastro no banco: a lógica de associação usa o NADH (2157)
+# - NAD+ NASAL: não há dose intranasal humana estabelecida. Dose extrapolada de dados
+#   pré-clínicos (Won 2012, 20 mg/kg ratos; Yoo 2026). Validar com o farmacêutico/regulatório.
+
+titulo: NAD+ · Energia Celular
+cor:
+  escura: "#8a3a0f"
+  clara: "#f2a541"
+qr: https://medicinal.vip/protoc_NAD?r=qr   # link a criar no medicinal.vip
+capa: capa.jpg
+capa_posicao: "center center"
+
+paginas:
+  # Página 2 — DESTAQUE: NAD+ Nasal (nariz → cérebro)
+  - - texto:
+        titulo: Destaque · NAD+ Nasal
+        paragrafos:
+          - A via **intranasal** entrega o NAD+ direto ao **sistema nervoso central** pelos nervos **olfatório e trigêmeo**, **contornando a barreira hematoencefálica** e a degradação digestiva. É a rota que leva a coenzima ao cérebro com a **menor dose** e o **início de ação mais rápido**.
+    - faixa:
+        src: nasal.jpg
+        altura: 78
+        posicao: "center 42%"
+        etiqueta: [Nariz, Cérebro]
+    - formula:
+        nome: NAD+ Nasal
+        subtitulo: energia e foco pela via nariz-cérebro
+        via: OUT
+        periodo: dia
+        ativos:
+          - { nome: NAD+ (LipoAvail®), dose: "10mg/ml", destaque: true }
+          - { nome: Nasalan® (veículo nasal), dose: q.s.p. }
+          - { nome: Frasco spray nasal, dose: 30ml }
+        modo_de_uso: Aplicar 1 jato em cada narina pela manhã (cada jato ≈ 0,1 ml ≈ 1 mg). A frequência pode ir a 2 vezes ao dia conforme avaliação do prescritor. Dose extrapolada de dados pré-clínicos — ver orientações ao prescritor.
+    - destaques:
+        - nome: NAD+ Nasal
+          texto: Em modelos **pré-clínicos**, o NAD+ intranasal **elevou os níveis de NAD+ no cérebro** e **protegeu neurônios**, com desempenho **superior às vias sistêmicas** na mesma dose. A forma **lipossomal** protege a coenzima e favorece a passagem pela mucosa. Indicado como suporte a **energia mental, foco e neuroproteção**.
+
+  # Página 3 — Educativo: NAD+/NADH e tecnologia lipossomal
+  - - texto:
+        titulo: A coenzima da energia celular
+        paragrafos:
+          - O **NAD+** (nicotinamida adenina dinucleotídeo), também chamado de **coenzima I**, e sua forma reduzida, o **NADH**, são o par que transporta elétrons na **cadeia respiratória mitocondrial**. O NADH doa elétrons ao **complexo I** e dirige a síntese de **ATP**, sendo cofator de mais de **300 desidrogenases**.
+          - O pool de **NAD+** também sustenta a sinalização das **sirtuínas** e o **reparo de DNA** pelas PARPs, e **cai com a idade**. Repor esse pool apoia quatro frentes clínicas — **energia e metabolismo**, **antienvelhecimento e reparo de DNA**, **cognição** e **saúde do fígado e do coração** — que organizam as fórmulas deste guia.
+    - faixa:
+        src: lipossomo.jpg
+        altura: 66
+        posicao: "center 50%"
+        etiqueta: [Tecnologia, lipossomal]
+    - texto:
+        titulo: Por que lipossomal?
+        paragrafos:
+          - O NAD+ tem **alto peso molecular**, atravessa mal as membranas e é **instável em temperatura ambiente** e em meio ácido. No **LipoAvail® NAD+**, a coenzima é encapsulada em uma **bicamada de fosfolipídios** semelhante à membrana dos enterócitos, que se **funde à célula** e libera o ativo.
+          - '**Lipossomo verdadeiro**, verificado por Crio-MET: morfologia esférica, **diâmetro médio de 30 nm** e **50% de NAD+**. Em estudos em animais, a biodisponibilidade (AUC 0–24h) foi **1,52 vez maior** e a concentração de NAD+ no fígado **9 vezes maior** que a do NAD+ comum. Dose usual: **10 a 50 mg/dia**.'
+
+  # Página 4 — Energia (F1) e longevidade (F2)
+  - - formula:
+        nome: Energia & Disposição
+        subtitulo: fadiga e cansaço
+        via: IN
+        periodo: dia
+        arte: { src: capsulas.jpg, topo: 96, direita: 0, largura: 62 }
+        ativos:
+          - { nome: NAD+ (LipoAvail®), dose: 50mg, destaque: true }
+          - { nome: Teacrine®, dose: 150mg, destaque: true }
+          - { nome: Sulbutiamina, dose: 150mg }
+          - { nome: Rhodiola rosea, dose: 100mg }
+        modo_de_uso: Tomar 1 cápsula pela manhã, em jejum, 30 minutos antes do café da manhã.
+    - destaques:
+        - nome: NAD+
+          texto: Coenzima que entra direto na **cadeia respiratória** para gerar **ATP**. Também participa da síntese de **dopamina e noradrenalina**, apoiando **disposição e foco**. Na forma **lipossomal**, ganha estabilidade e absorção.
+        - nome: Teacrine®
+          texto: Teacrina purificada, de estrutura semelhante à cafeína, que oferece **energia e motivação sustentadas** **sem tolerância** e sem a queda típica do estimulante.
+    - formula:
+        nome: Longevidade Celular
+        subtitulo: antienvelhecimento e reparo de DNA
+        via: IN
+        periodo: dia
+        qr: false
+        ativos:
+          - { nome: NAD+ (LipoAvail®), dose: 50mg }
+          - { nome: PQQ (Bioactive Quinone®), dose: 10mg, destaque: true }
+          - { nome: Resveratrol, dose: 100mg, destaque: true }
+          - { nome: Nicotinamida, dose: 35mg }
+        modo_de_uso: Tomar 1 cápsula ao dia, pela manhã, em jejum.
+    - destaques:
+        - nome: PQQ
+          texto: Pirroloquinolina quinona, que estimula a **biogênese mitocondrial** (formação de novas mitocôndrias) e protege contra o **estresse oxidativo**. Com o NAD+, une **mais mitocôndrias** a **mais combustível** para elas.
+        - nome: Resveratrol
+          texto: Polifenol que **ativa as sirtuínas**, enzimas dependentes de NAD+ ligadas à **longevidade** e ao **reparo do DNA**. A **nicotinamida** completa a fórmula como precursora do NAD+.
+
+  # Página 5 — Cognição (F3) e fígado (F4)
+  - - formula:
+        nome: Foco & Memória
+        subtitulo: cognição e neuroproteção
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: NAD+ (LipoAvail®), dose: 50mg }
+          - { nome: Magnésio L-treonato, dose: 300mg, destaque: true }
+          - { nome: Acetil-L-carnitina, dose: 100mg, destaque: true }
+          - { nome: Bacopa monnieri, dose: 100mg }
+        modo_de_uso: Tomar 1 cápsula pela manhã, em jejum.
+    - destaques:
+        - nome: Magnésio L-treonato
+          texto: Única forma de magnésio com **boa passagem pela barreira hematoencefálica**, que aumenta a **densidade sináptica** e favorece **memória e aprendizado**.
+        - nome: Acetil-L-carnitina
+          texto: Transporta ácidos graxos para dentro da mitocôndria e doa acetil para a síntese de **acetilcolina**, somando **energia neuronal** à ação do NAD+.
+    - formula:
+        nome: Fígado em Equilíbrio
+        subtitulo: hepatoproteção e detox
+        via: IN
+        periodo: dia
+        qr: false
+        ativos:
+          - { nome: NAD+ (LipoAvail®), dose: 50mg }
+          - { nome: Silimarina, dose: 300mg, destaque: true }
+          - { nome: N-acetilcisteína, dose: 200mg }
+          - { nome: Glutationa reduzida, dose: 100mg }
+        modo_de_uso: Tomar 1 cápsula ao dia, em jejum.
+    - destaques:
+        - nome: Silimarina
+          texto: Complexo de flavonolignanas do **cardo-mariano** que **estabiliza a membrana do hepatócito**, estimula a **regeneração hepática** e eleva a **glutationa**. A **NAC** e a **glutationa reduzida** reforçam a **defesa antioxidante** e a **detoxificação** do fígado, órgão onde o NAD+ é mais exigido.
+
+  # Página 6 — Coração (F5) e sachê de recuperação (F6)
+  - - formula:
+        nome: Coração Ativo
+        subtitulo: suporte cardiovascular
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: NAD+ (LipoAvail®), dose: 50mg }
+          - { nome: Coenzima Q10, dose: 100mg, destaque: true }
+          - { nome: Taurina, dose: 200mg }
+          - { nome: Magnésio bisglicinato, dose: 200mg }
+        modo_de_uso: Tomar 1 cápsula ao dia, em jejum.
+    - destaques:
+        - nome: Coenzima Q10
+          texto: Recebe os elétrons na **cadeia respiratória** e é essencial ao **músculo cardíaco**, de alta demanda energética. Com **taurina** e **magnésio**, apoia a **função cardíaca** e o **controle pressórico**.
+    - formula:
+        nome: Sachê Recuperação
+        subtitulo: fadiga crônica e fibromialgia
+        via: IN
+        periodo: dia
+        qr: false
+        ativos:
+          - { nome: NAD+ (LipoAvail®), dose: 50mg, destaque: true }
+          - { nome: D-ribose, dose: 5g, destaque: true }
+          - { nome: L-carnitina, dose: 500mg }
+          - { nome: Dimalato de magnésio, dose: 300mg }
+          - { nome: Base sabor neutro, dose: q.s.p. 1 sachê }
+        modo_de_uso: Diluir 1 sachê em 200ml de água e tomar logo após o preparo, pela manhã.
+    - destaques:
+        arte: { src: sache.jpg, largura: 52 }
+        itens:
+          - nome: D-ribose
+            texto: Açúcar que forma o **esqueleto do ATP** e acelera a **recuperação das reservas de energia** muscular. Somada ao NAD+, à **carnitina** e ao **malato de magnésio**, apoia a **fadiga crônica**, a **fibromialgia** e a **recuperação pós-treino**.
+
+  # Página 7 — Orientações ao prescritor
+  - - texto:
+        titulo: Orientações ao prescritor
+        paragrafos:
+          - '**Posologia oral:** NAD+ lipossomal de **10 a 50 mg/dia**, em dose única pela manhã e **em jejum**. As doses podem ser ajustadas ao objetivo terapêutico, ao estado clínico e ao perfil do paciente.'
+          - '**NAD+ Nasal:** não há dose intranasal **humana** estabelecida. A proposta (≈ 1 mg por jato, 1 a 2 vezes ao dia) é **extrapolada de estudos pré-clínicos** — NAD+ intranasal 20 mg/kg em ratos (Won et al., 2012) e restauração olfatória em camundongos (Yoo et al., 2026), ambos com ganho de NAD+ cerebral. Uso **off-label**, a critério do prescritor, e sujeito à validação do farmacêutico responsável.'
+          - '**Segurança:** NAD+ é geralmente bem tolerado (infusão IV de 750 mg em humanos sem eventos graves — Grant et al., 2019). Evitar em caso de hipersensibilidade; dados insuficientes na **gestação e lactação**. Considerar as interações próprias de cada associado (a NAC com nitratos, a coenzima Q10 com varfarina) e a potencialização da **levodopa** pela via dopaminérgica.'
+          - '**Referências:** Won SJ et al. J Neurotrauma. 2012;29(7):1401-1409 (PMID 22352983). Yoo SH et al. Exp Mol Med. 2026;58(7):2155-2167 (PMID 42380286). Grant R et al. Front Aging Neurosci. 2019;11:257. LipoAvail® NAD+ — material técnico EffePharm. Material destinado exclusivamente à classe prescritora; não constitui promessa de cura ou tratamento.'
+    - faixa:
+        src: capa.jpg
+        altura: 66
+        posicao: "center 40%"
+        etiqueta: [Mais energia, em cada célula]
