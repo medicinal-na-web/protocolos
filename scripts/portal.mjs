@@ -14,9 +14,10 @@ import { fileURLToPath } from "node:url";
 const raiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dirSaida = path.join(raiz, "saida");
 
-// Logo oficial da Medicinal servida por URL (/artes/_marca/logo-azul.webp, gerada pelo portal-sync).
-// POR-017: símbolo + wordmark, nunca recortada. Mantém o app leve (nada embutido em base64).
-const LOGO = "/artes/_marca/logo-azul.webp";
+// Logo e imagens vêm da Edge Function portal-app (/img/...), servidas do repositório.
+// Assim o site tem só o carregador e nada precisa ser subido manualmente.
+const FN = "https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app";
+const LOGO = FN + "/img/_marca/logo-azul.webp";
 
 // ---- Configuração do backend (projeto nexusPrescricao) ----
 const NEXUS_URL = "https://uahbcelcjmjcljogfilh.supabase.co";

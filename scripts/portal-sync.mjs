@@ -21,7 +21,9 @@ import { renderizar } from "./build.mjs";
 const raiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dirProtocolos = path.join(raiz, "protocolos");
 const dirSaida = path.join(raiz, "saida");
-const dirArtes = path.join(dirSaida, "artes");
+// Imagens vão para o repositório (portal/artes) e são servidas pela Edge Function portal-app.
+const FN = "https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app";
+const dirArtes = path.join(raiz, "portal", "artes");
 const dirSync = path.join(dirSaida, "sync");
 const VIA = { IN: "Uso interno", OUT: "Uso externo" };
 const semMarcacao = (s = "") => String(s).replace(/\*\*(.+?)\*\*/g, "$1");
@@ -58,7 +60,7 @@ fs.mkdirSync(dirSync, { recursive: true });
 const resumo = [];
 for (let i = 0; i < slugs.length; i++) {
   const { slug, p } = slugs[i];
-  const artesBase = `/artes/${slug}`;
+  const artesBase = `${FN}/img/${slug}`;
   const artesDest = path.join(dirArtes, slug);
 
   // Guia completo (mesmo visual do PDF), imagens por URL, comprimido para trafegar leve.
