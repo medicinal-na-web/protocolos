@@ -121,6 +121,13 @@ const APP = String.raw`
   .visor-topo b{font-family:var(--disp);font-size:15px}
   .visor-topo .acoes{margin-left:auto;display:flex;gap:8px}
   .bcopiar{border:1px solid var(--linha);background:var(--sup-2);color:var(--tinta);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600}
+  .fbar{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:10px max(14px,env(safe-area-inset-left,0px));background:var(--sup);border-bottom:1px solid var(--linha);scrollbar-width:thin}
+  .fbar:empty{display:none}
+  .fchip{flex:none;display:inline-flex;align-items:center;gap:7px;border:1px solid var(--linha);background:var(--sup-2);color:var(--tinta);border-radius:999px;padding:8px 13px;font-size:12.5px;font-weight:600;white-space:nowrap;cursor:pointer}
+  .fchip svg{width:14px;height:14px;fill:none;stroke:var(--acc);stroke-width:1.8;flex:none}
+  .fchip:hover{border-color:var(--acc)}
+  .fchip.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+  .fchip.ok svg{stroke:#fff}
   .palco{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;display:flex;justify-content:center;padding:18px 10px 40px}
   .palco iframe{border:0;background:#fff;box-shadow:0 10px 40px rgba(20,35,58,.18);display:block}
   /* ---- Navegação (admin) ---- */
@@ -278,8 +285,9 @@ const APP = String.raw`
   <div class="visor-topo">
     <button class="voltar" id="guia-voltar"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 5l-7 7 7 7"/></svg> Voltar</button>
     <b id="guia-titulo"></b>
-    <div class="acoes"><button class="bcopiar" id="guia-copiar">Copiar fórmulas</button></div>
+    <div class="acoes"><button class="bcopiar" id="guia-copiar">Copiar todas</button></div>
   </div>
+  <div class="fbar" id="fbar" aria-label="Copiar fórmula"></div>
   <div class="palco" id="palco"></div>
 </div>
 
@@ -446,10 +454,39 @@ const APP = String.raw`
       ifr.style.marginBottom=(alturaTotal*escala-alturaTotal)+"px";
     }catch(e){}
   }
+  // Texto de uma fórmula, pronto para colar na prescrição
+  function textoFormula(f){
+    var L=[f.nome+(f.via?" — "+f.via:"")];
+    (f.ativos||[]).forEach(function(a){L.push(a.nome+(a.dose?"  "+a.dose:""))});
+    if(f.modo)L.push("Posologia: "+f.modo);
+    return L.join("\n");
+  }
+  function copiarTexto(txt,cb){
+    function ok(){cb&&cb()}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(ok).catch(sel)}else sel();
+    function sel(){var ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");ok()}catch(_){}document.body.removeChild(ta)}
+  }
+  function montaChips(p){
+    var fb=$("fbar"); fb.innerHTML="";
+    (p.formulas||[]).forEach(function(f){
+      var b=document.createElement("button"); b.className="fchip"; b.type="button";
+      b.innerHTML='<svg viewBox="0 0 24 24"><path d="M9 9V5.5A1.5 1.5 0 0 1 10.5 4h8A1.5 1.5 0 0 1 20 5.5v8a1.5 1.5 0 0 1-1.5 1.5H15M4 10.5A1.5 1.5 0 0 1 5.5 9h8A1.5 1.5 0 0 1 15 10.5v8A1.5 1.5 0 0 1 13.5 20h-8A1.5 1.5 0 0 1 4 18.5z"/></svg><span></span>';
+      b.querySelector("span").textContent=f.nome;
+      b.onclick=function(){
+        copiarTexto(textoFormula(f)+"\n\n("+p.titulo+" · Medicinal)",function(){
+          var s=b.querySelector("span"), t=s.textContent;
+          b.classList.add("ok"); s.textContent="Copiado!";
+          setTimeout(function(){b.classList.remove("ok"); s.textContent=t;},1500);
+        });
+      };
+      fb.appendChild(b);
+    });
+  }
   var protoAtual=null;
   async function abrirGuia(p){
     protoAtual=p;
     $("guia-titulo").textContent=p.titulo;
+    montaChips(p);
     $("visor").hidden=false; $("palco").innerHTML='<div class="carregando">Abrindo guia…</div>';
     history.pushState({guia:p.slug},"","#"+p.slug);
     var linha=await api("?select=guia_html&slug=eq."+encodeURIComponent(p.slug)+"&limit=1");
@@ -464,25 +501,18 @@ const APP = String.raw`
     ifr.srcdoc=html;
     window.addEventListener("resize",function(){ajustarIframe(ifr)});
   }
-  function fecharGuia(){$("visor").hidden=true;$("palco").innerHTML="";protoAtual=null;if(location.hash)history.pushState("","",location.pathname)}
+  function fecharGuia(){$("visor").hidden=true;$("palco").innerHTML="";$("fbar").innerHTML="";protoAtual=null;if(location.hash)history.pushState("","",location.pathname)}
   $("guia-voltar").onclick=fecharGuia;
   window.addEventListener("popstate",function(){ if($("visor").hidden===false) fecharGuia(); });
 
-  // Copiar todas as fórmulas do protocolo (texto pronto para prescrição)
+  // Copiar TODAS as fórmulas do protocolo
   $("guia-copiar").onclick=function(){
     if(!protoAtual)return;
     var linhas=[protoAtual.titulo,""];
-    (protoAtual.formulas||[]).forEach(function(f){
-      linhas.push(f.nome+(f.via?" — "+f.via:""));
-      (f.ativos||[]).forEach(function(a){linhas.push(a.nome+(a.dose?"  "+a.dose:""))});
-      if(f.modo)linhas.push("Posologia: "+f.modo);
-      linhas.push("");
-    });
+    (protoAtual.formulas||[]).forEach(function(f){ linhas.push(textoFormula(f)); linhas.push(""); });
     linhas.push("(Medicinal Farmácia e Manipulação)");
-    var txt=linhas.join("\n"), btn=$("guia-copiar");
-    function ok(){btn.textContent="Copiado!";setTimeout(function(){btn.textContent="Copiar fórmulas"},1600)}
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(ok).catch(sel)}else sel();
-    function sel(){var ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");ok()}catch(_){}document.body.removeChild(ta)}
+    var btn=$("guia-copiar");
+    copiarTexto(linhas.join("\n"),function(){ btn.textContent="Copiado!"; setTimeout(function(){btn.textContent="Copiar todas"},1600); });
   };
 
   // ---------- Administração ----------
