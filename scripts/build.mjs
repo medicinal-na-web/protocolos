@@ -18,6 +18,39 @@ const raiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dirProtocolos = path.join(raiz, "protocolos");
 const dirSaida = path.join(raiz, "saida");
 
+// ---------- Encurtador Bitly (opcional) ----------
+// Se BITLY_TOKEN estiver no ambiente, cada link `qr:` é encurtado via Bitly
+// (bit.ly) e o QR passa a apontar para o link curto — assim a farmácia tem
+// link de marca e métricas de clique. Os links são guardados em
+// template/qr-cache.json (o Bitly devolve o mesmo link para a mesma URL, então
+// o cache mantém builds offline e determinísticos). Sem token, usa a URL longa.
+const BITLY_TOKEN = process.env.BITLY_TOKEN;
+const arqCacheQr = path.join(raiz, "template", "qr-cache.json");
+const cacheQr = fs.existsSync(arqCacheQr) ? JSON.parse(fs.readFileSync(arqCacheQr, "utf8")) : {};
+
+async function encurtar(url) {
+  if (!url || !BITLY_TOKEN) return url;              // sem token: mantém a URL longa
+  if (cacheQr[url]) return cacheQr[url];             // já encurtada antes
+  try {
+    const r = await fetch("https://api-ssl.bitly.com/v4/shorten", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${BITLY_TOKEN}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ long_url: url, domain: "bit.ly" }),
+    });
+    if (!r.ok) {
+      console.warn(`  ⚠ Bitly ${r.status} para ${url} — usando URL longa`);
+      return url;
+    }
+    const curto = (await r.json()).link;
+    cacheQr[url] = curto;
+    fs.writeFileSync(arqCacheQr, JSON.stringify(cacheQr, null, 2) + "\n");
+    return curto;
+  } catch (e) {
+    console.warn(`  ⚠ Bitly falhou (${e.message}) — usando URL longa`);
+    return url;
+  }
+}
+
 const esc = (s = "") =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
@@ -47,7 +80,7 @@ async function blocoFormula(b, ctx) {
     )
     .join("");
   // qr: false esconde o QR (ex.: segundo card da mesma página)
-  const linkQr = b.qr === false ? null : b.qr || ctx.qr;
+  const linkQr = b.qr === false ? null : await encurtar(b.qr || ctx.qr);
   const qr = linkQr
     ? `<div class="qr-box">Copie a<br>fórmula<br>aqui<img src="${await QRCode.toDataURL(linkQr, { margin: 0, width: 400, color: { dark: "#111111" } })}"></div>`
     : "";

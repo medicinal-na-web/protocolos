@@ -14,7 +14,7 @@ titulo: NAD+ · Energia Celular
 cor:
   escura: "#8a3a0f"
   clara: "#f2a541"
-qr: https://medicinal.vip/protoc_NAD?r=qr   # link a criar no medicinal.vip
+qr: https://portalprescritor.medicinalnaweb.com.br/#nad   # Portal do Prescritor (deep-link por protocolo)
 capa: capa.jpg
 capa_posicao: "center center"
 

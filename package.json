@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node scripts/build.mjs"
+    "build": "node scripts/build.mjs",
+    "portal": "node scripts/portal.mjs"
   },
   "dependencies": {
     "js-yaml": "^4.1.0",
