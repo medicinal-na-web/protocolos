@@ -1,6 +1,7 @@
 // Gera o Portal do Prescritor a partir de todos os protocolos/<slug>/protocolo.yaml
 // Saída:
-//   saida/portal.html        página standalone (para hospedar, ex.: medicinal.vip)
+//   saida/index.html            página standalone (sobe na raiz do subdomínio)
+//   saida/robots.txt            bloqueia buscadores (portal restrito)
 //   saida/portal-artifact.html  mesmo conteúdo sem <head>/<body> (para publicar como Artifact)
 //
 // O prescritor abre o portal, busca o protocolo/ativo e copia a fórmula pronta
@@ -300,7 +301,7 @@ const standalone = `<!doctype html>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 ${estilo}
 </head><body>${corpo}</body></html>`;
-fs.writeFileSync(path.join(dirSaida, "portal.html"), standalone);
+fs.writeFileSync(path.join(dirSaida, "index.html"), standalone);
 
 // robots.txt — portal restrito à classe prescritora, fora dos buscadores
 fs.writeFileSync(
@@ -316,4 +317,4 @@ ${estilo}
 ${corpo}`;
 fs.writeFileSync(path.join(dirSaida, "portal-artifact.html"), artifact);
 
-console.log(`✓ portal: ${protocolos.length} protocolos, ${protocolos.reduce((n, p) => n + p.formulas.length, 0)} fórmulas → saida/portal.html`);
+console.log(`✓ portal: ${protocolos.length} protocolos, ${protocolos.reduce((n, p) => n + p.formulas.length, 0)} fórmulas → saida/index.html`);
