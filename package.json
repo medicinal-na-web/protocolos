@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "portal": "node scripts/portal.mjs"
+    "portal": "node scripts/portal.mjs",
+    "portal:sync": "node scripts/portal-sync.mjs"
   },
   "dependencies": {
     "js-yaml": "^4.1.0",
