@@ -80,8 +80,9 @@ insert into public.portal_protocolo (slug, titulo, cor, ordem, formulas, capa, g
 on conflict (slug) do update set
   titulo=excluded.titulo, cor=excluded.cor, ordem=excluded.ordem,
   formulas=excluded.formulas, capa=excluded.capa, guia_html=excluded.guia_html,
-  destaque=excluded.destaque, novo=excluded.novo,
-  ativo=true, atualizado_em=now();
+  atualizado_em=now();
+  -- destaque, novo, visibilidade e ativo são geridos no painel de administração: a
+  -- sincronização só os define na criação do protocolo (não sobrescreve suas escolhas).
 `;
   fs.writeFileSync(path.join(dirSync, `${slug}.sql`), sql);
   resumo.push({ slug, formulas: formulas.length, guiaKB: (guiaGz.length / 1024).toFixed(0) });
