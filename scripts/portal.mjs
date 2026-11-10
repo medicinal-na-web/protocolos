@@ -271,6 +271,7 @@ const APP = String.raw`
       <div class="subnav">
         <button class="subnav-b ativo" data-sub="protocolos" type="button">Protocolos</button>
         <button class="subnav-b" data-sub="prescritores" type="button">Prescritores</button>
+        <button class="subnav-b" data-sub="carteiras" type="button">Carteiras</button>
       </div>
 
       <div id="sub-protocolos">
@@ -294,6 +295,25 @@ const APP = String.raw`
         <div class="pr-resumo" id="pr-resumo"></div>
         <div id="pr-lista" class="adm-lista"></div>
         <div class="carregando" id="pr-carregando">Carregando…</div>
+      </div>
+
+      <div id="sub-carteiras" hidden>
+        <div class="pr-ctrl">
+          <select id="cv-visitadora" class="adm-sel" style="min-width:230px"></select>
+          <label class="busca-in" style="flex:1;min-width:200px;margin:0">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--tinta-2)"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+            <input id="cv-q" type="search" placeholder="Buscar na carteira…" autocomplete="off">
+          </label>
+          <select id="cv-filtro" class="adm-sel">
+            <option value="todos">Todos</option>
+            <option value="temporario">Liberados 72h</option>
+            <option value="definitivo">Acesso definitivo</option>
+            <option value="sem">Sem acesso</option>
+          </select>
+        </div>
+        <div class="pr-resumo" id="cv-resumo"></div>
+        <div id="cv-lista" class="adm-lista"></div>
+        <div class="carregando" id="cv-carregando" hidden>Carregando…</div>
       </div>
     </div>
 
@@ -663,8 +683,9 @@ const APP = String.raw`
     bt.onclick=function(){
       var v=bt.dataset.sub;
       document.querySelectorAll(".subnav-b").forEach(function(x){x.classList.toggle("ativo",x.dataset.sub===v)});
-      $("sub-protocolos").hidden=v!=="protocolos"; $("sub-prescritores").hidden=v!=="prescritores";
+      $("sub-protocolos").hidden=v!=="protocolos"; $("sub-prescritores").hidden=v!=="prescritores"; $("sub-carteiras").hidden=v!=="carteiras";
       if(v==="prescritores"&&!prCarregado){prCarregado=true;carregarPrescritores();}
+      if(v==="carteiras"&&!cvCarregado){cvCarregado=true;iniciarCarteiras();}
     };
   });
   $("pr-q").addEventListener("input",function(){ clearTimeout(tPr); tPr=setTimeout(carregarPrescritores,260); });
@@ -803,7 +824,12 @@ const APP = String.raw`
     vis.forEach(function(it){ L.appendChild(linhaCartela(it)); });
     if(!vis.length)L.innerHTML='<p class="adm-meta">Nenhum prescritor neste filtro.</p>';
   }
-  function linhaCartela(it){
+  function linhaCartela(it,cdfun){
+    var adm=(cdfun!=null);
+    function argsLib(email){ var a={p_pfcrm:it.pfcrm,p_ufcrm:it.ufcrm,p_nrcrm:it.nrcrm,p_email:email}; if(adm)a.p_cdfun=cdfun; return a; }
+    function argsRev(){ var a={p_pfcrm:it.pfcrm,p_ufcrm:it.ufcrm,p_nrcrm:it.nrcrm}; if(adm)a.p_cdfun=cdfun; return a; }
+    var fnLib=adm?"admin_visitadora_liberar":"visitadora_liberar";
+    var fnRev=adm?"admin_visitadora_revogar":"visitadora_revogar";
     var row=document.createElement("div"); row.className="adm-row";
     row.innerHTML='<div class="adm-info"><h3><span class="t"></span></h3><div class="adm-meta"></div></div><div class="adm-ctrl"></div>';
     var ctrl=row.querySelector(".adm-ctrl");
@@ -824,13 +850,13 @@ const APP = String.raw`
       bt.onclick=async function(){
         bt.disabled=true;
         if(it.situacao==="temporario"){
-          var rv=await rpc("visitadora_revogar",{p_pfcrm:it.pfcrm,p_ufcrm:it.ufcrm,p_nrcrm:it.nrcrm});
+          var rv=await rpc(fnRev,argsRev());
           bt.disabled=false;
           if(rv&&rv.ok){ it.situacao="inativo"; pinta(); showToast("Acesso de "+(it.nome||"prescritor")+" revogado."); }
           else showToast("Não foi possível revogar.");
           return;
         }
-        var r=await rpc("visitadora_liberar",{p_pfcrm:it.pfcrm,p_ufcrm:it.ufcrm,p_nrcrm:it.nrcrm,p_email:inp.value.trim()||null});
+        var r=await rpc(fnLib,argsLib(inp.value.trim()||null));
         bt.disabled=false;
         if(!r||!r.ok){ showToast(r&&r.motivo==="email_invalido"?"E-mail inválido.":"Não foi possível liberar."); return; }
         if(r.situacao==="definitivo"){ it.situacao="definitivo"; pinta(); showToast("Este prescritor já tem acesso definitivo."); return; }
@@ -843,8 +869,48 @@ const APP = String.raw`
     return row;
   }
 
+  // ---------- Carteiras (admin): supervisão por visitadora ----------
+  var cvCarregado=false, cvItens=[], cvCdfun=null, tCv=null;
+  async function iniciarCarteiras(){
+    var d=await rpc("admin_visitadoras",{});
+    var sel=$("cv-visitadora");
+    if(!d||!d.ok){ $("cv-resumo").textContent="Não foi possível carregar as visitadoras."; return; }
+    sel.innerHTML="";
+    (d.itens||[]).forEach(function(v){
+      var o=document.createElement("option"); o.value=v.cdfun;
+      o.textContent=(v.nome||("Func "+v.cdfun))+" — "+(v.total||0)+" na carteira"+((v.temporarios||0)?(" · "+v.temporarios+" em 72h"):"");
+      sel.appendChild(o);
+    });
+    sel.onchange=function(){ cvCdfun=parseInt(sel.value,10); carregarCv(); };
+    $("cv-q").addEventListener("input",function(){ clearTimeout(tCv); tCv=setTimeout(carregarCv,280); });
+    $("cv-filtro").addEventListener("change",pintaCv);
+    if((d.itens||[]).length){ cvCdfun=parseInt(sel.value,10); carregarCv(); }
+    else $("cv-resumo").textContent="Nenhuma visitadora ativa.";
+  }
+  async function carregarCv(){
+    if(cvCdfun==null)return;
+    $("cv-carregando").hidden=false;
+    var d=await rpc("admin_visitadora_cartela",{p_cdfun:cvCdfun,p_busca:$("cv-q").value.trim(),p_limite:2000});
+    $("cv-carregando").hidden=true;
+    if(!d||!d.ok){ $("cv-lista").innerHTML='<p class="adm-meta">Não foi possível carregar a carteira.</p>'; return; }
+    cvItens=d.itens||[]; var r=d.resumo||{};
+    $("cv-resumo").textContent=(r.total||0)+" na carteira · "+(r.definitivos||0)+" definitivos · "+(r.temporarios||0)+" liberados 72h · "+(r.com_email||0)+" com e-mail";
+    pintaCv();
+  }
+  function pintaCv(){
+    var f=$("cv-filtro").value, L=$("cv-lista"); L.innerHTML="";
+    var vis=cvItens.filter(function(it){
+      if(f==="temporario")return it.situacao==="temporario";
+      if(f==="definitivo")return it.situacao==="definitivo";
+      if(f==="sem")return it.situacao==="novo"||it.situacao==="inativo";
+      return true;
+    });
+    vis.forEach(function(it){ L.appendChild(linhaCartela(it,cvCdfun)); });
+    if(!vis.length)L.innerHTML='<p class="adm-meta">Nenhum prescritor neste filtro.</p>';
+  }
+
   // ---------- Sair ----------
-  function sair(){limparSessao();sessao=null;location.hash="";$("app").hidden=true;$("visor").hidden=true;$("modal-acesso").hidden=true;$("nav").hidden=true;$("view-admin").hidden=true;$("view-cartela").hidden=true;$("view-protocolos").hidden=false;viewAtual="protocolos";adminCarregado=false;cartelaCarregada=false;cartelaItens=[];$("tela-login").hidden=false;$("passo-cod").hidden=true;$("passo-id").hidden=false}
+  function sair(){limparSessao();sessao=null;location.hash="";$("app").hidden=true;$("visor").hidden=true;$("modal-acesso").hidden=true;$("nav").hidden=true;$("view-admin").hidden=true;$("view-cartela").hidden=true;$("view-protocolos").hidden=false;viewAtual="protocolos";adminCarregado=false;cartelaCarregada=false;cartelaItens=[];cvCarregado=false;cvItens=[];cvCdfun=null;$("tela-login").hidden=false;$("passo-cod").hidden=true;$("passo-id").hidden=false}
   $("sair").onclick=sair;
 
   // ---------- Início ----------
