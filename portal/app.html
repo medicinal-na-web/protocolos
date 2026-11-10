@@ -453,6 +453,18 @@
     if(r.status===401){ sair(); return null; }
     return r.ok?r.json():null;
   }
+  // Aviso por e-mail ao liberar 72h (prescritor + visitadora) — não bloqueia a liberação
+  async function avisarLiberacao(it,cdfun){
+    try{
+      var body={p_pfcrm:it.pfcrm,p_ufcrm:it.ufcrm,p_nrcrm:it.nrcrm}; if(cdfun!=null)body.p_cdfun=cdfun;
+      var url=NEXUS_URL+"/functions/v1/avisar-liberacao";
+      function opt(){return {method:"POST",headers:{apikey:ANON,Authorization:"Bearer "+sessao.access_token,"Content-Type":"application/json"},body:JSON.stringify(body)}}
+      var r=await fetch(url,opt());
+      if(r.status===401){ if(await refrescar()) r=await fetch(url,opt()); }
+      var d=await r.json().catch(function(){return null});
+      if(d&&d.ok&&d.enviados&&(d.enviados.prescritor||d.enviados.visitadora)) showToast("Avisos enviados por e-mail.");
+    }catch(e){}
+  }
 
   // ---------- App ----------
   function entrarNoApp(){
@@ -835,8 +847,9 @@
         if(!r||!r.ok){ showToast(r&&r.motivo==="email_invalido"?"E-mail inválido.":"Não foi possível liberar."); return; }
         if(r.situacao==="definitivo"){ it.situacao="definitivo"; pinta(); showToast("Este prescritor já tem acesso definitivo."); return; }
         it.situacao="temporario"; it.horas_restantes=72; it.email=r.email||inp.value.trim()||it.email; pinta();
-        showToast(r.tem_email ? ((it.nome||"Prescritor")+" liberado por 72h — já pode entrar no portal.")
-                              : "Liberado por 72h. Informe um e-mail para ele receber o código de acesso.");
+        showToast((it.nome||"Prescritor")+" liberado por 72h."+(r.tem_email?"":" Informe um e-mail para ele receber o código."));
+        // avisa prescritor e visitadora por e-mail (não bloqueia a liberação)
+        avisarLiberacao(it,cdfun);
       };
     }
     pinta();
