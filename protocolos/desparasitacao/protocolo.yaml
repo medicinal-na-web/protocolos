@@ -1,0 +1,87 @@
+# Guia de Formulações — Desparasitação
+# Fórmulas e doses: referência enviada pela equipe (sessão 2026.11.10), transcritas sem alteração.
+#
+# RASCUNHO para revisão do prescritor/farmacêutico responsável. Pendências em revisao.md:
+# - Ornitina: referência sem duração de uso
+# - Tintura: horário da tomada não informado (marcado como "dia")
+# - Absinto: tujona — confirmar contraindicações e advertências do rótulo
+# - Óleo de orégano 300 mg 3x/dia (900 mg/dia): confirmar dose
+# - Artes (capa e fotos) ainda não produzidas
+
+titulo: Desparasitação
+cor:
+  escura: "#3f5418"
+  clara: "#9cb83c"
+qr: https://medicinal.vip/protoc_Desparasitacao?r=qr   # link a criar no medicinal.vip
+capa: capa.jpg
+capa_posicao: "center 60%"
+
+paginas:
+  # Página 2 — F1 · Cápsulas fitoterápicas + proteção hepática
+  - - formula:
+        nome: Cápsulas Desparasitantes
+        subtitulo: ação antiparasitária e proteção hepática
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: Hortelã, dose: 400mg, destaque: true }
+          - { nome: Alecrim, dose: 300mg }
+          - { nome: Silimarina, dose: 300mg, destaque: true }
+          - { nome: Alho, dose: 200mg, destaque: true }
+          - { nome: Aloe vera, dose: 100mg }
+        modo_de_uso: Tomar 1 dose pela manhã, por 30 dias.
+    - destaques:
+        - nome: Alho
+          texto: Fonte de **alicina** e compostos sulfurados com **ação antimicrobiana e antiparasitária**, tradicionalmente usados para tornar o intestino um **ambiente desfavorável** a parasitas, bactérias e fungos oportunistas.
+        - nome: Hortelã
+          texto: Rica em **mentol**, tem ação **antiespasmódica e carminativa**, aliviando **cólicas, gases e desconforto abdominal**, comuns durante a eliminação dos parasitas.
+        - nome: Silimarina
+          texto: Complexo de flavonolignanas do **cardo-mariano** com ação **hepatoprotetora e antioxidante**. Apoia o **fígado** na metabolização das toxinas liberadas ao longo do protocolo.
+
+  # Página 3 — F2 · Tintura composta
+  - - formula:
+        nome: Tintura Vegetal Composta
+        subtitulo: nogueira, absinto, orégano e cravo
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: Tintura de nogueira, dose: 25%, destaque: true }
+          - { nome: Tintura de absinto, dose: 25%, destaque: true }
+          - { nome: Tintura de orégano, dose: 25% }
+          - { nome: Tintura de cravo-da-índia, dose: 25%, destaque: true }
+        modo_de_uso: Tomar 30 gotas 1 vez ao dia, por 30 dias.
+    - destaques:
+        - nome: Nogueira
+          texto: A casca verde da noz é rica em **juglona e taninos**, com uso tradicional **vermífugo e antifúngico**, e ação **adstringente** sobre a mucosa intestinal.
+        - nome: Absinto
+          texto: Planta de **princípios amargos** (absintina) de longa tradição como **antiparasitário**. Também **estimula a digestão** e a produção de bile, favorecendo a eliminação intestinal.
+        - nome: Cravo-da-índia
+          texto: Concentra **eugenol**, de ação **antimicrobiana, antifúngica e antiparasitária**. Na associação clássica com nogueira e absinto, completa o espectro de ação da tintura.
+
+  # Página 4 — F3 · Óleo de orégano, F4 · Ornitina e educativo
+  - - formula:
+        nome: Óleo de Orégano
+        via: IN
+        periodo: [dia, noite]
+        ativos:
+          - { nome: Óleo de orégano, dose: 300mg, destaque: true }
+        modo_de_uso: Tomar 1 dose 3 vezes ao dia (café da manhã, almoço e jantar), por 30 dias.
+    - destaques:
+        - nome: Óleo de Orégano
+          texto: Rico em **carvacrol e timol**, compostos de **amplo espectro antimicrobiano, antifúngico e antiparasitário**. Tomado junto às refeições, mantém a ação ao longo do dia e é **mais bem tolerado** pelo estômago.
+    - formula:
+        nome: Ornitina Noturna
+        via: IN
+        periodo: noite
+        qr: false
+        ativos:
+          - { nome: L-Ornitina, dose: 550mg, destaque: true }
+        modo_de_uso: Tomar 1 dose ao deitar, no mínimo 1 hora após a última refeição.
+    - destaques:
+        - nome: L-Ornitina
+          texto: Aminoácido do **ciclo da ureia** que ajuda o fígado a **eliminar a amônia**. Tomada à noite, longe das refeições, apoia a **desintoxicação** e a **qualidade do sono** durante o protocolo.
+    - espaco: 10
+    - texto:
+        paragrafos:
+          - As **parasitoses intestinais** podem causar **distensão abdominal**, **alterações do trânsito intestinal**, **cansaço**, **coceira** e **má absorção de nutrientes**. O protocolo associa **fitoterápicos antiparasitários** com **proteção hepática** e apoio à **desintoxicação**, por 30 dias.
+          - '**Não indicado** para gestantes, lactantes e crianças, nem para pessoas com epilepsia ou doença hepática, sem avaliação do prescritor.'
