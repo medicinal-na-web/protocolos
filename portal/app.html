@@ -136,6 +136,10 @@
   .mini{border:1px solid var(--linha);background:var(--sup-2);color:var(--tinta);border-radius:10px;padding:8px 12px;font-size:12.5px;font-weight:600}
   .mini.ghost{opacity:.55}
   .adm-sel{border:1px solid var(--linha);background:var(--sup-2);color:var(--tinta);border-radius:10px;padding:8px 10px;font:inherit;font-size:12.5px}
+  .adm-badge.tmp{background:color-mix(in srgb,#e8912a 20%,transparent);color:#a8640f}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .adm-badge.tmp{color:#f0b968}}
+  :root[data-theme="dark"] .adm-badge.tmp{color:#f0b968}
+  .cart-exp{font-variant-numeric:tabular-nums}
 
   /* ---- Modal de liberação ---- */
   .modal{position:fixed;inset:0;z-index:60;background:rgba(10,18,32,.55);display:flex;align-items:flex-end;justify-content:center;padding:0}
@@ -266,6 +270,28 @@
         <div class="carregando" id="pr-carregando">Carregando…</div>
       </div>
     </div>
+
+    <div id="view-cartela" hidden>
+      <div class="intro">
+        <h1>Minha carteira</h1>
+        <p>Libere o acesso de um prescritor da sua carteira ao portal por <b>72&nbsp;horas</b>. O cadastro definitivo de e-mail vem oficialmente do Fórmula Certa.</p>
+      </div>
+      <div class="pr-ctrl">
+        <label class="busca-in" style="flex:1;min-width:220px;margin:0">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--tinta-2)"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+          <input id="ct-q" type="search" placeholder="Buscar por nome, registro ou e-mail…" autocomplete="off">
+        </label>
+        <select id="ct-filtro" class="adm-sel">
+          <option value="todos">Todos</option>
+          <option value="temporario">Liberados 72h</option>
+          <option value="definitivo">Acesso definitivo</option>
+          <option value="sem">Sem acesso</option>
+        </select>
+      </div>
+      <div class="pr-resumo" id="ct-resumo"></div>
+      <div id="ct-lista" class="adm-lista"></div>
+      <div class="carregando" id="ct-carregando">Carregando sua carteira…</div>
+    </div>
   </main>
 </div>
 
@@ -372,7 +398,7 @@
     try{
       var d=await chamarFn(Object.assign({acao:"verificar",codigo:codigo},idEnvio));
       if(!d.ok||!d.access_token){limpaAviso($("aviso-cod"));$("btn-verificar").disabled=false;return aviso($("aviso-cod"),MOTIVOS[d.motivo]||"Código inválido.")}
-      sessao={access_token:d.access_token,refresh_token:d.refresh_token,expira:Date.now()+(d.expires_in||3600)*1000,nome:d.nome||null,crm:d.crm||null,admin:!!d.admin};
+      sessao={access_token:d.access_token,refresh_token:d.refresh_token,expira:Date.now()+(d.expires_in||3600)*1000,nome:d.nome||null,crm:d.crm||null,admin:!!d.admin,visitadora:!!d.visitadora};
       gravarSessao(sessao); entrarNoApp();
     }catch(e){aviso($("aviso-cod"),"Sem conexão com o servidor.");$("btn-verificar").disabled=false}
   };
@@ -411,9 +437,18 @@
   // ---------- App ----------
   function entrarNoApp(){
     $("tela-login").hidden=true; $("app").hidden=false;
+    if(sessao.visitadora){
+      $("quem-nome").textContent=(sessao.nome||"Visitadora")+" — Equipe Medicinal";
+      $("nav").hidden=true;
+      $("view-protocolos").hidden=true; $("view-admin").hidden=true; $("view-cartela").hidden=false;
+      viewAtual="cartela";
+      if(!cartelaCarregada){cartelaCarregada=true;carregarCartela();}
+      return;
+    }
     var q=sessao.nome?("Dr(a). "+sessao.nome):(sessao.crm||"");
     $("quem-nome").textContent=q;
     $("nav").hidden=!sessao.admin;
+    $("view-cartela").hidden=true; $("view-protocolos").hidden=false;
     carregarProtocolos();
   }
   // Navegação Protocolos / Administração (admin)
@@ -717,8 +752,73 @@
     });
   }
 
+  // ---------- Minha carteira (visitadora) ----------
+  var cartelaCarregada=false, tCt=null, cartelaItens=[];
+  $("ct-q").addEventListener("input",function(){ clearTimeout(tCt); tCt=setTimeout(carregarCartela,280); });
+  $("ct-filtro").addEventListener("change",pintaCartela);
+
+  async function carregarCartela(){
+    $("ct-carregando").hidden=false;
+    var d=await rpc("visitadora_cartela",{p_busca:$("ct-q").value.trim(),p_limite:800});
+    $("ct-carregando").hidden=true;
+    if(!d||!d.ok){ $("ct-lista").innerHTML='<p class="adm-meta">Não foi possível carregar sua carteira.</p>'; return; }
+    cartelaItens=d.itens||[]; var r=d.resumo||{};
+    $("ct-resumo").textContent=(r.total||0)+" na sua carteira · "+(r.definitivos||0)+" com acesso definitivo · "+(r.temporarios||0)+" liberados agora · "+(r.com_email||0)+" com e-mail";
+    pintaCartela();
+  }
+  function pintaCartela(){
+    var f=$("ct-filtro").value, L=$("ct-lista"); L.innerHTML="";
+    var vis=cartelaItens.filter(function(it){
+      if(f==="temporario")return it.situacao==="temporario";
+      if(f==="definitivo")return it.situacao==="definitivo";
+      if(f==="sem")return it.situacao==="novo"||it.situacao==="inativo";
+      return true;
+    });
+    vis.forEach(function(it){ L.appendChild(linhaCartela(it)); });
+    if(!vis.length)L.innerHTML='<p class="adm-meta">Nenhum prescritor neste filtro.</p>';
+  }
+  function linhaCartela(it){
+    var row=document.createElement("div"); row.className="adm-row";
+    row.innerHTML='<div class="adm-info"><h3><span class="t"></span></h3><div class="adm-meta"></div></div><div class="adm-ctrl"></div>';
+    var ctrl=row.querySelector(".adm-ctrl");
+    function badge(){
+      if(it.situacao==="definitivo")return '<span class="adm-badge pub">Acesso definitivo</span>';
+      if(it.situacao==="temporario")return '<span class="adm-badge tmp cart-exp">72h · faltam '+(it.horas_restantes||0)+'h</span>';
+      return '<span class="adm-badge off">Sem acesso</span>';
+    }
+    function meta(){ return "CRM "+it.nrcrm+"/"+it.ufcrm+(it.email?(" · "+it.email):" · sem e-mail"); }
+    function pinta(){ row.querySelector("h3").innerHTML='<span class="t"></span> '+badge(); row.querySelector(".t").textContent=it.nome||"—"; row.querySelector(".adm-meta").textContent=meta(); render(); }
+    function render(){
+      ctrl.innerHTML="";
+      if(it.situacao==="definitivo")return; // acesso oficial — nada a fazer
+      var inp=document.createElement("input"); inp.className="pr-email"; inp.type="email"; inp.placeholder="e-mail do prescritor"; inp.value=it.email||"";
+      var bt=document.createElement("button"); bt.className="mini lib";
+      if(it.situacao==="temporario"){ bt.textContent="Revogar"; bt.classList.add("on"); } else bt.textContent="Liberar 72h";
+      ctrl.appendChild(inp); ctrl.appendChild(bt);
+      bt.onclick=async function(){
+        bt.disabled=true;
+        if(it.situacao==="temporario"){
+          var rv=await rpc("visitadora_revogar",{p_pfcrm:it.pfcrm,p_ufcrm:it.ufcrm,p_nrcrm:it.nrcrm});
+          bt.disabled=false;
+          if(rv&&rv.ok){ it.situacao="inativo"; pinta(); showToast("Acesso de "+(it.nome||"prescritor")+" revogado."); }
+          else showToast("Não foi possível revogar.");
+          return;
+        }
+        var r=await rpc("visitadora_liberar",{p_pfcrm:it.pfcrm,p_ufcrm:it.ufcrm,p_nrcrm:it.nrcrm,p_email:inp.value.trim()||null});
+        bt.disabled=false;
+        if(!r||!r.ok){ showToast(r&&r.motivo==="email_invalido"?"E-mail inválido.":"Não foi possível liberar."); return; }
+        if(r.situacao==="definitivo"){ it.situacao="definitivo"; pinta(); showToast("Este prescritor já tem acesso definitivo."); return; }
+        it.situacao="temporario"; it.horas_restantes=72; it.email=r.email||inp.value.trim()||it.email; pinta();
+        showToast(r.tem_email ? ((it.nome||"Prescritor")+" liberado por 72h — já pode entrar no portal.")
+                              : "Liberado por 72h. Informe um e-mail para ele receber o código de acesso.");
+      };
+    }
+    pinta();
+    return row;
+  }
+
   // ---------- Sair ----------
-  function sair(){limparSessao();sessao=null;location.hash="";$("app").hidden=true;$("visor").hidden=true;$("modal-acesso").hidden=true;$("nav").hidden=true;$("view-admin").hidden=true;$("view-protocolos").hidden=false;viewAtual="protocolos";adminCarregado=false;$("tela-login").hidden=false;$("passo-cod").hidden=true;$("passo-id").hidden=false}
+  function sair(){limparSessao();sessao=null;location.hash="";$("app").hidden=true;$("visor").hidden=true;$("modal-acesso").hidden=true;$("nav").hidden=true;$("view-admin").hidden=true;$("view-cartela").hidden=true;$("view-protocolos").hidden=false;viewAtual="protocolos";adminCarregado=false;cartelaCarregada=false;cartelaItens=[];$("tela-login").hidden=false;$("passo-cod").hidden=true;$("passo-id").hidden=false}
   $("sair").onclick=sair;
 
   // ---------- Início ----------
