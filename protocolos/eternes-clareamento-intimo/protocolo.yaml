@@ -4,7 +4,7 @@
 #   F1 sabonete  (TP4)  → ácido clareador suave: Ácido mandélico (50210)
 #   F2 creme     (TP2)  → ativo do Pigmentbio Sensitive Areas (azelato de lisina): Azeloglicina (2012)
 #                          + 4-n-butilresorcinol (587) 0,2% por pedido da prescritora + demais ativos do Pigmentbio:
-#                          ácido salicílico 0,1%, alcaçuz, tocoferol e prebiótico (BioEcolia no lugar de ramnose/xilitol/manitol/FOS)
+#                          ácido salicílico 0,1%, ácido glicirrízico (6622) 1% como ativo do alcaçuz, tocoferol e prebiótico (BioEcolia no lugar de ramnose/xilitol/manitol/FOS)
 #                          Retirados: Belides, LumiPure Unify (decisão da prescritora) e alfa-arbutin (redundante com o butilresorcinol)
 #   F3 hidratante (TP2, uso externo) → Ácido hialurônico em pó (5690) 0,5% + Madecassoside (8616) 0,2%
 #   (promestrieno: sem estoque · genisteína e S-equol: retirados por serem isoflavonas de soja)
@@ -65,7 +65,7 @@ paginas:
         ativos:
           - { nome: Azeloglicina, dose: 10%, destaque: true }
           - { nome: 4-n-butilresorcinol, dose: "0,2%", destaque: true }
-          - { nome: Alcaçuz extrato, dose: "0,1%", destaque: true }
+          - { nome: Ácido glicirrízico, dose: 1%, destaque: true }
           - { nome: Ácido tranexâmico, dose: 3% }
           - { nome: Niacinamida, dose: 4% }
           - { nome: Ácido salicílico, dose: "0,1%" }
@@ -79,8 +79,8 @@ paginas:
           texto: Derivado **hidrossolúvel do ácido azelaico**, o mesmo princípio do **Pigmentbio® Sensitive Areas** (que usa o azelato de lisina). Inibe a tirosinase de forma **seletiva nos melanócitos hiperativos**, tem ação **anti-inflamatória** e é muito mais **suave** que o ácido azelaico puro, sem ardor.
         - nome: 4-n-butilresorcinol
           texto: Um dos inibidores de **tirosinase** mais potentes da dermatologia, com **eficácia clínica** comprovada em melasma. Em dose baixa, dá **força ao clareamento** sem perder a tolerância.
-        - nome: Alcaçuz
-          texto: Extrato de **Glycyrrhiza glabra**, presente no Pigmentbio®, rico em **glabridina** e ácido glicirrízico. **Clareia** e **acalma** ao mesmo tempo, reduzindo a vermelhidão que antecede a mancha.
+        - nome: Ácido glicirrízico
+          texto: Princípio ativo do **alcaçuz** (Glycyrrhiza glabra), presente no Pigmentbio®. Potente **anti-inflamatório** e **calmante**, reduz a vermelhidão e a irritação que antecedem a mancha e **potencializa o clareamento**.
     - texto:
         paragrafos:
           - O **ácido tranexâmico** interrompe o **escurecimento pós-inflamatório** causado por depilação e atrito, e a **niacinamida** bloqueia a transferência da melanina. Como no Pigmentbio®, o **ácido salicílico** em microdose renova a superfície, o **BioEcolia®** faz o papel dos **açúcares prebióticos** e a **vitamina E** protege da oxidação. Sem **hidroquinona, retinoides ou ácido glicólico**.

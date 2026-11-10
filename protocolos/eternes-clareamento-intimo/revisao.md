@@ -34,7 +34,7 @@ Para trocar ativos, informe os números com ❌ (ex.: "4 ❌, 12 ❌").
 | 7 | F2 Creme | NAF | Azeloglicina (2012) · B | 10% | FC12110 (2ª dose mais comum) | — | Âncora do Pigmentbio (azelato de lisina) |
 | 8 | F2 | NAF-06 | 4-n-butilresorcinol (587) · C | 0,2% | pedido da prescritora | 37 c/ Hyaxel (histórico) | Tier C (fora do FGTS), mas com 265 usos em TP2 (+554 como Acticinol 10312). Tier provavelmente desatualizado |
 | 9 | F2 | BAC | Ácido salicílico (50283) · A | 0,1% | **Pigmentbio** (moda TP2 = 2%) | 136 c/ azeloglicina | Microdose, como no comercial |
-| 10 | F2 | BAC | Alcaçuz extrato (560) · B | 0,1% | FC12110 (moda TP2, 87 reg.) | 1 c/ azeloglicina · 74 c/ niacinamida | Do Pigmentbio. Cadastro diz "oral": confirmar matéria-prima tópica padronizada em glabridina |
+| 10 | F2 | NAF-06 | Ácido glicirrízico, uso externo (6622) · C | 1% | FC12110 (moda TP2, 145 reg.) | 46 c/ bisabolol · 43 c/ niacinamida · 17 c/ tranexâmico · 7 c/ salicílico · 3 c/ azeloglicina | Ativo do alcaçuz do Pigmentbio, a pedido da prescritora. **Sem ficha técnica** no banco (tier C, nome_tecnico vazio): completar o cadastro |
 | 11 | F2 | BAC | Ácido tranexâmico (5615) · A | 3% | FC12110 (moda) | 35 | |
 | 11b | F2 | BAC | Niacinamida PC (6032) · S | 4% | FC12110 (moda) | 644 | |
 | 11c | F2 | NAF-06 | BioEcolia (8376) · B | 1% | FC12110 (moda TP2) | 43 c/ niacinamida | Substitui os açúcares prebióticos do Pigmentbio (ramnose, xilitol, manitol, FOS) |
@@ -58,7 +58,7 @@ vaginal, mas é hormônio e Lista C5. Fica como alternativa à escolha da prescr
 
 ## Pendências antes da versão oficial
 
-0. Revisar o tier do 4-n-butilresorcinol (C → B?) com a próxima carga da FC12110 e confirmar o alcaçuz tópico (glabridina). Andrographis paniculata (tier C, 3 usos) e Laminaria ochroleuca (não cadastrada), também do Pigmentbio, ficaram de fora.
+0. Revisar o tier do 4-n-butilresorcinol (C → B?) com a próxima carga da FC12110 e completar a ficha do ácido glicirrízico (6622). Andrographis paniculata (tier C, 3 usos) e Laminaria ochroleuca (não cadastrada), também do Pigmentbio, ficaram de fora.
 
 1. Rodar a `validate_protocolo()` (não rodei nesta prévia).
 2. Confirmar a dose do mandélico no sabonete (2,5% contra a moda de 5%) e a base de sabonete íntimo pH 4,5.
