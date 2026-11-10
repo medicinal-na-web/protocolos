@@ -3,6 +3,7 @@
 # Âncoras definidas pelo prescritor (NAF-06 / GER-04):
 #   F1 sabonete  (TP4)  → ácido clareador suave: Ácido mandélico (50210)
 #   F2 creme     (TP2)  → ativo do Pigmentbio Sensitive Areas (azelato de lisina): Azeloglicina (2012)
+#                          + 4-n-butilresorcinol (587) 0,2% e LumiPure Unify 0,3% (não cadastrado) por pedido da prescritora; Belides retirado
 #   F3 hidratante (TP2, uso externo) → Ácido hialurônico em pó (5690) 0,5% + Madecassoside (8616) 0,2%
 #   (promestrieno: sem estoque · genisteína e S-equol: retirados por serem isoflavonas de soja)
 #   BioEcolia (8376) 1% incluída no F1 e no F3 a pedido da prescritora
@@ -61,23 +62,27 @@ paginas:
         periodo: noite
         ativos:
           - { nome: Azeloglicina, dose: 10%, destaque: true }
-          - { nome: Niacinamida, dose: 4%, destaque: true }
+          - { nome: 4-n-butilresorcinol, dose: "0,2%", destaque: true }
+          - { nome: LumiPure Unify®, dose: "0,3%", destaque: true }
           - { nome: Ácido tranexâmico, dose: 3%, destaque: true }
+          - { nome: Niacinamida, dose: 4% }
           - { nome: Alfa-arbutin, dose: 2% }
-          - { nome: Belides®, dose: 2% }
           - { nome: Bisabolol, dose: 1% }
-          - { nome: Creme não iônico para áreas sensíveis, dose: 30g }
+          - { nome: Vitamina E, dose: "0,5%" }
+          - { nome: Creme não iônico (airless opaco), dose: 30g }
         modo_de_uso: À noite, com a pele limpa e seca, aplicar uma camada fina na virilha, na vulva externa, no períneo e na região perianal. Pode ser usado também nas axilas. Evitar mucosas e não usar logo após a depilação.
     - destaques:
         - nome: Azeloglicina
           texto: Derivado **hidrossolúvel do ácido azelaico**, o mesmo princípio do **Pigmentbio® Sensitive Areas** (que usa o azelato de lisina). Inibe a tirosinase de forma **seletiva nos melanócitos hiperativos**, tem ação **anti-inflamatória** e é muito mais **suave** que o ácido azelaico puro, sem ardor.
-        - nome: Niacinamida
-          texto: Bloqueia a **transferência da melanina** do melanócito para as células da superfície e **reforça a barreira** da pele, reduzindo a sensibilidade causada pelo atrito.
+        - nome: 4-n-butilresorcinol
+          texto: Um dos inibidores de **tirosinase** mais potentes da dermatologia, com **eficácia clínica** comprovada em melasma. Em dose baixa, dá **força ao clareamento** sem perder a tolerância.
+        - nome: LumiPure Unify®
+          texto: Derivado da **Magnolia officinalis** que age em **três etapas** da produção de melanina sem bloquear a enzima de forma agressiva. Sua ação **anti-inflamatória** previne as manchas que surgem após **depilação e atrito**.
         - nome: Ácido tranexâmico
           texto: Atua na **inflamação** que estimula o melanócito após depilação e atrito, interrompendo o ciclo de **escurecimento pós-inflamatório**, a principal causa de manchas na virilha.
     - texto:
         paragrafos:
-          - Os ativos de apoio completam o creme. A **alfa-arbutin** inibe a tirosinase por outra via, o **Belides®** (Bellis perennis) é uma alternativa natural à hidroquinona, e o **bisabolol** acalma a pele. A fórmula **não usa hidroquinona, retinoides nem ácido glicólico**, que irritam as áreas íntimas.
+          - A **niacinamida** bloqueia a **transferência da melanina** e reforça a barreira, a **alfa-arbutin** inibe a tirosinase por outra via, o **bisabolol** acalma e a **vitamina E** protege os ativos da oxidação. A fórmula **não usa hidroquinona, retinoides nem ácido glicólico**, que irritam as áreas íntimas.
 
   # Página 4 — 03 Revitalizar (creme hidratante vulvar, uso externo)
   - - formula:
