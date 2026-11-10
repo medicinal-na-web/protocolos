@@ -32,15 +32,16 @@ Para trocar ativos, informe os números com ❌ (ex.: "4 ❌, 12 ❌").
 | 5b | F1 | NAF-06 | BioEcolia (8376) · B | 1% | FC12110 (moda TP4, 150 reg.) | 22 c/ aroeira (TP4) · sem registro c/ mandélico em TP4 | Pedido da prescritora |
 | 6 | F1 | veículo | Sabonete líquido íntimo pH 4,5 | 150 ml | — | — | Ajustar pH com ácido lático |
 | 7 | F2 Creme | NAF | Azeloglicina (2012) · B | 10% | FC12110 (2ª dose mais comum) | — | Âncora do Pigmentbio (azelato de lisina) |
-| 8 | F2 | BAC | Niacinamida PC (6032) · S | 4% | FC12110 (moda) | 644 | |
-| 9 | F2 | BAC | Ácido tranexâmico (5615) · A | 3% | FC12110 (moda) | 35 | |
-| 10 | F2 | BAC | Alfa-arbutin (6031) · A | 2% | FC12110 (moda) | 82 | |
-| 11 | F2 | NAF-06 | 4-n-butilresorcinol (587) · C | 0,2% | pedido da prescritora | — | Tier C (fora do FGTS), mas com 265 usos em TP2 (+554 como Acticinol 10312). Tier provavelmente desatualizado |
-| 11b | F2 | PAR/NAF-06 | **LumiPure Unify®** (tetrahidromagnolol, Purekemika) | 0,3% | catálogo do fabricante (faixa 0,05–0,5%) | — | **Não cadastrado.** Evidência só do fabricante. Solubilizar antes (evitar propilenoglicol), incorporar abaixo de 45 °C, pH 5,0–6,5 |
-| 11c | F2 | estabilizante | Vitamina E (57794) · S | 0,5% | fabricante do LumiPure | — | Antioxidante do LumiPure. Embalagem airless opaca |
-| — | F2 | descartado | Belides® (4199) | — | — | — | Substituído pelo LumiPure |
-| 12 | F2 | BAC | Bisabolol (10601) · A | 1% | FC12110 (moda) | 313 | Calmante, adjuvante (P2) |
-| 13 | F2 | veículo | Creme não iônico | 30 g | — | — | |
+| 8 | F2 | NAF-06 | 4-n-butilresorcinol (587) · C | 0,2% | pedido da prescritora | 37 c/ Hyaxel (histórico) | Tier C (fora do FGTS), mas com 265 usos em TP2 (+554 como Acticinol 10312). Tier provavelmente desatualizado |
+| 9 | F2 | BAC | Ácido salicílico (50283) · A | 0,1% | **Pigmentbio** (moda TP2 = 2%) | 136 c/ azeloglicina | Microdose, como no comercial |
+| 10 | F2 | BAC | Alcaçuz extrato (560) · B | 0,1% | FC12110 (moda TP2, 87 reg.) | 1 c/ azeloglicina · 74 c/ niacinamida | Do Pigmentbio. Cadastro diz "oral": confirmar matéria-prima tópica padronizada em glabridina |
+| 11 | F2 | BAC | Ácido tranexâmico (5615) · A | 3% | FC12110 (moda) | 35 | |
+| 11b | F2 | BAC | Niacinamida PC (6032) · S | 4% | FC12110 (moda) | 644 | |
+| 11c | F2 | NAF-06 | BioEcolia (8376) · B | 1% | FC12110 (moda TP2) | 43 c/ niacinamida | Substitui os açúcares prebióticos do Pigmentbio (ramnose, xilitol, manitol, FOS) |
+| 12 | F2 | BAC | Bisabolol (10601) · A | 1% | FC12110 (moda) | 313 | No lugar da Laminaria ochroleuca (calmante do Pigmentbio, não cadastrada) |
+| 12b | F2 | BAC | Vitamina E (57794) · S | 0,5% | Pigmentbio (tocoferol) | 40 | |
+| — | F2 | descartados | Belides · LumiPure Unify · Alfa-arbutin | — | — | — | Belides e LumiPure por decisão da prescritora; alfa-arbutin redundante com o butilresorcinol |
+| 13 | F2 | veículo | Creme não iônico (airless opaco) | 30 g | — | — | |
 | 14 | F3 Creme | NAF | Ácido hialurônico em pó (5690) · A | 0,5% | FC12110 (moda TP2, 209 reg.) | — | Cadastro diz "oral": corrigir a ficha para uso tópico |
 | 15 | F3 | NAF | Madecassoside (8616) · B | 0,2% | FC12110 (moda TP2, 251 reg.) | 1 c/ ácido hialurônico | Papel trófico (colágeno) no lugar dos fitoestrogênios |
 | 16 | F3 | NAF-06 | BioEcolia (8376) · B | 1% | FC12110 (moda TP2, 413 reg.) | 60 c/ ácido hialurônico · 4 c/ madecassoside | Pedido da prescritora |
@@ -57,7 +58,7 @@ vaginal, mas é hormônio e Lista C5. Fica como alternativa à escolha da prescr
 
 ## Pendências antes da versão oficial
 
-0. **Cadastrar o LumiPure Unify** (ficha, fornecedor Purekemika, faixa de uso) e revisar o tier do 4-n-butilresorcinol (C → B?) com a próxima carga da FC12110.
+0. Revisar o tier do 4-n-butilresorcinol (C → B?) com a próxima carga da FC12110 e confirmar o alcaçuz tópico (glabridina). Andrographis paniculata (tier C, 3 usos) e Laminaria ochroleuca (não cadastrada), também do Pigmentbio, ficaram de fora.
 
 1. Rodar a `validate_protocolo()` (não rodei nesta prévia).
 2. Confirmar a dose do mandélico no sabonete (2,5% contra a moda de 5%) e a base de sabonete íntimo pH 4,5.

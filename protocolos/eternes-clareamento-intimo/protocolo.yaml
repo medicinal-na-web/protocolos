@@ -3,7 +3,9 @@
 # Âncoras definidas pelo prescritor (NAF-06 / GER-04):
 #   F1 sabonete  (TP4)  → ácido clareador suave: Ácido mandélico (50210)
 #   F2 creme     (TP2)  → ativo do Pigmentbio Sensitive Areas (azelato de lisina): Azeloglicina (2012)
-#                          + 4-n-butilresorcinol (587) 0,2% e LumiPure Unify 0,3% (não cadastrado) por pedido da prescritora; Belides retirado
+#                          + 4-n-butilresorcinol (587) 0,2% por pedido da prescritora + demais ativos do Pigmentbio:
+#                          ácido salicílico 0,1%, alcaçuz, tocoferol e prebiótico (BioEcolia no lugar de ramnose/xilitol/manitol/FOS)
+#                          Retirados: Belides, LumiPure Unify (decisão da prescritora) e alfa-arbutin (redundante com o butilresorcinol)
 #   F3 hidratante (TP2, uso externo) → Ácido hialurônico em pó (5690) 0,5% + Madecassoside (8616) 0,2%
 #   (promestrieno: sem estoque · genisteína e S-equol: retirados por serem isoflavonas de soja)
 #   BioEcolia (8376) 1% incluída no F1 e no F3 a pedido da prescritora
@@ -63,10 +65,11 @@ paginas:
         ativos:
           - { nome: Azeloglicina, dose: 10%, destaque: true }
           - { nome: 4-n-butilresorcinol, dose: "0,2%", destaque: true }
-          - { nome: LumiPure Unify®, dose: "0,3%", destaque: true }
-          - { nome: Ácido tranexâmico, dose: 3%, destaque: true }
+          - { nome: Alcaçuz extrato, dose: "0,1%", destaque: true }
+          - { nome: Ácido tranexâmico, dose: 3% }
           - { nome: Niacinamida, dose: 4% }
-          - { nome: Alfa-arbutin, dose: 2% }
+          - { nome: Ácido salicílico, dose: "0,1%" }
+          - { nome: BioEcolia®, dose: 1% }
           - { nome: Bisabolol, dose: 1% }
           - { nome: Vitamina E, dose: "0,5%" }
           - { nome: Creme não iônico (airless opaco), dose: 30g }
@@ -76,13 +79,11 @@ paginas:
           texto: Derivado **hidrossolúvel do ácido azelaico**, o mesmo princípio do **Pigmentbio® Sensitive Areas** (que usa o azelato de lisina). Inibe a tirosinase de forma **seletiva nos melanócitos hiperativos**, tem ação **anti-inflamatória** e é muito mais **suave** que o ácido azelaico puro, sem ardor.
         - nome: 4-n-butilresorcinol
           texto: Um dos inibidores de **tirosinase** mais potentes da dermatologia, com **eficácia clínica** comprovada em melasma. Em dose baixa, dá **força ao clareamento** sem perder a tolerância.
-        - nome: LumiPure Unify®
-          texto: Derivado da **Magnolia officinalis** que age em **três etapas** da produção de melanina sem bloquear a enzima de forma agressiva. Sua ação **anti-inflamatória** previne as manchas que surgem após **depilação e atrito**.
-        - nome: Ácido tranexâmico
-          texto: Atua na **inflamação** que estimula o melanócito após depilação e atrito, interrompendo o ciclo de **escurecimento pós-inflamatório**, a principal causa de manchas na virilha.
+        - nome: Alcaçuz
+          texto: Extrato de **Glycyrrhiza glabra**, presente no Pigmentbio®, rico em **glabridina** e ácido glicirrízico. **Clareia** e **acalma** ao mesmo tempo, reduzindo a vermelhidão que antecede a mancha.
     - texto:
         paragrafos:
-          - A **niacinamida** bloqueia a **transferência da melanina** e reforça a barreira, a **alfa-arbutin** inibe a tirosinase por outra via, o **bisabolol** acalma e a **vitamina E** protege os ativos da oxidação. A fórmula **não usa hidroquinona, retinoides nem ácido glicólico**, que irritam as áreas íntimas.
+          - O **ácido tranexâmico** interrompe o **escurecimento pós-inflamatório** causado por depilação e atrito, e a **niacinamida** bloqueia a transferência da melanina. Como no Pigmentbio®, o **ácido salicílico** em microdose renova a superfície, o **BioEcolia®** faz o papel dos **açúcares prebióticos** e a **vitamina E** protege da oxidação. Sem **hidroquinona, retinoides ou ácido glicólico**.
 
   # Página 4 — 03 Revitalizar (creme hidratante vulvar, uso externo)
   - - formula:
