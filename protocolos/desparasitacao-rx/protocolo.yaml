@@ -1,0 +1,148 @@
+# Guia de Formulações — Desparasitação Completa (versão com ivermectina e albendazol)
+# Fase de ataque com antiparasitários de prescrição (tarja vermelha) + protocolo fitoterápico v2
+# v2 — proposta a partir da referência da equipe, reforçada pelas associações do motor NEXUS
+# Banco: supabase_ativos (emzkiemgizgmggthaeia). Sessão: 2026.11.10
+#
+# RASCUNHO para revisão do prescritor/farmacêutico responsável. Detalhes e pendências em revisao.md:
+# - Alicina (11875) é tier C: entra como PAR (invocação do prescritor)
+# - Óleo de orégano em cápsula dura: confirmar adsorção (Aerosil) ou usar cápsula oleosa
+# - Aloe vera 200:1 (31690) contém antraquinonas: confirmar dose e teor
+# - Artes (capa e fotos) ainda não produzidas
+
+titulo: Desparasitação Completa
+cor:
+  escura: "#3f5418"
+  clara: "#9cb83c"
+qr: https://medicinal.vip/protoc_DesparasitacaoRx?r=qr   # link a criar no medicinal.vip
+capa: capa.jpg
+capa_posicao: "center 60%"
+
+paginas:
+  # Página 2 — F0 · Ataque: antiparasitários de prescrição
+  - - formula:
+        nome: Ivermectina
+        subtitulo: fase de ataque · dose única
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: Ivermectina, dose: 6mg, destaque: true }
+          - { nome: Excipiente q.s.p., dose: 1 cápsula }
+        modo_de_uso: 'Dose de **200 mcg/kg**: 1 cápsula para cada 30 kg de peso (até 60 kg, 2 cápsulas; até 90 kg, 3 cápsulas), em jejum, com água, no **dia 1**. Repetir a mesma dose no **dia 15**.'
+    - destaques:
+        - nome: Ivermectina
+          texto: Antiparasitário que se liga aos **canais de cloreto** do sistema nervoso e muscular dos parasitas, causando **paralisia e morte**. Eficaz contra **Strongyloides**, **Ascaris** e **Enterobius** (oxiúros), além de ectoparasitas como sarna e piolho.
+    - formula:
+        nome: Albendazol
+        subtitulo: fase de ataque · dose única
+        via: IN
+        periodo: dia
+        qr: false
+        ativos:
+          - { nome: Albendazol, dose: 400mg, destaque: true }
+          - { nome: Excipiente q.s.p., dose: 1 cápsula }
+        modo_de_uso: Tomar 1 cápsula no **dia 1**, junto com a ivermectina, e repetir no **dia 15**. Para tênias e estrongiloidíase, o prescritor pode estender para 3 dias seguidos.
+    - destaques:
+        - nome: Albendazol
+          texto: Benzimidazol de **amplo espectro** que bloqueia a formação dos **microtúbulos** do parasita, impedindo a absorção de glicose. Atua sobre **Ascaris, ancilostomídeos, Trichuris, Enterobius, tênias** e **Giardia**, e complementa o espectro da ivermectina.
+    - espaco: 10
+    - texto:
+        paragrafos:
+          - '**Como associar:** ivermectina e albendazol no **dia 1** e no **dia 15** (a segunda dose atinge os parasitas que eclodiram dos ovos). As fórmulas fitoterápicas das páginas seguintes começam no dia 1 e seguem por 30 dias.'
+  # Página 3 — F1 · Eliminar: cápsula antiparasitária
+  - - formula:
+        nome: Cápsulas Antiparasitárias
+        subtitulo: fase 1 · eliminar
+        via: IN
+        periodo: [dia, noite]
+        ativos:
+          - { nome: Berberina, dose: 500mg, destaque: true }
+          - { nome: Óleo de orégano, dose: 200mg, destaque: true }
+          - { nome: Alicina (extrato de alho), dose: 150mg, destaque: true }
+        modo_de_uso: Tomar 1 dose após o almoço e 1 dose após o jantar, por 30 dias.
+    - destaques:
+        - nome: Berberina
+          texto: Alcaloide vegetal com **ação antiparasitária e antimicrobiana** documentada contra protozoários intestinais como a **Giardia**. Também ajuda a **reequilibrar a microbiota** e a reduzir a **inflamação intestinal**.
+        - nome: Óleo de Orégano
+          texto: Rico em **carvacrol e timol**, compostos de **amplo espectro antiparasitário, antifúngico e antibacteriano**, que atuam sobre a membrana dos microrganismos e completam a ação da berberina.
+        - nome: Alicina
+          texto: Principal composto ativo do **alho**, com ação **antimicrobiana e antiparasitária**. Torna o intestino um **ambiente desfavorável** a parasitas, bactérias e fungos oportunistas.
+
+  # Página 4 — F2 · Eliminar: mix de tinturas (mix completo da casa, 9 tinturas)
+  - - formula:
+        nome: Mix de Tinturas Antiparasitárias
+        subtitulo: fase 1 · eliminar
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: Tintura de nogueira-preta, dose: 11%, destaque: true }
+          - { nome: Tintura de absinto, dose: 12%, destaque: true }
+          - { nome: Tintura de cravinho, dose: 11%, destaque: true }
+          - { nome: Tintura de Berberis vulgaris, dose: 11%, destaque: true }
+          - { nome: Tintura de orégano, dose: 11%, destaque: true }
+          - { nome: Tintura de espinheira-santa, dose: 11%, destaque: true }
+          - { nome: Tintura de bardana, dose: 11%, destaque: true }
+          - { nome: Tintura de erva-doce, dose: 11%, destaque: true }
+          - { nome: Tintura de própolis, dose: 11%, destaque: true }
+        modo_de_uso: Tomar 30 gotas diluídas em meio copo de água, 1 vez ao dia pela manhã, por 30 dias.
+    - destaques:
+        - nome: Nogueira-preta, absinto e cravinho
+          texto: O **tripé clássico** da desparasitação. A **juglona** da nogueira age sobre os parasitas adultos, os **amargos** do absinto estimulam a bile e a eliminação, e o **eugenol** do cravinho atinge **ovos e larvas**, cobrindo **todo o ciclo de vida** do parasita.
+        - nome: Berberis e orégano
+          texto: Reforçam o espectro **antimicrobiano**. A **berberina** do Berberis atua sobre **protozoários** como a Giardia, e o **carvacrol** do orégano sobre **fungos e bactérias oportunistas**.
+        - nome: Espinheira-santa, bardana, erva-doce e própolis
+          texto: Tornam o mix **mais bem tolerado**. A espinheira-santa **protege o estômago**, a bardana tem ação **depurativa**, a erva-doce alivia **gases e cólicas** e a própolis apoia a **imunidade** da mucosa.
+
+  # Página 5 — F3 · Proteger o fígado e F4 · conforto digestivo
+  - - formula:
+        nome: Proteção Hepática
+        subtitulo: fase 2 · proteger
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: N-acetilcisteína (NAC), dose: 600mg, destaque: true }
+          - { nome: Silimarina, dose: 200mg, destaque: true }
+          - { nome: L-metionina, dose: 100mg }
+        modo_de_uso: Tomar 1 dose pela manhã, após o café, por 30 dias.
+    - destaques:
+        - nome: Silimarina
+          texto: Flavonolignanas do **cardo-mariano** com ação **hepatoprotetora e antioxidante**, que preservam a célula hepática durante a eliminação dos parasitas e das toxinas liberadas.
+        - nome: NAC
+          texto: Precursora da **glutationa**, o principal antioxidante do fígado. Com a **L-metionina**, sustenta as vias de **detoxificação hepática** e ainda ajuda a **romper o biofilme** que protege os microrganismos.
+    - formula:
+        nome: Conforto Digestivo
+        subtitulo: cólicas, gases e digestão
+        via: IN
+        periodo: dia
+        qr: false
+        ativos:
+          - { nome: Biointestil®, dose: 300mg, destaque: true }
+          - { nome: Menta piperita, dose: 250mg, destaque: true }
+          - { nome: Bromelina, dose: 100mg }
+          - { nome: Papaína, dose: 100mg }
+        modo_de_uso: Tomar 1 dose 15 minutos antes do almoço, por 30 dias.
+    - destaques:
+        - nome: Biointestil® e Menta piperita
+          texto: '**Óleos essenciais** de palmarosa e gengibre com **menta piperita**: ação **antiespasmódica e carminativa** que alivia **cólicas, gases e distensão**. As enzimas **bromelina e papaína** completam a digestão e ajudam a degradar a camada proteica que protege os parasitas.'
+
+  # Página 6 — F5 · Reparar + educativo
+  - - formula:
+        nome: Sachê Reparador
+        subtitulo: fase 3 · reparar
+        via: IN
+        periodo: noite
+        ativos:
+          - { nome: L-Glutamina, dose: 5g, destaque: true }
+          - { nome: Saccharomyces boulardii, dose: 250mg, destaque: true }
+          - { nome: Aloe vera 200:1, dose: 100mg }
+          - { nome: Sachê sabor limão, dose: 1 un }
+        modo_de_uso: Diluir 1 sachê em 200ml de água e tomar à noite, por 60 dias (desde o início do protocolo e por mais 30 dias após o fim da fase 1).
+    - destaques:
+        - nome: Saccharomyces boulardii
+          texto: '**Levedura probiótica** que não é afetada pelos fitoterápicos antimicrobianos. Compete com patógenos, tem ação documentada contra **Giardia e Blastocystis** e **reduz diarreia e desconforto** durante o tratamento.'
+        - nome: L-Glutamina
+          texto: Principal **fonte de energia dos enterócitos**. Com o **Aloe vera**, ajuda a **regenerar a mucosa** agredida pelos parasitas e a reduzir a **permeabilidade intestinal**.
+    - espaco: 6
+    - texto:
+        paragrafos:
+          - As **parasitoses intestinais** podem causar **distensão abdominal**, **alterações do trânsito**, **cansaço**, **coceira** e **má absorção de nutrientes**. Com o **ataque medicamentoso** nos dias 1 e 15, o protocolo segue três fases simultâneas — **eliminar** os parasitas em todo o ciclo de vida, **proteger** o fígado e **reparar** a mucosa e a microbiota — para um resultado duradouro.
+          - '**Ivermectina e albendazol exigem receita médica.** Contraindicados na **gestação** e na amamentação, em crianças com menos de 15 kg (ivermectina) e em doença hepática. O protocolo todo não é indicado para pessoas com epilepsia (absinto). A berberina pode interagir com medicamentos: informe o prescritor sobre os que você usa.'
