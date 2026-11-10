@@ -222,7 +222,8 @@
     <span class="topo-sub">Portal do<br>Prescritor</span>
     <nav class="nav" id="nav" hidden style="margin-left:18px">
       <button class="nav-b ativo" data-view="protocolos" type="button">Protocolos</button>
-      <button class="nav-b" data-view="admin" type="button">Administração</button>
+      <button class="nav-b" data-view="cartela" id="nav-cartela" type="button" hidden>Minha carteira</button>
+      <button class="nav-b" data-view="admin" id="nav-admin" type="button" hidden>Administração</button>
     </nav>
     <div class="quem"><span id="quem-nome"></span><button class="sair" id="sair">Sair</button></div>
   </div></header>
@@ -469,18 +470,16 @@
   // ---------- App ----------
   function entrarNoApp(){
     $("tela-login").hidden=true; $("app").hidden=false;
-    if(sessao.visitadora){
-      $("quem-nome").textContent=(sessao.nome||"Visitadora")+" — Equipe Medicinal";
-      $("nav").hidden=true;
-      $("view-protocolos").hidden=true; $("view-admin").hidden=true; $("view-cartela").hidden=false;
-      viewAtual="cartela";
-      if(!cartelaCarregada){cartelaCarregada=true;carregarCartela();}
-      return;
-    }
-    var q=sessao.nome?("Dr(a). "+sessao.nome):(sessao.crm||"");
-    $("quem-nome").textContent=q;
-    $("nav").hidden=!sessao.admin;
-    $("view-cartela").hidden=true; $("view-protocolos").hidden=false;
+    $("quem-nome").textContent = sessao.visitadora ? ((sessao.nome||"Visitadora")+" — Equipe Medicinal")
+                               : (sessao.nome?("Dr(a). "+sessao.nome):(sessao.crm||""));
+    var temNav=sessao.admin||sessao.visitadora;
+    $("nav").hidden=!temNav;
+    $("nav-admin").hidden=!sessao.admin;
+    $("nav-cartela").hidden=!sessao.visitadora;
+    // todos começam em Protocolos; visitadora/admin trocam de aba pela nav
+    viewAtual="protocolos";
+    document.querySelectorAll(".nav-b").forEach(function(x){x.classList.toggle("ativo",x.dataset.view==="protocolos")});
+    $("view-protocolos").hidden=false; $("view-admin").hidden=true; $("view-cartela").hidden=true;
     carregarProtocolos();
   }
   // Navegação Protocolos / Administração (admin)
@@ -489,8 +488,9 @@
     bt.onclick=function(){
       var v=bt.dataset.view; if(v===viewAtual)return; viewAtual=v;
       document.querySelectorAll(".nav-b").forEach(function(x){x.classList.toggle("ativo",x.dataset.view===v)});
-      $("view-protocolos").hidden=v!=="protocolos"; $("view-admin").hidden=v!=="admin";
+      $("view-protocolos").hidden=v!=="protocolos"; $("view-admin").hidden=v!=="admin"; $("view-cartela").hidden=v!=="cartela";
       if(v==="admin"&&!adminCarregado){adminCarregado=true;carregarAdmin();}
+      if(v==="cartela"&&!cartelaCarregada){cartelaCarregada=true;carregarCartela();}
     };
   });
   async function carregarProtocolos(){
