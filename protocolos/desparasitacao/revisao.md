@@ -8,8 +8,12 @@ Ponto de partida: referência da equipe (v1, abaixo). A v2 mantém o núcleo fit
 
 ## O que o banco mostrou
 
-- **Tintura:** nogueira-preta + absinto + cravinho é o tripé real da casa (**172 / 162 / 159** associações entre si).
-  A dose mais prescrita é **20%** ou **33%** de cada. A tintura de orégano (15304) é **tier C** e aparece só ~20 vezes com o tripé.
+- **Mix de tinturas:** nogueira-preta + absinto + cravinho é o tripé real da casa (**172 / 162 / 159** associações entre si).
+  Agrupando por requisição, a FC12110 mostra 3 mixes:
+  - **Tripé** a 20% ou 33% de cada: ~110 receitas.
+  - **Tripé + Berberis vulgaris** a 25% de cada: 10 receitas (última em 03/2026).
+  - **Mix completo com 9 tinturas** a ~11% cada (tripé + Berberis, orégano, bardana, espinheira-santa, erva-doce e própolis): 6 receitas (última em 02/2026).
+  **A v2 usa o mix completo na F2.**
 - **Óleo de orégano (14547):** dose moda **200 mg**. A v1 usava 300 mg 3x/dia (900 mg/dia).
   Em cápsula, associa com **berberina** (11).
 - **Berberina (9099, tier A, 900 prescrições/ano):** dose moda 500 mg. Associa com **alicina** (47), **silimarina** (101) e óleo de orégano (11).
@@ -30,10 +34,15 @@ Para trocar ativos, informe os números com ❌ (ex.: "4 ❌, 12 ❌").
 | 1 | F1 Cápsulas Antiparasitárias | TP1 | NAF | Berberina (9099) · A | 500 mg | FC12110 (moda) | ✅ | Novo. Interage com medicamentos (CYP3A4, metformina) |
 | 2 | F1 | TP1 | BAC | Óleo de orégano (14547) · B | 200 mg | FC12110 (moda) | ✅ | Era 300 mg 3x/dia. Confirmar adsorção em cápsula dura (Aerosil) |
 | 3 | F1 | TP1 | PAR | Alicina (11875) · C | 150 mg | FC12110 | ⚠️ | Substitui "alho 200 mg". Tier C → PAR. 47 associações com berberina |
-| 4 | F2 Tintura Antiparasitária | TP5 | NAF | Tintura de nogueira-preta (15417) · B | 33% | FC12110 | ✅ | Era 25% |
-| 5 | F2 | TP5 | BAC | Tintura de absinto (15415) · B | 33% | FC12110 | ✅ | Tujona: contraindicado em epilepsia e gestação |
-| 6 | F2 | TP5 | BAC | Tintura de cravinho (15416) · B | 34% | FC12110 | ✅ | |
-| 7 | F2 | | — | ~~Tintura de orégano (15304) · C~~ | — | — | ↺ | Removida: o orégano já está no F1 |
+| 4 | F2 Mix de Tinturas | TP5 | NAF | Tintura de nogueira-preta (15417) · B | 11% | FC12110 (mix completo) | ✅ | |
+| 5 | F2 | TP5 | NAF | Tintura de absinto (15415) · B | 12% | FC12110 (mix completo) | ✅ | Tujona: contraindicado em epilepsia e gestação |
+| 6 | F2 | TP5 | NAF | Tintura de cravinho (15416) · B | 11% | FC12110 (mix completo) | ✅ | |
+| 7 | F2 | TP5 | PAR | Tintura de Berberis vulgaris (11472) · C | 11% | FC12110 (mix completo) | ⚠️ | Tier C. Repete a berberina do F1 (GER-11): manter as duas? |
+| 7a | F2 | TP5 | PAR | Tintura de orégano (15304) · C | 11% | FC12110 (mix completo) | ⚠️ | Tier C. Repete o orégano do F1 (GER-11): manter os dois? |
+| 7b | F2 | TP5 | BAC | Tintura de espinheira-santa (52978) · B | 11% | FC12110 (mix completo) | ✅ | 7 a 8 associações com o tripé |
+| 7c | F2 | TP5 | PAR | Tintura de bardana (12650) · C | 11% | FC12110 (mix completo) | ⚠️ | Tier C |
+| 7d | F2 | TP5 | PAR | Tintura de erva-doce (46322) · C | 11% | FC12110 (mix completo) | ⚠️ | Tier C |
+| 7e | F2 | TP5 | BAC | Tintura de própolis (17036) · B | 11% | FC12110 (mix completo) | ✅ | 6 associações com o tripé |
 | 8 | F3 Proteção Hepática | TP1 | NAF | Silimarina (61682) · A | 200 mg | FC12110 (moda) | ✅ | Era 300 mg na cápsula da v1 |
 | 9 | F3 | TP1 | BAC | N-acetilcisteína (4285) · S | 600 mg | FC12110 (moda) | ✅ | Novo. Também ajuda a romper biofilme |
 | 10 | F3 | TP1 | BAC | L-metionina (60604) · A | 100 mg | FC12110 (moda) | ✅ | Novo |
@@ -51,15 +60,15 @@ Para trocar ativos, informe os números com ❌ (ex.: "4 ❌, 12 ❌").
 
 - **GER-07:** cápsulas abaixo de 2.000 mg (F1 850 mg · F3 900 mg · F4 750 mg).
 - **GER-08:** o único probiótico (S. boulardii) está em sachê.
-- **GER-11:** nenhum ativo repetido entre fórmulas (a v1 repetia o orégano em tintura e óleo).
+- **GER-11:** berberina e orégano aparecem no F1 (cápsula) e no F2 (tintura). É o mix da casa, mas precisa do aval do prescritor.
 - **BAC-01:** todos os BAC têm associação direta com o NAF da própria fórmula, conferida nas duas direções.
-- **PAR:** alicina (tier C) entra por invocação do prescritor.
+- **PAR:** alicina e as tinturas de Berberis, orégano, bardana e erva-doce (tier C) entram por invocação do prescritor.
 
 ## Posologia da v2 (rotina diária)
 
 | Horário | O que tomar |
 |---|---|
-| Manhã | F2 Tintura (30 gotas em água) + F3 Proteção Hepática após o café |
+| Manhã | F2 Mix de Tinturas (30 gotas em água) + F3 Proteção Hepática após o café |
 | Antes do almoço | F4 Conforto Digestivo |
 | Após almoço e jantar | F1 Cápsulas Antiparasitárias |
 | À noite | F5 Sachê Reparador (60 dias) |
@@ -74,7 +83,9 @@ nitazoxanida não estão cadastrados.
 
 ## Pendências antes da versão oficial
 
-1. Aprovar a v2 (ou marcar ❌ na tabela).
+1. Aprovar a v2 (ou marcar ❌ na tabela). Alternativas para a F2, se preferir menos tinturas:
+   tripé a 33% (mais prescrito) ou tripé + Berberis a 25%.
+1a. Confirmar a posologia do mix (30 gotas 1x/dia veio da referência v1; no mix completo cada tintura fica a ~11%).
 2. Confirmar forma do óleo de orégano no F1 (cápsula dura com Aerosil ou cápsula oleosa separada).
 3. Confirmar teor de antraquinonas do Aloe 200:1 e a unidade do S. boulardii.
 4. Artes: capa 3:4 em tons de verde-oliva e fotos de produto (cápsulas, frasco conta-gotas, sachê).

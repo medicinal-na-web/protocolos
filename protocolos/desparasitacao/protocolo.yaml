@@ -36,24 +36,30 @@ paginas:
         - nome: Alicina
           texto: Principal composto ativo do **alho**, com ação **antimicrobiana e antiparasitária**. Torna o intestino um **ambiente desfavorável** a parasitas, bactérias e fungos oportunistas.
 
-  # Página 3 — F2 · Eliminar: tintura clássica
+  # Página 3 — F2 · Eliminar: mix de tinturas (mix completo da casa, 9 tinturas)
   - - formula:
-        nome: Tintura Antiparasitária
+        nome: Mix de Tinturas Antiparasitárias
         subtitulo: fase 1 · eliminar
         via: IN
         periodo: dia
         ativos:
-          - { nome: Tintura de nogueira-preta, dose: 33%, destaque: true }
-          - { nome: Tintura de absinto, dose: 33%, destaque: true }
-          - { nome: Tintura de cravinho, dose: 34%, destaque: true }
+          - { nome: Tintura de nogueira-preta, dose: 11%, destaque: true }
+          - { nome: Tintura de absinto, dose: 12%, destaque: true }
+          - { nome: Tintura de cravinho, dose: 11%, destaque: true }
+          - { nome: Tintura de Berberis vulgaris, dose: 11%, destaque: true }
+          - { nome: Tintura de orégano, dose: 11%, destaque: true }
+          - { nome: Tintura de espinheira-santa, dose: 11%, destaque: true }
+          - { nome: Tintura de bardana, dose: 11%, destaque: true }
+          - { nome: Tintura de erva-doce, dose: 11%, destaque: true }
+          - { nome: Tintura de própolis, dose: 11%, destaque: true }
         modo_de_uso: Tomar 30 gotas diluídas em meio copo de água, 1 vez ao dia pela manhã, por 30 dias.
     - destaques:
-        - nome: Nogueira-preta
-          texto: Rica em **juglona e taninos**, de uso tradicional **vermífugo e antifúngico**, com ação **adstringente** sobre a mucosa intestinal. Atua principalmente sobre as **formas adultas** dos parasitas.
-        - nome: Absinto
-          texto: Planta de **princípios amargos** (absintina) com longa tradição **antiparasitária**. **Estimula a digestão** e a produção de bile, favorecendo a eliminação intestinal.
-        - nome: Cravinho
-          texto: Concentra **eugenol**, de ação **antimicrobiana e antiparasitária**, com efeito sobre **ovos e larvas**. Fecha o tripé clássico com nogueira e absinto, cobrindo **todo o ciclo de vida** do parasita.
+        - nome: Nogueira-preta, absinto e cravinho
+          texto: O **tripé clássico** da desparasitação. A **juglona** da nogueira age sobre os parasitas adultos, os **amargos** do absinto estimulam a bile e a eliminação, e o **eugenol** do cravinho atinge **ovos e larvas**, cobrindo **todo o ciclo de vida** do parasita.
+        - nome: Berberis e orégano
+          texto: Reforçam o espectro **antimicrobiano**. A **berberina** do Berberis atua sobre **protozoários** como a Giardia, e o **carvacrol** do orégano sobre **fungos e bactérias oportunistas**.
+        - nome: Espinheira-santa, bardana, erva-doce e própolis
+          texto: Tornam o mix **mais bem tolerado**. A espinheira-santa **protege o estômago**, a bardana tem ação **depurativa**, a erva-doce alivia **gases e cólicas** e a própolis apoia a **imunidade** da mucosa.
 
   # Página 4 — F3 · Proteger o fígado e F4 · conforto digestivo
   - - formula:
