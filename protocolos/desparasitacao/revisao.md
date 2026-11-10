@@ -46,7 +46,7 @@ Para trocar ativos, informe os números com ❌ (ex.: "4 ❌, 12 ❌").
 | 8 | F3 Proteção Hepática | TP1 | NAF | Silimarina (61682) · A | 200 mg | FC12110 (moda) | ✅ | Era 300 mg na cápsula da v1 |
 | 9 | F3 | TP1 | BAC | N-acetilcisteína (4285) · S | 600 mg | FC12110 (moda) | ✅ | Novo. Também ajuda a romper biofilme |
 | 10 | F3 | TP1 | BAC | L-metionina (60604) · A | 100 mg | FC12110 (moda) | ✅ | Novo |
-| 11 | F4 Conforto Digestivo | TP1 | NAF | Biointestil® (11437) · A | 300 mg | FC12110 (moda) | ✅ | Novo |
+| 11 | F4 Conforto Digestivo | TP1 | NAF | Biointestil® (11437) · A | 300 mg | FC12110 (moda) | ⚠️ | Novo. "Prescrever isoladamente" **não confirmado** (ver nota abaixo) |
 | 12 | F4 | TP1 | BAC | Menta piperita (974) · B | 250 mg | FC12110 (moda) | ✅ | Substitui "hortelã 400 mg" |
 | 13 | F4 | TP1 | BAC | Bromelina (54781) · A | 100 mg | FC12110 (moda) | ✅ | Novo |
 | 14 | F4 | TP1 | BAC | Papaína (55888) · A | 100 mg | FC12110 (moda) | ✅ | Novo. 1.682 associações com bromelina |
@@ -55,6 +55,17 @@ Para trocar ativos, informe os números com ❌ (ex.: "4 ❌, 12 ❌").
 | 17 | F5 | TP15 | BAC | Aloe vera 200:1 (31690) · B | 100 mg | FC12110 | ⚠️ | Movido da cápsula. Contém antraquinonas: confirmar teor |
 | 18 | — | | — | ~~L-ornitina (55426) · B~~ | — | — | ↺ | Removida (uso esportivo no histórico). Volta se o prescritor quiser |
 | 19 | — | | — | ~~Alecrim 300 mg~~ | — | — | ↺ | Sem extrato seco oral cadastrado |
+
+### Nota: Biointestil isolado ou associado? (verificado em 10/11/2026)
+
+- **Fornecedor (Infinity Pharma, guia de formulações):** associa o BIOintestil® **na mesma cápsula** com boldo, alcachofra,
+  Relora®, EpiCor™, InSea2® e até com *L. gasseri* + *L. paracasei*. Também há xarope a 3%. Não há orientação de manipular isolado
+  nem de cápsula gastrorresistente. Doses do fornecedor: 300 mg 2x/dia (associado) ou 600 mg 1x/dia (isolado).
+- **FC12110 (desde 01/2024):** em cápsula, ~80% das receitas trazem o Biointestil sozinho (1.801 de ~2.300), mas há ~480 receitas
+  associadas (menta piperita 129, IBS Care-8 230, curcumina 170, bromelina 10).
+- **Ficha no banco (11437):** sem alerta de incompatibilidade. Fabricante TGD srl, fornecedor Infinity Pharma.
+- **Conclusão:** a regra não se confirma nas fontes disponíveis. O isolamento é hábito de prescrição, não exigência técnica.
+  Se o farmacêutico tiver orientação diferente do fornecedor, a F4 pode virar duas cápsulas (Biointestil 600 mg 1x/dia + menta/enzimas).
 
 ## Regras do motor
 
