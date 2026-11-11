@@ -249,6 +249,7 @@ const APP = String.raw`
     <nav class="nav" id="nav" hidden style="margin-left:18px">
       <button class="nav-b ativo" data-view="protocolos" type="button">Protocolos</button>
       <button class="nav-b" data-view="cartela" id="nav-cartela" type="button" hidden>Minha carteira</button>
+      <button class="nav-b" data-view="materiais" id="nav-materiais" type="button" hidden>Materiais</button>
       <button class="nav-b" data-view="admin" id="nav-admin" type="button" hidden>Administração</button>
     </nav>
     <div class="quem"><span id="quem-nome"></span><button class="sair" id="sair">Sair</button></div>
@@ -338,6 +339,15 @@ const APP = String.raw`
       <div class="pr-resumo" id="ct-resumo"></div>
       <div id="ct-lista" class="adm-lista"></div>
       <div class="carregando" id="ct-carregando">Carregando sua carteira…</div>
+    </div>
+
+    <div id="view-materiais" hidden>
+      <div class="intro">
+        <h1>Materiais</h1>
+        <p>Baixe os guias em PDF para apresentar aos prescritores. Material de uso interno da equipe.</p>
+      </div>
+      <div id="mat-lista" class="adm-lista"></div>
+      <div class="carregando" id="mat-carregando">Carregando materiais…</div>
     </div>
   </main>
 </div>
@@ -502,10 +512,11 @@ const APP = String.raw`
     $("nav").hidden=!temNav;
     $("nav-admin").hidden=!sessao.admin;
     $("nav-cartela").hidden=!sessao.visitadora;
+    $("nav-materiais").hidden=!sessao.visitadora;
     // todos começam em Protocolos; visitadora/admin trocam de aba pela nav
     viewAtual="protocolos";
     document.querySelectorAll(".nav-b").forEach(function(x){x.classList.toggle("ativo",x.dataset.view==="protocolos")});
-    $("view-protocolos").hidden=false; $("view-admin").hidden=true; $("view-cartela").hidden=true;
+    $("view-protocolos").hidden=false; $("view-admin").hidden=true; $("view-cartela").hidden=true; $("view-materiais").hidden=true;
     carregarProtocolos();
   }
   // Navegação Protocolos / Administração (admin)
@@ -514,9 +525,10 @@ const APP = String.raw`
     bt.onclick=function(){
       var v=bt.dataset.view; if(v===viewAtual)return; viewAtual=v;
       document.querySelectorAll(".nav-b").forEach(function(x){x.classList.toggle("ativo",x.dataset.view===v)});
-      $("view-protocolos").hidden=v!=="protocolos"; $("view-admin").hidden=v!=="admin"; $("view-cartela").hidden=v!=="cartela";
+      $("view-protocolos").hidden=v!=="protocolos"; $("view-admin").hidden=v!=="admin"; $("view-cartela").hidden=v!=="cartela"; $("view-materiais").hidden=v!=="materiais";
       if(v==="admin"&&!adminCarregado){adminCarregado=true;carregarAdmin();}
       if(v==="cartela"&&!cartelaCarregada){cartelaCarregada=true;carregarCartela();}
+      if(v==="materiais"&&!materiaisCarregado){materiaisCarregado=true;carregarMateriais();}
     };
   });
   async function carregarProtocolos(){
@@ -922,8 +934,28 @@ const APP = String.raw`
     if(!vis.length)L.innerHTML='<p class="adm-meta">Nenhum prescritor neste filtro.</p>';
   }
 
+  // ---------- Materiais (PDF) — visitadora ----------
+  var materiaisCarregado=false;
+  async function carregarMateriais(){
+    var lista=protocolos;
+    if(!lista||!lista.length){ lista=await api("?select=slug,titulo,cor&ativo=eq.true&order=destaque.desc,ordem")||[]; }
+    $("mat-carregando").hidden=true;
+    var L=$("mat-lista"); L.innerHTML="";
+    if(!lista.length){ L.innerHTML='<p class="adm-meta">Nenhum material disponível.</p>'; return; }
+    lista.forEach(function(p){
+      var row=document.createElement("div"); row.className="adm-row";
+      row.innerHTML='<div class="adm-info"><h3><span class="t"></span></h3><div class="adm-meta">Guia completo em PDF</div></div><div class="adm-ctrl"></div>';
+      row.querySelector(".t").textContent=p.titulo;
+      var a=document.createElement("a"); a.className="mini"; a.textContent="⬇ Baixar PDF";
+      a.href=NEXUS_URL+"/functions/v1/portal-app/pdf/"+encodeURIComponent(p.slug);
+      a.setAttribute("download", p.slug+".pdf"); a.target="_blank"; a.rel="noopener"; a.style.textDecoration="none";
+      row.querySelector(".adm-ctrl").appendChild(a);
+      L.appendChild(row);
+    });
+  }
+
   // ---------- Sair ----------
-  function sair(){limparSessao();sessao=null;location.hash="";$("app").hidden=true;$("visor").hidden=true;$("modal-acesso").hidden=true;$("nav").hidden=true;$("view-admin").hidden=true;$("view-cartela").hidden=true;$("view-protocolos").hidden=false;viewAtual="protocolos";adminCarregado=false;cartelaCarregada=false;cartelaItens=[];cvCarregado=false;cvItens=[];cvCdfun=null;$("tela-login").hidden=false;$("passo-cod").hidden=true;$("passo-id").hidden=false}
+  function sair(){limparSessao();sessao=null;location.hash="";$("app").hidden=true;$("visor").hidden=true;$("modal-acesso").hidden=true;$("nav").hidden=true;$("view-admin").hidden=true;$("view-cartela").hidden=true;$("view-protocolos").hidden=false;viewAtual="protocolos";adminCarregado=false;cartelaCarregada=false;cartelaItens=[];cvCarregado=false;cvItens=[];cvCdfun=null;materiaisCarregado=false;$("view-materiais").hidden=true;$("tela-login").hidden=false;$("passo-cod").hidden=true;$("passo-id").hidden=false}
   $("sair").onclick=sair;
 
   // ---------- Início ----------
