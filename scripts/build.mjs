@@ -168,6 +168,39 @@ function imgWebDataUri(arqAbs, maxDim = 950, q = 68) {
   _cacheOtim.set(chave, uri);
   return uri;
 }
+// Para o PDF: embute a imagem otimizada em vez do original em resolução cheia.
+// Imagem opaca → JPEG (o Chromium mantém a compressão DCT no PDF → leve).
+// Imagem com transparência → PNG redimensionado (preserva o canal alfa).
+// Capa e fundos cheios (flatten:true) viram sempre JPEG sobre branco.
+function _temAlpha(arqAbs) {
+  try {
+    return execSync(`identify -format "%[opaque]" ${JSON.stringify(arqAbs)}`, { stdio: ["ignore", "pipe", "ignore"] })
+      .toString().trim().toLowerCase() === "false";
+  } catch { return false; }
+}
+function imgPdfDataUri(arqAbs, opt = {}) {
+  const maxDim = opt.maxDim || 1600, q = opt.q || 84;
+  const chave = `pdf|${arqAbs}|${maxDim}|${q}|${opt.flatten ? 1 : 0}`;
+  if (_cacheOtim.has(chave)) return _cacheOtim.get(chave);
+  const ext = path.extname(arqAbs).toLowerCase();
+  let uri;
+  try {
+    const alpha = !opt.flatten && _temAlpha(arqAbs);
+    const out = path.join(os.tmpdir(), `guiapdf_${process.pid}_${_otimN++}.${alpha ? "png" : "jpg"}`);
+    if (alpha) {
+      execSync(`convert ${JSON.stringify(arqAbs)} -resize "${maxDim}x${maxDim}>" -strip ${JSON.stringify(out)}`, { stdio: "ignore" });
+      uri = `data:image/png;base64,${b64(out)}`;
+    } else {
+      execSync(`convert ${JSON.stringify(arqAbs)} -resize "${maxDim}x${maxDim}>" -background white -flatten -strip -quality ${q} ${JSON.stringify(out)}`, { stdio: "ignore" });
+      uri = `data:image/jpeg;base64,${b64(out)}`;
+    }
+    fs.rmSync(out, { force: true });
+  } catch {
+    uri = `data:${MIME[ext] || "image/jpeg"};base64,${b64(arqAbs)}`; // sem ImageMagick: original
+  }
+  _cacheOtim.set(chave, uri);
+  return uri;
+}
 // Gera o WebP em disco (uma vez) e devolve a URL pública para o guia referenciar.
 function imgWebUrl(arqAbs, destDir, baseUrl, maxDim = 950, q = 68) {
   const nome = path.basename(arqAbs, path.extname(arqAbs)) + ".webp";
@@ -203,7 +236,13 @@ export async function renderizar(slug, modo = "pdf", opts = {}) {
     web,
     qr: p.qr,
     img: !web
-      ? (f) => `../protocolos/${slug}/artes/${f}`
+      ? (f) => imgPdfDataUri(path.join(artesDir, f))
+      : porUrl
+        ? (f) => imgWebUrl(path.join(artesDir, f), opts.artesDest, opts.artesBase)
+        : (f) => imgWebDataUri(path.join(artesDir, f)),
+    // capa/fundo cheio: sempre JPEG sobre branco (transparência não importa em full-bleed)
+    capa: !web
+      ? (f) => imgPdfDataUri(path.join(artesDir, f), { flatten: true, maxDim: 1700, q: 86 })
       : porUrl
         ? (f) => imgWebUrl(path.join(artesDir, f), opts.artesDest, opts.artesBase)
         : (f) => imgWebDataUri(path.join(artesDir, f)),
@@ -217,7 +256,7 @@ export async function renderizar(slug, modo = "pdf", opts = {}) {
       <h1>${esc(p.titulo)}</h1>
       <div class="selo-branco"></div>
     </div>
-    <div class="capa-imagem" style="background-image:url('${ctx.img(p.capa)}');background-position:${p.capa_posicao || "center top"}"></div>
+    <div class="capa-imagem" style="background-image:url('${ctx.capa(p.capa)}');background-position:${p.capa_posicao || "center top"}"></div>
     <div class="capa-logo"></div>
   </section>`);
 
