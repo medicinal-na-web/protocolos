@@ -39,7 +39,7 @@ paginas:
         ativos:
           - { nome: NAD+ (LipoAvail®), dose: "10mg/ml", destaque: true }
           - { nome: Nasalan® (veículo nasal), dose: q.s.p. }
-          - { nome: Frasco spray nasal, dose: 30ml }
+          - { nome: Frasco spray nasal, dose: 10ml }
         modo_de_uso: Aplicar 1 jato em cada narina pela manhã (cada jato ≈ 0,1 ml ≈ 1 mg). A frequência pode ir a 2 vezes ao dia conforme avaliação do prescritor. Dose extrapolada de dados pré-clínicos — ver orientações ao prescritor.
     - destaques:
         - nome: NAD+ Nasal
