@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia de Formulações — Melan Control</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap">
+<style>/* Guia de Formulações — Medicinal Farmácia e Manipulação
+   Layout A4 único. A cor de cada protocolo vem de --tema-escura / --tema-clara,
+   definidas no protocolo.yaml. O resto é identidade fixa da marca.
+   --mascara-selo / --mascara-logo são injetadas pelo build como data URI
+   (o Chromium não aplica mask com arquivo local). */
+
+
+
+
+:root {
+  --marca-azul: #1f6fc2;
+  --card-borda: #22b5e6;
+  --texto: #1d1d1f;
+  --texto-suave: #3a3a3c;
+  --conector: #6b6b70;
+  --sol: #f5b82e;
+  --lua: #1f2f5c;
+}
+
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #fff; }
+body {
+  font-family: "Montserrat", sans-serif;
+  color: var(--texto);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.pagina {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  page-break-after: always;
+  break-after: page;
+  background: #fff;
+}
+.pagina:last-child { page-break-after: auto; break-after: auto; }
+
+/* Selo da marca tingido com a cor do protocolo */
+.selo-tema {
+  background: linear-gradient(135deg, var(--tema-escura), var(--tema-clara));
+  -webkit-mask: var(--mascara-selo) center / contain no-repeat;
+  mask: var(--mascara-selo) center / contain no-repeat;
+}
+
+/* ---------- Capa ---------- */
+.capa-faixa {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 63mm;
+  background: linear-gradient(90deg, var(--tema-escura), var(--tema-clara));
+  padding: 19mm 18mm 0 18mm;
+  color: #fff;
+  z-index: 2;
+}
+.capa-faixa .sobretitulo { font-size: 13pt; font-weight: 400; letter-spacing: 0.2pt; }
+.capa-faixa h1 {
+  margin: 4mm 0 0 0;
+  font-size: 26pt;
+  font-weight: 700;
+  letter-spacing: 0.3pt;
+  text-transform: uppercase;
+  max-width: 130mm;
+  line-height: 1.1;
+}
+.capa-faixa .selo-branco {
+  position: absolute;
+  right: 18mm;
+  top: 17mm;
+  width: 27mm;
+  height: 27mm;
+  background: url("https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/selo-branco.webp") center / contain no-repeat;
+}
+.capa-imagem {
+  position: absolute;
+  inset: 63mm 0 0 0;
+  background-size: cover;
+  background-position: center top;
+}
+.capa-imagem::after {
+  /* véu branco no rodapé para o logo respirar e ter contraste em qualquer capa */
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 58mm;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.75) 55%, rgba(255,255,255,0.98) 100%);
+}
+.capa-logo {
+  position: absolute;
+  left: 50%;
+  bottom: 9mm;
+  transform: translateX(-50%);
+  width: 62mm;
+  height: 14mm;
+  z-index: 3;
+  background: var(--tema-escura);
+  -webkit-mask: var(--mascara-logo) center / contain no-repeat;
+  mask: var(--mascara-logo) center / contain no-repeat;
+}
+
+/* ---------- Páginas internas ---------- */
+.cabecalho {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 30mm;
+  padding: 9mm 14mm 0 23mm;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.cabecalho .nome { font-size: 8.5pt; margin-top: 8mm; text-transform: uppercase; }
+.cabecalho .marca { display: flex; flex-direction: column; align-items: flex-end; }
+.cabecalho .marca img { width: 46mm; }
+.cabecalho .marca span { font-size: 8.5pt; margin-top: 1.5mm; letter-spacing: 0.2pt; }
+
+.selo-canto {
+  position: absolute;
+  right: 9mm;
+  bottom: 9mm;
+  width: 14mm;
+  height: 14mm;
+}
+
+.conteudo {
+  position: absolute;
+  top: 37mm;
+  left: 0; right: 0; bottom: 22mm;
+}
+
+/* ---------- Bloco de fórmula ---------- */
+.bloco {
+  position: relative;
+  padding: 0 14mm 0 23mm;
+}
+.bloco + .bloco { margin-top: 7mm; }
+
+.linha-formula {
+  display: flex;
+  align-items: flex-start;
+  gap: 8mm;
+}
+
+.card {
+  position: relative;
+  width: 122mm;
+  flex: none;
+  border: 0.45mm solid var(--card-borda);
+  border-radius: 5mm;
+  padding: 12.5mm 9mm 7mm 18mm;
+  background: rgba(255,255,255,0.86);
+  z-index: 2;
+}
+.pill {
+  position: absolute;
+  top: -5mm;
+  left: 12mm;
+  background: #fff;
+  border: 0.4mm solid var(--card-borda);
+  border-radius: 4mm;
+  padding: 1.6mm 4mm 1.6mm 3.5mm;
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+}
+.pill .titulos { display: flex; flex-direction: column; line-height: 1.1; }
+.pill b { font-size: 11pt; font-weight: 700; text-transform: uppercase; }
+.pill small { font-size: 7pt; font-weight: 700; font-style: italic; text-transform: uppercase; }
+.pill svg { width: 5.6mm; height: 5.6mm; flex: none; }
+
+.via {
+  position: absolute;
+  top: -1mm;
+  right: -10mm;
+  width: 17mm;
+  height: 12mm;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 17pt;
+  background: linear-gradient(135deg, var(--tema-escura), var(--tema-clara));
+}
+
+.ativos { list-style: none; margin: 0; padding: 0; width: 76mm; }
+.ativos li {
+  display: flex;
+  align-items: baseline;
+  font-size: 7.4pt;
+  height: 6.1mm;
+}
+.ativos .n { font-weight: 700; white-space: nowrap; }
+/* Pontilhado feito com pontos de texto: sai idêntico em qualquer leitor de PDF
+   (borda "dotted" muda de densidade conforme a escala e o comprimento). */
+.ativos .pont {
+  flex: 1;
+  min-width: 3mm;
+  margin: 0 1mm;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 6pt;
+  font-weight: 400;
+  letter-spacing: 0.32mm;
+  color: #555;
+  direction: rtl; /* corta o excesso no início, então os pontos sempre encostam na dose */
+}
+.ativos .pont::before {
+  content: "................................................................................................................................................";
+}
+.ativos .d { white-space: nowrap; }
+.modo { font-size: 7.4pt; margin: 4mm 0 0 0; max-width: 82mm; line-height: 1.45; }
+.modo b { font-weight: 700; }
+
+.qr-box {
+  width: 37mm;
+  flex: none;
+  margin-left: auto;
+  margin-top: 4mm;
+  border: 0.4mm solid var(--card-borda);
+  border-radius: 4mm;
+  padding: 3mm 3mm 3.5mm;
+  text-align: center;
+  font-size: 9.5pt;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.qr-box img { width: 27mm; height: 27mm; margin-top: 2.5mm; display: block; margin-inline: auto; }
+
+/* Arte ao lado do card (mãos, conta-gotas, potes…) */
+.arte-lado {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  /* funde a foto com o branco da página */
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+
+/* ---------- Destaques de ativos ---------- */
+.destaques { margin-top: 6mm; padding-left: 8mm; padding-right: 6mm; }
+.destaque + .destaque { margin-top: 3.5mm; }
+.destaque h4 {
+  margin: 0 0 2.5mm 0;
+  font-size: 10.5pt;
+  font-weight: 700;
+}
+.destaque p {
+  margin: 0;
+  font-size: 9.6pt;
+  line-height: 1.42;
+  color: var(--texto-suave);
+}
+.destaque p strong, .texto p strong { color: var(--texto); font-weight: 700; }
+
+.destaques-com-arte { display: flex; align-items: flex-start; gap: 2mm; margin-right: -14mm; }
+.destaques-com-arte .destaques { flex: 1; padding-right: 0; }
+.arte-destaques {
+  flex: none;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+
+/* Conectores desenhados por script após o layout */
+.conectores {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ---------- Faixa de imagem ---------- */
+.faixa {
+  position: relative;
+  height: var(--altura, 55mm);
+  margin: 7mm 0;
+  background-size: cover;
+  background-position: center;
+}
+.faixa::before, .faixa::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  height: 38%;
+  pointer-events: none;
+}
+.faixa::before { top: 0; background: linear-gradient(#fff 0%, rgba(255,255,255,0.75) 35%, rgba(255,255,255,0)); }
+.faixa::after { bottom: 0; background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.75) 65%, #fff 100%); }
+.faixa .etiqueta { position: absolute; top: 2mm; left: 50%; transform: translateX(-50%); margin: 0; z-index: 2; }
+
+/* ---------- Texto educativo ---------- */
+.texto { padding: 0 25mm 0 23mm; }
+.texto h3 {
+  font-size: 13pt;
+  margin: 0 0 3mm;
+  color: var(--tema-escura);
+}
+.texto p { font-size: 9.6pt; line-height: 1.55; margin: 0 0 3mm; color: var(--texto-suave); text-align: justify; }
+.texto .ilustracao { display: block; margin: 2mm auto 4mm; max-width: 100%; }
+.etiqueta {
+  display: block;
+  width: fit-content;
+  margin: 2mm auto -6mm;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.etiqueta span {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 1.5mm 4mm;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14pt;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--tema-escura), var(--tema-clara));
+  border-radius: 1.5mm;
+}
+.etiqueta span:first-child { transform: rotate(-3deg); width: fit-content; }
+.etiqueta span + span { margin-top: -1mm; transform: rotate(-2deg); }
+
+/* fundir: false — foto já em fundo branco puro, sem esfumar as bordas */
+.arte-destaques.sem-mascara { -webkit-mask-image: none; mask-image: none; align-self: center; }
+
+/* Separação entre fórmulas diferentes na mesma página: respiro + linha fina na cor do protocolo */
+.bloco[data-formula] ~ .bloco[data-formula] { margin-top: 13mm; }
+.bloco[data-formula] ~ .bloco[data-formula]::before {
+  content: "";
+  position: absolute;
+  left: 23mm;
+  right: 14mm;
+  top: -7.5mm;
+  height: 0.35mm;
+  background: linear-gradient(90deg, var(--tema-clara), rgba(255,255,255,0));
+  opacity: 0.7;
+}
+</style>
+<style>:root{--tema-escura:#5a2a82;--tema-clara:#b072e0;--mascara-selo:url("https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/selo.webp");--mascara-logo:url("https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-mono.webp");}</style>
+</head><body>
+<section class="pagina capa">
+    <div class="capa-faixa">
+      <div class="sobretitulo">Guia de Formulações</div>
+      <h1>Melan Control</h1>
+      <div class="selo-branco"></div>
+    </div>
+    <div class="capa-imagem" style="background-image:url('https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/melan-control/capa.webp');background-position:center top"></div>
+    <div class="capa-logo"></div>
+  </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Melan Control</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Melan Control Cream</b><small>com hidroquinona</small></span><svg viewBox="0 0 24 24"><path d="M15.5 3.2a9 9 0 1 0 5.3 13.6A7.5 7.5 0 0 1 15.5 3.2z" fill="none" stroke="var(--lua)" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li>
+        <span class="n">Nikkol VC-IP</span><span class="pont"></span><span class="d">5%</span></li><li>
+        <span class="n">Hidroquinona</span><span class="pont"></span><span class="d">4%</span></li><li>
+        <span class="n">Tretinoína</span><span class="pont"></span><span class="d">0,025%</span></li><li>
+        <span class="n">Fluocinolona</span><span class="pont"></span><span class="d">0,025%</span></li><li>
+        <span class="n">Ácido Glicólico</span><span class="pont"></span><span class="d">8%</span></li><li>
+        <span class="n">Vitamina E</span><span class="pont"></span><span class="d">3%</span></li><li>
+        <span class="n">Creme clareador</span><span class="pont"></span><span class="d">30g</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Aplicar na face à noite após higienização.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-formula data-grupo="2">
+    <img class="arte-lado" src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/melan-control/creme.webp" style="top:-6mm;right:0mm;width:82mm">
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Melan Control Cream</b><small>sem hidroquinona</small></span><svg viewBox="0 0 24 24"><path d="M15.5 3.2a9 9 0 1 0 5.3 13.6A7.5 7.5 0 0 1 15.5 3.2z" fill="none" stroke="var(--lua)" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Nikkol VC-IP</span><span class="pont"></span><span class="d">5%</span></li><li class="ativo-destaque">
+        <span class="n">4-HR (Hexilresorcinol)</span><span class="pont"></span><span class="d">1%</span></li><li class="ativo-destaque">
+        <span class="n">POMC-BlocK</span><span class="pont"></span><span class="d">3%</span></li><li>
+        <span class="n">Ácido Tranexâmico</span><span class="pont"></span><span class="d">5%</span></li><li>
+        <span class="n">Fluocinolona</span><span class="pont"></span><span class="d">0,025%</span></li><li>
+        <span class="n">Tretinoína</span><span class="pont"></span><span class="d">0,025%</span></li><li>
+        <span class="n">Vitamina E</span><span class="pont"></span><span class="d">3%</span></li><li>
+        <span class="n">Creme clareador</span><span class="pont"></span><span class="d">30g</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Aplicar na face à noite após higienização.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques"><div class="destaque"><h4>Nikkol VC-IP®</h4><p>É o derivado <strong>lipossolúvel da Vitamina C</strong> na forma de éster que apresenta <strong>alta estabilidade</strong> e <strong>excelente absorção percutânea</strong>, possui potente ação antioxidante, contribuindo para a <strong>uniformização do tom da pele</strong>, por <strong>inibir</strong> a atividade da <strong>tirosinase</strong>.</p></div><div class="destaque"><h4>4-HR (Hexilresorcinol)®</h4><p>Atua como inibidor da <strong>tirosinase</strong>, a enzima chave na <strong>produção de melanina</strong>, com eficácia no <strong>clareamento</strong> e <strong>uniformização do tom da pele</strong>. Também tem ação <strong>antioxidante</strong>.</p></div><div class="destaque"><h4>POMC-BlocK®</h4><p>Atua na <strong>inibição</strong> da <strong>expressão gênica</strong> da <strong>POMC</strong> e da <strong>tirosinase</strong>, suprimindo a <strong>melanogênese</strong> para impedir a síntese e a transferência da melanina, <strong>reduzindo as hiperpigmentações cutâneas</strong>.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Melan Control</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Cápsulas Despigmentantes</b></span></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">MintyBright™ Nu</span><span class="pont"></span><span class="d">150mg</span></li><li class="ativo-destaque">
+        <span class="n">Oli-Olá</span><span class="pont"></span><span class="d">250mg</span></li><li>
+        <span class="n">Pinus Pinaster</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">Polypodium Leucotomos</span><span class="pont"></span><span class="d">250mg</span></li><li>
+        <span class="n">Luteína</span><span class="pont"></span><span class="d">10mg</span></li><li>
+        <span class="n">Vit C Revestida</span><span class="pont"></span><span class="d">500mg</span></li><li>
+        <span class="n">Acetato de Tocoferol</span><span class="pont"></span><span class="d">400UI</span></li><li>
+        <span class="n">Licopeno</span><span class="pont"></span><span class="d">10mg</span></li><li>
+        <span class="n">Astaxantina</span><span class="pont"></span><span class="d">5mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 1 dose pela manhã.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>MintyBright™ Nu</h4><p>Atua com <strong>tripla ação</strong>, desenvolvido para ajudar na redução das hiperpigmentações dérmicas e uniformização do tom da pele, atuando de dentro pra fora. <strong>Tratamento 360°</strong> que age na raiz do melasma — <strong>clareia, uniformiza e protege</strong>.</p></div><div class="destaque"><h4>Oli-Ola®</h4><p>Devido à potente ação antioxidante do hidroxitirosol, Oli-Ola™ auxilia na <strong>diminuição da hiperpigmentação</strong>, promovendo <strong>uniformidade do tom da pele</strong>, estímulo da renovação celular e a síntese de <strong>colágeno e elastina</strong>.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Melan Control</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Foam Ácido Mandélico</b></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg><svg viewBox="0 0 24 24"><path d="M15.5 3.2a9 9 0 1 0 5.3 13.6A7.5 7.5 0 0 1 15.5 3.2z" fill="none" stroke="var(--lua)" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li>
+        <span class="n">Ácido Mandélico</span><span class="pont"></span><span class="d">3,5%</span></li><li>
+        <span class="n">Oliven300</span><span class="pont"></span><span class="d">5%</span></li><li>
+        <span class="n">Glicerina</span><span class="pont"></span><span class="d">3%</span></li><li>
+        <span class="n">Foam</span><span class="pont"></span><span class="d">150ml</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Lavar o rosto pela manhã e à noite.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="faixa" style="background-image:url('https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/melan-control/espuma.webp');--altura:62mm;background-position:center"></div>
+<div class="bloco" data-formula data-grupo="2">
+    <img class="arte-lado" src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/melan-control/conta-gotas.webp" style="top:10mm;right:6mm;width:42mm">
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Sérum Protetor</b></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Ólea HT10</span><span class="pont"></span><span class="d">1%</span></li><li>
+        <span class="n">Vitamina B12</span><span class="pont"></span><span class="d">0,1%</span></li><li>
+        <span class="n">Niacinamida</span><span class="pont"></span><span class="d">4%</span></li><li>
+        <span class="n">Alfa Arbutin</span><span class="pont"></span><span class="d">4%</span></li><li>
+        <span class="n">Ceramides 3</span><span class="pont"></span><span class="d">0,5%</span></li><li>
+        <span class="n">Ácido Glicirrízico</span><span class="pont"></span><span class="d">0,5%</span></li><li>
+        <span class="n">Sérum fluido</span><span class="pont"></span><span class="d">50ml</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Aplicar na face 5 gotas pela manhã após higienização e antes do filtro solar.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques"><div class="destaque"><h4>Olea HT™</h4><p>Proporciona <strong>proteção à pele</strong> frente aos danos induzidos pela <strong>luz azul</strong>.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Melan Control</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Modulador da Microbiota</b></span></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">DERMMA Biotic</span><span class="pont"></span><span class="d">100mg</span></li><li class="ativo-destaque">
+        <span class="n">Newbiome</span><span class="pont"></span><span class="d">200mg</span></li><li>
+        <span class="n">Bifidum Adolescentis</span><span class="pont"></span><span class="d">1BLH</span></li><li>
+        <span class="n">Lactobacillus Johnsonii</span><span class="pont"></span><span class="d">1BLH</span></li><li>
+        <span class="n">Lactobacillus Paracasei</span><span class="pont"></span><span class="d">1BLH</span></li><li>
+        <span class="n">Lactobacillus Rhamnosus</span><span class="pont"></span><span class="d">1BLH</span></li><li>
+        <span class="n">Lactobacillus Salivarius</span><span class="pont"></span><span class="d">1BLH</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 1 dose à noite.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>Newbiome®</h4><p>É um <strong>posbiótico avançado</strong>, padronizado em 50% de tributirina microencapsulada em pó, que serve como uma <strong>fonte de butirato</strong> altamente biodisponível e <strong>sem odor</strong> para a <strong>saúde intestinal</strong>. Atua de forma sinérgica no manejo da distensão abdominal, abordando mecanismos centrais como <strong>disbiose intestinal, inflamação de baixo grau e disfunção da barreira intestinal</strong>.</p></div><div class="destaque"><h4>DERMMA Biotic®</h4><p>É a combinação de <strong>8 cepas probióticas</strong> selecionadas em concentrações balanceadas, desenvolvidas para atuarem no <strong>eixo intestino-pele</strong>, promovendo a <strong>saúde cutânea e capilar</strong>.</p></div></div></div>
+<div class="texto"><div class="etiqueta"><span>Eixo</span><span>Intestino - Pele</span></div><img class="ilustracao" src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/melan-control/eixo-intestino-pele.webp" style="width:112mm"><p>O <strong>eixo intestino–pele</strong> é a conexão direta entre a saúde intestinal e a saúde da pele. Ele envolve microbiota, sistema imunológico, <strong>inflamação</strong>, <strong>metabolismo hormonal</strong> e até <strong>estresse oxidativo</strong>, todos fatores que influenciam o <strong>melasma</strong>. No caso do melasma, essa relação é especialmente importante porque estamos falando de uma condição <strong>inflamatória e multifatorial</strong>, não apenas estética.</p></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<script>// Desenha as linhas que ligam os ativos em destaque (ativo-destaque) aos
+// textos explicativos (.destaque h4) de cada página, como no guia original.
+window.desenharConectores = function () {
+  const pxPorMm = (() => {
+    const d = document.createElement("div");
+    d.style.width = "100mm";
+    document.body.appendChild(d);
+    const v = d.getBoundingClientRect().width / 100;
+    d.remove();
+    return v;
+  })();
+
+  for (const conteudo of document.querySelectorAll(".pagina .conteudo")) {
+    const grupos = [...new Set([...conteudo.querySelectorAll("[data-grupo]")].map((e) => e.dataset.grupo))];
+    for (const g of grupos) {
+      const blocos = [...conteudo.querySelectorAll(`[data-grupo="${g}"]`)];
+      desenharGrupo(
+        conteudo,
+        blocos.flatMap((b) => [...b.querySelectorAll(".ativo-destaque .n")]),
+        blocos.flatMap((b) => [...b.querySelectorAll(".destaque h4")]),
+      );
+    }
+  }
+
+  // Um tronco por fórmula: liga só os ativos em destaque dela aos seus textos.
+  function desenharGrupo(conteudo, ativos, titulos) {
+    const base = conteudo.getBoundingClientRect();
+    if (!ativos.length || !titulos.length) return;
+
+    const tronco = 9 * pxPorMm;
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("class", "conectores");
+    const traco = (x1, y1, x2, y2) => {
+      const l = document.createElementNS(ns, "line");
+      Object.entries({ x1, y1, x2, y2, stroke: "#6b6b70", "stroke-width": 0.3 * pxPorMm }).forEach(([k, v]) =>
+        l.setAttribute(k, v),
+      );
+      svg.appendChild(l);
+    };
+    const ys = [];
+
+    for (const a of ativos) {
+      const r = a.getBoundingClientRect();
+      const y = r.top + r.height * 0.55 - base.top;
+      traco(tronco, y, r.left - base.left - 1.2 * pxPorMm, y);
+      ys.push(y);
+    }
+    for (const h of titulos) {
+      const r = h.getBoundingClientRect();
+      const y = r.top + r.height / 2 - base.top;
+      const ponta = r.left - base.left - 1.5 * pxPorMm;
+      const t = 1.6 * pxPorMm;
+      traco(tronco, y, ponta - t, y);
+      const seta = document.createElementNS(ns, "path");
+      seta.setAttribute("d", `M${ponta - t * 1.5},${y - t} L${ponta},${y} L${ponta - t * 1.5},${y + t} Z`);
+      seta.setAttribute("fill", "#6b6b70");
+      svg.appendChild(seta);
+      ys.push(y);
+    }
+    traco(tronco, Math.min(...ys), tronco, Math.max(...ys));
+    conteudo.appendChild(svg);
+  }
+};
+
+// Avisa quando o conteúdo de uma página passa da área útil (precisa dividir a página).
+window.verificarTransbordo = function () {
+  const avisos = [];
+  document.querySelectorAll(".pagina.interna").forEach((pag, i) => {
+    const c = pag.querySelector(".conteudo");
+    if (c.scrollHeight > c.clientHeight + 2) avisos.push(`página ${i + 2} passou da área útil`);
+  });
+  return avisos;
+};
+</script>
+<script>addEventListener("load",function(){(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(function(){window.desenharConectores&&window.desenharConectores();});});</script>
+</body></html>

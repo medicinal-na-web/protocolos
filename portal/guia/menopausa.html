@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia de Formulações — Bem-Estar na Menopausa</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap">
+<style>/* Guia de Formulações — Medicinal Farmácia e Manipulação
+   Layout A4 único. A cor de cada protocolo vem de --tema-escura / --tema-clara,
+   definidas no protocolo.yaml. O resto é identidade fixa da marca.
+   --mascara-selo / --mascara-logo são injetadas pelo build como data URI
+   (o Chromium não aplica mask com arquivo local). */
+
+
+
+
+:root {
+  --marca-azul: #1f6fc2;
+  --card-borda: #22b5e6;
+  --texto: #1d1d1f;
+  --texto-suave: #3a3a3c;
+  --conector: #6b6b70;
+  --sol: #f5b82e;
+  --lua: #1f2f5c;
+}
+
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #fff; }
+body {
+  font-family: "Montserrat", sans-serif;
+  color: var(--texto);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.pagina {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  page-break-after: always;
+  break-after: page;
+  background: #fff;
+}
+.pagina:last-child { page-break-after: auto; break-after: auto; }
+
+/* Selo da marca tingido com a cor do protocolo */
+.selo-tema {
+  background: linear-gradient(135deg, var(--tema-escura), var(--tema-clara));
+  -webkit-mask: var(--mascara-selo) center / contain no-repeat;
+  mask: var(--mascara-selo) center / contain no-repeat;
+}
+
+/* ---------- Capa ---------- */
+.capa-faixa {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 63mm;
+  background: linear-gradient(90deg, var(--tema-escura), var(--tema-clara));
+  padding: 19mm 18mm 0 18mm;
+  color: #fff;
+  z-index: 2;
+}
+.capa-faixa .sobretitulo { font-size: 13pt; font-weight: 400; letter-spacing: 0.2pt; }
+.capa-faixa h1 {
+  margin: 4mm 0 0 0;
+  font-size: 26pt;
+  font-weight: 700;
+  letter-spacing: 0.3pt;
+  text-transform: uppercase;
+  max-width: 130mm;
+  line-height: 1.1;
+}
+.capa-faixa .selo-branco {
+  position: absolute;
+  right: 18mm;
+  top: 17mm;
+  width: 27mm;
+  height: 27mm;
+  background: url("https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/selo-branco.webp") center / contain no-repeat;
+}
+.capa-imagem {
+  position: absolute;
+  inset: 63mm 0 0 0;
+  background-size: cover;
+  background-position: center top;
+}
+.capa-imagem::after {
+  /* véu branco no rodapé para o logo respirar e ter contraste em qualquer capa */
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 58mm;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.75) 55%, rgba(255,255,255,0.98) 100%);
+}
+.capa-logo {
+  position: absolute;
+  left: 50%;
+  bottom: 9mm;
+  transform: translateX(-50%);
+  width: 62mm;
+  height: 14mm;
+  z-index: 3;
+  background: var(--tema-escura);
+  -webkit-mask: var(--mascara-logo) center / contain no-repeat;
+  mask: var(--mascara-logo) center / contain no-repeat;
+}
+
+/* ---------- Páginas internas ---------- */
+.cabecalho {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 30mm;
+  padding: 9mm 14mm 0 23mm;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.cabecalho .nome { font-size: 8.5pt; margin-top: 8mm; text-transform: uppercase; }
+.cabecalho .marca { display: flex; flex-direction: column; align-items: flex-end; }
+.cabecalho .marca img { width: 46mm; }
+.cabecalho .marca span { font-size: 8.5pt; margin-top: 1.5mm; letter-spacing: 0.2pt; }
+
+.selo-canto {
+  position: absolute;
+  right: 9mm;
+  bottom: 9mm;
+  width: 14mm;
+  height: 14mm;
+}
+
+.conteudo {
+  position: absolute;
+  top: 37mm;
+  left: 0; right: 0; bottom: 22mm;
+}
+
+/* ---------- Bloco de fórmula ---------- */
+.bloco {
+  position: relative;
+  padding: 0 14mm 0 23mm;
+}
+.bloco + .bloco { margin-top: 7mm; }
+
+.linha-formula {
+  display: flex;
+  align-items: flex-start;
+  gap: 8mm;
+}
+
+.card {
+  position: relative;
+  width: 122mm;
+  flex: none;
+  border: 0.45mm solid var(--card-borda);
+  border-radius: 5mm;
+  padding: 12.5mm 9mm 7mm 18mm;
+  background: rgba(255,255,255,0.86);
+  z-index: 2;
+}
+.pill {
+  position: absolute;
+  top: -5mm;
+  left: 12mm;
+  background: #fff;
+  border: 0.4mm solid var(--card-borda);
+  border-radius: 4mm;
+  padding: 1.6mm 4mm 1.6mm 3.5mm;
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+}
+.pill .titulos { display: flex; flex-direction: column; line-height: 1.1; }
+.pill b { font-size: 11pt; font-weight: 700; text-transform: uppercase; }
+.pill small { font-size: 7pt; font-weight: 700; font-style: italic; text-transform: uppercase; }
+.pill svg { width: 5.6mm; height: 5.6mm; flex: none; }
+
+.via {
+  position: absolute;
+  top: -1mm;
+  right: -10mm;
+  width: 17mm;
+  height: 12mm;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 17pt;
+  background: linear-gradient(135deg, var(--tema-escura), var(--tema-clara));
+}
+
+.ativos { list-style: none; margin: 0; padding: 0; width: 76mm; }
+.ativos li {
+  display: flex;
+  align-items: baseline;
+  font-size: 7.4pt;
+  height: 6.1mm;
+}
+.ativos .n { font-weight: 700; white-space: nowrap; }
+/* Pontilhado feito com pontos de texto: sai idêntico em qualquer leitor de PDF
+   (borda "dotted" muda de densidade conforme a escala e o comprimento). */
+.ativos .pont {
+  flex: 1;
+  min-width: 3mm;
+  margin: 0 1mm;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 6pt;
+  font-weight: 400;
+  letter-spacing: 0.32mm;
+  color: #555;
+  direction: rtl; /* corta o excesso no início, então os pontos sempre encostam na dose */
+}
+.ativos .pont::before {
+  content: "................................................................................................................................................";
+}
+.ativos .d { white-space: nowrap; }
+.modo { font-size: 7.4pt; margin: 4mm 0 0 0; max-width: 82mm; line-height: 1.45; }
+.modo b { font-weight: 700; }
+
+.qr-box {
+  width: 37mm;
+  flex: none;
+  margin-left: auto;
+  margin-top: 4mm;
+  border: 0.4mm solid var(--card-borda);
+  border-radius: 4mm;
+  padding: 3mm 3mm 3.5mm;
+  text-align: center;
+  font-size: 9.5pt;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.qr-box img { width: 27mm; height: 27mm; margin-top: 2.5mm; display: block; margin-inline: auto; }
+
+/* Arte ao lado do card (mãos, conta-gotas, potes…) */
+.arte-lado {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  /* funde a foto com o branco da página */
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+
+/* ---------- Destaques de ativos ---------- */
+.destaques { margin-top: 6mm; padding-left: 8mm; padding-right: 6mm; }
+.destaque + .destaque { margin-top: 3.5mm; }
+.destaque h4 {
+  margin: 0 0 2.5mm 0;
+  font-size: 10.5pt;
+  font-weight: 700;
+}
+.destaque p {
+  margin: 0;
+  font-size: 9.6pt;
+  line-height: 1.42;
+  color: var(--texto-suave);
+}
+.destaque p strong, .texto p strong { color: var(--texto); font-weight: 700; }
+
+.destaques-com-arte { display: flex; align-items: flex-start; gap: 2mm; margin-right: -14mm; }
+.destaques-com-arte .destaques { flex: 1; padding-right: 0; }
+.arte-destaques {
+  flex: none;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+
+/* Conectores desenhados por script após o layout */
+.conectores {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ---------- Faixa de imagem ---------- */
+.faixa {
+  position: relative;
+  height: var(--altura, 55mm);
+  margin: 7mm 0;
+  background-size: cover;
+  background-position: center;
+}
+.faixa::before, .faixa::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  height: 38%;
+  pointer-events: none;
+}
+.faixa::before { top: 0; background: linear-gradient(#fff 0%, rgba(255,255,255,0.75) 35%, rgba(255,255,255,0)); }
+.faixa::after { bottom: 0; background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.75) 65%, #fff 100%); }
+.faixa .etiqueta { position: absolute; top: 2mm; left: 50%; transform: translateX(-50%); margin: 0; z-index: 2; }
+
+/* ---------- Texto educativo ---------- */
+.texto { padding: 0 25mm 0 23mm; }
+.texto h3 {
+  font-size: 13pt;
+  margin: 0 0 3mm;
+  color: var(--tema-escura);
+}
+.texto p { font-size: 9.6pt; line-height: 1.55; margin: 0 0 3mm; color: var(--texto-suave); text-align: justify; }
+.texto .ilustracao { display: block; margin: 2mm auto 4mm; max-width: 100%; }
+.etiqueta {
+  display: block;
+  width: fit-content;
+  margin: 2mm auto -6mm;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.etiqueta span {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 1.5mm 4mm;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14pt;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--tema-escura), var(--tema-clara));
+  border-radius: 1.5mm;
+}
+.etiqueta span:first-child { transform: rotate(-3deg); width: fit-content; }
+.etiqueta span + span { margin-top: -1mm; transform: rotate(-2deg); }
+
+/* fundir: false — foto já em fundo branco puro, sem esfumar as bordas */
+.arte-destaques.sem-mascara { -webkit-mask-image: none; mask-image: none; align-self: center; }
+
+/* Separação entre fórmulas diferentes na mesma página: respiro + linha fina na cor do protocolo */
+.bloco[data-formula] ~ .bloco[data-formula] { margin-top: 13mm; }
+.bloco[data-formula] ~ .bloco[data-formula]::before {
+  content: "";
+  position: absolute;
+  left: 23mm;
+  right: 14mm;
+  top: -7.5mm;
+  height: 0.35mm;
+  background: linear-gradient(90deg, var(--tema-clara), rgba(255,255,255,0));
+  opacity: 0.7;
+}
+</style>
+<style>:root{--tema-escura:#7a1f4b;--tema-clara:#e2879f;--mascara-selo:url("https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/selo.webp");--mascara-logo:url("https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-mono.webp");}</style>
+</head><body>
+<section class="pagina capa">
+    <div class="capa-faixa">
+      <div class="sobretitulo">Guia de Formulações</div>
+      <h1>Bem-Estar na Menopausa</h1>
+      <div class="selo-branco"></div>
+    </div>
+    <div class="capa-imagem" style="background-image:url('https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/menopausa/antebraco.webp');background-position:66% center"></div>
+    <div class="capa-logo"></div>
+  </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Bem-Estar na Menopausa</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Estradiol Spray Transdermal</b><small>referência Lenzetto®</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Estradiol (hemi-hidratado)</span><span class="pont"></span><span class="d">1,53mg/jato</span></li><li class="ativo-destaque">
+        <span class="n">Octisalato</span><span class="pont"></span><span class="d">5%</span></li><li>
+        <span class="n">Álcool etílico 95%</span><span class="pont"></span><span class="d">q.s.p.</span></li><li>
+        <span class="n">Spray dosimetrado 90µL</span><span class="pont"></span><span class="d">8,1ml (56 jatos)</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Apoiar o aplicador em cone na face interna do antebraço, com a pele limpa e seca, e aplicar 1 jato pela manhã. Deixar secar por 2 minutos e não lavar o local por 1 hora. A dose pode ser ajustada para 2 ou 3 jatos ao dia, conforme resposta clínica.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques-com-arte">
+    <div class="destaques"><div class="destaque"><h4>Estradiol</h4><p>Hormônio <strong>bioidêntico</strong>, igual ao produzido pelos ovários. É a terapia mais eficaz contra <strong>fogachos e suores noturnos</strong> e também atua no <strong>sono</strong>, no <strong>humor</strong>, no <strong>ressecamento vaginal</strong> e na <strong>prevenção da perda óssea</strong>. A via <strong>transdermal</strong> evita a primeira passagem pelo fígado, com <strong>menor impacto sobre a coagulação</strong> e os triglicerídeos.</p></div><div class="destaque"><h4>Octisalato</h4><p><strong>Promotor de permeação</strong> que forma um reservatório na camada córnea e garante <strong>absorção contínua</strong> do estradiol ao longo do dia. Em veículo alcoólico, o spray <strong>seca em cerca de 2 minutos</strong>, sem resíduo, com <strong>dose exata a cada jato</strong>.</p></div></div>
+    <img class="arte-destaques" src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/menopausa/spray.webp" style="width:58mm">
+  </div></div>
+<div class="faixa" style="background-image:url('https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/menopausa/antebraco.webp');--altura:66mm;background-position:center 50%"></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Bem-Estar na Menopausa</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Progesterona Noturna</b><small>proteção endometrial</small></span><svg viewBox="0 0 24 24"><path d="M15.5 3.2a9 9 0 1 0 5.3 13.6A7.5 7.5 0 0 1 15.5 3.2z" fill="none" stroke="var(--lua)" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Progesterona micronizada</span><span class="pont"></span><span class="d">100mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 1 cápsula à noite, ao deitar, em uso contínuo. Indicada para mulheres com útero, em associação ao estradiol.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>Progesterona micronizada</h4><p><strong>Bioidêntica</strong>, protege o <strong>endométrio</strong> do estímulo do estradiol em mulheres com útero. Tomada à noite, seus metabólitos têm efeito <strong>calmante</strong> e contribuem para a <strong>qualidade do sono</strong>.</p></div></div></div>
+<div class="bloco" data-formula data-grupo="2">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Creme Vaginal Trófico</b><small>síndrome geniturinária</small></span><svg viewBox="0 0 24 24"><path d="M15.5 3.2a9 9 0 1 0 5.3 13.6A7.5 7.5 0 0 1 15.5 3.2z" fill="none" stroke="var(--lua)" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Estriol</span><span class="pont"></span><span class="d">1mg/g</span></li><li>
+        <span class="n">Creme vaginal</span><span class="pont"></span><span class="d">30g com aplicador</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Aplicar 1 aplicador (1g) via vaginal à noite por 2 semanas. Depois, 2 vezes por semana.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques"><div class="destaque"><h4>Estriol</h4><p>Estrogênio de <strong>ação local</strong> que restaura a espessura, a <strong>lubrificação</strong> e a elasticidade da mucosa vaginal, aliviando <strong>ressecamento</strong>, <strong>dor na relação</strong> e <strong>sintomas urinários</strong>. Pode ser associado ao estradiol transdermal.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Bem-Estar na Menopausa</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fogachos sem Hormônio</b><small>alternativa não hormonal</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">EVA360®</span><span class="pont"></span><span class="d">200mg</span></li><li class="ativo-destaque">
+        <span class="n">Fezolinetanto</span><span class="pont"></span><span class="d">45mg</span></li><li>
+        <span class="n">Relora®</span><span class="pont"></span><span class="d">250mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 1 cápsula ao dia, sempre no mesmo horário.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>EVA360®</h4><p>Blend patenteado de <strong>shatavarinas</strong> (Asparagus racemosus) que <strong>sensibiliza os receptores estrogênicos</strong>, apoiando o <strong>equilíbrio hormonal feminino</strong> sem conter hormônios.</p></div><div class="destaque"><h4>Fezolinetanto</h4><p>Antagonista do <strong>receptor NK3</strong> que atua diretamente no <strong>centro termorregulador do hipotálamo</strong>, reduzindo a frequência e a intensidade dos <strong>fogachos</strong> — opção para quem <strong>não pode usar hormônios</strong>.</p></div></div></div>
+<div class="bloco" data-formula data-grupo="2">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Equilíbrio da Menopausa</b><small>sintomas gerais</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">S-equol</span><span class="pont"></span><span class="d">10mg</span></li><li>
+        <span class="n">Cimicifuga racemosa</span><span class="pont"></span><span class="d">80mg</span></li><li>
+        <span class="n">Vitamina E (acetato)</span><span class="pont"></span><span class="d">200UI</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 1 cápsula ao dia, após a refeição.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques"><div class="destaque"><h4>S-equol</h4><p>Metabólito ativo das isoflavonas de soja, com <strong>alta afinidade pelo receptor ER-β</strong>. Entrega o benefício que só cerca de metade das mulheres consegue produzir no intestino, ajudando nos <strong>fogachos</strong>, no <strong>humor</strong> e no <strong>conforto geral</strong> da menopausa.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Bem-Estar na Menopausa</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Sono Reparador</b></span><svg viewBox="0 0 24 24"><path d="M15.5 3.2a9 9 0 1 0 5.3 13.6A7.5 7.5 0 0 1 15.5 3.2z" fill="none" stroke="var(--lua)" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Magnésio bisglicinato</span><span class="pont"></span><span class="d">200mg</span></li><li>
+        <span class="n">Valeriana extrato seco</span><span class="pont"></span><span class="d">200mg</span></li><li>
+        <span class="n">Passiflora extrato seco</span><span class="pont"></span><span class="d">200mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 1 dose 30 minutos antes de dormir.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>Magnésio bisglicinato</h4><p>Forma <strong>quelada de alta absorção</strong> e boa tolerância. Promove <strong>relaxamento muscular e neural</strong> e favorece o <strong>início e a manutenção do sono</strong>, frequentemente prejudicados pelos suores noturnos.</p></div></div></div>
+<div class="bloco" data-formula data-grupo="2">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Humor em Equilíbrio</b><small>ansiedade e irritabilidade</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">L-teanina</span><span class="pont"></span><span class="d">200mg</span></li><li>
+        <span class="n">5-HTP</span><span class="pont"></span><span class="d">50mg</span></li><li>
+        <span class="n">Serenzo™</span><span class="pont"></span><span class="d">250mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 1 dose pela manhã e 1 dose à tarde.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques"><div class="destaque"><h4>L-teanina</h4><p>Aminoácido do chá-verde que <strong>aumenta as ondas alfa</strong> e modula <strong>GABA, serotonina e dopamina</strong>, trazendo <strong>calma sem sonolência</strong> para a irritabilidade e a oscilação de humor.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Bem-Estar na Menopausa</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Ossos Fortes</b></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Vitamina K2 (MK-7)</span><span class="pont"></span><span class="d">120mcg</span></li><li>
+        <span class="n">Citrato malato de cálcio</span><span class="pont"></span><span class="d">250mg</span></li><li>
+        <span class="n">Boro quelado</span><span class="pont"></span><span class="d">2mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 1 dose ao dia, após o almoço.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>Vitamina K2 (MK-7)</h4><p>Ativa a <strong>osteocalcina</strong>, direcionando o cálcio para os <strong>ossos</strong> e não para as artérias. Fundamental na menopausa, quando a <strong>perda de massa óssea acelera</strong>.</p></div></div></div>
+<div class="bloco" data-formula data-grupo="2">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Pele Firme</b><small>colágeno e hidratação</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Genu-in Skin®</span><span class="pont"></span><span class="d">2,5g</span></li><li>
+        <span class="n">Ácido hialurônico (oral)</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">Cerasomosides</span><span class="pont"></span><span class="d">40mg</span></li><li>
+        <span class="n">SiliciuMax®</span><span class="pont"></span><span class="d">50mg</span></li><li>
+        <span class="n">Sachê sabor neutro</span><span class="pont"></span><span class="d">1 un</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Diluir 1 sachê em 200ml de água e tomar 1 vez ao dia.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques"><div class="destaque"><h4>Genu-in Skin®</h4><p>Peptídeos de colágeno tipo I de <strong>baixo peso molecular</strong> que sinalizam os <strong>fibroblastos</strong> a produzir colágeno, melhorando <strong>firmeza, elasticidade e hidratação</strong> da pele, que perde colágeno rapidamente após a menopausa.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Bem-Estar na Menopausa</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Metabolismo Ativo</b><small>microbiota e peso</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Akkermansia muciniphila (Bio MAMPs)</span><span class="pont"></span><span class="d">50mg</span></li><li>
+        <span class="n">Bifidobacterium lactis</span><span class="pont"></span><span class="d">1 BLH</span></li><li>
+        <span class="n">Lactobacillus gasseri</span><span class="pont"></span><span class="d">2 BLH</span></li><li>
+        <span class="n">PreticX™ (XOS)</span><span class="pont"></span><span class="d">1,4g</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Diluir 1 sachê em água e tomar pela manhã, em jejum.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>Akkermansia muciniphila</h4><p>Bactéria-chave da <strong>barreira intestinal</strong>, ligada à <strong>sensibilidade à insulina</strong> e ao <strong>controle de peso</strong>. Ajuda a conter o <strong>acúmulo de gordura abdominal</strong> típico da menopausa.</p></div></div></div>
+<div class="bloco" data-formula data-grupo="2">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Conforto Urinário</b></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg><svg viewBox="0 0 24 24"><path d="M15.5 3.2a9 9 0 1 0 5.3 13.6A7.5 7.5 0 0 1 15.5 3.2z" fill="none" stroke="var(--lua)" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Cranberry extrato seco</span><span class="pont"></span><span class="d">500mg</span></li><li>
+        <span class="n">D-manose</span><span class="pont"></span><span class="d">500mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 1 dose pela manhã e 1 dose à noite.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques"><div class="destaque"><h4>Cranberry</h4><p>Proantocianidinas tipo A que <strong>impedem a adesão da E. coli</strong> ao epitélio urinário. Com a <strong>D-manose</strong>, reduz as <strong>infecções urinárias de repetição</strong>, mais frequentes após a menopausa.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Bem-Estar na Menopausa</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Libido Feminina</b></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Elibrya™</span><span class="pont"></span><span class="d">150mg</span></li><li>
+        <span class="n">Maca peruana</span><span class="pont"></span><span class="d">500mg</span></li><li>
+        <span class="n">Tribulus terrestris</span><span class="pont"></span><span class="d">500mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 1 dose pela manhã.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>Elibrya™</h4><p>Extrato de Anacyclus pyrethrum padronizado em <strong>amidas graxas</strong>, que atua no <strong>desejo</strong>, na <strong>excitação</strong> e na <strong>satisfação sexual</strong>. Associado à <strong>maca</strong> e ao <strong>tribulus</strong>, apoia a libido feminina de forma não hormonal.</p></div></div></div>
+<div class="faixa com-etiqueta" style="background-image:url('https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/menopausa/mulher.webp');--altura:58mm;background-position:center 35%"><div class="etiqueta"><span>Menopausa</span><span>Em equilíbrio</span></div></div>
+<div class="texto"><p>A <strong>menopausa</strong> marca a queda dos hormônios ovarianos e pode trazer <strong>fogachos</strong>, <strong>insônia</strong>, <strong>alterações de humor</strong>, <strong>ressecamento vaginal</strong>, <strong>ganho de peso</strong> e <strong>perda óssea</strong>. Iniciada na <strong>janela de oportunidade</strong>, a terapia com <strong>estradiol transdermal</strong> é a estratégia mais eficaz, e as demais fórmulas tratam cada sintoma de forma individualizada.</p><p><strong>Contraindicações da terapia hormonal:</strong> câncer de mama ou de endométrio, sangramento vaginal não esclarecido, trombose venosa ou arterial e doença hepática ativa.</p></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<script>// Desenha as linhas que ligam os ativos em destaque (ativo-destaque) aos
+// textos explicativos (.destaque h4) de cada página, como no guia original.
+window.desenharConectores = function () {
+  const pxPorMm = (() => {
+    const d = document.createElement("div");
+    d.style.width = "100mm";
+    document.body.appendChild(d);
+    const v = d.getBoundingClientRect().width / 100;
+    d.remove();
+    return v;
+  })();
+
+  for (const conteudo of document.querySelectorAll(".pagina .conteudo")) {
+    const grupos = [...new Set([...conteudo.querySelectorAll("[data-grupo]")].map((e) => e.dataset.grupo))];
+    for (const g of grupos) {
+      const blocos = [...conteudo.querySelectorAll(`[data-grupo="${g}"]`)];
+      desenharGrupo(
+        conteudo,
+        blocos.flatMap((b) => [...b.querySelectorAll(".ativo-destaque .n")]),
+        blocos.flatMap((b) => [...b.querySelectorAll(".destaque h4")]),
+      );
+    }
+  }
+
+  // Um tronco por fórmula: liga só os ativos em destaque dela aos seus textos.
+  function desenharGrupo(conteudo, ativos, titulos) {
+    const base = conteudo.getBoundingClientRect();
+    if (!ativos.length || !titulos.length) return;
+
+    const tronco = 9 * pxPorMm;
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("class", "conectores");
+    const traco = (x1, y1, x2, y2) => {
+      const l = document.createElementNS(ns, "line");
+      Object.entries({ x1, y1, x2, y2, stroke: "#6b6b70", "stroke-width": 0.3 * pxPorMm }).forEach(([k, v]) =>
+        l.setAttribute(k, v),
+      );
+      svg.appendChild(l);
+    };
+    const ys = [];
+
+    for (const a of ativos) {
+      const r = a.getBoundingClientRect();
+      const y = r.top + r.height * 0.55 - base.top;
+      traco(tronco, y, r.left - base.left - 1.2 * pxPorMm, y);
+      ys.push(y);
+    }
+    for (const h of titulos) {
+      const r = h.getBoundingClientRect();
+      const y = r.top + r.height / 2 - base.top;
+      const ponta = r.left - base.left - 1.5 * pxPorMm;
+      const t = 1.6 * pxPorMm;
+      traco(tronco, y, ponta - t, y);
+      const seta = document.createElementNS(ns, "path");
+      seta.setAttribute("d", `M${ponta - t * 1.5},${y - t} L${ponta},${y} L${ponta - t * 1.5},${y + t} Z`);
+      seta.setAttribute("fill", "#6b6b70");
+      svg.appendChild(seta);
+      ys.push(y);
+    }
+    traco(tronco, Math.min(...ys), tronco, Math.max(...ys));
+    conteudo.appendChild(svg);
+  }
+};
+
+// Avisa quando o conteúdo de uma página passa da área útil (precisa dividir a página).
+window.verificarTransbordo = function () {
+  const avisos = [];
+  document.querySelectorAll(".pagina.interna").forEach((pag, i) => {
+    const c = pag.querySelector(".conteudo");
+    if (c.scrollHeight > c.clientHeight + 2) avisos.push(`página ${i + 2} passou da área útil`);
+  });
+  return avisos;
+};
+</script>
+<script>addEventListener("load",function(){(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(function(){window.desenharConectores&&window.desenharConectores();});});</script>
+</body></html>

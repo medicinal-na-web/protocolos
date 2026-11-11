@@ -67,6 +67,11 @@ for (let i = 0; i < slugs.length; i++) {
   const html = await renderizar(slug, "web", { artesBase, artesDest });
   const guiaGz = zlib.gzipSync(Buffer.from(html, "utf8"), { level: 9 }).toString("base64");
 
+  // Guia servido pela Edge Function (portal/guia/<slug>.html) — evita o blob base64
+  // no banco (frágil de transmitir) e atualiza via `git push`, como imagens e PDFs.
+  fs.mkdirSync(path.join(raiz, "portal", "guia"), { recursive: true });
+  fs.writeFileSync(path.join(raiz, "portal", "guia", `${slug}.html`), html);
+
   const capaUrl = `${artesBase}/${path.basename(p.capa, path.extname(p.capa))}.webp`;
   const formulas = formulasDe(p);
   const cor = { escura: p.cor?.escura || "#2A62AC", clara: p.cor?.clara || "#5b8fd6" };

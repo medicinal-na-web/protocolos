@@ -669,11 +669,12 @@ const APP = String.raw`
     $("guia-titulo").textContent=p.titulo;
     $("visor").hidden=false; $("palco").innerHTML='<div class="carregando">Abrindo guia…</div>';
     history.pushState({guia:p.slug},"","#"+p.slug);
-    var linha=await api("?select=guia_html&slug=eq."+encodeURIComponent(p.slug)+"&limit=1");
-    if(!linha||!linha[0]||!linha[0].guia_html){$("palco").innerHTML='<div class="carregando">Guia indisponível.</div>';return}
     var html;
-    try{ html=await gunzipB64(linha[0].guia_html); }
-    catch(e){ $("palco").innerHTML='<div class="carregando">Seu navegador não suporta abrir este guia. Atualize o navegador.</div>'; return; }
+    try{
+      var r=await fetch(NEXUS_URL+"/functions/v1/portal-app/guia/"+encodeURIComponent(p.slug),{headers:{apikey:ANON}});
+      if(!r.ok) throw new Error(r.status);
+      html=await r.text();
+    }catch(e){ $("palco").innerHTML='<div class="carregando">Guia indisponível no momento. Tente novamente.</div>'; return; }
     var ifr=document.createElement("iframe");
     ifr.setAttribute("title","Guia "+p.titulo);
     ifr.setAttribute("scrolling","no");
