@@ -43,19 +43,19 @@ paginas:
         linhas:
           - [AR (rs6152), Maior sensibilidade ao DHT, 'F1 **Dutasterida** · F4 Finasterida **0,15%** · F4C **Clascosterona**', 43%]
           - [SRD5A2, Alta conversão T → DHT, 'F1 **Finasterida** ou Dutasterida · F4 Finasterida', 83%]
-          - [HDAC9, Amplificação da via androgênica, 'F1 Dutasterida · F4 **Tretinoína** · F5 · F10 **Vesélle™**', 73%]
+          - [HDAC9, Amplificação da via androgênica, 'F1 Dutasterida · F4 **Tretinoína** · F5 · F7V **Vesélle™**', 73%]
           - [CYP19A1, Baixa aromatase, 'F4 **Alfa-estradiol 0,025%**', 71%]
           - [PGD2 (GPR44), Forte tendência à regressão folicular, 'F4 **Cetirizina** 1% (intermediário) ou 2% (aumentado)', 73%]
           - [PTGFR, Baixa eficácia da latanoprosta, 'F3 **só** quando PTGFR preservado', 13% elegíveis]
           - [SULT1A1, Menor ativação do minoxidil, 'F4 **Tretinoína 0,015%** (induz a SULT1A1)', 59%]
           - [LIPH, Estrutura e espessura do fio prejudicadas, 'F4 Auxina e Capilia na **dose maior** · F7 bloco obrigatório', 100%]
-          - [ECA, Perfusão folicular reduzida, 'F2 Minoxidil oral · F5 **VEGF + aFGF** · F10 **Vesélle™**', 74%]
+          - [ECA, Perfusão folicular reduzida, 'F2 Minoxidil oral · F5 **VEGF + aFGF** · F7V **Vesélle™**', 74%]
           - [GC + VDR, Vitamina D pouco funcional, 'F6 **Vitamina D 10.000 UI/dia**', 74%]
           - [MTHFR, Hipometilação + inflamação, 'F7 bloco **Metilfolato + Metilcobalamina**', 69%]
           - [FUT2, Inflamação intestinal e risco de eflúvio, 'F9 **Sachê intestinal** · F7 Metilcobalamina', 21%]
           - [ZPR1, Baixa vitamina E + triglicerídeos aumentados, 'F7 bloco **antioxidante** (Vitamina E, PQQ)', 24%]
-          - [TNF-α / NQO1, Inflamação e defesa antioxidante, 'F7 bloco antioxidante · F9 · F10 **Vesélle™** (NRF2)', 23% / 37%]
-        nota: '**Fórmulas sempre presentes:** F2 (Minoxidil oral), F4 (Loção capilar) e F8 (Shampoo). **Novo:** F10 Vesélle™ (Fagron), fator de crescimento oral sem ação hormonal. As demais dependem do laudo. Frequência = pacientes com resultado intermediário ou aumentado entre os 70 laudos analisados (SRD5A2 e AR: só resultado aumentado).'
+          - [TNF-α / NQO1, Inflamação e defesa antioxidante, 'F7 bloco antioxidante · F9 · F7V **Vesélle™** (NRF2)', 23% / 37%]
+        nota: '**Fórmulas sempre presentes:** F2 (Minoxidil oral), F4 (Loção capilar) e F8 (Shampoo). **Novo:** F7V Vesélle™ (Fagron) e F7B Bloomé™ reúnem os blocos da Fórmula 7. As demais dependem do laudo. Frequência = pacientes com resultado intermediário ou aumentado entre os 70 laudos analisados (SRD5A2 e AR: só resultado aumentado).'
 
   # Página NEXUS — introdução ao motor
   - - texto:
@@ -169,36 +169,38 @@ paginas:
         - nome: Latanoprosta
           texto: Análogo da **prostaglandina F2α** que estimula o crescimento pelo **receptor FP (PTGFR)**. Quando o PTGFR está alterado, a resposta é baixa — por isso a fórmula **só entra com PTGFR preservado**, o que aconteceu em **13%** dos laudos.
 
-  # Página F10 — Vesélle™ (Fagron)
+  # Página F7V — Vesélle™ + blocos da Fórmula 7
   - - formula:
-        nome: Fórmula 10 · Vesélle™
-        subtitulo: novo · Fagron · sem ação hormonal
+        nome: Fórmula 7V · Vesélle™ Genético
+        subtitulo: novo · Fagron + bloco obrigatório + 2 módulos
         via: IN
         periodo: dia
         ativos:
           - { nome: Vesélle™, dose: 100mg, destaque: true }
-          - { nome: DiluCAP® Hygro, dose: qsp 1 dose }
-          - { nome: Cápsulas vegetais, dose: 1 dose }
+          - { nome: Biotina *, dose: 2 · 5 · 10mg, destaque: true }
+          - { nome: Piridoxal 5-fosfato *, dose: 50 · 75mg }
+          - { nome: Zinco quelato *, dose: 25 · 35mg }
+          - { nome: Pantotenato de cálcio *, dose: 150 · 200mg }
+          - { nome: Cistina *, dose: 20 · 30mg }
+          - { nome: Tiamina *, dose: 60 · 75mg }
           - { nome: Preparar, dose: 90 doses }
-        modo_de_uso: Tomar **01 dose ao dia**. A dose pode subir até **300 mg/dia** conforme avaliação do prescritor.
+        modo_de_uso: Tomar **01 dose ao dia**. Somar **2 módulos** da tabela abaixo, na ordem de prioridade — metilfolato, antioxidante, nutricional — conforme o laudo.
     - destaques:
-        arte: { src: capsulas.jpg, largura: 42 }
+        arte: { src: capsulas.jpg, largura: 40 }
         itens:
         - nome: Vesélle™
-          texto: Extrato de **folha de rúcula** (Kyoh®) padronizado em **1,5% de erucosídeos**. Na papila dérmica humana aumentou **VEGF (+267%)**, **FGF7/KGF (+244%)** e **NRF2 (+71%)** e estimulou a proliferação celular **sem alterar o eixo do DHT**. No estudo clínico (150 pacientes, 84 dias), a dose de 100 mg aumentou a **densidade capilar** e as **unidades foliculares**.
-        - nome: Por que combina com o laudo
-          texto: É um **fator de crescimento por via oral**. O VEGF responde à **ECA** alterada (74% dos laudos), o FGF7 ao **HDAC9 e PAX1** (73%), e o **NRF2 é o regulador que liga o gene NQO1** — reforço direto para os 37% com NQO1 alterado. Por não ser hormonal, serve a **mulheres**, **menopausa** e queda associada a **análogos de GLP-1**.
-    - espaco: 3
+          texto: 'Extrato de **folha de rúcula** (Kyoh®) com **1,5% de erucosídeos**. Na papila dérmica aumentou **VEGF (+267%)**, **FGF7/KGF (+244%)** e **NRF2 (+71%)**, sem alterar o eixo do DHT — responde à **ECA**, ao **HDAC9/PAX1** e ao **NQO1** (o NRF2 liga o gene NQO1). Em 150 pacientes, 100 mg/dia aumentaram a **densidade capilar** em 84 dias.'
+        - nome: Biotina
+          texto: 'Com **cistina**, **zinco** e **pantotenato**, forma o **bloco obrigatório** — a base estrutural da queratina para o **LIPH** alterado, presente em **100%** dos laudos.'
+    - espaco: 2
     - tabela:
-        titulo: Associações sugeridas
-        colunas: [Variação, Gatilho genético, Fórmula]
+        titulo: Módulos genéticos · somar 2
+        colunas: [Módulo, Gatilho genético, Ativos]
         linhas:
-          - ['Densidade e queda', 'ECA · HDAC9 · PAX1', '**Vesélle™ 100mg** isolado']
-          - ['Alopecia androgenética', 'AR · SRD5A2', '**Vesélle™ 100mg** + Androtase™ 300mg']
-          - ['Estrutura do fio', 'LIPH', '**Vesélle™ 100mg** + SiliciuMax® 300mg']
-          - ['Defesa antioxidante', 'NQO1 · TNF-α', '**Vesélle™ 200 a 300mg** (dose maior)']
-          - ['Crescimento com latanoprosta', 'PTGFR preservado', '**Vesélle™ 100mg** oral + **F3** Latanoprosta 0,005% em TrichoSol®']
-        nota: 'Associações do material técnico da Fagron, ligadas aos genes do laudo. **Androtase™** (β-sitosterol, tier A) e **SiliciuMax®** (silício, tier A) são cadastrados na farmácia na dose sugerida. Vesélle™ é solúvel em água e pode ser manipulado em cápsula ou goma.'
+          - ['1 · Metilfolato', 'MTHFR · FUT2 · TCN2', '**Metilfolato 1mg** + Metilcobalamina 1mg']
+          - ['2 · Antioxidante', 'ZPR1 · TNF-α · NQO1', '**CavaCurcumin® 50mg** + **CavaQ10® 50mg** + Nigella sativa 50mg + PQQ 1mg + Vitamina E 200 · 400 · 600UI']
+          - ['3 · Nutricional', 'Carência · TMPRSS6 · CRABP2', '**In.Cell® 150mg** + Riboflavina 25 · 30mg + Vitamina C 250 · 350mg + Magnésio 150 · 200mg + Cobre 1mg + Selênio 200mcg']
+        nota: '**Associações Fagron:** + Androtase™ 300mg (AR · SRD5A2) · + SiliciuMax® 300mg (LIPH) · Vesélle™ até **300mg/dia** (NQO1 · TNF-α) · + **F3** latanoprosta 0,005% em TrichoSol® (PTGFR preservado). Sem ação hormonal — serve a **mulheres**, **menopausa** e queda por **análogos de GLP-1**.'
 
   # Página SO1 — suplementação oral: Pill Food Genético
   - - formula:
@@ -207,24 +209,24 @@ paginas:
         via: IN
         periodo: dia
         ativos:
+          - { nome: Vesélle™, dose: 100mg }
+          - { nome: Exsynutriment (silício), dose: 100mg }
           - { nome: Queratina hidrolisada, dose: 20mg }
           - { nome: L-Cistina, dose: 20mg }
           - { nome: Pantotenato de cálcio, dose: 60mg }
           - { nome: Vitamina B1 (tiamina), dose: 60mg }
           - { nome: PABA, dose: 20mg }
           - { nome: Levedo de cerveja, dose: 100mg }
-          - { nome: Vesélle™ (F10), dose: 100mg }
           - { nome: Zinco quelato, dose: 25mg }
           - { nome: L-Metionina, dose: 100mg }
           - { nome: Riboflavina, dose: 20mg }
-          - { nome: Exsynutriment (silício), dose: 100mg }
           - { nome: Vitamina E acetato, dose: 10mg }
           - { nome: Selênio complexo, dose: 100mcg }
           - { nome: Vitamina C revestida, dose: 100mg }
           - { nome: Nicotinamida, dose: 15mg }
           - { nome: Ferro bisglicinato, dose: 30mg }
           - { nome: Cobre quelado, dose: 1mg }
-        modo_de_uso: Tomar **2 cápsulas ao dia**, após a primeira refeição. Preparar 60 doses. Usar **no lugar da F7** — não somar as duas.
+        modo_de_uso: Tomar **2 cápsulas ao dia**, após a primeira refeição. Preparar 60 doses. Alternativa às Fórmulas 7V e 7B — não somar.
     - espaco: 2
     - tabela:
         colunas: [Ativo suplementar, Gene-alvo, Por que entra]
@@ -241,43 +243,41 @@ paginas:
           - [Cobre quelado, 'LIPH · ECA', 'Cofator da lisil-oxidase; equilibra o zinco']
         nota: 'Base = **Pill Food manipulado** da Medicinal (2.676 fórmulas). Retirar os ativos cujo gene vier **preservado** no laudo. Soma ≈ 780 mg/dose.'
 
-  # Página SO2 — suplementação oral: Bloomé
+  # Página F7B — Bloomé™ + blocos da Fórmula 7
   - - formula:
-        nome: Bloomé Capilar
-        subtitulo: âncora Bloomé + 10 associados do motor NEXUS
+        nome: Fórmula 7B · Bloomé™ Genético
+        subtitulo: Biodiversité + bloco obrigatório + 2 módulos
         via: IN
         periodo: dia
         ativos:
           - { nome: Bloomé™, dose: 500mg, destaque: true }
-          - { nome: Exsynutriment (silício), dose: 100mg }
-          - { nome: Zinco quelato, dose: 30mg }
-          - { nome: L-Cisteína, dose: 100mg }
-          - { nome: Vitamina C revestida, dose: 100mg }
-          - { nome: L-Metionina, dose: 100mg }
-          - { nome: Vitamina E acetato, dose: 10mg }
-          - { nome: Pantotenato de cálcio, dose: 60mg }
-          - { nome: In.Cell®, dose: 100mg }
-          - { nome: Selênio complexo, dose: 100mcg }
-          - { nome: Riboflavina, dose: 20mg }
-        modo_de_uso: Tomar **2 cápsulas ao dia**, após a primeira refeição. Preparar 60 doses. Alternativa ao Pill Food Genético e à F7.
+          - { nome: Biotina *, dose: 2 · 5 · 10mg }
+          - { nome: Piridoxal 5-fosfato *, dose: 50 · 75mg }
+          - { nome: Zinco quelato *, dose: 25 · 35mg }
+          - { nome: Pantotenato de cálcio *, dose: 150 · 200mg }
+          - { nome: Cistina *, dose: 20 · 30mg }
+          - { nome: Tiamina *, dose: 60 · 75mg }
+          - { nome: Preparar, dose: 90 doses }
+        modo_de_uso: Tomar **2 cápsulas ao dia**. Somar **2 módulos** genéticos (os mesmos da Fórmula 7V). Alternativa à 7V.
     - destaques:
         - nome: Bloomé™
-          texto: Nutricosmético oral de **origem natural** com indicação primária em **crescimento capilar** no banco de ativos (tier A, 590 fórmulas na Medicinal, dose mais usada **500 mg**). Os 10 associados são os ativos que **mais saem junto com o Bloomé** nas cápsulas da farmácia.
+          texto: 'Nutricosmético oral de **origem natural** com indicação primária em **crescimento capilar** no banco de ativos (tier A, 590 fórmulas na Medicinal, dose mais usada **500 mg**). Pode ser somado ao **Vesélle™ 100 mg** — um nutre o bulbo, o outro estimula os fatores de crescimento.'
     - espaco: 3
     - tabela:
-        colunas: [Associado, Coprescrições com Bloomé, Gene-alvo]
+        titulo: Associados do motor NEXUS e onde entram
+        colunas: [Associado, Coprescrições com Bloomé, Onde entra]
         linhas:
-          - [Exsynutriment (silício), '109', 'LIPH']
-          - [Zinco quelato, '79', 'SRD5A2 · ZPR1']
-          - [L-Cisteína, '49', 'LIPH · NQO1 (glutationa)']
-          - [Vitamina C revestida, '47', 'TMPRSS6 · colágeno']
-          - [L-Metionina, '45', 'MTHFR']
-          - [Vitamina E acetato, '36', 'ZPR1']
-          - [Pantotenato de cálcio, '32', 'LIPH']
-          - [In.Cell®, '32', 'LIPH (matriz)']
-          - [Selênio complexo, '22', 'NQO1 · TNF-α']
-          - [Riboflavina, '23', 'MTHFR (cofator FAD)']
-        nota: 'Associados ranqueados pela coprescrição real com o Bloomé em cápsulas (motor NEXUS, âncora Bloomé · tier A). Para potencializar, o Bloomé pode ser somado ao **Vesélle™ 100 mg** — um age pela nutrição do bulbo, o outro pelos fatores de crescimento. Soma ≈ 1.120 mg por dose.'
+          - [Exsynutriment (silício), '109', '**Somar** — LIPH']
+          - [In.Cell®, '32', 'Módulo nutricional']
+          - [Zinco quelato, '79', 'Bloco obrigatório']
+          - [L-Cisteína, '49', '**Somar** — LIPH · NQO1 (glutationa)']
+          - [Vitamina C revestida, '47', 'Módulo nutricional']
+          - [L-Metionina, '45', '**Somar** — MTHFR']
+          - [Vitamina E acetato, '36', 'Módulo antioxidante']
+          - [Pantotenato de cálcio, '32', 'Bloco obrigatório']
+          - [Riboflavina, '23', 'Módulo nutricional']
+          - [Selênio complexo, '22', 'Módulo nutricional']
+        nota: 'Os associados reais do Bloomé coincidem com os blocos da Fórmula 7 — confirmação de uso da casa. Os marcados **Somar** podem entrar além dos 2 módulos (Exsynutriment 100mg, L-Cisteína 100mg, L-Metionina 100mg).'
 
   # Página 6 — Fórmula 4 (loção capilar)
   - - formula:
@@ -286,14 +286,14 @@ paginas:
         via: OUT
         periodo: noite
         ativos:
+          - { nome: Auxina Tricógena® ***, dose: 5% ou 10% }
+          - { nome: Capilia Longa™ ***, dose: "2% ou 3,5%", destaque: true }
           - { nome: Minoxidil *, dose: 5% }
           - { nome: Finasterida *, dose: "0,10% ou 0,15%" }
           - { nome: Alfa-estradiol **, dose: "0,025%", destaque: true }
           - { nome: Cetirizina **, dose: 1% ou 2%, destaque: true }
           - { nome: Tretinoína (regenerador), dose: "0,015%", destaque: true }
           - { nome: D-Pantenol ***, dose: 2% }
-          - { nome: Auxina Tricógena® ***, dose: 5% ou 10% }
-          - { nome: Capilia Longa™ ***, dose: "2% ou 3,5%", destaque: true }
           - { nome: TrichoSol®, dose: qsp 100ml }
         modo_de_uso: Aplicar no couro cabeludo **1 vez ao dia, à noite**, com massagens suaves.
     - destaques:
@@ -318,7 +318,7 @@ paginas:
         colunas: [Variação, Gatilho genético, Somar à Fórmula 4, Coprescrições c/ minoxidil]
         linhas:
           - ['A · Anti-inflamatória', 'PGD2 · TNF-α', '**Ciclopirox olamina 1%** + Niacinamida PC 4%', '2.945 · 37']
-          - ['B · Regenerativa', 'HDAC9 · PAX1/FOXA2 · LIPH', '**GHK-Cu 1%** + Nanofactor IGF 1% + Capixyl® 3%', '1.100 · 668 · 253']
+          - ['B · Regenerativa', 'HDAC9 · PAX1/FOXA2 · LIPH', '**Capixyl® 3%** + GHK-Cu 1% + Nanofactor IGF 1%', '253 · 1.100 · 668']
           - ['C · Microcirculação', 'ECA · SULT1A1', '**Cafeína 2%** + Adenosina 0,75% + L-arginina 1,5%', '945 · 240 · 267']
           - ['D · Antiandrogênica tópica', 'AR · SRD5A2', '**Trichoxidil® 3%** + Tintura de Serenoa 1% + Espironolactona 1%', '434 · 217 · 119']
           - ['E · Energia do bulbo', 'HDAC9 · ECA', '**L-carnitina 0,7%** + Ginkgo biloba glicólico 2%', '171 · 127']
@@ -366,9 +366,9 @@ paginas:
         periodo: dia
         ativos:
           - { nome: ProHairin Complex, dose: "1,5%" }
+          - { nome: Procapil®, dose: "1,5%", destaque: true }
           - { nome: Fator de crescimento aFGF, dose: "1,5%", destaque: true }
           - { nome: Fator de crescimento VEGF, dose: "1,0%", destaque: true }
-          - { nome: Procapil®, dose: "1,5%", destaque: true }
           - { nome: Soro capilar, dose: qsp 100ml }
         modo_de_uso: Borrifar diretamente no couro cabeludo **1 vez ao dia, pela manhã**.
     - destaques:
@@ -416,10 +416,10 @@ paginas:
         via: OUT
         periodo: dia
         ativos:
+          - { nome: Capilia Longa™, dose: 1% }
           - { nome: Fator de crescimento bFGF, dose: 1% }
           - { nome: Fator de crescimento KGF, dose: "1,5%", destaque: true }
           - { nome: Fator de crescimento IGF, dose: 1% }
-          - { nome: Capilia Longa™, dose: 1% }
           - { nome: Soro capilar, dose: qsp 60ml }
         modo_de_uso: Borrifar no couro cabeludo **1 vez ao dia, pela manhã**. Alternativa à Fórmula 5 quando o achado principal é o **ciclo encurtado**.
     - destaques:
@@ -465,9 +465,9 @@ paginas:
         periodo: [dia, noite]
         qr: false
         ativos:
+          - { nome: Auxina Tricógena®, dose: 10% }
           - { nome: Piritionato de Zinco, dose: 1%, destaque: true }
           - { nome: Extrato de Jaborandi, dose: 10% }
-          - { nome: Auxina Tricógena®, dose: 10% }
           - { nome: Shampoo, dose: qsp 200ml }
         modo_de_uso: Aplicar durante o banho.
     - destaques:
@@ -497,77 +497,6 @@ paginas:
           - ['A · Seborreguladora', 'TNF-α · microinflamação', '**Ácido salicílico 2%** + Cetoconazol 2%', '85 · 64 (piritionato)']
           - ['B · Microbioma do couro cabeludo', 'FUT2 · TNF-α', '**DefensCalp® 1,5%** + Octopirox 1%', '57 · 20 (piritionato)']
           - ['C · Estimulante', 'ECA', '**Cafeína 1%** + D-pantenol 2%', '51 (piritionato) · 131 (Auxina)']
-
-  # Página 9 — Fórmula 7: blocos obrigatório e metilfolato
-  - - formula:
-        nome: Fórmula 7 · Bloco Obrigatório
-        subtitulo: presente em todas as formulações
-        via: IN
-        periodo: dia
-        ativos:
-          - { nome: Biotina *, dose: 2 · 5 · 10mg, destaque: true }
-          - { nome: Piridoxal 5-fosfato *, dose: 50 · 75mg }
-          - { nome: Zinco quelato *, dose: 25 · 35mg }
-          - { nome: Pantotenato de cálcio *, dose: 150 · 200mg }
-          - { nome: Cistina *, dose: 20 · 30mg, destaque: true }
-          - { nome: Tiamina *, dose: 60 · 75mg }
-        modo_de_uso: Compõe a Fórmula 7 com **mais 2 blocos**, na ordem de prioridade — metilfolato, antioxidante, nutricional.
-    - destaques:
-        - nome: Biotina
-          texto: Cofator das carboxilases e da **síntese de queratina**. Com **cistina**, **zinco** e **pantotenato**, forma a base estrutural para o **LIPH** alterado — presente em **100%** dos laudos, que indica fio mais fino e frágil.
-        - nome: Cistina
-          texto: Aminoácido sulfurado que forma as **pontes dissulfeto** da queratina, dando **resistência e espessura** ao fio.
-    - espaco: 4
-    - formula:
-        nome: Fórmula 7 · Bloco Metilfolato
-        subtitulo: MTHFR, FUT2 ou TCN2 alterados
-        via: IN
-        periodo: dia
-        qr: false
-        ativos:
-          - { nome: Metilfolato **, dose: 1mg, destaque: true }
-          - { nome: Metilcobalamina **, dose: 1mg }
-        modo_de_uso: Sempre que o metilfolato for prescrito, a **metilcobalamina** entra junto.
-    - destaques:
-        - nome: Metilfolato
-          texto: Forma ativa do folato, que **não depende da MTHFR**. Restaura a **metilação** e reduz a homocisteína e a inflamação — **69%** dos laudos têm MTHFR alterada.
-
-  # Página 10 — Fórmula 7: blocos antioxidante e nutricional
-  - - formula:
-        nome: Fórmula 7 · Bloco Antioxidante
-        subtitulo: ZPR1, TNF-α ou NQO1 alterados
-        via: IN
-        periodo: dia
-        ativos:
-          - { nome: CavaCurcumin® **, dose: 50mg, destaque: true }
-          - { nome: CavaQ10® **, dose: 50mg }
-          - { nome: Nigella sativa **, dose: 50mg }
-          - { nome: PQQ *, dose: 1mg }
-          - { nome: Vitamina E *, dose: 200 · 400 · 600UI, destaque: true }
-        modo_de_uso: Entra quando o laudo indica **suplementação antioxidante**.
-    - destaques:
-        - nome: CavaCurcumin®
-          texto: Curcumina em **γ-ciclodextrina**, de alta absorção, que modula o **TNF-α** e o NF-κB — a **microinflamação** que acelera a miniaturização.
-        - nome: Vitamina E
-          texto: Principal antioxidante das membranas. O **ZPR1** alterado indica **baixa vitamina E** e triglicerídeos aumentados — a dose sobe conforme o achado.
-    - espaco: 4
-    - formula:
-        nome: Fórmula 7 · Bloco Nutricional
-        subtitulo: carência nutricional
-        via: IN
-        periodo: dia
-        qr: false
-        ativos:
-          - { nome: In.Cell® *, dose: 150mg, destaque: true }
-          - { nome: Riboflavina *, dose: 25 · 30mg }
-          - { nome: Vitamina C *, dose: 250 · 350mg }
-          - { nome: Magnésio *, dose: 150 · 200mg }
-          - { nome: Cobre *, dose: 1mg }
-          - { nome: Selênio *, dose: 200mcg }
-        modo_de_uso: Preparar **90 doses**. Tomar **01 dose pela manhã**, após a primeira refeição do dia.
-    - destaques:
-        - nome: In.Cell®
-          texto: Blend de **aminoácidos, ácido hialurônico e glicosaminoglicanos** que repõe a matriz do folículo quando há **carência nutricional**.
 
   # Página F7 — variações NEXUS
   - - tabela:
@@ -623,7 +552,7 @@ paginas:
         titulo: Fórmula 9 · Variações do sachê
         colunas: [Variação, Gatilho genético, Somar à Fórmula 9, Coprescrições]
         linhas:
-          - ['A · Barreira intestinal', 'FUT2', '**Fibregum™ B 3g** + L. plantarum 3 BLH + CoreBiome® 300mg', '423 · 135 · 9 (glutamina)']
+          - ['A · Barreira intestinal', 'FUT2', '**Fibregum™ B 3g** + CoreBiome® 300mg + L. plantarum 3 BLH', '423 · 9 · 135 (glutamina)']
           - ['B · Microbiota-chave', 'FUT2 · TNF-α', '**Akkermansia (Bio-MAMPs) 50mg** + PreticX™ 1,4g', '145 · 89 (glutamina)']
           - ['C · Bifidobactérias', 'MTHFR · FUT2', '**B. lactis 1 BLH** + B. longum 1 BLH + Inulina 500mg', '391 · 213 · 241']
           - ['D · Ferro e eflúvio', 'TMPRSS6', '**Lactoferrina (Bioferrin®) 25mg**', '7 (glutamina)']
@@ -716,7 +645,7 @@ paginas:
           - [Hierarquia da F4, 'Obrigatórios (∗) nunca faltam · Tretinoína entra pelo laudo · Restritos (∗∗) só com indicação genética · Complementares (∗∗∗) sempre presentes.']
           - ['Tretinoína 0,015%', 'Laudo indica **estímulo regenerativo**, regeneração folicular reduzida, baixa proliferação celular ou turnover epidérmico — e **SULT1A1 reduzida**.']
           - [Fórmula 5, 'Laudo indica **fatores de crescimento**, peptídeos regeneradores, **deficiência angiogênica** ou comprometimento da matriz extracelular.']
-          - [Fórmula 7, 'Bloco obrigatório + **2 blocos** na ordem: metilfolato → antioxidante → nutricional. Sem indicação de metilfolato, usar antioxidante + nutricional.']
+          - [Fórmula 7, 'Âncora (**Vesélle™** ou **Bloomé™**) + bloco obrigatório + **2 módulos** na ordem: metilfolato → antioxidante → nutricional. Sem indicação de metilfolato, usar antioxidante + nutricional.']
           - [Fórmula 1, '**Dutasterida** com via androgênica intensa (SRD5A2 + SRD5A1, AR ou HDAC9). **Finasterida** com achado isolado no SRD5A2.']
           - [Fórmula 3, 'Somente com **PTGFR preservado**.']
           - [Fórmula 9, '**FUT2** alterado ou qualquer gene indicando inflamação, disbiose ou eflúvio.']

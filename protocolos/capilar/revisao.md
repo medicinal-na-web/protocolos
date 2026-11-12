@@ -167,3 +167,12 @@ Observações:
 
 - **Peso por dose:** cerca de 780 mg no Pill Food Genético e cerca de 1.120 mg no Bloomé Capilar. Os dois ficam abaixo do limite de 2.000 mg da GER-07 e são tomados em 2 cápsulas.
 - **Pendência:** a ficha do **Bloomé** está sem mecanismo de ação, indicações e dose (`mecanismo_acao` vazio). O texto do guia usa só o que o banco comprova. Completar a ficha com o material da Biodiversité.
+
+## Fórmula 7 agregada às associações nutracêuticas (12/11/2026)
+
+- Os 4 blocos da F7 (obrigatório, metilfolato, antioxidante e nutricional) deixaram de ser fórmulas separadas. Agora entram em duas fórmulas nutracêuticas:
+  - **F7V · Vesélle™ Genético:** Vesélle™ 100 mg + bloco obrigatório + 2 módulos;
+  - **F7B · Bloomé™ Genético:** Bloomé™ 500 mg + bloco obrigatório + 2 módulos.
+- Os módulos seguem a ordem de prioridade da orientação: metilfolato → antioxidante → nutricional. As associações Fagron foram para a nota da F7V.
+- A tabela de associados do Bloomé mostra onde cada um já entra (bloco ou módulo). Exsynutriment, L-cisteína e L-metionina ficam como **Somar**.
+- **Regra nova, valendo para todas as fórmulas:** ativos de **marca** (® ou ™, ou marca registrada como Exsynutriment e ProHairin) vêm **primeiro**. Veículos, qsp e preparo ficam no fim. Mudaram de ordem: Pill Food Genético, F4 Loção, F5 Soro, Soro Indutor do Anágeno e F8 Shampoo.
