@@ -16,8 +16,8 @@ Para trocar ativos, informe os números com ❌ (ex.: "7 ❌, 15 ❌").
 | 1 | F1 Estradiol Spray | TP2 spray | NAF | Estradiol 1:10 (6161) · B | 1,53 mg/jato | Lenzetto® | ✅ | Cadastro "uso interno": confirmar matéria-prima tópica e a forma spray |
 | 2 | F1 | | veículo | Octisalato 5% | 5% | referência | ⚠️ | Não cadastrado no banco |
 | 3 | F2 Progesterona | TP1 cápsula | NAF | Progesterona micronizada (55670) · S | 100 mg | FC12110 (moda) | ✅ | **Aprovado:** usar progesterona micronizada (o cadastro 55670 ainda diz "não micronizada", então corrigir a ficha) |
-| 4 | F3 Fogachos s/ hormônio | TP1 | NAF | EVA360® (16552) · A | 200 mg | FC12110 | ✅ | |
-| 5 | F3 | TP1 | PAR | **Fezolinetanto** | 45 mg | referência clínica | ⏳ | Sem cadastro (aguardando chegada) |
+| 4 | F3 Fogachos s/ hormônio | TP1 | NAF | EVA360® (16552) · A | 100 mg (2x/dia = 200 mg/dia) | FC12110 | ✅ | Dose por cápsula reduzida porque a fórmula passou a ser tomada 2x/dia |
+| 5 | F3 | TP1 | PAR | **EstroG-100®** (17399) | 257 mg (2x/dia = 514 mg/dia) | ensaios clínicos | ⏳ | Substitui o fezolinetanto (12/11/2026). Ficha pendente, sem tier, sem categorias e sem histórico na FC12110 |
 | 6 | F3 | TP1 | BAC | Relora® (10002) · A | 250 mg | FC12110 | ⚠️ | Associação fraca com o foco (1 ocorrência) · P2 |
 | 7 | F4 Creme vaginal | TP2 | NAF | Estriol 1:10 (5004) · B | 1 mg/g | FC12110 | ✅ | Motor só achou hormônios no BAC (já usados em F1/F2) |
 | 8 | F5 Sono | TP1 | NAF | Magnésio bisglicinato (4167) · S | 200 mg | FC12110 | ✅ | |
@@ -64,10 +64,28 @@ Para trocar ativos, informe os números com ❌ (ex.: "7 ❌, 15 ❌").
 
 ## Pendências antes da versão oficial
 
-1. Cadastrar **Fezolinetanto**, **Genu-in Skin** (TP15) e **Elibrya** (TP1 + dose).
+1. Completar a ficha do **EstroG-100** (17399) e vincular a categoria Menopausa; cadastrar **Genu-in Skin** (TP15) e **Elibrya** (TP1) na FC12110. Exigir do fornecedor do EstroG-100 o laudo de identidade do *Cynanchum wilfordii* (ver nota de segurança).
+8. Fezolinetanto retirado do protocolo em 12/11/2026.
 2. Incluir **vitamina D3** na tabela `ativos`.
 3. Corrigir a direção do BAC-01 em `validate_protocolo()` (script pronto em `nexus/correcao_validate_protocolo_bac01.sql`, aplicar pelo owner).
 7. Reimportar a FC12110 a partir do ERP (última carga: 04/04/2026) e recalcular associações e tiers (scripts locais do owner).
 4. Confirmar a matéria-prima do estradiol tópico. Progesterona micronizada e S-equol 10 mg já foram aprovados (29/10/2026). Falta ajustar a ficha da 55670 para "micronizada".
 5. Validar com o regulatório o uso da marca Lenzetto® e a concentração do spray.
 6. Registrar em `protocolos_matriz` como `rascunho` v1.0 (GER-05). Ainda não registrei: depende da aprovação de vocês.
+
+## Nota — EstroG-100® (validação de 12/11/2026)
+
+- **Identidade:** blend padronizado de *Cynanchum wilfordii*, *Phlomis umbrosa* e *Angelica gigas* (desenvolvido pela Naturalendo Tech, Coreia).
+  No banco, só existe como "ESTROG 100" (17399), com ficha pendente.
+- **Evidência clínica:** pequena e majoritariamente patrocinada pelo fabricante, mas consistente:
+  - Chang et al., Phytother Res 2012;26:510–516 (PMID 21887807): ECR duplo-cego, 64 mulheres, 257 mg 2x/dia por 12 semanas.
+    O índice de Kupperman caiu de cerca de 29,5 para 11,3, com melhora do ressecamento vaginal e sem ganho de peso nem efeitos adversos graves.
+  - Kim et al., 2022 (HSOA): ECR multicêntrico, 105 mulheres de 40 a 70 anos, com melhora do Kupperman, dos fogachos e da fadiga em 12 semanas.
+  - Estudo iraniano, Explore 2024 (PMID 37778911): ECR focado em fogachos, com melhora em relação ao placebo (35 analisadas por grupo, de 120 randomizadas).
+  - Estudo indiano de braço único, 2024 (PMID 38504729): 60 mulheres, melhora no MRS, sem efeitos adversos. Sem grupo controle.
+- **Força da evidência:** moderada-baixa (nível C). Funciona bem como alternativa **não hormonal** para sintomas leves a moderados,
+  mas não tem a mesma potência do estradiol nem a do fezolinetanto para fogachos intensos.
+- **Segurança e qualidade:** em 2015 houve, na Coreia, um caso de adulteração de produtos de *Cynanchum wilfordii*
+  com *C. auriculatum* (espécie proibida para consumo). A empresa contestou e o caso teve desfecho judicial controverso.
+  **Exigir laudo de autenticação botânica (DNA) do lote.** A *Angelica gigas* contém cumarinas (decursina):
+  ter cautela com anticoagulantes. Evitar na gestação e na lactação.

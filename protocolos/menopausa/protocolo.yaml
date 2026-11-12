@@ -3,7 +3,8 @@
 # Banco: supabase_ativos (emzkiemgizgmggthaeia). Sessão: 2026.10.24
 #
 # RASCUNHO para revisão do prescritor/farmacêutico responsável. Pendências:
-# - Fezolinetanto: sem cadastro no banco (aguardando chegada) — dose de referência 45 mg/dia
+# - Estrog-100 (cdpro 17399, ESTROG 100): substitui o fezolinetanto (12/11/2026). Ficha pendente e sem
+#   histórico na FC12110. Dose dos ensaios: 257 mg 2x/dia (514 mg/dia)
 # - Genu-in Skin (17239) e Elibrya (17258): PAR sem registro em FC12110 — cadastrar forma
 # - Estradiol spray: 6161 é "uso interno" — confirmar matéria-prima tópica, volume de 90 µL/jato,
 #   octisalato 5% (não cadastrado) e uso da marca Lenzetto® com o regulatório
@@ -73,17 +74,17 @@ paginas:
         nome: Fogachos sem Hormônio
         subtitulo: alternativa não hormonal
         via: IN
-        periodo: dia
+        periodo: [dia, noite]
         ativos:
-          - { nome: EVA360®, dose: 200mg, destaque: true }
-          - { nome: Fezolinetanto, dose: 45mg, destaque: true }
+          - { nome: EstroG-100®, dose: 257mg, destaque: true }
+          - { nome: EVA360®, dose: 100mg, destaque: true }
           - { nome: Relora®, dose: 250mg }
-        modo_de_uso: Tomar 1 cápsula ao dia, sempre no mesmo horário.
+        modo_de_uso: Tomar 1 cápsula pela manhã e 1 cápsula à noite.
     - destaques:
+        - nome: EstroG-100®
+          texto: Blend padronizado de três extratos da medicina tradicional coreana (Cynanchum wilfordii, Phlomis umbrosa e Angelica gigas). Em ensaios clínicos controlados por placebo, reduziu **fogachos**, **suores noturnos**, **fadiga** e **ressecamento vaginal**, **sem conter hormônios**.
         - nome: EVA360®
           texto: Blend patenteado de **shatavarinas** (Asparagus racemosus) que **sensibiliza os receptores estrogênicos**, apoiando o **equilíbrio hormonal feminino** sem conter hormônios.
-        - nome: Fezolinetanto
-          texto: Antagonista do **receptor NK3** que atua diretamente no **centro termorregulador do hipotálamo**, reduzindo a frequência e a intensidade dos **fogachos** — opção para quem **não pode usar hormônios**.
     - formula:
         nome: Equilíbrio da Menopausa
         subtitulo: sintomas gerais
