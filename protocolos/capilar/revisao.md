@@ -116,3 +116,17 @@ Observações:
 - **Mentol a 0,25%:** abaixo da moda da farmácia (0,5%), por causa da sensibilidade do pós-operatório.
 - **Sérum calmante:** bisabolol + alantoína (151), camomila + bisabolol (121) e bisabolol + D-pantenol (36).
 - **Sérum reparador da área doadora:** GHK-Cu + TrichoSol (241) e GHK-Cu + D-pantenol (182). EGF e TGF-β3 entram por indicação, com poucas coprescrições na loção.
+
+## Fórmula 10 · Vesélle™ (Fagron) — 12/11/2026
+
+- **Fonte:** folder técnico da Fagron ("Vesélle™ | Cuidado capilar que começa na raiz"), enviado pelo prescritor.
+- **O que é:** extrato de folha de rúcula Kyoh®, padronizado em 1,5% de erucosídeos. Uso oral: 100 mg/dia, com dose máxima de 300 mg/dia. É solúvel em água e pode ser manipulado em cápsula ou goma.
+- **Evidência:**
+  - Mena-García et al., *Molecules* 30(7):1489, 2025: em células da papila dérmica humana, VEGF +267%, FGF7 +244% e NRF2 +71% em 24 h, sem alterar o eixo do DHT.
+  - Morán-Valero et al., *Preprints* 2026: 150 pacientes, 84 dias, doses de 100 a 300 mg. Densidade de +5,0 fios/cm² e +6,6 unidades foliculares/cm² com 100 mg no D84.
+- **Camada PAR:** Vesélle™ e DiluCAP® Hygro **não têm cadastro** em `ativos` nem em `FC12110`. Cadastrar os dois antes da validação.
+- **Associações do folder:** Androtase™ 300 mg (15353 · A, moda 300 mg) e SiliciuMax® 300 mg (11161 · A). A associação com latanoprosta 0,005% em TrichoSol® é a F3 deste protocolo.
+- **Ligação com os genes:**
+  - VEGF ↔ ECA;
+  - FGF7 ↔ HDAC9, PAX1 e LIPH;
+  - NRF2 ↔ NQO1, porque o NRF2 é o fator de transcrição do gene NQO1.

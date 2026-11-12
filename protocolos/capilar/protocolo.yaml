@@ -43,19 +43,19 @@ paginas:
         linhas:
           - [AR (rs6152), Maior sensibilidade ao DHT, 'F1 **Dutasterida** · F4 Finasterida **0,15%** · F4C **Clascosterona**', 43%]
           - [SRD5A2, Alta conversão T → DHT, 'F1 **Finasterida** ou Dutasterida · F4 Finasterida', 83%]
-          - [HDAC9, Amplificação da via androgênica, 'F1 Dutasterida · F4 **Tretinoína** · F5', 73%]
+          - [HDAC9, Amplificação da via androgênica, 'F1 Dutasterida · F4 **Tretinoína** · F5 · F10 **Vesélle™**', 73%]
           - [CYP19A1, Baixa aromatase, 'F4 **Alfa-estradiol 0,025%**', 71%]
           - [PGD2 (GPR44), Forte tendência à regressão folicular, 'F4 **Cetirizina** 1% (intermediário) ou 2% (aumentado)', 73%]
           - [PTGFR, Baixa eficácia da latanoprosta, 'F3 **só** quando PTGFR preservado', 13% elegíveis]
           - [SULT1A1, Menor ativação do minoxidil, 'F4 **Tretinoína 0,015%** (induz a SULT1A1)', 59%]
           - [LIPH, Estrutura e espessura do fio prejudicadas, 'F4 Auxina e Capilia na **dose maior** · F7 bloco obrigatório', 100%]
-          - [ECA, Perfusão folicular reduzida, 'F2 Minoxidil oral · F5 **VEGF + aFGF**', 74%]
+          - [ECA, Perfusão folicular reduzida, 'F2 Minoxidil oral · F5 **VEGF + aFGF** · F10 **Vesélle™**', 74%]
           - [GC + VDR, Vitamina D pouco funcional, 'F6 **Vitamina D 10.000 UI/dia**', 74%]
           - [MTHFR, Hipometilação + inflamação, 'F7 bloco **Metilfolato + Metilcobalamina**', 69%]
           - [FUT2, Inflamação intestinal e risco de eflúvio, 'F9 **Sachê intestinal** · F7 Metilcobalamina', 21%]
           - [ZPR1, Baixa vitamina E + triglicerídeos aumentados, 'F7 bloco **antioxidante** (Vitamina E, PQQ)', 24%]
-          - [TNF-α / NQO1, Inflamação e defesa antioxidante, 'F7 bloco antioxidante · F9', 23% / 37%]
-        nota: '**Fórmulas sempre presentes:** F2 (Minoxidil oral), F4 (Loção capilar) e F8 (Shampoo). As demais dependem do laudo. Frequência = pacientes com resultado intermediário ou aumentado entre os 70 laudos analisados (SRD5A2 e AR: só resultado aumentado).'
+          - [TNF-α / NQO1, Inflamação e defesa antioxidante, 'F7 bloco antioxidante · F9 · F10 **Vesélle™** (NRF2)', 23% / 37%]
+        nota: '**Fórmulas sempre presentes:** F2 (Minoxidil oral), F4 (Loção capilar) e F8 (Shampoo). **Novo:** F10 Vesélle™ (Fagron), fator de crescimento oral sem ação hormonal. As demais dependem do laudo. Frequência = pacientes com resultado intermediário ou aumentado entre os 70 laudos analisados (SRD5A2 e AR: só resultado aumentado).'
 
   # Página NEXUS — introdução ao motor
   - - texto:
@@ -167,6 +167,37 @@ paginas:
         itens:
         - nome: Latanoprosta
           texto: Análogo da **prostaglandina F2α** que estimula o crescimento pelo **receptor FP (PTGFR)**. Quando o PTGFR está alterado, a resposta é baixa — por isso a fórmula **só entra com PTGFR preservado**, o que aconteceu em **13%** dos laudos.
+
+  # Página F10 — Vesélle™ (Fagron)
+  - - formula:
+        nome: Fórmula 10 · Vesélle™
+        subtitulo: novo · Fagron · sem ação hormonal
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: Vesélle™, dose: 100mg, destaque: true }
+          - { nome: DiluCAP® Hygro, dose: qsp 1 dose }
+          - { nome: Cápsulas vegetais, dose: 1 dose }
+          - { nome: Preparar, dose: 90 doses }
+        modo_de_uso: Tomar **01 dose ao dia**. A dose pode subir até **300 mg/dia** conforme avaliação do prescritor.
+    - destaques:
+        arte: { src: capsulas.jpg, largura: 42 }
+        itens:
+        - nome: Vesélle™
+          texto: Extrato de **folha de rúcula** (Kyoh®) padronizado em **1,5% de erucosídeos**. Na papila dérmica humana aumentou **VEGF (+267%)**, **FGF7/KGF (+244%)** e **NRF2 (+71%)** e estimulou a proliferação celular **sem alterar o eixo do DHT**. No estudo clínico (150 pacientes, 84 dias), a dose de 100 mg aumentou a **densidade capilar** e as **unidades foliculares**.
+        - nome: Por que combina com o laudo
+          texto: É um **fator de crescimento por via oral**. O VEGF responde à **ECA** alterada (74% dos laudos), o FGF7 ao **HDAC9 e PAX1** (73%), e o **NRF2 é o regulador que liga o gene NQO1** — reforço direto para os 37% com NQO1 alterado. Por não ser hormonal, serve a **mulheres**, **menopausa** e queda associada a **análogos de GLP-1**.
+    - espaco: 3
+    - tabela:
+        titulo: Associações sugeridas
+        colunas: [Variação, Gatilho genético, Fórmula]
+        linhas:
+          - ['Densidade e queda', 'ECA · HDAC9 · PAX1', '**Vesélle™ 100mg** isolado']
+          - ['Alopecia androgenética', 'AR · SRD5A2', '**Vesélle™ 100mg** + Androtase™ 300mg']
+          - ['Estrutura do fio', 'LIPH', '**Vesélle™ 100mg** + SiliciuMax® 300mg']
+          - ['Defesa antioxidante', 'NQO1 · TNF-α', '**Vesélle™ 200 a 300mg** (dose maior)']
+          - ['Crescimento com latanoprosta', 'PTGFR preservado', '**Vesélle™ 100mg** oral + **F3** Latanoprosta 0,005% em TrichoSol®']
+        nota: 'Associações do material técnico da Fagron, ligadas aos genes do laudo. **Androtase™** (β-sitosterol, tier A) e **SiliciuMax®** (silício, tier A) são cadastrados na farmácia na dose sugerida. Vesélle™ é solúvel em água e pode ser manipulado em cápsula ou goma.'
 
   # Página 6 — Fórmula 4 (loção capilar)
   - - formula:
