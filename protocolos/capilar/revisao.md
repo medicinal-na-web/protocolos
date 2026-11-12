@@ -130,3 +130,40 @@ Observações:
   - VEGF ↔ ECA;
   - FGF7 ↔ HDAC9, PAX1 e LIPH;
   - NRF2 ↔ NQO1, porque o NRF2 é o fator de transcrição do gene NQO1.
+
+## Suplementações orais: Pill Food Genético e Bloomé Capilar (12/11/2026)
+
+- **Base Pill Food:** não há "Pill Food" cadastrado no banco. A base é o Pill Food manipulado mais frequente da Medicinal. Busquei em `FC12110` (cápsula, desde jan/2024) as receitas que têm queratina 20 mg (7148), L-cistina 20 mg (51780) e pantotenato de cálcio 60 mg (55463) juntos: são **2.676 receitas**. Nelas também aparecem vitamina B1 60 mg (51238 · 83%), PABA 20 mg (50246 · 76%) e levedo de cerveja 100 mg (54483 · 73%).
+- **Pill Food Genético:** essa base + Vesélle™ 100 mg + 10 suplementares, cada um ligado a um gene:
+
+| Ativo | Gene | Dado de apoio |
+|---|---|---|
+| Zinco quelato 25 mg | SRD5A2, ZPR1 | aparece em 50% das receitas Pill Food |
+| L-metionina 100 mg | MTHFR | 38% das receitas Pill Food |
+| Riboflavina 20 mg | MTHFR | — |
+| Exsynutriment 100 mg | LIPH | — |
+| Vitamina E 10 mg | ZPR1 | — |
+| Selênio 100 mcg | NQO1, TNF-α | — |
+| Vitamina C 100 mg | TMPRSS6 | — |
+| Nicotinamida 15 mg | NQO1, TNF-α | — |
+| Ferro bisglicinato 30 mg | TMPRSS6 | só com ferritina baixa |
+| Cobre 1 mg | LIPH, ECA | — |
+
+- **Vitamina B6:** a piridoxina (34% das receitas Pill Food) ficou de fora para não repetir a B6 do bloco obrigatório da F7. O Pill Food Genético é **alternativa** à F7, não soma com ela.
+- **Bloomé Capilar:** Bloomé (16608 · A, dose mais usada 500 mg) + os 10 ativos que mais saem junto com ele em cápsula (`associacoes_ativos`, forma 1):
+
+| Ativo | Receitas junto com o Bloomé |
+|---|---|
+| Exsynutriment | 109 |
+| Zinco quelato | 79 |
+| L-cisteína | 49 |
+| Vitamina C | 47 |
+| L-metionina | 45 |
+| Vitamina E | 36 |
+| Pantotenato de cálcio | 32 |
+| In.Cell | 32 |
+| Riboflavina | 23 |
+| Selênio | 22 |
+
+- **Peso por dose:** cerca de 780 mg no Pill Food Genético e cerca de 1.120 mg no Bloomé Capilar. Os dois ficam abaixo do limite de 2.000 mg da GER-07 e são tomados em 2 cápsulas.
+- **Pendência:** a ficha do **Bloomé** está sem mecanismo de ação, indicações e dose (`mecanismo_acao` vazio). O texto do guia usa só o que o banco comprova. Completar a ficha com o material da Biodiversité.
