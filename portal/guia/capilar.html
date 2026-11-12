@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia de Formulações — Protocolo Capilar</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap">
+<style>/* Guia de Formulações — Medicinal Farmácia e Manipulação
+   Layout A4 único. A cor de cada protocolo vem de --tema-escura / --tema-clara,
+   definidas no protocolo.yaml. O resto é identidade fixa da marca.
+   --mascara-selo / --mascara-logo são injetadas pelo build como data URI
+   (o Chromium não aplica mask com arquivo local). */
+
+
+
+
+:root {
+  --marca-azul: #1f6fc2;
+  --card-borda: #22b5e6;
+  --texto: #1d1d1f;
+  --texto-suave: #3a3a3c;
+  --conector: #6b6b70;
+  --sol: #f5b82e;
+  --lua: #1f2f5c;
+}
+
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #fff; }
+body {
+  font-family: "Montserrat", sans-serif;
+  color: var(--texto);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.pagina {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  page-break-after: always;
+  break-after: page;
+  background: #fff;
+}
+.pagina:last-child { page-break-after: auto; break-after: auto; }
+
+/* Selo da marca tingido com a cor do protocolo */
+.selo-tema {
+  background: linear-gradient(135deg, var(--tema-escura), var(--tema-clara));
+  -webkit-mask: var(--mascara-selo) center / contain no-repeat;
+  mask: var(--mascara-selo) center / contain no-repeat;
+}
+
+/* ---------- Capa ---------- */
+.capa-faixa {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 63mm;
+  background: linear-gradient(90deg, var(--tema-escura), var(--tema-clara));
+  padding: 19mm 18mm 0 18mm;
+  color: #fff;
+  z-index: 2;
+}
+.capa-faixa .sobretitulo { font-size: 13pt; font-weight: 400; letter-spacing: 0.2pt; }
+.capa-faixa h1 {
+  margin: 4mm 0 0 0;
+  font-size: 26pt;
+  font-weight: 700;
+  letter-spacing: 0.3pt;
+  text-transform: uppercase;
+  max-width: 130mm;
+  line-height: 1.1;
+}
+.capa-faixa .selo-branco {
+  position: absolute;
+  right: 18mm;
+  top: 17mm;
+  width: 27mm;
+  height: 27mm;
+  background: url("https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/selo-branco.webp") center / contain no-repeat;
+}
+.capa-imagem {
+  position: absolute;
+  inset: 63mm 0 0 0;
+  background-size: cover;
+  background-position: center top;
+}
+.capa-imagem::after {
+  /* véu branco no rodapé para o logo respirar e ter contraste em qualquer capa */
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 58mm;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.75) 55%, rgba(255,255,255,0.98) 100%);
+}
+.capa-logo {
+  position: absolute;
+  left: 50%;
+  bottom: 9mm;
+  transform: translateX(-50%);
+  width: 62mm;
+  height: 14mm;
+  z-index: 3;
+  background: var(--tema-escura);
+  -webkit-mask: var(--mascara-logo) center / contain no-repeat;
+  mask: var(--mascara-logo) center / contain no-repeat;
+}
+
+/* ---------- Páginas internas ---------- */
+.cabecalho {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 30mm;
+  padding: 9mm 14mm 0 23mm;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.cabecalho .nome { font-size: 8.5pt; margin-top: 8mm; text-transform: uppercase; }
+.cabecalho .marca { display: flex; flex-direction: column; align-items: flex-end; }
+.cabecalho .marca img { width: 46mm; }
+.cabecalho .marca span { font-size: 8.5pt; margin-top: 1.5mm; letter-spacing: 0.2pt; }
+
+.selo-canto {
+  position: absolute;
+  right: 9mm;
+  bottom: 9mm;
+  width: 14mm;
+  height: 14mm;
+}
+
+.conteudo {
+  position: absolute;
+  top: 37mm;
+  left: 0; right: 0; bottom: 22mm;
+}
+
+/* ---------- Bloco de fórmula ---------- */
+.bloco {
+  position: relative;
+  padding: 0 14mm 0 23mm;
+}
+.bloco + .bloco { margin-top: 7mm; }
+
+.linha-formula {
+  display: flex;
+  align-items: flex-start;
+  gap: 8mm;
+}
+
+.card {
+  position: relative;
+  width: 122mm;
+  flex: none;
+  border: 0.45mm solid var(--card-borda);
+  border-radius: 5mm;
+  padding: 12.5mm 9mm 7mm 18mm;
+  background: rgba(255,255,255,0.86);
+  z-index: 2;
+}
+.pill {
+  position: absolute;
+  top: -5mm;
+  left: 12mm;
+  background: #fff;
+  border: 0.4mm solid var(--card-borda);
+  border-radius: 4mm;
+  padding: 1.6mm 4mm 1.6mm 3.5mm;
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+}
+.pill .titulos { display: flex; flex-direction: column; line-height: 1.1; }
+.pill b { font-size: 11pt; font-weight: 700; text-transform: uppercase; }
+.pill small { font-size: 7pt; font-weight: 700; font-style: italic; text-transform: uppercase; }
+.pill svg { width: 5.6mm; height: 5.6mm; flex: none; }
+
+.via {
+  position: absolute;
+  top: -1mm;
+  right: -10mm;
+  width: 17mm;
+  height: 12mm;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 17pt;
+  background: linear-gradient(135deg, var(--tema-escura), var(--tema-clara));
+}
+
+.ativos { list-style: none; margin: 0; padding: 0; width: 76mm; }
+.ativos li {
+  display: flex;
+  align-items: baseline;
+  font-size: 7.4pt;
+  height: 6.1mm;
+}
+.ativos .n { font-weight: 700; white-space: nowrap; }
+/* Pontilhado feito com pontos de texto: sai idêntico em qualquer leitor de PDF
+   (borda "dotted" muda de densidade conforme a escala e o comprimento). */
+.ativos .pont {
+  flex: 1;
+  min-width: 3mm;
+  margin: 0 1mm;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 6pt;
+  font-weight: 400;
+  letter-spacing: 0.32mm;
+  color: #555;
+  direction: rtl; /* corta o excesso no início, então os pontos sempre encostam na dose */
+}
+.ativos .pont::before {
+  content: "................................................................................................................................................";
+}
+.ativos .d { white-space: nowrap; }
+.modo { font-size: 7.4pt; margin: 4mm 0 0 0; max-width: 82mm; line-height: 1.45; }
+.modo b { font-weight: 700; }
+
+.qr-box {
+  width: 37mm;
+  flex: none;
+  margin-left: auto;
+  margin-top: 4mm;
+  border: 0.4mm solid var(--card-borda);
+  border-radius: 4mm;
+  padding: 3mm 3mm 3.5mm;
+  text-align: center;
+  font-size: 9.5pt;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.qr-box img { width: 27mm; height: 27mm; margin-top: 2.5mm; display: block; margin-inline: auto; }
+
+/* Arte ao lado do card (mãos, conta-gotas, potes…) */
+.arte-lado {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  /* funde a foto com o branco da página */
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+
+/* ---------- Destaques de ativos ---------- */
+.destaques { margin-top: 6mm; padding-left: 8mm; padding-right: 6mm; }
+.destaque + .destaque { margin-top: 3.5mm; }
+.destaque h4 {
+  margin: 0 0 2.5mm 0;
+  font-size: 10.5pt;
+  font-weight: 700;
+}
+.destaque p {
+  margin: 0;
+  font-size: 9.6pt;
+  line-height: 1.42;
+  color: var(--texto-suave);
+}
+.destaque p strong, .texto p strong { color: var(--texto); font-weight: 700; }
+
+.destaques-com-arte { display: flex; align-items: flex-start; gap: 2mm; margin-right: -14mm; }
+.destaques-com-arte .destaques { flex: 1; padding-right: 0; }
+.arte-destaques {
+  flex: none;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+
+/* Conectores desenhados por script após o layout */
+.conectores {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ---------- Faixa de imagem ---------- */
+.faixa {
+  position: relative;
+  height: var(--altura, 55mm);
+  margin: 7mm 0;
+  background-size: cover;
+  background-position: center;
+}
+.faixa::before, .faixa::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  height: 38%;
+  pointer-events: none;
+}
+.faixa::before { top: 0; background: linear-gradient(#fff 0%, rgba(255,255,255,0.75) 35%, rgba(255,255,255,0)); }
+.faixa::after { bottom: 0; background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.75) 65%, #fff 100%); }
+.faixa .etiqueta { position: absolute; top: 2mm; left: 50%; transform: translateX(-50%); margin: 0; z-index: 2; }
+
+/* ---------- Texto educativo ---------- */
+.texto { padding: 0 25mm 0 23mm; }
+.texto h3 {
+  font-size: 13pt;
+  margin: 0 0 3mm;
+  color: var(--tema-escura);
+}
+.texto p { font-size: 9.6pt; line-height: 1.55; margin: 0 0 3mm; color: var(--texto-suave); text-align: justify; }
+.texto .ilustracao { display: block; margin: 2mm auto 4mm; max-width: 100%; }
+.etiqueta {
+  display: block;
+  width: fit-content;
+  margin: 2mm auto -6mm;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.etiqueta span {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 1.5mm 4mm;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14pt;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--tema-escura), var(--tema-clara));
+  border-radius: 1.5mm;
+}
+.etiqueta span:first-child { transform: rotate(-3deg); width: fit-content; }
+.etiqueta span + span { margin-top: -1mm; transform: rotate(-2deg); }
+
+/* fundir: false — foto já em fundo branco puro, sem esfumar as bordas */
+.arte-destaques.sem-mascara { -webkit-mask-image: none; mask-image: none; align-self: center; }
+
+/* Separação entre fórmulas diferentes na mesma página: respiro + linha fina na cor do protocolo */
+.bloco[data-formula] ~ .bloco[data-formula] { margin-top: 13mm; }
+.bloco[data-formula] ~ .bloco[data-formula]::before {
+  content: "";
+  position: absolute;
+  left: 23mm;
+  right: 14mm;
+  top: -7.5mm;
+  height: 0.35mm;
+  background: linear-gradient(90deg, var(--tema-clara), rgba(255,255,255,0));
+  opacity: 0.7;
+}
+
+/* ---------- Tabela (mapa gene → fórmula, critérios) ---------- */
+.tabela { padding: 0 14mm 0 23mm; }
+.tabela h3 { font-size: 13pt; margin: 0 0 3mm; color: var(--tema-escura); }
+.tabela table { width: 100%; border-collapse: collapse; font-size: 7.6pt; line-height: 1.35; }
+.tabela thead th {
+  text-align: left;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 7pt;
+  letter-spacing: 0.2pt;
+  padding: 2mm 2.2mm;
+  background: linear-gradient(135deg, var(--tema-escura), var(--tema-clara));
+}
+.tabela thead th:first-child { border-radius: 1.5mm 0 0 0; }
+.tabela thead th:last-child { border-radius: 0 1.5mm 0 0; }
+.tabela td { padding: 1.7mm 2.2mm; border-bottom: 0.25mm solid #e3e3e6; vertical-align: top; color: var(--texto-suave); }
+.tabela td:first-child { font-weight: 700; color: var(--texto); white-space: nowrap; }
+.tabela td strong { color: var(--texto); }
+.tabela tbody tr:nth-child(even) td { background: #faf8f5; }
+.tabela .nota { font-size: 7.4pt; line-height: 1.45; color: var(--texto-suave); margin: 2.5mm 0 0; }
+
+</style>
+<style>:root{--tema-escura:#7a4416;--tema-clara:#d39a55;--mascara-selo:url("https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/selo.webp");--mascara-logo:url("https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-mono.webp");}</style>
+</head><body>
+<section class="pagina capa">
+    <div class="capa-faixa">
+      <div class="sobretitulo">Guia de Formulações</div>
+      <h1>Protocolo Capilar</h1>
+      <div class="selo-branco"></div>
+    </div>
+    <div class="capa-imagem" style="background-image:url('https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/capilar/capa.webp');background-position:center top"></div>
+    <div class="capa-logo"></div>
+  </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="texto"><h3>Do laudo genético à fórmula</h3><p>A <strong>alopecia androgenética</strong> tem cerca de <strong>80% de herança genética</strong>. O teste capilar analisa <strong>27 variantes</strong> distribuídas em cinco eixos — <strong>sensibilidade androgênica</strong>, <strong>resposta aos tratamentos</strong>, <strong>vitaminas e micronutrientes</strong>, <strong>microcirculação</strong> e <strong>inflamação</strong> — e mostra em quais pontos do ciclo do folículo cada paciente precisa de reforço.</p><p>Este guia reúne as <strong>9 fórmulas</strong> do protocolo Medicinal. Cada uma é <strong>ativada, ajustada ou excluída</strong> pelo resultado do laudo. A regra é sempre a mesma — <strong>o laudo genético determina a composição final da prescrição</strong>.</p></div>
+<div class="faixa com-etiqueta" style="background-image:url('https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/capilar/foliculo.webp');--altura:70mm;background-position:center 40%"><div class="etiqueta"><span>Folículo</span><span>Da raiz à genética</span></div></div>
+<div class="tabela"><h3>Como ler as fórmulas</h3>
+    <table><thead><tr><th>Marcação</th><th>Classe</th><th>Regra de inclusão</th></tr></thead><tbody><tr><td>*</td><td>Obrigatório</td><td>Sempre incluído. Só a dose varia conforme o laudo.</td></tr><tr><td>**</td><td>Restrito</td><td>Só entra com <strong>indicação genética direta</strong> no laudo.</td></tr><tr><td>***</td><td>Complementar</td><td>Sempre incluído, na <strong>dose mais apropriada</strong> ao perfil.</td></tr><tr><td>—</td><td>Regenerador</td><td><strong>Tretinoína 0,015%</strong> entra automaticamente quando o laudo indica estímulo regenerativo.</td></tr></tbody></table>
+    <p class="nota">Base de dados do guia — <strong>70 laudos</strong> de pacientes da Medicinal. As porcentagens das próximas páginas mostram em quantos pacientes cada achado apareceu.</p></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="tabela"><h3>Mapa genético-terapêutico</h3>
+    <table><thead><tr><th>Gene</th><th>Achado no laudo</th><th>Conduta no protocolo</th><th>Frequência</th></tr></thead><tbody><tr><td>AR (rs6152)</td><td>Maior sensibilidade ao DHT</td><td>F1 <strong>Dutasterida</strong> · F4 Finasterida <strong>0,15%</strong> · F4C <strong>Clascosterona</strong></td><td>43%</td></tr><tr><td>SRD5A2</td><td>Alta conversão T → DHT</td><td>F1 <strong>Finasterida</strong> ou Dutasterida · F4 Finasterida</td><td>83%</td></tr><tr><td>HDAC9</td><td>Amplificação da via androgênica</td><td>F1 Dutasterida · F4 <strong>Tretinoína</strong> · F5 · F10 <strong>Vesélle™</strong></td><td>73%</td></tr><tr><td>CYP19A1</td><td>Baixa aromatase</td><td>F4 <strong>Alfa-estradiol 0,025%</strong></td><td>71%</td></tr><tr><td>PGD2 (GPR44)</td><td>Forte tendência à regressão folicular</td><td>F4 <strong>Cetirizina</strong> 1% (intermediário) ou 2% (aumentado)</td><td>73%</td></tr><tr><td>PTGFR</td><td>Baixa eficácia da latanoprosta</td><td>F3 <strong>só</strong> quando PTGFR preservado</td><td>13% elegíveis</td></tr><tr><td>SULT1A1</td><td>Menor ativação do minoxidil</td><td>F4 <strong>Tretinoína 0,015%</strong> (induz a SULT1A1)</td><td>59%</td></tr><tr><td>LIPH</td><td>Estrutura e espessura do fio prejudicadas</td><td>F4 Auxina e Capilia na <strong>dose maior</strong> · F7 bloco obrigatório</td><td>100%</td></tr><tr><td>ECA</td><td>Perfusão folicular reduzida</td><td>F2 Minoxidil oral · F5 <strong>VEGF + aFGF</strong> · F10 <strong>Vesélle™</strong></td><td>74%</td></tr><tr><td>GC + VDR</td><td>Vitamina D pouco funcional</td><td>F6 <strong>Vitamina D 10.000 UI/dia</strong></td><td>74%</td></tr><tr><td>MTHFR</td><td>Hipometilação + inflamação</td><td>F7 bloco <strong>Metilfolato + Metilcobalamina</strong></td><td>69%</td></tr><tr><td>FUT2</td><td>Inflamação intestinal e risco de eflúvio</td><td>F9 <strong>Sachê intestinal</strong> · F7 Metilcobalamina</td><td>21%</td></tr><tr><td>ZPR1</td><td>Baixa vitamina E + triglicerídeos aumentados</td><td>F7 bloco <strong>antioxidante</strong> (Vitamina E, PQQ)</td><td>24%</td></tr><tr><td>TNF-α / NQO1</td><td>Inflamação e defesa antioxidante</td><td>F7 bloco antioxidante · F9 · F10 <strong>Vesélle™</strong> (NRF2)</td><td>23% / 37%</td></tr></tbody></table>
+    <p class="nota"><strong>Fórmulas sempre presentes:</strong> F2 (Minoxidil oral), F4 (Loção capilar) e F8 (Shampoo). <strong>Novo:</strong> F10 Vesélle™ (Fagron), fator de crescimento oral sem ação hormonal. As demais dependem do laudo. Frequência = pacientes com resultado intermediário ou aumentado entre os 70 laudos analisados (SRD5A2 e AR: só resultado aumentado).</p></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="texto"><h3>Motor NEXUS · âncoras e associações</h3><p>Cada fórmula base pode ser <strong>potencializada</strong> com associações sugeridas pelo <strong>motor NEXUS</strong> da Medicinal. O motor parte do banco de ativos e de <strong>mais de 2 milhões de itens manipulados</strong> e segue sempre a mesma sequência:</p><p><strong>1. FGTS</strong> — só entram ativos de relevância <strong>S, A ou B</strong>. <strong>2. Forma farmacêutica</strong> — o ativo precisa ter uso registrado na mesma forma (loção, cápsula, sachê, shampoo). <strong>3. NAF (âncora)</strong> — ativo com <strong>indicação primária</strong> em Alopecia ou Crescimento capilar. <strong>4. BAC (associados)</strong> — ativos com <strong>coprescrição real</strong> com a âncora, ranqueados pelo número de âncoras e pela frequência.</p><p>Nas próximas páginas, cada fórmula ganha <strong>variações</strong>. Cada variação soma um módulo de associados à fórmula base e é escolhida pelo <strong>achado genético</strong> do laudo.</p></div>
+<div class="tabela"><h3>Âncoras do motor por fórmula</h3>
+    <table><thead><tr><th>Fórmula</th><th>Forma</th><th>Âncoras (NAF · tier)</th><th>Associados de maior força (BAC)</th></tr></thead><tbody><tr><td>F1N</td><td>Cápsula</td><td>Saw palmetto <strong>S</strong> · Pygeum <strong>B</strong> · Androtase® <strong>A</strong></td><td>Zinco quelato, Licopeno, Urtiga dioica</td></tr><tr><td>F4</td><td>Loção</td><td>Minoxidil sulfato <strong>S</strong> · Auxina Tricógena® <strong>A</strong> · Capilia Longa™ <strong>B</strong> · Alfa-estradiol <strong>B</strong></td><td>Ciclopirox olamina, GHK-Cu, Cafeína, Nanofactor IGF</td></tr><tr><td>F5</td><td>Soro</td><td>aFGF <strong>A</strong> · VEGF <strong>A</strong> · IGF <strong>A</strong> · GHK-Cu <strong>A</strong></td><td>bFGF, Follicusan™, Kopexyl, Adenosina</td></tr><tr><td>F7</td><td>Cápsula</td><td>Zinco quelato <strong>S</strong> · Exsynutriment <strong>S</strong> · L-cistina <strong>S</strong> · P5P <strong>S</strong></td><td>Riboflavina, L-metionina, Ácido alfa-lipoico, Pinus pinaster</td></tr><tr><td>F8</td><td>Shampoo</td><td>Piritionato de zinco <strong>B</strong> · Jaborandi <strong>B</strong> · Auxina Tricógena® <strong>A</strong></td><td>D-pantenol, Ácido salicílico, Cetoconazol, DefensCalp®</td></tr><tr><td>F9</td><td>Sachê</td><td>L-glutamina <strong>S</strong> · L. acidophilus <strong>S</strong> · L. rhamnosus <strong>S</strong></td><td>Fibregum™ B, Inulina, Akkermansia, L. plantarum</td></tr></tbody></table>
+    <p class="nota"><strong>Coprescrições</strong> (nas próximas tabelas) = quantas vezes o associado foi manipulado junto com a âncora, na mesma forma, no histórico da Medicinal. F2, F3 e F6 ficam fora do motor porque minoxidil oral, latanoprosta e vitamina D3 ainda não têm cadastro no banco. Para a F6, a associação recomendada é <strong>Vitamina K2 MK-7 100 mcg</strong> (tier S), que direciona o cálcio mobilizado pela vitamina D.</p></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fórmula 1 · Dutasterida</b><small>via androgênica intensa</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Dutasterida</span><span class="pont"></span><span class="d">0,5mg</span></li><li>
+        <span class="n">Preparar</span><span class="pont"></span><span class="d">45 doses</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 01 cápsula <strong>3 vezes na semana</strong>.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>Dutasterida</h4><p>Inibe as <strong>duas isoformas da 5α-redutase</strong> (tipos 1 e 2) e reduz o DHT sérico em mais de 90%. Escolha quando o laudo mostra <strong>intensidade androgênica alta</strong> — <strong>SRD5A2 aumentado</strong> somado a <strong>SRD5A1 alterado</strong>, <strong>AR (rs6152) aumentado</strong> ou <strong>HDAC9</strong> alterado. Foi o perfil de <strong>57%</strong> dos 70 pacientes.</p></div></div></div>
+<div style="height:4mm"></div>
+<div class="bloco" data-formula data-grupo="2">
+    <img class="arte-lado" src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/capilar/capsulas.webp" style="top:-8mm;right:2mm;width:46mm">
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fórmula 1 · Finasterida</b><small>via androgênica moderada</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Finasterida</span><span class="pont"></span><span class="d">1,0mg</span></li><li>
+        <span class="n">Preparar</span><span class="pont"></span><span class="d">90 doses</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 01 cápsula ao dia.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques"><div class="destaque"><h4>Finasterida</h4><p>Inibidor seletivo da <strong>5α-redutase tipo 2</strong>, a isoforma predominante no folículo. Indicada quando o achado androgênico é <strong>isolado no SRD5A2</strong> (alta conversão T → DHT), sem reforço do receptor ou da isoforma tipo 1 — <strong>20%</strong> dos pacientes.</p></div></div></div>
+<div style="height:3mm"></div>
+<div class="texto"><p><strong>Escolha entre as opções:</strong> a Fórmula 1 entra sempre que o <strong>SRD5A2 está aumentado</strong> (83% dos laudos). Sem achado androgênico, a Fórmula 1 não é prescrita. Uso masculino; em mulheres, só com indicação médica e contracepção eficaz.</p></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fórmula 1N · Antiandrogênico Natural</b><small>associação NEXUS</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg><svg viewBox="0 0 24 24"><path d="M15.5 3.2a9 9 0 1 0 5.3 13.6A7.5 7.5 0 0 1 15.5 3.2z" fill="none" stroke="var(--lua)" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Saw palmetto extrato seco</span><span class="pont"></span><span class="d">160mg</span></li><li>
+        <span class="n">Pygeum africanum</span><span class="pont"></span><span class="d">100mg</span></li><li class="ativo-destaque">
+        <span class="n">Licopeno 10%</span><span class="pont"></span><span class="d">10mg</span></li><li class="ativo-destaque">
+        <span class="n">Urtiga dioica (raiz)</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">Zinco quelato</span><span class="pont"></span><span class="d">30mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 01 cápsula <strong>2 vezes ao dia</strong>. Alternativa ou adjuvante à F1 — mulheres, intolerância ou recusa aos inibidores sintéticos.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>Saw palmetto</h4><p>Ácidos graxos e <strong>β-sitosterol</strong> de Serenoa repens que inibem as <strong>duas isoformas da 5α-redutase</strong> e o acoplamento do DHT ao <strong>receptor androgênico (AR)</strong>. É a âncora tier S do motor nesta forma.</p></div><div class="destaque"><h4>Licopeno</h4><p>Carotenoide que <strong>reduz a expressão da 5α-redutase</strong> e protege o folículo do estresse oxidativo. Coprescrito com o saw palmetto <strong>1.071 vezes</strong>.</p></div><div class="destaque"><h4>Urtiga dioica</h4><p>A raiz <strong>liga a SHBG</strong> e reduz a fração livre de testosterona disponível para virar DHT — sinergia com o saw palmetto no <strong>SRD5A2</strong> aumentado.</p></div></div></div>
+<div style="height:3mm"></div>
+<div class="tabela">
+    <table><thead><tr><th>Associado</th><th>Tier</th><th>Coprescrições com saw palmetto</th><th>Gene-alvo</th></tr></thead><tbody><tr><td>Zinco quelato</td><td>S</td><td>2.647</td><td>SRD5A2 (cofator inibitório da 5α-redutase)</td></tr><tr><td>Pygeum africanum</td><td>B</td><td>1.229</td><td>AR · inflamação perifolicular</td></tr><tr><td>Licopeno 10%</td><td>A</td><td>1.071</td><td>SRD5A2 · NQO1</td></tr><tr><td>Urtiga dioica</td><td>B</td><td>468</td><td>SRD5A2 · AR (SHBG)</td></tr><tr><td>Androtase® (β-sitosterol)</td><td>A</td><td>238</td><td>SRD5A1 e SRD5A2 — opção para potencializar</td></tr></tbody></table>
+    </div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fórmula 2 · Minoxidil Oral</b><small>sempre prescrever</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Minoxidil</span><span class="pont"></span><span class="d">2,5mg</span></li><li>
+        <span class="n">Preparar</span><span class="pont"></span><span class="d">90 doses</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 01 cápsula ao dia.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>Minoxidil</h4><p>Abre <strong>canais de potássio</strong> na musculatura dos vasos e na papila dérmica, aumenta o fluxo sanguíneo e <strong>prolonga a fase anágena</strong>. Por via oral é ativado pela <strong>SULT1A1</strong> do folículo e compensa a <strong>perfusão reduzida</strong> apontada pela <strong>ECA</strong> (74% dos laudos). Avaliar pressão arterial e frequência cardíaca antes e durante o uso.</p></div></div></div>
+<div style="height:6mm"></div>
+<div class="bloco" data-formula data-grupo="2">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fórmula 3 · Latanoprosta</b><small>só com indicação genética</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Latanoprosta</span><span class="pont"></span><span class="d">0,005%</span></li><li>
+        <span class="n">Loção capilar</span><span class="pont"></span><span class="d">qsp 100ml</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Aplicar nas áreas indicadas <strong>1 vez ao dia, pela manhã</strong>.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques-com-arte">
+    <div class="destaques"><div class="destaque"><h4>Latanoprosta</h4><p>Análogo da <strong>prostaglandina F2α</strong> que estimula o crescimento pelo <strong>receptor FP (PTGFR)</strong>. Quando o PTGFR está alterado, a resposta é baixa — por isso a fórmula <strong>só entra com PTGFR preservado</strong>, o que aconteceu em <strong>13%</strong> dos laudos.</p></div></div>
+    <img class="arte-destaques sem-mascara" src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/capilar/locao-pente.webp" style="width:34mm">
+  </div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fórmula 10 · Vesélle™</b><small>novo · Fagron · sem ação hormonal</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Vesélle™</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">DiluCAP® Hygro</span><span class="pont"></span><span class="d">qsp 1 dose</span></li><li>
+        <span class="n">Cápsulas vegetais</span><span class="pont"></span><span class="d">1 dose</span></li><li>
+        <span class="n">Preparar</span><span class="pont"></span><span class="d">90 doses</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar <strong>01 dose ao dia</strong>. A dose pode subir até <strong>300 mg/dia</strong> conforme avaliação do prescritor.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques-com-arte">
+    <div class="destaques"><div class="destaque"><h4>Vesélle™</h4><p>Extrato de <strong>folha de rúcula</strong> (Kyoh®) padronizado em <strong>1,5% de erucosídeos</strong>. Na papila dérmica humana aumentou <strong>VEGF (+267%)</strong>, <strong>FGF7/KGF (+244%)</strong> e <strong>NRF2 (+71%)</strong> e estimulou a proliferação celular <strong>sem alterar o eixo do DHT</strong>. No estudo clínico (150 pacientes, 84 dias), a dose de 100 mg aumentou a <strong>densidade capilar</strong> e as <strong>unidades foliculares</strong>.</p></div><div class="destaque"><h4>Por que combina com o laudo</h4><p>É um <strong>fator de crescimento por via oral</strong>. O VEGF responde à <strong>ECA</strong> alterada (74% dos laudos), o FGF7 ao <strong>HDAC9 e PAX1</strong> (73%), e o <strong>NRF2 é o regulador que liga o gene NQO1</strong> — reforço direto para os 37% com NQO1 alterado. Por não ser hormonal, serve a <strong>mulheres</strong>, <strong>menopausa</strong> e queda associada a <strong>análogos de GLP-1</strong>.</p></div></div>
+    <img class="arte-destaques" src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/capilar/capsulas.webp" style="width:42mm">
+  </div></div>
+<div style="height:3mm"></div>
+<div class="tabela"><h3>Associações sugeridas</h3>
+    <table><thead><tr><th>Variação</th><th>Gatilho genético</th><th>Fórmula</th></tr></thead><tbody><tr><td>Densidade e queda</td><td>ECA · HDAC9 · PAX1</td><td><strong>Vesélle™ 100mg</strong> isolado</td></tr><tr><td>Alopecia androgenética</td><td>AR · SRD5A2</td><td><strong>Vesélle™ 100mg</strong> + Androtase™ 300mg</td></tr><tr><td>Estrutura do fio</td><td>LIPH</td><td><strong>Vesélle™ 100mg</strong> + SiliciuMax® 300mg</td></tr><tr><td>Defesa antioxidante</td><td>NQO1 · TNF-α</td><td><strong>Vesélle™ 200 a 300mg</strong> (dose maior)</td></tr><tr><td>Crescimento com latanoprosta</td><td>PTGFR preservado</td><td><strong>Vesélle™ 100mg</strong> oral + <strong>F3</strong> Latanoprosta 0,005% em TrichoSol®</td></tr></tbody></table>
+    <p class="nota">Associações do material técnico da Fagron, ligadas aos genes do laudo. <strong>Androtase™</strong> (β-sitosterol, tier A) e <strong>SiliciuMax®</strong> (silício, tier A) são cadastrados na farmácia na dose sugerida. Vesélle™ é solúvel em água e pode ser manipulado em cápsula ou goma.</p></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Pill Food Genético</b><small>base Pill Food + Vesélle™ + 10 ativos guiados pelo laudo</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li>
+        <span class="n">Queratina hidrolisada</span><span class="pont"></span><span class="d">20mg</span></li><li>
+        <span class="n">L-Cistina</span><span class="pont"></span><span class="d">20mg</span></li><li>
+        <span class="n">Pantotenato de cálcio</span><span class="pont"></span><span class="d">60mg</span></li><li>
+        <span class="n">Vitamina B1 (tiamina)</span><span class="pont"></span><span class="d">60mg</span></li><li>
+        <span class="n">PABA</span><span class="pont"></span><span class="d">20mg</span></li><li>
+        <span class="n">Levedo de cerveja</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">Vesélle™ (F10)</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">Zinco quelato</span><span class="pont"></span><span class="d">25mg</span></li><li>
+        <span class="n">L-Metionina</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">Riboflavina</span><span class="pont"></span><span class="d">20mg</span></li><li>
+        <span class="n">Exsynutriment (silício)</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">Vitamina E acetato</span><span class="pont"></span><span class="d">10mg</span></li><li>
+        <span class="n">Selênio complexo</span><span class="pont"></span><span class="d">100mcg</span></li><li>
+        <span class="n">Vitamina C revestida</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">Nicotinamida</span><span class="pont"></span><span class="d">15mg</span></li><li>
+        <span class="n">Ferro bisglicinato</span><span class="pont"></span><span class="d">30mg</span></li><li>
+        <span class="n">Cobre quelado</span><span class="pont"></span><span class="d">1mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar <strong>2 cápsulas ao dia</strong>, após a primeira refeição. Preparar 60 doses. Usar <strong>no lugar da F7</strong> — não somar as duas.</p>
+      </div>
+      
+    </div>
+  </div>
+<div style="height:2mm"></div>
+<div class="tabela">
+    <table><thead><tr><th>Ativo suplementar</th><th>Gene-alvo</th><th>Por que entra</th></tr></thead><tbody><tr><td>Zinco quelato</td><td>SRD5A2 · ZPR1</td><td>Inibe a 5α-redutase; já vem em <strong>50%</strong> das fórmulas Pill Food da casa</td></tr><tr><td>L-Metionina</td><td>MTHFR</td><td>Doadora de metila (SAM-e) e enxofre para a queratina</td></tr><tr><td>Riboflavina</td><td>MTHFR</td><td>Precursora do <strong>FAD</strong>, cofator da própria MTHFR</td></tr><tr><td>Exsynutriment</td><td>LIPH</td><td>Silício orgânico para <strong>espessura e resistência</strong> do fio</td></tr><tr><td>Vitamina E</td><td>ZPR1</td><td>Repõe a vitamina E que o ZPR1 alterado tende a baixar</td></tr><tr><td>Selênio</td><td>NQO1 · TNF-α</td><td>Cofator da <strong>glutationa peroxidase</strong>, defesa antioxidante</td></tr><tr><td>Vitamina C</td><td>TMPRSS6</td><td>Aumenta a <strong>absorção do ferro</strong> e a síntese de colágeno</td></tr><tr><td>Nicotinamida</td><td>NQO1 · TNF-α</td><td>Precursora de NAD⁺; reduz a microinflamação</td></tr><tr><td>Ferro bisglicinato</td><td>TMPRSS6</td><td>Só com <strong>ferritina baixa</strong> — hepcidina desregulada</td></tr><tr><td>Cobre quelado</td><td>LIPH · ECA</td><td>Cofator da lisil-oxidase; equilibra o zinco</td></tr></tbody></table>
+    <p class="nota">Base = <strong>Pill Food manipulado</strong> da Medicinal (2.676 fórmulas). Retirar os ativos cujo gene vier <strong>preservado</strong> no laudo. Soma ≈ 780 mg/dose.</p></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Bloomé Capilar</b><small>âncora Bloomé + 10 associados do motor NEXUS</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Bloomé™</span><span class="pont"></span><span class="d">500mg</span></li><li>
+        <span class="n">Exsynutriment (silício)</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">Zinco quelato</span><span class="pont"></span><span class="d">30mg</span></li><li>
+        <span class="n">L-Cisteína</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">Vitamina C revestida</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">L-Metionina</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">Vitamina E acetato</span><span class="pont"></span><span class="d">10mg</span></li><li>
+        <span class="n">Pantotenato de cálcio</span><span class="pont"></span><span class="d">60mg</span></li><li>
+        <span class="n">In.Cell®</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">Selênio complexo</span><span class="pont"></span><span class="d">100mcg</span></li><li>
+        <span class="n">Riboflavina</span><span class="pont"></span><span class="d">20mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar <strong>2 cápsulas ao dia</strong>, após a primeira refeição. Preparar 60 doses. Alternativa ao Pill Food Genético e à F7.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>Bloomé™</h4><p>Nutricosmético oral de <strong>origem natural</strong> com indicação primária em <strong>crescimento capilar</strong> no banco de ativos (tier A, 590 fórmulas na Medicinal, dose mais usada <strong>500 mg</strong>). Os 10 associados são os ativos que <strong>mais saem junto com o Bloomé</strong> nas cápsulas da farmácia.</p></div></div></div>
+<div style="height:3mm"></div>
+<div class="tabela">
+    <table><thead><tr><th>Associado</th><th>Coprescrições com Bloomé</th><th>Gene-alvo</th></tr></thead><tbody><tr><td>Exsynutriment (silício)</td><td>109</td><td>LIPH</td></tr><tr><td>Zinco quelato</td><td>79</td><td>SRD5A2 · ZPR1</td></tr><tr><td>L-Cisteína</td><td>49</td><td>LIPH · NQO1 (glutationa)</td></tr><tr><td>Vitamina C revestida</td><td>47</td><td>TMPRSS6 · colágeno</td></tr><tr><td>L-Metionina</td><td>45</td><td>MTHFR</td></tr><tr><td>Vitamina E acetato</td><td>36</td><td>ZPR1</td></tr><tr><td>Pantotenato de cálcio</td><td>32</td><td>LIPH</td></tr><tr><td>In.Cell®</td><td>32</td><td>LIPH (matriz)</td></tr><tr><td>Selênio complexo</td><td>22</td><td>NQO1 · TNF-α</td></tr><tr><td>Riboflavina</td><td>23</td><td>MTHFR (cofator FAD)</td></tr></tbody></table>
+    <p class="nota">Associados ranqueados pela coprescrição real com o Bloomé em cápsulas (motor NEXUS, âncora Bloomé · tier A). Para potencializar, o Bloomé pode ser somado ao <strong>Vesélle™ 100 mg</strong> — um age pela nutrição do bulbo, o outro pelos fatores de crescimento. Soma ≈ 1.120 mg por dose.</p></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fórmula 4 · Loção Capilar</b><small>minoxidil potencializado</small></span><svg viewBox="0 0 24 24"><path d="M15.5 3.2a9 9 0 1 0 5.3 13.6A7.5 7.5 0 0 1 15.5 3.2z" fill="none" stroke="var(--lua)" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li>
+        <span class="n">Minoxidil *</span><span class="pont"></span><span class="d">5%</span></li><li>
+        <span class="n">Finasterida *</span><span class="pont"></span><span class="d">0,10% ou 0,15%</span></li><li class="ativo-destaque">
+        <span class="n">Alfa-estradiol **</span><span class="pont"></span><span class="d">0,025%</span></li><li class="ativo-destaque">
+        <span class="n">Cetirizina **</span><span class="pont"></span><span class="d">1% ou 2%</span></li><li class="ativo-destaque">
+        <span class="n">Tretinoína (regenerador)</span><span class="pont"></span><span class="d">0,015%</span></li><li>
+        <span class="n">D-Pantenol ***</span><span class="pont"></span><span class="d">2%</span></li><li>
+        <span class="n">Auxina Tricógena® ***</span><span class="pont"></span><span class="d">5% ou 10%</span></li><li class="ativo-destaque">
+        <span class="n">Capilia Longa™ ***</span><span class="pont"></span><span class="d">2% ou 3,5%</span></li><li>
+        <span class="n">TrichoSol®</span><span class="pont"></span><span class="d">qsp 100ml</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Aplicar no couro cabeludo <strong>1 vez ao dia, à noite</strong>, com massagens suaves.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques-com-arte">
+    <div class="destaques"><div class="destaque"><h4>Alfa-estradiol</h4><p>Isômero do estradiol <strong>sem ação estrogênica sistêmica</strong>. Estimula a <strong>aromatase</strong> local, desviando testosterona para estradiol e reduzindo o substrato do DHT. Entra quando o <strong>CYP19A1</strong> indica <strong>baixa aromatase</strong> (71%).</p></div><div class="destaque"><h4>Cetirizina</h4><p>Reduz a <strong>prostaglandina D2</strong>, sinal que leva o folículo à <strong>regressão</strong>. <strong>1%</strong> com PGD2 intermediário; <strong>2%</strong> com PGD2 aumentado (15% dos laudos).</p></div><div class="destaque"><h4>Tretinoína</h4><p><strong>Induz a SULT1A1</strong>, enzima que ativa o minoxidil — reforço para os <strong>59%</strong> com SULT1A1 reduzida — e estimula a <strong>renovação</strong> folicular quando o laudo pede regeneração.</p></div><div class="destaque"><h4>Capilia Longa™</h4><p><strong>Fito-exossomas</strong> de Curcuma longa que bloqueiam a queda e estimulam o crescimento. Com a <strong>Auxina Tricógena®</strong>, sobe para a dose maior quando os eixos de <strong>estrutura</strong> ou <strong>crescimento</strong> passam de 50%.</p></div></div>
+    <img class="arte-destaques sem-mascara" src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/capilar/locao-bico.webp" style="width:40mm">
+  </div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="faixa com-etiqueta" style="background-image:url('https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/capilar/aplicadores.webp');--altura:56mm;background-position:center 55%"><div class="etiqueta"><span>Loção capilar</span><span>Variações NEXUS</span></div></div>
+<div class="tabela">
+    <table><thead><tr><th>Variação</th><th>Gatilho genético</th><th>Somar à Fórmula 4</th><th>Coprescrições c/ minoxidil</th></tr></thead><tbody><tr><td>A · Anti-inflamatória</td><td>PGD2 · TNF-α</td><td><strong>Ciclopirox olamina 1%</strong> + Niacinamida PC 4%</td><td>2.945 · 37</td></tr><tr><td>B · Regenerativa</td><td>HDAC9 · PAX1/FOXA2 · LIPH</td><td><strong>GHK-Cu 1%</strong> + Nanofactor IGF 1% + Capixyl® 3%</td><td>1.100 · 668 · 253</td></tr><tr><td>C · Microcirculação</td><td>ECA · SULT1A1</td><td><strong>Cafeína 2%</strong> + Adenosina 0,75% + L-arginina 1,5%</td><td>945 · 240 · 267</td></tr><tr><td>D · Antiandrogênica tópica</td><td>AR · SRD5A2</td><td><strong>Trichoxidil® 3%</strong> + Tintura de Serenoa 1% + Espironolactona 1%</td><td>434 · 217 · 119</td></tr><tr><td>E · Energia do bulbo</td><td>HDAC9 · ECA</td><td><strong>L-carnitina 0,7%</strong> + Ginkgo biloba glicólico 2%</td><td>171 · 127</td></tr></tbody></table>
+    <p class="nota">Escolha <strong>uma ou duas variações</strong> conforme o laudo. As doses são as mais usadas na Medicinal para loção capilar. Associações com <strong>mais de 900 coprescrições</strong> já são rotina da farmácia; as demais são inovação com base de uso real.</p></div>
+<div class="bloco" data-grupo="0"><div class="destaques"><div class="destaque"><h4>Ciclopirox olamina</h4><p>Antifúngico com ação <strong>anti-inflamatória e quelante de ferro</strong> que reduz a microinflamação perifolicular e a <strong>PGD2</strong>. É o associado <strong>mais coprescrito</strong> com o minoxidil em loção (2.945 vezes).</p></div><div class="destaque"><h4>GHK-Cu (Copper Peptide)</h4><p>Tripeptídeo de cobre que <strong>aumenta o tamanho do folículo</strong>, estimula <strong>VEGF</strong> e <strong>colágeno</strong> e prolonga a fase anágena — resposta ao <strong>HDAC9</strong> e ao <strong>LIPH</strong> alterados.</p></div><div class="destaque"><h4>Adenosina</h4><p>Estimula a papila dérmica a produzir <strong>FGF-7</strong> e <strong>VEGF</strong> e <strong>engrossa o fio</strong>. Com a cafeína, reforça a perfusão quando a <strong>ECA</strong> está alterada.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fórmula 4C · Clascosterona</b><small>antiandrogênico de receptor · proposta</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg><svg viewBox="0 0 24 24"><path d="M15.5 3.2a9 9 0 1 0 5.3 13.6A7.5 7.5 0 0 1 15.5 3.2z" fill="none" stroke="var(--lua)" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Clascosterona</span><span class="pont"></span><span class="d">5%</span></li><li>
+        <span class="n">Veículo anidro (álcool + propilenoglicol)</span><span class="pont"></span><span class="d">qsp 60ml</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Aplicar <strong>1 ml no couro cabeludo seco, 2 vezes ao dia</strong>, em horário diferente da Fórmula 4. Conservar em geladeira.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>Clascosterona</h4><p><strong>Antagonista tópico do receptor androgênico.</strong> Compete com o DHT pelo <strong>AR</strong> dentro do folículo e é hidrolisada na pele a cortexolona, inativa — por isso tem <strong>baixa exposição sistêmica</strong> e não altera o DHT circulante. É a resposta direta ao <strong>AR (rs6152) aumentado</strong> (43% dos laudos), o único achado da orientação sem ativo próprio.</p></div></div></div>
+<div style="height:3mm"></div>
+<div class="tabela"><h3>Avaliação para inclusão</h3>
+    <table><thead><tr><th>Critério</th><th>Avaliação</th></tr></thead><tbody><tr><td>Mecanismo</td><td>✔ Bloqueia o <strong>receptor</strong> (AR) — complementa a F1, que reduz a <strong>produção</strong> de DHT. As duas vias juntas cobrem o eixo androgênico inteiro.</td></tr><tr><td>Gene-alvo</td><td>✔ <strong>AR aumentado</strong> em 43% dos laudos; em 7 pacientes com AR alto o SRD5A2 é normal e o laudo não indica nenhum antiandrogênico.</td></tr><tr><td>Perfis</td><td>✔ <strong>Mulheres</strong> (sem efeito sistêmico antiandrogênico), homens com <strong>efeitos sexuais</strong> à finasterida ou dutasterida e quem recusa inibidores orais.</td></tr><tr><td>Evidência</td><td>⚠ Aprovada para <strong>acne</strong> (creme 1%, FDA 2020). Em alopecia androgenética, estudos de <strong>fase 3</strong> com <strong>solução 5%, 2 vezes ao dia</strong>.</td></tr><tr><td>Segurança</td><td>⚠ Supressão do <strong>eixo HPA</strong> descrita em uso extenso. Evitar em gestantes e em áreas muito grandes; reavaliar em 3 meses.</td></tr><tr><td>Estabilidade</td><td>⚠ Éster sensível à <strong>hidrólise</strong>: veículo anidro, frasco âmbar, geladeira e validade curta (a definir com estudo da farmácia).</td></tr><tr><td>Disponibilidade</td><td>✖ <strong>Sem cadastro</strong> no banco de ativos e sem uso na Medicinal. Depende de matéria-prima com laudo e de enquadramento regulatório.</td></tr></tbody></table>
+    <p class="nota"><strong>Parecer:</strong> incluir como <strong>proposta</strong> para AR aumentado — sozinha (mulheres, intolerância aos inibidores) ou somada à F4 — condicionada à aquisição da matéria-prima e à validação de estabilidade. Entra pela camada <strong>PAR</strong> (invocação nominal), fora do motor NEXUS.</p></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fórmula 5 · Soro Capilar</b><small>fatores de crescimento</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li>
+        <span class="n">ProHairin Complex</span><span class="pont"></span><span class="d">1,5%</span></li><li class="ativo-destaque">
+        <span class="n">Fator de crescimento aFGF</span><span class="pont"></span><span class="d">1,5%</span></li><li class="ativo-destaque">
+        <span class="n">Fator de crescimento VEGF</span><span class="pont"></span><span class="d">1,0%</span></li><li class="ativo-destaque">
+        <span class="n">Procapil®</span><span class="pont"></span><span class="d">1,5%</span></li><li>
+        <span class="n">Soro capilar</span><span class="pont"></span><span class="d">qsp 100ml</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Borrifar diretamente no couro cabeludo <strong>1 vez ao dia, pela manhã</strong>.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques-com-arte">
+    <div class="destaques"><div class="destaque"><h4>aFGF (FGF-1)</h4><p>Fator de crescimento fibroblástico que ativa a <strong>papila dérmica</strong> e a proliferação das células da matriz, <strong>prolongando a fase anágena</strong>. Resposta ao <strong>HDAC9</strong> e ao <strong>PAX1/FOXA2</strong> alterados, que indicam ciclo encurtado e menor densidade.</p></div><div class="destaque"><h4>VEGF</h4><p>Fator de crescimento endotelial que forma <strong>novos capilares</strong> ao redor do bulbo. Compensa a <strong>perfusão folicular reduzida</strong> da <strong>ECA</strong> e a <strong>deficiência angiogênica</strong>.</p></div><div class="destaque"><h4>Procapil®</h4><p>Biomimético (biotinoil tripeptídeo-1 + apigenina + ácido oleanólico) que <strong>ancora o fio</strong>, melhora a <strong>microcirculação</strong> e reduz a ação do DHT no bulbo.</p></div></div>
+    <img class="arte-destaques" src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/capilar/soro.webp" style="width:48mm">
+  </div></div>
+<div style="height:3mm"></div>
+<div class="texto"><p><strong>Ativação automática:</strong> a Fórmula 5 entra sempre que o laudo indica necessidade de <strong>fatores de crescimento</strong>, <strong>peptídeos regeneradores</strong>, <strong>deficiência angiogênica</strong> ou <strong>comprometimento da matriz extracelular</strong> — HDAC9, PAX1/FOXA2 ou ECA alterados apareceram em <strong>95%</strong> dos laudos.</p></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="faixa com-etiqueta" style="background-image:url('https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/capilar/fatores.webp');--altura:58mm;background-position:70% center"><div class="etiqueta"><span>Subseção</span><span>Fatores de crescimento</span></div></div>
+<div class="texto"><p>Os <strong>fatores de crescimento</strong> são peptídeos sinalizadores que conversam com a <strong>papila dérmica</strong> e com as <strong>células-tronco do bulge</strong>. Na manipulação, chegam ao folículo como <strong>biomiméticos nanoencapsulados</strong>. Cada um age em uma etapa do ciclo — <strong>induzir</strong> o anágeno, <strong>mantê-lo</strong>, <strong>nutrir</strong> o bulbo e <strong>reparar</strong> o tecido —, e o laudo indica qual etapa precisa de reforço.</p></div>
+<div class="tabela">
+    <table><thead><tr><th>Fator</th><th>Ação no folículo</th><th>Gene do laudo</th><th>Dose · loção</th><th>Par mais forte (coprescrições)</th></tr></thead><tbody><tr><td>bFGF (FGF-2)</td><td>Ativa as células-tronco do bulge e <strong>inicia o anágeno</strong></td><td>HDAC9 · PAX1</td><td>1%</td><td>IGF · 578</td></tr><tr><td>aFGF (FGF-1)</td><td>Proliferação da matriz, <strong>prolonga o anágeno</strong></td><td>HDAC9</td><td>1,5%</td><td>GHK-Cu · 591</td></tr><tr><td>KGF (FGF-7)</td><td>Queratinócitos da bainha — <strong>espessura do fio</strong></td><td>LIPH</td><td>1,5%</td><td>Minoxidil · 62</td></tr><tr><td>IGF-1</td><td>Mantém o anágeno e <strong>bloqueia a apoptose</strong> induzida pelo TGF-β</td><td>HDAC9 · AR</td><td>1%</td><td>Minoxidil · 668</td></tr><tr><td>VEGF</td><td><strong>Angiogênese</strong> perifolicular, aumenta o bulbo</td><td>ECA</td><td>1%</td><td>Minoxidil · 779</td></tr><tr><td>IDP-2 (IGF-2)</td><td>Proliferação de fibroblastos e <strong>matriz</strong> da papila</td><td>LIPH</td><td>0,5%</td><td>Niacinamida · 88</td></tr><tr><td>GHK-Cu</td><td>Aumenta o folículo, estimula <strong>VEGF e colágeno</strong></td><td>LIPH · ECA</td><td>1%</td><td>Minoxidil · 1.100</td></tr><tr><td>Capilia Longa™</td><td><strong>Fito-exossomas</strong> antiqueda e pró-crescimento</td><td>HDAC9</td><td>1%</td><td>Minoxidil · 368</td></tr><tr><td>EGF</td><td>Migração e <strong>reparo</strong> epidérmico — uso em ciclos, não contínuo</td><td>Pós-transplante</td><td>1%</td><td>IGF · 84</td></tr><tr><td>TGF-β3</td><td><strong>Anticicatricial</strong>; a família TGF-β sinaliza catágeno</td><td>Só área doadora</td><td>2%</td><td>—</td></tr></tbody></table>
+    <p class="nota">Doses = mais usadas na Medicinal em loção capilar. <strong>Atenção:</strong> o TGF-β (β1 e β2) é o principal sinal de <strong>entrada em catágeno</strong> — não usar TGF-β para crescimento; o β3 fica reservado para a <strong>cicatrização da área doadora</strong> no pós-transplante.</p></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Soro Indutor do Anágeno</b><small>HDAC9 · PAX1/FOXA2 alterados</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li>
+        <span class="n">Fator de crescimento bFGF</span><span class="pont"></span><span class="d">1%</span></li><li class="ativo-destaque">
+        <span class="n">Fator de crescimento KGF</span><span class="pont"></span><span class="d">1,5%</span></li><li>
+        <span class="n">Fator de crescimento IGF</span><span class="pont"></span><span class="d">1%</span></li><li>
+        <span class="n">Capilia Longa™</span><span class="pont"></span><span class="d">1%</span></li><li>
+        <span class="n">Soro capilar</span><span class="pont"></span><span class="d">qsp 60ml</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Borrifar no couro cabeludo <strong>1 vez ao dia, pela manhã</strong>. Alternativa à Fórmula 5 quando o achado principal é o <strong>ciclo encurtado</strong>.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>KGF (FGF-7)</h4><p>Produzido pela própria papila dérmica, estimula os <strong>queratinócitos da bainha</strong> e o <strong>calibre do fio</strong>. Com bFGF e IGF — par que já soma <strong>578</strong> coprescrições —, cobre indução e manutenção do anágeno.</p></div></div></div>
+<div style="height:6mm"></div>
+<div class="bloco" data-formula data-grupo="2">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Soro Angiogênico</b><small>ECA alterada</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li>
+        <span class="n">Fator de crescimento VEGF</span><span class="pont"></span><span class="d">1%</span></li><li>
+        <span class="n">Fator de crescimento aFGF</span><span class="pont"></span><span class="d">1,5%</span></li><li class="ativo-destaque">
+        <span class="n">GHK-Cu (Copper Peptide)</span><span class="pont"></span><span class="d">1%</span></li><li>
+        <span class="n">Soro capilar</span><span class="pont"></span><span class="d">qsp 60ml</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Borrifar no couro cabeludo <strong>1 vez ao dia, pela manhã</strong>. Alternativa à Fórmula 5 quando o achado principal é a <strong>perfusão reduzida</strong>.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques"><div class="destaque"><h4>GHK-Cu</h4><p>Liga as duas pontas do soro — é o par mais forte do <strong>aFGF (591)</strong> e do <strong>VEGF (612)</strong> — e, por ser cobre, atua como cofator da <strong>lisil-oxidase</strong>, que firma o colágeno ao redor dos novos capilares.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fórmula 6 · Vitamina D</b><small>GC + VDR alterados</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Vitamina D</span><span class="pont"></span><span class="d">1.000 UI/gota</span></li><li>
+        <span class="n">Preparar</span><span class="pont"></span><span class="d">50ml</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar <strong>10 gotas ao dia</strong>.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques-com-arte">
+    <div class="destaques"><div class="destaque"><h4>Vitamina D</h4><p>O <strong>receptor de vitamina D (VDR)</strong> é essencial para o início de cada novo ciclo do fio. Com <strong>GC</strong> (transporte) e <strong>VDR</strong> (receptor) alterados — <strong>74%</strong> dos laudos — a vitamina circula menos e age menos no folículo. Acompanhar <strong>25(OH)D</strong> e cálcio.</p></div></div>
+    <img class="arte-destaques" src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/capilar/gotas.webp" style="width:40mm">
+  </div></div>
+<div style="height:6mm"></div>
+<div class="bloco" data-formula data-grupo="2">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fórmula 8 · Shampoo</b><small>couro cabeludo saudável</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg><svg viewBox="0 0 24 24"><path d="M15.5 3.2a9 9 0 1 0 5.3 13.6A7.5 7.5 0 0 1 15.5 3.2z" fill="none" stroke="var(--lua)" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Piritionato de Zinco</span><span class="pont"></span><span class="d">1%</span></li><li>
+        <span class="n">Extrato de Jaborandi</span><span class="pont"></span><span class="d">10%</span></li><li>
+        <span class="n">Auxina Tricógena®</span><span class="pont"></span><span class="d">10%</span></li><li>
+        <span class="n">Shampoo</span><span class="pont"></span><span class="d">qsp 200ml</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Aplicar durante o banho.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques"><div class="destaque"><h4>Piritionato de Zinco</h4><p>Antifúngico e <strong>seborregulador</strong> que controla a <strong>microinflamação</strong> do couro cabeludo. Com o <strong>jaborandi</strong> e a <strong>Auxina Tricógena®</strong>, prepara o couro cabeludo para receber a loção.</p></div></div></div>
+<div class="faixa" style="background-image:url('https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/capilar/espuma.webp');--altura:24mm;background-position:center"></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="tabela"><h3>Fórmula 5 · Variações do soro</h3>
+    <table><thead><tr><th>Variação</th><th>Gatilho genético</th><th>Somar à Fórmula 5</th><th>Coprescrições</th></tr></thead><tbody><tr><td>A · Angiogênica plus</td><td>ECA</td><td><strong>Nanofactor bFGF 1%</strong> + Cafeína 2%</td><td>493 (VEGF) · 64 (aFGF)</td></tr><tr><td>B · Densidade</td><td>PAX1/FOXA2 · HDAC9</td><td><strong>Follicusan™ 5%</strong> + Kopexyl 1%</td><td>246 (VEGF) · 44 (VEGF)</td></tr><tr><td>C · Matriz e reparo</td><td>LIPH · NQO1</td><td><strong>EGF 1%</strong> + Niacinamida PC 4%</td><td>28 (VEGF) · 9 (IGF)</td></tr></tbody></table>
+    <p class="nota">Âncoras do soro: <strong>aFGF</strong>, <strong>VEGF</strong>, <strong>IGF</strong> e <strong>GHK-Cu</strong> (tier A). O <strong>Procapil®</strong> da fórmula base segue como ativo da orientação.</p></div>
+<div class="bloco" data-grupo="0"><div class="destaques"><div class="destaque"><h4>Nanofactor bFGF (FGF-2)</h4><p>Fator de crescimento que <strong>recruta células-tronco</strong> do bulge e acelera a entrada em anágeno. É o par mais forte do VEGF no soro (<strong>493</strong> coprescrições).</p></div><div class="destaque"><h4>Follicusan™</h4><p>Complexo com <strong>proteínas do leite, biotina e pantenol</strong> que reduz a apoptose do folículo e aumenta a densidade — indicação primária em Alopecia no banco.</p></div></div></div>
+<div style="height:4mm"></div>
+<div class="tabela"><h3>Fórmula 8 · Variações do shampoo</h3>
+    <table><thead><tr><th>Variação</th><th>Gatilho genético</th><th>Somar à Fórmula 8</th><th>Coprescrições</th></tr></thead><tbody><tr><td>A · Seborreguladora</td><td>TNF-α · microinflamação</td><td><strong>Ácido salicílico 2%</strong> + Cetoconazol 2%</td><td>85 · 64 (piritionato)</td></tr><tr><td>B · Microbioma do couro cabeludo</td><td>FUT2 · TNF-α</td><td><strong>DefensCalp® 1,5%</strong> + Octopirox 1%</td><td>57 · 20 (piritionato)</td></tr><tr><td>C · Estimulante</td><td>ECA</td><td><strong>Cafeína 1%</strong> + D-pantenol 2%</td><td>51 (piritionato) · 131 (Auxina)</td></tr></tbody></table>
+    </div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fórmula 7 · Bloco Obrigatório</b><small>presente em todas as formulações</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Biotina *</span><span class="pont"></span><span class="d">2 · 5 · 10mg</span></li><li>
+        <span class="n">Piridoxal 5-fosfato *</span><span class="pont"></span><span class="d">50 · 75mg</span></li><li>
+        <span class="n">Zinco quelato *</span><span class="pont"></span><span class="d">25 · 35mg</span></li><li>
+        <span class="n">Pantotenato de cálcio *</span><span class="pont"></span><span class="d">150 · 200mg</span></li><li class="ativo-destaque">
+        <span class="n">Cistina *</span><span class="pont"></span><span class="d">20 · 30mg</span></li><li>
+        <span class="n">Tiamina *</span><span class="pont"></span><span class="d">60 · 75mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Compõe a Fórmula 7 com <strong>mais 2 blocos</strong>, na ordem de prioridade — metilfolato, antioxidante, nutricional.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>Biotina</h4><p>Cofator das carboxilases e da <strong>síntese de queratina</strong>. Com <strong>cistina</strong>, <strong>zinco</strong> e <strong>pantotenato</strong>, forma a base estrutural para o <strong>LIPH</strong> alterado — presente em <strong>100%</strong> dos laudos, que indica fio mais fino e frágil.</p></div><div class="destaque"><h4>Cistina</h4><p>Aminoácido sulfurado que forma as <strong>pontes dissulfeto</strong> da queratina, dando <strong>resistência e espessura</strong> ao fio.</p></div></div></div>
+<div style="height:4mm"></div>
+<div class="bloco" data-formula data-grupo="2">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fórmula 7 · Bloco Metilfolato</b><small>MTHFR, FUT2 ou TCN2 alterados</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Metilfolato **</span><span class="pont"></span><span class="d">1mg</span></li><li>
+        <span class="n">Metilcobalamina **</span><span class="pont"></span><span class="d">1mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Sempre que o metilfolato for prescrito, a <strong>metilcobalamina</strong> entra junto.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques"><div class="destaque"><h4>Metilfolato</h4><p>Forma ativa do folato, que <strong>não depende da MTHFR</strong>. Restaura a <strong>metilação</strong> e reduz a homocisteína e a inflamação — <strong>69%</strong> dos laudos têm MTHFR alterada.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fórmula 7 · Bloco Antioxidante</b><small>ZPR1, TNF-α ou NQO1 alterados</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">CavaCurcumin® **</span><span class="pont"></span><span class="d">50mg</span></li><li>
+        <span class="n">CavaQ10® **</span><span class="pont"></span><span class="d">50mg</span></li><li>
+        <span class="n">Nigella sativa **</span><span class="pont"></span><span class="d">50mg</span></li><li>
+        <span class="n">PQQ *</span><span class="pont"></span><span class="d">1mg</span></li><li class="ativo-destaque">
+        <span class="n">Vitamina E *</span><span class="pont"></span><span class="d">200 · 400 · 600UI</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Entra quando o laudo indica <strong>suplementação antioxidante</strong>.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>CavaCurcumin®</h4><p>Curcumina em <strong>γ-ciclodextrina</strong>, de alta absorção, que modula o <strong>TNF-α</strong> e o NF-κB — a <strong>microinflamação</strong> que acelera a miniaturização.</p></div><div class="destaque"><h4>Vitamina E</h4><p>Principal antioxidante das membranas. O <strong>ZPR1</strong> alterado indica <strong>baixa vitamina E</strong> e triglicerídeos aumentados — a dose sobe conforme o achado.</p></div></div></div>
+<div style="height:4mm"></div>
+<div class="bloco" data-formula data-grupo="2">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fórmula 7 · Bloco Nutricional</b><small>carência nutricional</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">In.Cell® *</span><span class="pont"></span><span class="d">150mg</span></li><li>
+        <span class="n">Riboflavina *</span><span class="pont"></span><span class="d">25 · 30mg</span></li><li>
+        <span class="n">Vitamina C *</span><span class="pont"></span><span class="d">250 · 350mg</span></li><li>
+        <span class="n">Magnésio *</span><span class="pont"></span><span class="d">150 · 200mg</span></li><li>
+        <span class="n">Cobre *</span><span class="pont"></span><span class="d">1mg</span></li><li>
+        <span class="n">Selênio *</span><span class="pont"></span><span class="d">200mcg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Preparar <strong>90 doses</strong>. Tomar <strong>01 dose pela manhã</strong>, após a primeira refeição do dia.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques"><div class="destaque"><h4>In.Cell®</h4><p>Blend de <strong>aminoácidos, ácido hialurônico e glicosaminoglicanos</strong> que repõe a matriz do folículo quando há <strong>carência nutricional</strong>.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="tabela"><h3>Fórmula 7 · Variações dos blocos</h3>
+    <table><thead><tr><th>Variação</th><th>Gatilho genético</th><th>Somar à Fórmula 7</th><th>Coprescrições</th></tr></thead><tbody><tr><td>Estrutural plus</td><td>LIPH</td><td><strong>L-metionina 100mg</strong> + Queratina hidrolisada 20mg</td><td>5.016 · 4.076 (zinco)</td></tr><tr><td>Metilação reforçada</td><td>MTHFR</td><td><strong>Riboflavina 20mg</strong> + Betaína HCl 300mg</td><td>5.387 · 2.326 (P5P)</td></tr><tr><td>Mitocondrial</td><td>NQO1</td><td><strong>Ubiquinol 10mg</strong> (no lugar da CoQ10) + Ácido alfa-lipoico 300mg</td><td>713 · 4.117 (zinco)</td></tr><tr><td>Vascular</td><td>ECA · TNF-α</td><td><strong>Pinus pinaster 150mg</strong> + Resveratrol 100mg</td><td>2.524 · 2.022 (zinco)</td></tr><tr><td>Lipídica</td><td>ZPR1</td><td><strong>Astaxantina 10mg</strong> + Glutationa reduzida 10mg</td><td>1.500 · 1.269 (zinco)</td></tr></tbody></table>
+    <p class="nota">Âncoras da cápsula: <strong>zinco quelato</strong>, <strong>Exsynutriment</strong>, <strong>L-cistina</strong> e <strong>P5P</strong> (todos tier S). Na variação de metilação, a riboflavina substitui a do bloco nutricional — não somar as duas. Respeitar o limite de <strong>2.000 mg por dose</strong> (regra GER-07); acima disso, migrar ativos sem sabor para sachê.</p></div>
+<div class="bloco" data-grupo="0"><div class="destaques"><div class="destaque"><h4>Riboflavina</h4><p>Precursora do <strong>FAD</strong>, o cofator da própria <strong>MTHFR</strong>. Na variante C677T, a enzima perde o FAD com facilidade — a riboflavina <strong>recupera a atividade</strong> e reduz a homocisteína, mesmo sem metilfolato.</p></div><div class="destaque"><h4>Ubiquinol</h4><p>Forma <strong>já reduzida</strong> da coenzima Q10. Quando a <strong>NQO1</strong> está alterada, o organismo converte mal a ubiquinona em ubiquinol — por isso a troca é uma escolha <strong>guiada pelo gene</strong>.</p></div><div class="destaque"><h4>Ácido alfa-lipoico</h4><p>Antioxidante <strong>hidro e lipossolúvel</strong> que regenera vitaminas C e E e a glutationa. Par frequente do zinco (<strong>4.117</strong> coprescrições).</p></div><div class="destaque"><h4>Pinus pinaster</h4><p>Proantocianidinas que estimulam a <strong>óxido nítrico sintase</strong>, melhorando a microcirculação do couro cabeludo quando a <strong>ECA</strong> está alterada.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fórmula 9 · Sachê Intestinal</b><small>eixo intestino-folículo</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">L-Glutamina</span><span class="pont"></span><span class="d">5g</span></li><li class="ativo-destaque">
+        <span class="n">Lactobacillus acidophilus</span><span class="pont"></span><span class="d">5 BLH</span></li><li>
+        <span class="n">Lactobacillus bifidum</span><span class="pont"></span><span class="d">5 BLH</span></li><li>
+        <span class="n">Lactobacillus rhamnosus</span><span class="pont"></span><span class="d">5 BLH</span></li><li>
+        <span class="n">Lactobacillus reuteri</span><span class="pont"></span><span class="d">2 BLH</span></li><li>
+        <span class="n">Lactobacillus gasseri</span><span class="pont"></span><span class="d">2 BLH</span></li><li>
+        <span class="n">Base suco de laranja</span><span class="pont"></span><span class="d">qsp 1 sachê</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Preparar <strong>60 doses</strong>. Dissolver 1 sachê em 100ml de água e tomar <strong>pela manhã, em jejum</strong>.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques-com-arte">
+    <div class="destaques"><div class="destaque"><h4>L-Glutamina</h4><p>Principal combustível dos <strong>enterócitos</strong>. Restaura as <strong>junções firmes</strong> da mucosa e reduz a <strong>permeabilidade intestinal</strong> — o ponto fraco quando o <strong>FUT2</strong> está alterado.</p></div><div class="destaque"><h4>Probióticos</h4><p>Cinco cepas que reequilibram a <strong>microbiota</strong>, reduzem a <strong>inflamação sistêmica</strong> e melhoram a absorção de <strong>vitamina B12, zinco e ferro</strong>, nutrientes essenciais para o fio.</p></div></div>
+    <img class="arte-destaques" src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/capilar/sache.webp" style="width:46mm">
+  </div></div>
+<div style="height:3mm"></div>
+<div class="texto"><h3>Eixo intestino-folículo</h3><p>O <strong>FUT2</strong> controla a mucosa protetora do intestino. Quando está alterado (<strong>21%</strong> dos laudos), cresce o risco de <strong>disbiose</strong>, <strong>inflamação crônica</strong> e má absorção de B12 — um caminho para o <strong>eflúvio telógeno secundário</strong>. Prescrever a Fórmula 9 quando o FUT2 ou qualquer gene indicar <strong>inflamação</strong>, <strong>disbiose</strong> ou <strong>eflúvio</strong>.</p></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="tabela"><h3>Fórmula 9 · Variações do sachê</h3>
+    <table><thead><tr><th>Variação</th><th>Gatilho genético</th><th>Somar à Fórmula 9</th><th>Coprescrições</th></tr></thead><tbody><tr><td>A · Barreira intestinal</td><td>FUT2</td><td><strong>Fibregum™ B 3g</strong> + L. plantarum 3 BLH + CoreBiome® 300mg</td><td>423 · 135 · 9 (glutamina)</td></tr><tr><td>B · Microbiota-chave</td><td>FUT2 · TNF-α</td><td><strong>Akkermansia (Bio-MAMPs) 50mg</strong> + PreticX™ 1,4g</td><td>145 · 89 (glutamina)</td></tr><tr><td>C · Bifidobactérias</td><td>MTHFR · FUT2</td><td><strong>B. lactis 1 BLH</strong> + B. longum 1 BLH + Inulina 500mg</td><td>391 · 213 · 241</td></tr><tr><td>D · Ferro e eflúvio</td><td>TMPRSS6</td><td><strong>Lactoferrina (Bioferrin®) 25mg</strong></td><td>7 (glutamina)</td></tr></tbody></table>
+    <p class="nota">Âncoras do sachê: <strong>L-glutamina</strong>, <strong>L. acidophilus</strong> e <strong>L. rhamnosus</strong> (tier S). Pela regra GER-08, todo probiótico do protocolo fica no sachê.</p></div>
+<div class="bloco" data-grupo="0"><div class="destaques-com-arte">
+    <div class="destaques"><div class="destaque"><h4>Fibregum™ B</h4><p>Goma acácia de <strong>fermentação lenta</strong>, bem tolerada, que alimenta bifidobactérias e reforça as <strong>junções firmes</strong> — indicação primária em disbiose e <strong>leaky gut</strong>.</p></div><div class="destaque"><h4>Akkermansia muciniphila</h4><p>Bactéria que <strong>regenera o muco intestinal</strong>, a mesma camada que depende do <strong>FUT2</strong>. A forma Bio-MAMPs é pós-biótica, estável em sachê.</p></div><div class="destaque"><h4>Lactoferrina</h4><p>Proteína que <strong>regula a absorção de ferro</strong> e a hepcidina sem irritar o intestino — inovação para o <strong>TMPRSS6</strong> alterado (26% dos laudos), que tende a ferritina baixa e eflúvio.</p></div></div>
+    <img class="arte-destaques" src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/capilar/sache.webp" style="width:42mm">
+  </div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="texto"><h3>Pós-transplante capilar</h3><p>Nas semanas após o transplante, as <strong>crostas</strong> dos enxertos e a cicatrização das áreas <strong>doadora e receptora</strong> provocam <strong>coceira</strong>. Coçar desloca enxertos; por isso o cuidado é <strong>aliviar sem friccionar</strong> e com ativos em concentração baixa.</p></div>
+<div style="height:5mm"></div>
+<div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Foam Pós-Transplante</b><small>alívio da coceira</small></span></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Ácido salicílico</span><span class="pont"></span><span class="d">0,5%</span></li><li class="ativo-destaque">
+        <span class="n">Óleo essencial de alecrim</span><span class="pont"></span><span class="d">0,25%</span></li><li>
+        <span class="n">Base Foam</span><span class="pont"></span><span class="d">qsp 100ml</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Aplicar <strong>1 vez ao dia</strong> nas <strong>sobrancelhas e no couro cabeludo</strong>, <strong>deixar agir por 5 minutos</strong> e enxaguar.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques-com-arte">
+    <div class="destaques"><div class="destaque"><h4>Ácido salicílico</h4><p>Em <strong>0,5%</strong>, solta as <strong>crostas</strong> e a descamação ao redor dos enxertos sem agredir, e o salicilato tem ação <strong>anti-inflamatória</strong> que reduz o prurido.</p></div><div class="destaque"><h4>Óleo de alecrim</h4><p><strong>Anti-inflamatório</strong>, antimicrobiano e <strong>refrescante</strong>. Em estudo comparativo com minoxidil, reduziu a <strong>coceira do couro cabeludo</strong> e ainda estimula o crescimento.</p></div></div>
+    <img class="arte-destaques sem-mascara" src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/capilar/foam.webp" style="width:40mm">
+  </div></div>
+<div style="height:3mm"></div>
+<div class="tabela"><h3>Variações NEXUS do foam</h3>
+    <table><thead><tr><th>Variação</th><th>Quando usar</th><th>Somar ao foam</th><th>Coprescrições</th></tr></thead><tbody><tr><td>A · Calmante</td><td>Coceira com vermelhidão</td><td><strong>Bisabolol 1%</strong> + Alantoína 1%</td><td>121 · 86 (salicílico)</td></tr><tr><td>B · Refrescante</td><td>Prurido intenso</td><td><strong>Mentol 0,25%</strong></td><td>145 (salicílico)</td></tr><tr><td>C · Barreira</td><td>Pele sensível e ressecada</td><td><strong>BioEcolia® 2%</strong> + Niacinamida 4%</td><td>92 · 71 (salicílico)</td></tr><tr><td>D · Antisséptica</td><td>Crostas e foliculite</td><td><strong>Óleo de melaleuca 0,5%</strong></td><td>118 (alecrim)</td></tr><tr><td>E · Reparadora</td><td>Área doadora</td><td><strong>D-pantenol 2%</strong> + Babosa 5%</td><td>41 · 16 (salicílico)</td></tr></tbody></table>
+    <p class="nota">Âncoras: ácido salicílico (tier A) e óleo de alecrim (tier B). Mentol na <strong>menor dose</strong> usada na farmácia (a mais comum é 0,5%), pela sensibilidade do pós-operatório.</p></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Sérum Calmante Leave-on</b><small>áreas doadora e receptora</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg><svg viewBox="0 0 24 24"><path d="M15.5 3.2a9 9 0 1 0 5.3 13.6A7.5 7.5 0 0 1 15.5 3.2z" fill="none" stroke="var(--lua)" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Bisabolol</span><span class="pont"></span><span class="d">1%</span></li><li>
+        <span class="n">Alantoína</span><span class="pont"></span><span class="d">1%</span></li><li>
+        <span class="n">D-Pantenol</span><span class="pont"></span><span class="d">2%</span></li><li>
+        <span class="n">Camomila extrato glicólico</span><span class="pont"></span><span class="d">5%</span></li><li>
+        <span class="n">TrichoSol®</span><span class="pont"></span><span class="d">qsp 60ml</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Aplicar algumas gotas <strong>sem esfregar</strong>, até 2 vezes ao dia, conforme liberação do cirurgião.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>Bisabolol</h4><p>Ativo da camomila que <strong>inibe mediadores do prurido</strong> e da inflamação. O trio bisabolol + alantoína + camomila é coprescrito na farmácia (<strong>151</strong> e <strong>121</strong> vezes) — calmante sem álcool, sobre a base TrichoSol®.</p></div></div></div>
+<div style="height:6mm"></div>
+<div class="bloco" data-formula data-grupo="2">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Sérum Reparador da Área Doadora</b><small>cicatrização</small></span><svg viewBox="0 0 24 24"><path d="M15.5 3.2a9 9 0 1 0 5.3 13.6A7.5 7.5 0 0 1 15.5 3.2z" fill="none" stroke="var(--lua)" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">Fator de crescimento EGF</span><span class="pont"></span><span class="d">1%</span></li><li class="ativo-destaque">
+        <span class="n">Fator de crescimento TGF-β3</span><span class="pont"></span><span class="d">2%</span></li><li>
+        <span class="n">GHK-Cu (Copper Peptide)</span><span class="pont"></span><span class="d">1%</span></li><li>
+        <span class="n">D-Pantenol</span><span class="pont"></span><span class="d">2%</span></li><li>
+        <span class="n">TrichoSol®</span><span class="pont"></span><span class="d">qsp 30ml</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Aplicar <strong>somente na área doadora</strong>, 1 vez à noite, após a cicatrização inicial. <strong>Não aplicar nos enxertos.</strong></p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques"><div class="destaque"><h4>EGF</h4><p>Acelera a <strong>reepitelização</strong> das microincisões da área doadora.</p></div><div class="destaque"><h4>TGF-β3</h4><p>Isoforma <strong>anticicatricial</strong> do TGF-β, que organiza o colágeno e reduz a marca das extrações. Fica longe dos enxertos porque a família TGF-β sinaliza catágeno.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">Protocolo Capilar</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="tabela"><h3>Regras do protocolo</h3>
+    <table><thead><tr><th>Regra</th><th>Quando aplicar</th></tr></thead><tbody><tr><td>Hierarquia da F4</td><td>Obrigatórios (∗) nunca faltam · Tretinoína entra pelo laudo · Restritos (∗∗) só com indicação genética · Complementares (∗∗∗) sempre presentes.</td></tr><tr><td>Tretinoína 0,015%</td><td>Laudo indica <strong>estímulo regenerativo</strong>, regeneração folicular reduzida, baixa proliferação celular ou turnover epidérmico — e <strong>SULT1A1 reduzida</strong>.</td></tr><tr><td>Fórmula 5</td><td>Laudo indica <strong>fatores de crescimento</strong>, peptídeos regeneradores, <strong>deficiência angiogênica</strong> ou comprometimento da matriz extracelular.</td></tr><tr><td>Fórmula 7</td><td>Bloco obrigatório + <strong>2 blocos</strong> na ordem: metilfolato → antioxidante → nutricional. Sem indicação de metilfolato, usar antioxidante + nutricional.</td></tr><tr><td>Fórmula 1</td><td><strong>Dutasterida</strong> com via androgênica intensa (SRD5A2 + SRD5A1, AR ou HDAC9). <strong>Finasterida</strong> com achado isolado no SRD5A2.</td></tr><tr><td>Fórmula 3</td><td>Somente com <strong>PTGFR preservado</strong>.</td></tr><tr><td>Fórmula 9</td><td><strong>FUT2</strong> alterado ou qualquer gene indicando inflamação, disbiose ou eflúvio.</td></tr></tbody></table>
+    </div>
+<div style="height:4mm"></div>
+<div class="texto"><h3>Cuidados</h3><p><strong>Minoxidil oral:</strong> avaliar pressão arterial, frequência cardíaca e edema; contraindicado em feocromocitoma e cardiopatia descompensada. <strong>Finasterida e dutasterida:</strong> uso masculino; informar sobre efeitos na libido; mulheres em idade fértil não devem manipular as cápsulas. <strong>Tretinoína e latanoprosta:</strong> contraindicadas na gestação.</p><p><strong>Monitoramento laboratorial sugerido:</strong> 25(OH)D e cálcio (GC/VDR), folato, B12 e homocisteína (MTHFR, FUT2), ferritina (TMPRSS6), zinco e perfil lipídico (ZPR1). O laudo indica <strong>predisposição</strong> — a prescrição final depende da avaliação clínica do prescritor.</p></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<script>// Desenha as linhas que ligam os ativos em destaque (ativo-destaque) aos
+// textos explicativos (.destaque h4) de cada página, como no guia original.
+window.desenharConectores = function () {
+  const pxPorMm = (() => {
+    const d = document.createElement("div");
+    d.style.width = "100mm";
+    document.body.appendChild(d);
+    const v = d.getBoundingClientRect().width / 100;
+    d.remove();
+    return v;
+  })();
+
+  for (const conteudo of document.querySelectorAll(".pagina .conteudo")) {
+    const grupos = [...new Set([...conteudo.querySelectorAll("[data-grupo]")].map((e) => e.dataset.grupo))];
+    for (const g of grupos) {
+      const blocos = [...conteudo.querySelectorAll(`[data-grupo="${g}"]`)];
+      desenharGrupo(
+        conteudo,
+        blocos.flatMap((b) => [...b.querySelectorAll(".ativo-destaque .n")]),
+        blocos.flatMap((b) => [...b.querySelectorAll(".destaque h4")]),
+      );
+    }
+  }
+
+  // Um tronco por fórmula: liga só os ativos em destaque dela aos seus textos.
+  function desenharGrupo(conteudo, ativos, titulos) {
+    const base = conteudo.getBoundingClientRect();
+    if (!ativos.length || !titulos.length) return;
+
+    const tronco = 9 * pxPorMm;
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("class", "conectores");
+    const traco = (x1, y1, x2, y2) => {
+      const l = document.createElementNS(ns, "line");
+      Object.entries({ x1, y1, x2, y2, stroke: "#6b6b70", "stroke-width": 0.3 * pxPorMm }).forEach(([k, v]) =>
+        l.setAttribute(k, v),
+      );
+      svg.appendChild(l);
+    };
+    const ys = [];
+
+    for (const a of ativos) {
+      const r = a.getBoundingClientRect();
+      const y = r.top + r.height * 0.55 - base.top;
+      traco(tronco, y, r.left - base.left - 1.2 * pxPorMm, y);
+      ys.push(y);
+    }
+    for (const h of titulos) {
+      const r = h.getBoundingClientRect();
+      const y = r.top + r.height / 2 - base.top;
+      const ponta = r.left - base.left - 1.5 * pxPorMm;
+      const t = 1.6 * pxPorMm;
+      traco(tronco, y, ponta - t, y);
+      const seta = document.createElementNS(ns, "path");
+      seta.setAttribute("d", `M${ponta - t * 1.5},${y - t} L${ponta},${y} L${ponta - t * 1.5},${y + t} Z`);
+      seta.setAttribute("fill", "#6b6b70");
+      svg.appendChild(seta);
+      ys.push(y);
+    }
+    traco(tronco, Math.min(...ys), tronco, Math.max(...ys));
+    conteudo.appendChild(svg);
+  }
+};
+
+// Avisa quando o conteúdo de uma página passa da área útil (precisa dividir a página).
+window.verificarTransbordo = function () {
+  const avisos = [];
+  document.querySelectorAll(".pagina.interna").forEach((pag, i) => {
+    const c = pag.querySelector(".conteudo");
+    if (c.scrollHeight > c.clientHeight + 2) avisos.push(`página ${i + 2} passou da área útil`);
+  });
+  return avisos;
+};
+</script>
+<script>addEventListener("load",function(){(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(function(){window.desenharConectores&&window.desenharConectores();});});</script>
+</body></html>
