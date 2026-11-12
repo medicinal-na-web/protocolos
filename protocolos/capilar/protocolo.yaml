@@ -473,7 +473,7 @@ paginas:
     - destaques:
         - nome: Piritionato de Zinco
           texto: Antifúngico e **seborregulador** que controla a **microinflamação** do couro cabeludo. Com o **jaborandi** e a **Auxina Tricógena®**, prepara o couro cabeludo para receber a loção.
-    - faixa: { src: espuma.jpg, altura: 38 }
+    - faixa: { src: espuma.jpg, altura: 24 }
 
   # Página F5 e F8 — variações NEXUS
   - - tabela:
