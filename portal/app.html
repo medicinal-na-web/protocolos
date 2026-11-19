@@ -141,6 +141,33 @@
   :root[data-theme="dark"] .adm-badge.tmp{color:#f0b968}
   .cart-exp{font-variant-numeric:tabular-nums}
 
+  /* ---- Solicitar fórmula (motor Nexus) ---- */
+  .ia-form{background:var(--sup);border:1px solid var(--linha);border-radius:16px;box-shadow:var(--sombra);padding:18px;margin-top:20px;display:grid;gap:4px}
+  .ia-form textarea.in{min-height:84px;resize:vertical;font-size:14.5px}
+  .ia-form .in{font-size:14.5px;padding:11px 13px}
+  .ia-form .dois{margin-top:2px}
+  @media (max-width:560px){.ia-form .dois{grid-template-columns:1fr}}
+  .ia-form .btn{width:auto;justify-self:start;padding:12px 22px;margin-top:14px}
+  .ia-nota{color:var(--tinta-2);font-size:12.5px;margin-top:8px}
+  .ia-h2{font-family:var(--disp);font-size:18px;font-weight:600;margin:30px 0 0}
+  .adm-badge.ger{background:color-mix(in srgb,var(--acc) 14%,transparent);color:var(--acc)}
+  .adm-badge.err{background:color-mix(in srgb,var(--erro) 14%,transparent);color:var(--erro)}
+  .ia-row{grid-template-columns:1fr}
+  .ia-obj{font-size:13.5px;margin-top:6px;color:var(--tinta)}
+  .ia-motivo{font-size:13px;margin-top:8px;color:var(--erro)}
+  .ia-formula{margin-top:12px;border-top:1px dashed var(--linha);padding-top:12px}
+  .ia-formula h4{font-family:var(--disp);font-size:15px;font-weight:600;margin:0 0 8px}
+  .ia-formula table{border-collapse:collapse;width:100%;font-size:13.5px}
+  .ia-formula td{padding:4px 0;vertical-align:top;border-bottom:1px solid var(--linha)}
+  .ia-formula td.d{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;padding-left:12px;font-weight:600}
+  .ia-formula td.n small{display:block;color:var(--tinta-2);font-size:11.5px;margin-top:2px}
+  .ia-formula .pos{margin-top:10px;font-size:13.5px}
+  .ia-formula .acoes{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+  .ia-gerando{display:inline-block;width:12px;height:12px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:ia-gira .8s linear infinite;vertical-align:-1px}
+  @keyframes ia-gira{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){.ia-gerando{animation:none}}
+  #ia-minhas{margin-bottom:26px}
+
   /* ---- Modal de liberação ---- */
   .modal{position:fixed;inset:0;z-index:60;background:rgba(10,18,32,.55);display:flex;align-items:flex-end;justify-content:center;padding:0}
   @media (min-width:640px){.modal{align-items:center;padding:20px}}
@@ -223,6 +250,7 @@
     <nav class="nav" id="nav" hidden style="margin-left:18px">
       <button class="nav-b ativo" data-view="protocolos" type="button">Protocolos</button>
       <button class="nav-b" data-view="cartela" id="nav-cartela" type="button" hidden>Minha carteira</button>
+      <button class="nav-b" data-view="ia" id="nav-ia" type="button" hidden>Solicitar fórmula</button>
       <button class="nav-b" data-view="materiais" id="nav-materiais" type="button" hidden>Materiais</button>
       <button class="nav-b" data-view="admin" id="nav-admin" type="button" hidden>Administração</button>
     </nav>
@@ -234,6 +262,11 @@
       <div class="intro">
         <h1>Protocolos da Medicinal</h1>
         <p>Toque em um protocolo para ver o guia completo e copiar as fórmulas prontas para a prescrição.</p>
+      </div>
+      <div id="ia-minhas" hidden>
+        <h2 class="ia-h2">Fórmulas preparadas para você</h2>
+        <p class="ia-nota">Montadas pelo motor Nexus da Medicinal a partir do histórico de prescrições e aprovadas em todas as regras do motor.</p>
+        <div id="ia-minhas-lista" class="adm-lista"></div>
       </div>
       <div id="grade" class="mosaico" aria-live="polite"></div>
       <div class="carregando" id="carregando">Carregando protocolos…</div>
@@ -313,6 +346,37 @@
       <div class="pr-resumo" id="ct-resumo"></div>
       <div id="ct-lista" class="adm-lista"></div>
       <div class="carregando" id="ct-carregando">Carregando sua carteira…</div>
+    </div>
+
+    <div id="view-ia" hidden>
+      <div class="intro">
+        <h1>Solicitar fórmula</h1>
+        <p>Peça ao motor Nexus uma fórmula avulsa para um prescritor da sua carteira. Ela é montada a partir do histórico de prescrições da Medicinal e só é entregue ao prescritor se passar em todas as regras do motor.</p>
+      </div>
+      <div class="ia-form" id="ia-form">
+        <label class="campo" for="ia-presc">Prescritor da carteira</label>
+        <input class="in" id="ia-presc" list="ia-presc-lista" placeholder="Digite o nome ou o CRM…" autocomplete="off">
+        <datalist id="ia-presc-lista"></datalist>
+        <label class="campo2" for="ia-objetivo">Objetivo terapêutico</label>
+        <textarea class="in" id="ia-objetivo" maxlength="1000" placeholder="Ex.: fadiga crônica e falta de energia em paciente adulta"></textarea>
+        <div class="dois">
+          <div>
+            <label class="campo2" for="ia-forma">Forma farmacêutica</label>
+            <select class="in" id="ia-forma"></select>
+          </div>
+          <div>
+            <label class="campo2" for="ia-restricoes">Restrições (opcional)</label>
+            <input class="in" id="ia-restricoes" maxlength="1000" placeholder="Ex.: sem cafeína, gestante, alergia a…">
+          </div>
+        </div>
+        <label class="campo2" for="ia-obs">Observações para o motor (opcional)</label>
+        <input class="in" id="ia-obs" maxlength="1000" placeholder="Ex.: o prescritor costuma usar Rhodiola">
+        <button class="btn" id="ia-enviar" type="button">Solicitar ao motor Nexus</button>
+        <div class="aviso" id="ia-aviso"></div>
+      </div>
+      <h2 class="ia-h2" id="ia-sol-titulo">Minhas solicitações</h2>
+      <div id="ia-lista" class="adm-lista"></div>
+      <div class="carregando" id="ia-carregando" hidden>Carregando…</div>
     </div>
 
     <div id="view-materiais" hidden>
@@ -487,11 +551,13 @@
     $("nav-admin").hidden=!sessao.admin;
     $("nav-cartela").hidden=!sessao.visitadora;
     $("nav-materiais").hidden=!sessao.visitadora;
+    $("nav-ia").hidden=!(sessao.visitadora||sessao.admin);
     // todos começam em Protocolos; visitadora/admin trocam de aba pela nav
     viewAtual="protocolos";
     document.querySelectorAll(".nav-b").forEach(function(x){x.classList.toggle("ativo",x.dataset.view==="protocolos")});
-    $("view-protocolos").hidden=false; $("view-admin").hidden=true; $("view-cartela").hidden=true; $("view-materiais").hidden=true;
+    $("view-protocolos").hidden=false; $("view-admin").hidden=true; $("view-cartela").hidden=true; $("view-materiais").hidden=true; $("view-ia").hidden=true;
     carregarProtocolos();
+    if(!sessao.visitadora&&!sessao.admin) carregarMinhasFormulas();
   }
   // Navegação Protocolos / Administração (admin)
   var viewAtual="protocolos", adminCarregado=false;
@@ -499,7 +565,9 @@
     bt.onclick=function(){
       var v=bt.dataset.view; if(v===viewAtual)return; viewAtual=v;
       document.querySelectorAll(".nav-b").forEach(function(x){x.classList.toggle("ativo",x.dataset.view===v)});
-      $("view-protocolos").hidden=v!=="protocolos"; $("view-admin").hidden=v!=="admin"; $("view-cartela").hidden=v!=="cartela"; $("view-materiais").hidden=v!=="materiais";
+      $("view-protocolos").hidden=v!=="protocolos"; $("view-admin").hidden=v!=="admin"; $("view-cartela").hidden=v!=="cartela"; $("view-materiais").hidden=v!=="materiais"; $("view-ia").hidden=v!=="ia";
+      if(v==="ia"){ if(!iaIniciada){iaIniciada=true;iniciarIA();} else carregarSolicitacoes(); }
+      if(v!=="ia") pararPollIA();
       if(v==="admin"&&!adminCarregado){adminCarregado=true;carregarAdmin();}
       if(v==="cartela"&&!cartelaCarregada){cartelaCarregada=true;carregarCartela();}
       if(v==="materiais"&&!materiaisCarregado){materiaisCarregado=true;carregarMateriais();}
@@ -929,8 +997,129 @@
     });
   }
 
+  // ---------- Solicitar fórmula ao motor Nexus (visitadora; admin acompanha todas) ----------
+  var iaIniciada=false, iaPresc={}, tPollIA=null;
+  var IA_STATUS={pendente:["Na fila","ger"],gerando:["Gerando","ger"],entregue:["Entregue ao prescritor","pub"],nao_gerada:["Não gerada","off"],erro:["Falha — será tentada de novo","err"]};
+  var IA_MOTIVOS={fora_da_cartela:"Esse prescritor não está na sua carteira.",objetivo_curto:"Descreva o objetivo com um pouco mais de detalhe.",forma_invalida:"Escolha a forma farmacêutica.",nao_visitadora:"Somente visitadoras podem solicitar fórmulas."};
+
+  async function iniciarIA(){
+    $("ia-form").hidden=!sessao.visitadora;
+    $("ia-sol-titulo").textContent=sessao.visitadora?"Minhas solicitações":"Solicitações das visitadoras";
+    if(sessao.visitadora){
+      var fs=await rpc("ia_formas",{})||[], sel=$("ia-forma"); sel.innerHTML="";
+      fs.forEach(function(f){ var o=document.createElement("option"); o.value=f.tp; o.textContent=f.rotulo+(f.via==="topico"?" (tópico)":""); sel.appendChild(o); });
+      var d=await rpc("visitadora_cartela",{p_busca:"",p_limite:2000});
+      var dl=$("ia-presc-lista"); dl.innerHTML=""; iaPresc={};
+      ((d&&d.itens)||[]).forEach(function(it){
+        var rot=(it.nome||"—")+" — CRM "+it.nrcrm+"/"+it.ufcrm;
+        iaPresc[rot]=it; var o=document.createElement("option"); o.value=rot; dl.appendChild(o);
+      });
+    }
+    carregarSolicitacoes();
+  }
+
+  $("ia-enviar").onclick=async function(){
+    var it=iaPresc[$("ia-presc").value.trim()], av=$("ia-aviso");
+    if(!it) return aviso(av,"Escolha um prescritor da lista da sua carteira.");
+    var obj=$("ia-objetivo").value.trim();
+    if(obj.length<5) return aviso(av,IA_MOTIVOS.objetivo_curto);
+    $("ia-enviar").disabled=true; aviso(av,"Enviando ao motor Nexus…","ok");
+    var r=await rpc("visitadora_solicitar_formula",{p_pfcrm:it.pfcrm,p_ufcrm:it.ufcrm,p_nrcrm:it.nrcrm,p_objetivo:obj,
+      p_tpformafarma:parseInt($("ia-forma").value,10),p_restricoes:$("ia-restricoes").value.trim()||null,p_observacoes:$("ia-obs").value.trim()||null});
+    $("ia-enviar").disabled=false;
+    if(!r||!r.ok){ return aviso(av,(r&&IA_MOTIVOS[r.motivo])||"Não foi possível registrar a solicitação."); }
+    aviso(av,"Solicitação registrada. O motor está trabalhando — acompanhe abaixo (leva cerca de 1 a 3 minutos).","ok");
+    $("ia-objetivo").value=""; $("ia-restricoes").value=""; $("ia-obs").value="";
+    dispararGeracao(r.id);
+    carregarSolicitacoes();
+  };
+
+  // Dispara a geração na hora; se falhar, o despachante do servidor pega em até 1 minuto.
+  async function dispararGeracao(id){
+    try{
+      var url=NEXUS_URL+"/functions/v1/gerar-formula";
+      function opt(){return {method:"POST",headers:{apikey:ANON,Authorization:"Bearer "+sessao.access_token,"Content-Type":"application/json"},body:JSON.stringify({id:id})}}
+      var r=await fetch(url,opt());
+      if(r.status===401){ if(await refrescar()) await fetch(url,opt()); }
+    }catch(e){}
+  }
+
+  async function carregarSolicitacoes(){
+    var L=$("ia-lista");
+    if(!L.children.length) $("ia-carregando").hidden=false;
+    var d=await rpc("visitadora_solicitacoes",{p_limite:60});
+    $("ia-carregando").hidden=true;
+    if(!d){ L.innerHTML='<p class="adm-meta">Não foi possível carregar as solicitações.</p>'; return; }
+    L.innerHTML="";
+    if(!d.length) L.innerHTML='<p class="adm-meta">Nenhuma solicitação ainda.</p>';
+    var emAndamento=false;
+    d.forEach(function(s){ if(s.status==="pendente"||s.status==="gerando"||s.status==="erro")emAndamento=true; L.appendChild(linhaSolicitacao(s)); });
+    pararPollIA();
+    if(emAndamento&&viewAtual==="ia") tPollIA=setTimeout(carregarSolicitacoes,8000);
+  }
+  function pararPollIA(){ if(tPollIA){clearTimeout(tPollIA);tPollIA=null;} }
+
+  function linhaSolicitacao(s){
+    var st=IA_STATUS[s.status]||[s.status,"off"];
+    var row=document.createElement("div"); row.className="adm-row ia-row";
+    row.innerHTML='<div class="adm-info"><h3><span class="t"></span> <span class="adm-badge '+st[1]+'">'+
+      ((s.status==="gerando"||s.status==="pendente")?'<span class="ia-gerando" aria-hidden="true"></span> ':'')+escH(st[0])+'</span></h3>'+
+      '<div class="adm-meta"></div><div class="ia-obj"></div></div>';
+    row.querySelector(".t").textContent=s.prescritor||"Prescritor";
+    var quando=s.criado_em?new Date(s.criado_em).toLocaleString("pt-BR",{dateStyle:"short",timeStyle:"short"}):"";
+    row.querySelector(".adm-meta").textContent="CRM "+(s.crm||"")+" · "+(s.forma||"")+" · "+quando;
+    row.querySelector(".ia-obj").textContent=s.objetivo||"";
+    var info=row.querySelector(".adm-info");
+    if((s.status==="nao_gerada"||s.status==="erro")&&s.motivo){ var m=document.createElement("div"); m.className="ia-motivo"; m.textContent=s.motivo; info.appendChild(m); }
+    if(s.status==="entregue"&&s.formula) info.appendChild(blocoFormula(s.formula,s.forma));
+    return row;
+  }
+
+  // Fórmula (itens, doses, posologia) com botão de copiar
+  function blocoFormula(f,formaRot){
+    var itens=f.itens||f.ativos||[];
+    var box=document.createElement("div"); box.className="ia-formula";
+    var h=document.createElement("h4"); h.textContent=(f.nome||"Fórmula")+(formaRot?" — "+formaRot:""); box.appendChild(h);
+    var tb=document.createElement("table");
+    itens.forEach(function(a){
+      var tr=document.createElement("tr");
+      var n=document.createElement("td"); n.className="n"; n.textContent=a.nome||("cdpro "+a.cdpro);
+      if(a.racional){ var sm=document.createElement("small"); sm.textContent=a.racional; n.appendChild(sm); }
+      var dd=document.createElement("td"); dd.className="d"; dd.textContent=(a.dose!=null?a.dose:"")+" "+(a.unidade||"");
+      tr.appendChild(n); tr.appendChild(dd); tb.appendChild(tr);
+    });
+    box.appendChild(tb);
+    if(f.posologia){ var p=document.createElement("div"); p.className="pos"; p.innerHTML="<b>Posologia:</b> "; p.appendChild(document.createTextNode(f.posologia)); box.appendChild(p); }
+    var ac=document.createElement("div"); ac.className="acoes";
+    var bc=document.createElement("button"); bc.className="mini"; bc.type="button"; bc.textContent="Copiar fórmula";
+    bc.onclick=function(){
+      var txt=(f.nome||"Fórmula")+(formaRot?" — "+formaRot:"")+"\n"+itens.map(function(a){return (a.nome||("cdpro "+a.cdpro))+" ..... "+a.dose+" "+(a.unidade||"")}).join("\n")+(f.posologia?"\n\nPosologia: "+f.posologia:"");
+      var ok=function(){showToast("Fórmula copiada.")}, falha=function(){showToast("Não foi possível copiar.")};
+      if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok,falha); else falha();
+    };
+    ac.appendChild(bc); box.appendChild(ac);
+    return box;
+  }
+
+  // Área do prescritor: fórmulas que o motor preparou para ele
+  async function carregarMinhasFormulas(){
+    var d=await rpc("minhas_formulas_ia",{});
+    if(!d||!d.length){ $("ia-minhas").hidden=true; return; }
+    var L=$("ia-minhas-lista"); L.innerHTML="";
+    d.forEach(function(p){
+      var row=document.createElement("div"); row.className="adm-row ia-row";
+      row.innerHTML='<div class="adm-info"><div class="adm-meta"></div></div>';
+      var quando=p.criado_em?new Date(p.criado_em).toLocaleDateString("pt-BR"):"";
+      row.querySelector(".adm-meta").textContent=(p.objetivo||"")+(quando?" · "+quando:"");
+      var fx=p.formula||{}; if(!fx.nome)fx.nome=p.nome;
+      row.querySelector(".adm-info").appendChild(blocoFormula(fx,(p.forma&&p.forma.rotulo)||""));
+      L.appendChild(row);
+    });
+    $("ia-minhas").hidden=false;
+  }
+
   // ---------- Sair ----------
-  function sair(){limparSessao();sessao=null;location.hash="";$("app").hidden=true;$("visor").hidden=true;$("modal-acesso").hidden=true;$("nav").hidden=true;$("view-admin").hidden=true;$("view-cartela").hidden=true;$("view-protocolos").hidden=false;viewAtual="protocolos";adminCarregado=false;cartelaCarregada=false;cartelaItens=[];cvCarregado=false;cvItens=[];cvCdfun=null;materiaisCarregado=false;$("view-materiais").hidden=true;$("tela-login").hidden=false;$("passo-cod").hidden=true;$("passo-id").hidden=false}
+  function sair(){pararPollIA();iaIniciada=false;$("view-ia").hidden=true;$("ia-minhas").hidden=true;limparSessao();sessao=null;location.hash="";$("app").hidden=true;$("visor").hidden=true;$("modal-acesso").hidden=true;$("nav").hidden=true;$("view-admin").hidden=true;$("view-cartela").hidden=true;$("view-protocolos").hidden=false;viewAtual="protocolos";adminCarregado=false;cartelaCarregada=false;cartelaItens=[];cvCarregado=false;cvItens=[];cvCdfun=null;materiaisCarregado=false;$("view-materiais").hidden=true;$("tela-login").hidden=false;$("passo-cod").hidden=true;$("passo-id").hidden=false}
   $("sair").onclick=sair;
 
   // ---------- Início ----------
