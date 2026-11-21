@@ -354,6 +354,11 @@
         <p>Peça ao motor Nexus uma fórmula avulsa para um prescritor da sua carteira. Ela é montada a partir do histórico de prescrições da Medicinal e só é entregue ao prescritor se passar em todas as regras do motor.</p>
       </div>
       <div class="ia-form" id="ia-form">
+        <div id="ia-cart-box" hidden>
+          <label class="campo" for="ia-cart">Carteira da visitadora</label>
+          <select class="in" id="ia-cart"></select>
+          <div style="height:10px"></div>
+        </div>
         <label class="campo" for="ia-presc">Prescritor da carteira</label>
         <input class="in" id="ia-presc" list="ia-presc-lista" placeholder="Digite o nome ou o CRM…" autocomplete="off">
         <datalist id="ia-presc-lista"></datalist>
@@ -1003,19 +1008,38 @@
   var IA_MOTIVOS={fora_da_cartela:"Esse prescritor não está na sua carteira.",objetivo_curto:"Descreva o objetivo com um pouco mais de detalhe.",forma_invalida:"Escolha a forma farmacêutica.",nao_visitadora:"Somente visitadoras podem solicitar fórmulas."};
 
   async function iniciarIA(){
-    $("ia-form").hidden=!sessao.visitadora;
+    var podePedir=sessao.visitadora||sessao.admin;
+    $("ia-form").hidden=!podePedir;
+    $("ia-cart-box").hidden=true;
     $("ia-sol-titulo").textContent=sessao.visitadora?"Minhas solicitações":"Solicitações das visitadoras";
-    if(sessao.visitadora){
+    if(podePedir){
       var fs=await rpc("ia_formas",{})||[], sel=$("ia-forma"); sel.innerHTML="";
       fs.forEach(function(f){ var o=document.createElement("option"); o.value=f.tp; o.textContent=f.rotulo+(f.via==="topico"?" (tópico)":""); sel.appendChild(o); });
-      var d=await rpc("visitadora_cartela",{p_busca:"",p_limite:2000});
-      var dl=$("ia-presc-lista"); dl.innerHTML=""; iaPresc={};
-      ((d&&d.itens)||[]).forEach(function(it){
-        var rot=(it.nome||"—")+" — CRM "+it.nrcrm+"/"+it.ufcrm;
-        iaPresc[rot]=it; var o=document.createElement("option"); o.value=rot; dl.appendChild(o);
-      });
+      if(sessao.visitadora){
+        var d=await rpc("visitadora_cartela",{p_busca:"",p_limite:2000});
+        montarPrescritores((d&&d.itens)||[]);
+      } else {
+        // admin: escolhe a carteira de uma visitadora e pede em nome dela
+        $("ia-cart-box").hidden=false;
+        var v=await rpc("admin_visitadoras",{}), sc=$("ia-cart"); sc.innerHTML="";
+        ((v&&v.itens)||[]).forEach(function(x){ var o=document.createElement("option"); o.value=x.cdfun; o.textContent=(x.nome||("Func "+x.cdfun))+" — "+(x.total||0)+" na carteira"; sc.appendChild(o); });
+        sc.onchange=carregarCarteiraAdmin;
+        if(sc.options.length) carregarCarteiraAdmin();
+      }
     }
     carregarSolicitacoes();
+  }
+  async function carregarCarteiraAdmin(){
+    $("ia-presc").value="";
+    var d=await rpc("admin_visitadora_cartela",{p_cdfun:parseInt($("ia-cart").value,10),p_busca:"",p_limite:2000});
+    montarPrescritores((d&&d.itens)||[]);
+  }
+  function montarPrescritores(itens){
+    var dl=$("ia-presc-lista"); dl.innerHTML=""; iaPresc={};
+    itens.forEach(function(it){
+      var rot=(it.nome||"—")+" — CRM "+it.nrcrm+"/"+it.ufcrm;
+      iaPresc[rot]=it; var o=document.createElement("option"); o.value=rot; dl.appendChild(o);
+    });
   }
 
   $("ia-enviar").onclick=async function(){
