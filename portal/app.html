@@ -106,6 +106,43 @@
   .palco::-webkit-scrollbar-thumb:hover{background:color-mix(in srgb,var(--tinta-2) 55%,transparent);background-clip:content-box}
   .palco::-webkit-scrollbar-track{background:transparent}
   .palco iframe{flex:0 0 auto;border:0;background:#fff;box-shadow:0 10px 40px rgba(20,35,58,.18);display:block;overflow:hidden}
+  /* ---- Protocolo em lista (menu lateral de fórmulas, sem guia A4) ---- */
+  .palco.lat-modo{display:block;padding:0;overflow:hidden}
+  .lat{display:grid;grid-template-columns:300px minmax(0,1fr);height:100%}
+  .lat-menu{border-right:1px solid var(--linha);background:var(--sup);overflow-y:auto;padding:14px 10px 30px}
+  .lat-busca{width:100%;border:1px solid var(--linha);background:var(--sup-2);color:var(--tinta);border-radius:10px;padding:9px 12px;font:inherit;font-size:13.5px;margin-bottom:6px}
+  .lat-grupo{margin-top:14px}
+  .lat-grupo h5{margin:0 0 4px;padding:0 8px;font-family:var(--disp);font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tema,var(--acc))}
+  .lat-item{display:block;width:100%;text-align:left;border:0;background:none;color:var(--tinta);border-radius:9px;padding:7px 10px;font:inherit;font-size:13.5px;line-height:1.3;cursor:pointer}
+  .lat-item small{display:block;color:var(--tinta-2);font-size:11.5px}
+  .lat-item:hover{background:var(--sup-2)}
+  .lat-item.ativo{background:color-mix(in srgb,var(--tema,var(--acc)) 14%,transparent);color:var(--tinta);font-weight:600}
+  .lat-corpo{overflow-y:auto;padding:26px clamp(16px,4vw,48px) 60px}
+  .lat-topo{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .lat-excl{display:inline-flex;align-items:center;gap:6px;background:color-mix(in srgb,var(--tema,var(--acc)) 14%,transparent);color:var(--tema,var(--acc));border-radius:999px;padding:4px 11px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+  .lat-card{max-width:720px;background:var(--sup);border:1px solid var(--linha);border-radius:18px;box-shadow:var(--sombra);overflow:hidden}
+  .lat-card .cab{padding:18px 22px;color:#fff;background:linear-gradient(135deg,var(--tema-escura,#2A62AC),var(--tema-clara,#5b8fd6))}
+  .lat-card .cab .t{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.85;font-weight:600}
+  .lat-card .cab h2{margin:4px 0 2px;font-family:var(--disp);font-size:22px;line-height:1.2}
+  .lat-card .cab .s{font-size:13.5px;opacity:.92}
+  .lat-card .cab .via{display:inline-block;margin-top:10px;background:rgba(255,255,255,.2);border-radius:999px;padding:3px 10px;font-size:11.5px;font-weight:700}
+  .lat-card .miolo{padding:18px 22px 22px}
+  .lat-card table{border-collapse:collapse;width:100%;font-size:14px}
+  .lat-card td{padding:7px 0;border-bottom:1px dashed var(--linha);vertical-align:top}
+  .lat-card td.d{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:600;padding-left:14px}
+  .lat-card .pos{margin-top:14px;font-size:14px;line-height:1.55}
+  .lat-card .acoes{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+  .lat-copiar{border:0;border-radius:11px;padding:11px 18px;font:inherit;font-size:13.5px;font-weight:700;color:#fff;cursor:pointer;background:linear-gradient(135deg,var(--tema-escura,#2A62AC),var(--tema-clara,#5b8fd6))}
+  .lat-copiar.ok{background:var(--ok)}
+  .lat-nav{border:1px solid var(--linha);background:var(--sup-2);color:var(--tinta);border-radius:11px;padding:10px 14px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+  .lat-vazio{color:var(--tinta-2);font-size:13px;padding:8px 10px}
+  .pcard .tag.excl{display:inline-block;background:#fff;color:#8a2a5c;opacity:1;padding:3px 8px;border-radius:999px}
+  @media (max-width:760px){
+    .lat{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}
+    .lat-menu{border-right:0;border-bottom:1px solid var(--linha);max-height:38vh;padding:10px 10px 14px}
+    .lat-corpo{padding:16px 14px 50px}
+    .lat-card .cab h2{font-size:19px}
+  }
   /* ---- Navegação (admin) ---- */
   .nav{display:flex;gap:4px;background:var(--sup-2);border:1px solid var(--linha);border-radius:999px;padding:4px}
   .nav-b{border:0;background:none;color:var(--tinta-2);font-family:var(--disp);font-weight:600;font-size:13px;padding:7px 14px;border-radius:999px}
@@ -579,7 +616,7 @@
     };
   });
   async function carregarProtocolos(){
-    var dados=await api("?select=slug,titulo,cor,ordem,capa,formulas,destaque,novo&ativo=eq.true&order=destaque.desc,ordem");
+    var dados=await api("?select=slug,titulo,cor,ordem,capa,formulas,destaque,novo,visibilidade&ativo=eq.true&order=destaque.desc,ordem");
     if(!dados){$("carregando").textContent="Não foi possível carregar os protocolos.";return}
     protocolos=dados; $("carregando").hidden=true;
     var g=$("grade"); g.innerHTML="";
@@ -589,7 +626,7 @@
       b.className="pcard"+(d>=3?" d3":d===2?" d2":"");
       b.style.background="linear-gradient(135deg,"+(cor.escura||"#2A62AC")+","+(cor.clara||"#5b8fd6")+")";
       if(p.capa){var im=new Image();im.onload=function(){b.style.backgroundImage="url('"+p.capa+"')"};im.src=p.capa;}
-      b.innerHTML=(p.novo?'<span class="novo">Novo</span>':'')+'<div class="leg"><span class="tag">Protocolo</span><h3></h3><div class="meta">'+n+(n===1?" fórmula":" fórmulas")+'</div></div>';
+      b.innerHTML=(p.novo?'<span class="novo">Novo</span>':'')+'<div class="leg">'+(p.visibilidade==="restrito"?'<span class="tag excl">Exclusivo</span>':'<span class="tag">Protocolo</span>')+'<h3></h3><div class="meta">'+n+(n===1?" fórmula":" fórmulas")+'</div></div>';
       b.querySelector("h3").textContent=p.titulo;
       b.onclick=function(){abrirGuia(p)};
       g.appendChild(b);
@@ -711,8 +748,101 @@
     }catch(e){}
   }
   var protoAtual=null;
+  // Protocolos montados por tema (ex.: exclusivos de um prescritor) não têm guia A4:
+  // o visor mostra um menu lateral com as fórmulas agrupadas por tema.
+  function ehLista(p){ return (p.formulas||[]).some(function(f){return f&&f.tema}); }
+  function negritoSeguro(s){ return escH(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>"); }
+  function semMarcas(f){ var c=Object.assign({},f); if(c.modo)c.modo=c.modo.replace(/\*\*/g,""); return c; }
+  function abrirLista(p){
+    var fs=p.formulas||[], cor=p.cor||{};
+    var palco=$("palco"); palco.innerHTML=""; palco.classList.add("lat-modo");
+    palco.style.setProperty("--tema",cor.escura||"#2A62AC");
+    palco.style.setProperty("--tema-escura",cor.escura||"#2A62AC");
+    palco.style.setProperty("--tema-clara",cor.clara||"#5b8fd6");
+    var lat=document.createElement("div"); lat.className="lat";
+    var menu=document.createElement("aside"); menu.className="lat-menu"; menu.setAttribute("aria-label","Fórmulas do protocolo");
+    var busca=document.createElement("input"); busca.className="lat-busca"; busca.type="search"; busca.placeholder="Buscar fórmula ou ativo…";
+    menu.appendChild(busca);
+    var lista=document.createElement("div"); menu.appendChild(lista);
+    var corpo=document.createElement("section"); corpo.className="lat-corpo";
+    lat.appendChild(menu); lat.appendChild(corpo); palco.appendChild(lat);
+    var atual=0, botoes=[];
+
+    function mostrar(i){
+      atual=i; var f=fs[i]; if(!f)return;
+      botoes.forEach(function(b){b.el.classList.toggle("ativo",b.i===i)});
+      corpo.innerHTML="";
+      var topo=document.createElement("div"); topo.className="lat-topo";
+      if(p.visibilidade==="restrito"){ var ex=document.createElement("span"); ex.className="lat-excl"; ex.textContent="Exclusivo para você"; topo.appendChild(ex); }
+      corpo.appendChild(topo);
+      var card=document.createElement("article"); card.className="lat-card";
+      card.innerHTML='<div class="cab"><div class="t"></div><h2></h2><div class="s"></div>'+(f.via?'<span class="via"></span>':'')+'</div><div class="miolo"><table></table></div>';
+      card.querySelector(".t").textContent=f.tema||p.titulo;
+      card.querySelector("h2").textContent=f.nome||"Fórmula";
+      card.querySelector(".s").textContent=f.subtitulo||"";
+      if(f.via) card.querySelector(".via").textContent=f.via;
+      var tb=card.querySelector("table");
+      (f.ativos||[]).forEach(function(a){
+        var tr=document.createElement("tr"), n=document.createElement("td"), d=document.createElement("td");
+        n.textContent=a.nome||""; d.className="d"; d.textContent=a.dose||"";
+        tr.appendChild(n); tr.appendChild(d); tb.appendChild(tr);
+      });
+      var mi=card.querySelector(".miolo");
+      if(f.modo){ var po=document.createElement("div"); po.className="pos"; po.innerHTML="<b>Posologia:</b> "+negritoSeguro(f.modo); mi.appendChild(po); }
+      var ac=document.createElement("div"); ac.className="acoes";
+      var bc=document.createElement("button"); bc.type="button"; bc.className="lat-copiar"; bc.textContent="Copiar fórmula";
+      bc.onclick=function(){
+        var fx=semMarcas(f);
+        copiarRico(window,document,htmlFormula(fx)+rodapeHtml(p),textoFormula(fx)+"\n\n("+p.titulo+" · Medicinal)").then(function(){
+          bc.classList.add("ok"); bc.textContent="Copiada!";
+          showToast("Fórmula “"+f.nome+"” copiada — cole na prescrição (Ctrl+V).");
+          setTimeout(function(){bc.classList.remove("ok"); bc.textContent="Copiar fórmula"},1700);
+        }).catch(function(){ showToast("Não foi possível copiar automaticamente. Selecione o texto da fórmula."); });
+      };
+      ac.appendChild(bc);
+      [[i-1,"‹ Anterior"],[i+1,"Próxima ›"]].forEach(function(o){
+        if(!fs[o[0]])return; var b=document.createElement("button"); b.type="button"; b.className="lat-nav"; b.textContent=o[1];
+        b.onclick=function(){mostrar(o[0])}; ac.appendChild(b);
+      });
+      mi.appendChild(ac); corpo.appendChild(card); corpo.scrollTop=0;
+      if(window.matchMedia("(max-width:760px)").matches) corpo.scrollIntoView({block:"start"});
+    }
+
+    function montarMenu(){
+      var q=busca.value.trim().toLowerCase(); lista.innerHTML=""; botoes=[];
+      var grupos={}, ordem=[];
+      fs.forEach(function(f,i){
+        var alvo=[f.nome,f.subtitulo,f.tema].concat((f.ativos||[]).map(function(a){return a.nome})).join(" ").toLowerCase();
+        if(q&&alvo.indexOf(q)<0)return;
+        var t=f.tema||"Fórmulas"; if(!grupos[t]){grupos[t]=[];ordem.push(t);} grupos[t].push(i);
+      });
+      if(!ordem.length){ lista.innerHTML='<div class="lat-vazio">Nenhuma fórmula encontrada.</div>'; return; }
+      ordem.forEach(function(t){
+        var g=document.createElement("div"); g.className="lat-grupo";
+        var h=document.createElement("h5"); h.textContent=t+" · "+grupos[t].length; g.appendChild(h);
+        grupos[t].forEach(function(i){
+          var f=fs[i], b=document.createElement("button"); b.type="button"; b.className="lat-item"+(i===atual?" ativo":"");
+          b.textContent=f.nome||"Fórmula";
+          if(f.subtitulo){ var s=document.createElement("small"); s.textContent=f.subtitulo; b.appendChild(s); }
+          b.onclick=function(){mostrar(i)};
+          botoes.push({i:i,el:b}); g.appendChild(b);
+        });
+        lista.appendChild(g);
+      });
+    }
+    busca.oninput=montarMenu;
+    montarMenu(); mostrar(0);
+  }
   async function abrirGuia(p){
     protoAtual=p;
+    $("palco").classList.remove("lat-modo");
+    if(ehLista(p)){
+      $("guia-titulo").textContent=p.titulo;
+      $("visor").hidden=false;
+      history.pushState({guia:p.slug},"","#"+p.slug);
+      abrirLista(p);
+      return;
+    }
     $("guia-titulo").textContent=p.titulo;
     $("visor").hidden=false; $("palco").innerHTML='<div class="carregando">Abrindo guia…</div>';
     history.pushState({guia:p.slug},"","#"+p.slug);
