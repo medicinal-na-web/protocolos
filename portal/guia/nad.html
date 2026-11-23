@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia de Formulações — NAD+ · Energia Celular</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap">
+<style>/* Guia de Formulações — Medicinal Farmácia e Manipulação
+   Layout A4 único. A cor de cada protocolo vem de --tema-escura / --tema-clara,
+   definidas no protocolo.yaml. O resto é identidade fixa da marca.
+   --mascara-selo / --mascara-logo são injetadas pelo build como data URI
+   (o Chromium não aplica mask com arquivo local). */
+
+
+
+
+:root {
+  --marca-azul: #1f6fc2;
+  --card-borda: #22b5e6;
+  --texto: #1d1d1f;
+  --texto-suave: #3a3a3c;
+  --conector: #6b6b70;
+  --sol: #f5b82e;
+  --lua: #1f2f5c;
+}
+
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #fff; }
+body {
+  font-family: "Montserrat", sans-serif;
+  color: var(--texto);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.pagina {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  page-break-after: always;
+  break-after: page;
+  background: #fff;
+}
+.pagina:last-child { page-break-after: auto; break-after: auto; }
+
+/* Selo da marca tingido com a cor do protocolo */
+.selo-tema {
+  background: linear-gradient(135deg, var(--tema-escura), var(--tema-clara));
+  -webkit-mask: var(--mascara-selo) center / contain no-repeat;
+  mask: var(--mascara-selo) center / contain no-repeat;
+}
+
+/* ---------- Capa ---------- */
+.capa-faixa {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 63mm;
+  background: linear-gradient(90deg, var(--tema-escura), var(--tema-clara));
+  padding: 19mm 18mm 0 18mm;
+  color: #fff;
+  z-index: 2;
+}
+.capa-faixa .sobretitulo { font-size: 13pt; font-weight: 400; letter-spacing: 0.2pt; }
+.capa-faixa h1 {
+  margin: 4mm 0 0 0;
+  font-size: 26pt;
+  font-weight: 700;
+  letter-spacing: 0.3pt;
+  text-transform: uppercase;
+  max-width: 130mm;
+  line-height: 1.1;
+}
+.capa-faixa .selo-branco {
+  position: absolute;
+  right: 18mm;
+  top: 17mm;
+  width: 27mm;
+  height: 27mm;
+  background: url("https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/selo-branco.webp") center / contain no-repeat;
+}
+.capa-imagem {
+  position: absolute;
+  inset: 63mm 0 0 0;
+  background-size: cover;
+  background-position: center top;
+}
+.capa-imagem::after {
+  /* véu branco no rodapé para o logo respirar e ter contraste em qualquer capa */
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 58mm;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.75) 55%, rgba(255,255,255,0.98) 100%);
+}
+.capa-logo {
+  position: absolute;
+  left: 50%;
+  bottom: 9mm;
+  transform: translateX(-50%);
+  width: 62mm;
+  height: 14mm;
+  z-index: 3;
+  background: var(--tema-escura);
+  -webkit-mask: var(--mascara-logo) center / contain no-repeat;
+  mask: var(--mascara-logo) center / contain no-repeat;
+}
+
+/* ---------- Páginas internas ---------- */
+.cabecalho {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 30mm;
+  padding: 9mm 14mm 0 23mm;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.cabecalho .nome { font-size: 8.5pt; margin-top: 8mm; text-transform: uppercase; }
+.cabecalho .marca { display: flex; flex-direction: column; align-items: flex-end; }
+.cabecalho .marca img { width: 46mm; }
+.cabecalho .marca span { font-size: 8.5pt; margin-top: 1.5mm; letter-spacing: 0.2pt; }
+
+.selo-canto {
+  position: absolute;
+  right: 9mm;
+  bottom: 9mm;
+  width: 14mm;
+  height: 14mm;
+}
+
+.conteudo {
+  position: absolute;
+  top: 37mm;
+  left: 0; right: 0; bottom: 22mm;
+}
+
+/* ---------- Bloco de fórmula ---------- */
+.bloco {
+  position: relative;
+  padding: 0 14mm 0 23mm;
+}
+.bloco + .bloco { margin-top: 7mm; }
+
+.linha-formula {
+  display: flex;
+  align-items: flex-start;
+  gap: 8mm;
+}
+
+.card {
+  position: relative;
+  width: 122mm;
+  flex: none;
+  border: 0.45mm solid var(--card-borda);
+  border-radius: 5mm;
+  padding: 12.5mm 9mm 7mm 18mm;
+  background: rgba(255,255,255,0.86);
+  z-index: 2;
+}
+.pill {
+  position: absolute;
+  top: -5mm;
+  left: 12mm;
+  background: #fff;
+  border: 0.4mm solid var(--card-borda);
+  border-radius: 4mm;
+  padding: 1.6mm 4mm 1.6mm 3.5mm;
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+}
+.pill .titulos { display: flex; flex-direction: column; line-height: 1.1; }
+.pill b { font-size: 11pt; font-weight: 700; text-transform: uppercase; }
+.pill small { font-size: 7pt; font-weight: 700; font-style: italic; text-transform: uppercase; }
+.pill svg { width: 5.6mm; height: 5.6mm; flex: none; }
+
+.via {
+  position: absolute;
+  top: -1mm;
+  right: -10mm;
+  width: 17mm;
+  height: 12mm;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 17pt;
+  background: linear-gradient(135deg, var(--tema-escura), var(--tema-clara));
+}
+
+.ativos { list-style: none; margin: 0; padding: 0; width: 76mm; }
+.ativos li {
+  display: flex;
+  align-items: baseline;
+  font-size: 7.4pt;
+  height: 6.1mm;
+}
+.ativos .n { font-weight: 700; white-space: nowrap; }
+/* Pontilhado feito com pontos de texto: sai idêntico em qualquer leitor de PDF
+   (borda "dotted" muda de densidade conforme a escala e o comprimento). */
+.ativos .pont {
+  flex: 1;
+  min-width: 3mm;
+  margin: 0 1mm;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 6pt;
+  font-weight: 400;
+  letter-spacing: 0.32mm;
+  color: #555;
+  direction: rtl; /* corta o excesso no início, então os pontos sempre encostam na dose */
+}
+.ativos .pont::before {
+  content: "................................................................................................................................................";
+}
+.ativos .d { white-space: nowrap; }
+.modo { font-size: 7.4pt; margin: 4mm 0 0 0; max-width: 82mm; line-height: 1.45; }
+.modo b { font-weight: 700; }
+
+.qr-box {
+  width: 37mm;
+  flex: none;
+  margin-left: auto;
+  margin-top: 4mm;
+  border: 0.4mm solid var(--card-borda);
+  border-radius: 4mm;
+  padding: 3mm 3mm 3.5mm;
+  text-align: center;
+  font-size: 9.5pt;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.qr-box img { width: 27mm; height: 27mm; margin-top: 2.5mm; display: block; margin-inline: auto; }
+
+/* Arte ao lado do card (mãos, conta-gotas, potes…) */
+.arte-lado {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  /* funde a foto com o branco da página */
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+
+/* ---------- Destaques de ativos ---------- */
+.destaques { margin-top: 6mm; padding-left: 8mm; padding-right: 6mm; }
+.destaque + .destaque { margin-top: 3.5mm; }
+.destaque h4 {
+  margin: 0 0 2.5mm 0;
+  font-size: 10.5pt;
+  font-weight: 700;
+}
+.destaque p {
+  margin: 0;
+  font-size: 9.6pt;
+  line-height: 1.42;
+  color: var(--texto-suave);
+}
+.destaque p strong, .texto p strong { color: var(--texto); font-weight: 700; }
+
+.destaques-com-arte { display: flex; align-items: flex-start; gap: 2mm; margin-right: -14mm; }
+.destaques-com-arte .destaques { flex: 1; padding-right: 0; }
+.arte-destaques {
+  flex: none;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+
+/* Conectores desenhados por script após o layout */
+.conectores {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ---------- Faixa de imagem ---------- */
+.faixa {
+  position: relative;
+  height: var(--altura, 55mm);
+  margin: 7mm 0;
+  background-size: cover;
+  background-position: center;
+}
+.faixa::before, .faixa::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  height: 38%;
+  pointer-events: none;
+}
+.faixa::before { top: 0; background: linear-gradient(#fff 0%, rgba(255,255,255,0.75) 35%, rgba(255,255,255,0)); }
+.faixa::after { bottom: 0; background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.75) 65%, #fff 100%); }
+.faixa .etiqueta { position: absolute; top: 2mm; left: 50%; transform: translateX(-50%); margin: 0; z-index: 2; }
+
+/* ---------- Texto educativo ---------- */
+.texto { padding: 0 25mm 0 23mm; }
+.texto h3 {
+  font-size: 13pt;
+  margin: 0 0 3mm;
+  color: var(--tema-escura);
+}
+.texto p { font-size: 9.6pt; line-height: 1.55; margin: 0 0 3mm; color: var(--texto-suave); text-align: justify; }
+.texto .ilustracao { display: block; margin: 2mm auto 4mm; max-width: 100%; }
+.etiqueta {
+  display: block;
+  width: fit-content;
+  margin: 2mm auto -6mm;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.etiqueta span {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 1.5mm 4mm;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14pt;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--tema-escura), var(--tema-clara));
+  border-radius: 1.5mm;
+}
+.etiqueta span:first-child { transform: rotate(-3deg); width: fit-content; }
+.etiqueta span + span { margin-top: -1mm; transform: rotate(-2deg); }
+
+/* fundir: false — foto já em fundo branco puro, sem esfumar as bordas */
+.arte-destaques.sem-mascara { -webkit-mask-image: none; mask-image: none; align-self: center; }
+
+/* Separação entre fórmulas diferentes na mesma página: respiro + linha fina na cor do protocolo */
+.bloco[data-formula] ~ .bloco[data-formula] { margin-top: 13mm; }
+.bloco[data-formula] ~ .bloco[data-formula]::before {
+  content: "";
+  position: absolute;
+  left: 23mm;
+  right: 14mm;
+  top: -7.5mm;
+  height: 0.35mm;
+  background: linear-gradient(90deg, var(--tema-clara), rgba(255,255,255,0));
+  opacity: 0.7;
+}
+</style>
+<style>:root{--tema-escura:#8a3a0f;--tema-clara:#f2a541;--mascara-selo:url("https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/selo.webp");--mascara-logo:url("https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-mono.webp");}</style>
+</head><body>
+<section class="pagina capa">
+    <div class="capa-faixa">
+      <div class="sobretitulo">Guia de Formulações</div>
+      <h1>NAD+ · Energia Celular</h1>
+      <div class="selo-branco"></div>
+    </div>
+    <div class="capa-imagem" style="background-image:url('https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/nad/capa.webp');background-position:center center"></div>
+    <div class="capa-logo"></div>
+  </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">NAD+ · Energia Celular</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="texto"><h3>Destaque · NAD+ Nasal</h3><p>A via <strong>intranasal</strong> entrega o NAD+ direto ao <strong>sistema nervoso central</strong> pelos nervos <strong>olfatório e trigêmeo</strong>, <strong>contornando a barreira hematoencefálica</strong> e a degradação digestiva. É a rota que leva a coenzima ao cérebro com a <strong>menor dose</strong> e o <strong>início de ação mais rápido</strong>.</p></div>
+<div class="faixa com-etiqueta" style="background-image:url('https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/nad/nasal.webp');--altura:78mm;background-position:center 42%"><div class="etiqueta"><span>Nariz</span><span>Cérebro</span></div></div>
+<div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>NAD+ Nasal</b><small>energia e foco pela via nariz-cérebro</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">OUT</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">NAD+ (LipoAvail®)</span><span class="pont"></span><span class="d">10mg/ml</span></li><li>
+        <span class="n">Nasalan® (veículo nasal)</span><span class="pont"></span><span class="d">q.s.p.</span></li><li>
+        <span class="n">Frasco spray nasal</span><span class="pont"></span><span class="d">10ml</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Aplicar 1 jato em cada narina pela manhã (cada jato ≈ 0,1 ml ≈ 1 mg). A frequência pode ir a 2 vezes ao dia conforme avaliação do prescritor. Dose extrapolada de dados pré-clínicos — ver orientações ao prescritor.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>NAD+ Nasal</h4><p>Em modelos <strong>pré-clínicos</strong>, o NAD+ intranasal <strong>elevou os níveis de NAD+ no cérebro</strong> e <strong>protegeu neurônios</strong>, com desempenho <strong>superior às vias sistêmicas</strong> na mesma dose. A forma <strong>lipossomal</strong> protege a coenzima e favorece a passagem pela mucosa. Indicado como suporte a <strong>energia mental, foco e neuroproteção</strong>.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">NAD+ · Energia Celular</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="texto"><h3>A coenzima da energia celular</h3><p>O <strong>NAD+</strong> (nicotinamida adenina dinucleotídeo), também chamado de <strong>coenzima I</strong>, e sua forma reduzida, o <strong>NADH</strong>, são o par que transporta elétrons na <strong>cadeia respiratória mitocondrial</strong>. O NADH doa elétrons ao <strong>complexo I</strong> e dirige a síntese de <strong>ATP</strong>, sendo cofator de mais de <strong>300 desidrogenases</strong>.</p><p>O pool de <strong>NAD+</strong> também sustenta a sinalização das <strong>sirtuínas</strong> e o <strong>reparo de DNA</strong> pelas PARPs, e <strong>cai com a idade</strong>. Repor esse pool apoia quatro frentes clínicas — <strong>energia e metabolismo</strong>, <strong>antienvelhecimento e reparo de DNA</strong>, <strong>cognição</strong> e <strong>saúde do fígado e do coração</strong> — que organizam as fórmulas deste guia.</p></div>
+<div class="faixa com-etiqueta" style="background-image:url('https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/nad/lipossomo.webp');--altura:66mm;background-position:center 50%"><div class="etiqueta"><span>Tecnologia</span><span>lipossomal</span></div></div>
+<div class="texto"><h3>Por que lipossomal?</h3><p>O NAD+ tem <strong>alto peso molecular</strong>, atravessa mal as membranas e é <strong>instável em temperatura ambiente</strong> e em meio ácido. No <strong>LipoAvail® NAD+</strong>, a coenzima é encapsulada em uma <strong>bicamada de fosfolipídios</strong> semelhante à membrana dos enterócitos, que se <strong>funde à célula</strong> e libera o ativo.</p><p><strong>Lipossomo verdadeiro</strong>, verificado por Crio-MET: morfologia esférica, <strong>diâmetro médio de 30 nm</strong> e <strong>50% de NAD+</strong>. Em estudos em animais, a biodisponibilidade (AUC 0–24h) foi <strong>1,52 vez maior</strong> e a concentração de NAD+ no fígado <strong>9 vezes maior</strong> que a do NAD+ comum. Dose usual: <strong>10 a 50 mg/dia</strong>.</p></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">NAD+ · Energia Celular</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    <img class="arte-lado" src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/nad/capsulas.webp" style="top:96mm;right:0mm;width:62mm">
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Energia &amp; Disposição</b><small>fadiga e cansaço</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">NAD+ (LipoAvail®)</span><span class="pont"></span><span class="d">50mg</span></li><li class="ativo-destaque">
+        <span class="n">Teacrine®</span><span class="pont"></span><span class="d">150mg</span></li><li>
+        <span class="n">Sulbutiamina</span><span class="pont"></span><span class="d">150mg</span></li><li>
+        <span class="n">Rhodiola rosea</span><span class="pont"></span><span class="d">100mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 1 cápsula pela manhã, em jejum, 30 minutos antes do café da manhã.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>NAD+</h4><p>Coenzima que entra direto na <strong>cadeia respiratória</strong> para gerar <strong>ATP</strong>. Também participa da síntese de <strong>dopamina e noradrenalina</strong>, apoiando <strong>disposição e foco</strong>. Na forma <strong>lipossomal</strong>, ganha estabilidade e absorção.</p></div><div class="destaque"><h4>Teacrine®</h4><p>Teacrina purificada, de estrutura semelhante à cafeína, que oferece <strong>energia e motivação sustentadas</strong> <strong>sem tolerância</strong> e sem a queda típica do estimulante.</p></div></div></div>
+<div class="bloco" data-formula data-grupo="2">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Longevidade Celular</b><small>antienvelhecimento e reparo de DNA</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li>
+        <span class="n">NAD+ (LipoAvail®)</span><span class="pont"></span><span class="d">50mg</span></li><li class="ativo-destaque">
+        <span class="n">PQQ (Bioactive Quinone®)</span><span class="pont"></span><span class="d">10mg</span></li><li class="ativo-destaque">
+        <span class="n">Resveratrol</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">Nicotinamida</span><span class="pont"></span><span class="d">35mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 1 cápsula ao dia, pela manhã, em jejum.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques"><div class="destaque"><h4>PQQ</h4><p>Pirroloquinolina quinona, que estimula a <strong>biogênese mitocondrial</strong> (formação de novas mitocôndrias) e protege contra o <strong>estresse oxidativo</strong>. Com o NAD+, une <strong>mais mitocôndrias</strong> a <strong>mais combustível</strong> para elas.</p></div><div class="destaque"><h4>Resveratrol</h4><p>Polifenol que <strong>ativa as sirtuínas</strong>, enzimas dependentes de NAD+ ligadas à <strong>longevidade</strong> e ao <strong>reparo do DNA</strong>. A <strong>nicotinamida</strong> completa a fórmula como precursora do NAD+.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">NAD+ · Energia Celular</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Foco &amp; Memória</b><small>cognição e neuroproteção</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li>
+        <span class="n">NAD+ (LipoAvail®)</span><span class="pont"></span><span class="d">50mg</span></li><li class="ativo-destaque">
+        <span class="n">Magnésio L-treonato</span><span class="pont"></span><span class="d">300mg</span></li><li class="ativo-destaque">
+        <span class="n">Acetil-L-carnitina</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">Bacopa monnieri</span><span class="pont"></span><span class="d">100mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 1 cápsula pela manhã, em jejum.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>Magnésio L-treonato</h4><p>Única forma de magnésio com <strong>boa passagem pela barreira hematoencefálica</strong>, que aumenta a <strong>densidade sináptica</strong> e favorece <strong>memória e aprendizado</strong>.</p></div><div class="destaque"><h4>Acetil-L-carnitina</h4><p>Transporta ácidos graxos para dentro da mitocôndria e doa acetil para a síntese de <strong>acetilcolina</strong>, somando <strong>energia neuronal</strong> à ação do NAD+.</p></div></div></div>
+<div class="bloco" data-formula data-grupo="2">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Fígado em Equilíbrio</b><small>hepatoproteção e detox</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li>
+        <span class="n">NAD+ (LipoAvail®)</span><span class="pont"></span><span class="d">50mg</span></li><li class="ativo-destaque">
+        <span class="n">Silimarina</span><span class="pont"></span><span class="d">300mg</span></li><li>
+        <span class="n">N-acetilcisteína</span><span class="pont"></span><span class="d">200mg</span></li><li>
+        <span class="n">Glutationa reduzida</span><span class="pont"></span><span class="d">100mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 1 cápsula ao dia, em jejum.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques"><div class="destaque"><h4>Silimarina</h4><p>Complexo de flavonolignanas do <strong>cardo-mariano</strong> que <strong>estabiliza a membrana do hepatócito</strong>, estimula a <strong>regeneração hepática</strong> e eleva a <strong>glutationa</strong>. A <strong>NAC</strong> e a <strong>glutationa reduzida</strong> reforçam a <strong>defesa antioxidante</strong> e a <strong>detoxificação</strong> do fígado, órgão onde o NAD+ é mais exigido.</p></div></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">NAD+ · Energia Celular</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="bloco" data-formula data-grupo="1">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Coração Ativo</b><small>suporte cardiovascular</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li>
+        <span class="n">NAD+ (LipoAvail®)</span><span class="pont"></span><span class="d">50mg</span></li><li class="ativo-destaque">
+        <span class="n">Coenzima Q10</span><span class="pont"></span><span class="d">100mg</span></li><li>
+        <span class="n">Taurina</span><span class="pont"></span><span class="d">200mg</span></li><li>
+        <span class="n">Magnésio bisglicinato</span><span class="pont"></span><span class="d">200mg</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Tomar 1 cápsula ao dia, em jejum.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="1"><div class="destaques"><div class="destaque"><h4>Coenzima Q10</h4><p>Recebe os elétrons na <strong>cadeia respiratória</strong> e é essencial ao <strong>músculo cardíaco</strong>, de alta demanda energética. Com <strong>taurina</strong> e <strong>magnésio</strong>, apoia a <strong>função cardíaca</strong> e o <strong>controle pressórico</strong>.</p></div></div></div>
+<div class="bloco" data-formula data-grupo="2">
+    
+    <div class="linha-formula">
+      <div class="card">
+        <div class="pill"><span class="titulos"><b>Sachê Recuperação</b><small>fadiga crônica e fibromialgia</small></span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="var(--sol)"/><g stroke="var(--sol)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(0 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(45 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(90 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(135 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(180 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(225 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(270 12 12)"/><line x1="12" y1="2.2" x2="12" y2="4.6" transform="rotate(315 12 12)"/></g></svg></div>
+        <div class="via">IN</div>
+        <ul class="ativos"><li class="ativo-destaque">
+        <span class="n">NAD+ (LipoAvail®)</span><span class="pont"></span><span class="d">50mg</span></li><li class="ativo-destaque">
+        <span class="n">D-ribose</span><span class="pont"></span><span class="d">5g</span></li><li>
+        <span class="n">L-carnitina</span><span class="pont"></span><span class="d">500mg</span></li><li>
+        <span class="n">Dimalato de magnésio</span><span class="pont"></span><span class="d">300mg</span></li><li>
+        <span class="n">Base sabor neutro</span><span class="pont"></span><span class="d">q.s.p. 1 sachê</span></li></ul>
+        <p class="modo"><b>Modo de uso:</b> Diluir 1 sachê em 200ml de água e tomar logo após o preparo, pela manhã.</p>
+      </div>
+      
+    </div>
+  </div>
+<div class="bloco" data-grupo="2"><div class="destaques-com-arte">
+    <div class="destaques"><div class="destaque"><h4>D-ribose</h4><p>Açúcar que forma o <strong>esqueleto do ATP</strong> e acelera a <strong>recuperação das reservas de energia</strong> muscular. Somada ao NAD+, à <strong>carnitina</strong> e ao <strong>malato de magnésio</strong>, apoia a <strong>fadiga crônica</strong>, a <strong>fibromialgia</strong> e a <strong>recuperação pós-treino</strong>.</p></div></div>
+    <img class="arte-destaques" src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/nad/sache.webp" style="width:52mm">
+  </div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<section class="pagina interna">
+      <div class="cabecalho">
+        <span class="nome">NAD+ · Energia Celular</span>
+        <div class="marca"><img src="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/_marca/logo-azul.webp"><span>GUIA DE FORMULAÇÕES</span></div>
+      </div>
+      <div class="conteudo"><div class="texto"><h3>Orientações ao prescritor</h3><p><strong>Posologia oral:</strong> NAD+ lipossomal de <strong>10 a 50 mg/dia</strong>, em dose única pela manhã e <strong>em jejum</strong>. As doses podem ser ajustadas ao objetivo terapêutico, ao estado clínico e ao perfil do paciente.</p><p><strong>NAD+ Nasal:</strong> não há dose intranasal <strong>humana</strong> estabelecida. A proposta (≈ 1 mg por jato, 1 a 2 vezes ao dia) é <strong>extrapolada de estudos pré-clínicos</strong> — NAD+ intranasal 20 mg/kg em ratos (Won et al., 2012) e restauração olfatória em camundongos (Yoo et al., 2026), ambos com ganho de NAD+ cerebral. Uso <strong>off-label</strong>, a critério do prescritor, e sujeito à validação do farmacêutico responsável.</p><p><strong>Segurança:</strong> NAD+ é geralmente bem tolerado (infusão IV de 750 mg em humanos sem eventos graves — Grant et al., 2019). Evitar em caso de hipersensibilidade; dados insuficientes na <strong>gestação e lactação</strong>. Considerar as interações próprias de cada associado (a NAC com nitratos, a coenzima Q10 com varfarina) e a potencialização da <strong>levodopa</strong> pela via dopaminérgica.</p><p><strong>Referências:</strong> Won SJ et al. J Neurotrauma. 2012;29(7):1401-1409 (PMID 22352983). Yoo SH et al. Exp Mol Med. 2026;58(7):2155-2167 (PMID 42380286). Grant R et al. Front Aging Neurosci. 2019;11:257. LipoAvail® NAD+ — material técnico EffePharm. Material destinado exclusivamente à classe prescritora; não constitui promessa de cura ou tratamento.</p></div>
+<div class="faixa com-etiqueta" style="background-image:url('https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app/img/nad/capa.webp');--altura:66mm;background-position:center 40%"><div class="etiqueta"><span>Mais energia</span><span>em cada célula</span></div></div></div>
+      <div class="selo-canto selo-tema"></div>
+    </section>
+<script>// Desenha as linhas que ligam os ativos em destaque (ativo-destaque) aos
+// textos explicativos (.destaque h4) de cada página, como no guia original.
+window.desenharConectores = function () {
+  const pxPorMm = (() => {
+    const d = document.createElement("div");
+    d.style.width = "100mm";
+    document.body.appendChild(d);
+    const v = d.getBoundingClientRect().width / 100;
+    d.remove();
+    return v;
+  })();
+
+  for (const conteudo of document.querySelectorAll(".pagina .conteudo")) {
+    const grupos = [...new Set([...conteudo.querySelectorAll("[data-grupo]")].map((e) => e.dataset.grupo))];
+    for (const g of grupos) {
+      const blocos = [...conteudo.querySelectorAll(`[data-grupo="${g}"]`)];
+      desenharGrupo(
+        conteudo,
+        blocos.flatMap((b) => [...b.querySelectorAll(".ativo-destaque .n")]),
+        blocos.flatMap((b) => [...b.querySelectorAll(".destaque h4")]),
+      );
+    }
+  }
+
+  // Um tronco por fórmula: liga só os ativos em destaque dela aos seus textos.
+  function desenharGrupo(conteudo, ativos, titulos) {
+    const base = conteudo.getBoundingClientRect();
+    if (!ativos.length || !titulos.length) return;
+
+    const tronco = 9 * pxPorMm;
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("class", "conectores");
+    const traco = (x1, y1, x2, y2) => {
+      const l = document.createElementNS(ns, "line");
+      Object.entries({ x1, y1, x2, y2, stroke: "#6b6b70", "stroke-width": 0.3 * pxPorMm }).forEach(([k, v]) =>
+        l.setAttribute(k, v),
+      );
+      svg.appendChild(l);
+    };
+    const ys = [];
+
+    for (const a of ativos) {
+      const r = a.getBoundingClientRect();
+      const y = r.top + r.height * 0.55 - base.top;
+      traco(tronco, y, r.left - base.left - 1.2 * pxPorMm, y);
+      ys.push(y);
+    }
+    for (const h of titulos) {
+      const r = h.getBoundingClientRect();
+      const y = r.top + r.height / 2 - base.top;
+      const ponta = r.left - base.left - 1.5 * pxPorMm;
+      const t = 1.6 * pxPorMm;
+      traco(tronco, y, ponta - t, y);
+      const seta = document.createElementNS(ns, "path");
+      seta.setAttribute("d", `M${ponta - t * 1.5},${y - t} L${ponta},${y} L${ponta - t * 1.5},${y + t} Z`);
+      seta.setAttribute("fill", "#6b6b70");
+      svg.appendChild(seta);
+      ys.push(y);
+    }
+    traco(tronco, Math.min(...ys), tronco, Math.max(...ys));
+    conteudo.appendChild(svg);
+  }
+};
+
+// Avisa quando o conteúdo de uma página passa da área útil (precisa dividir a página).
+window.verificarTransbordo = function () {
+  const avisos = [];
+  document.querySelectorAll(".pagina.interna").forEach((pag, i) => {
+    const c = pag.querySelector(".conteudo");
+    if (c.scrollHeight > c.clientHeight + 2) avisos.push(`página ${i + 2} passou da área útil`);
+  });
+  return avisos;
+};
+</script>
+<script>addEventListener("load",function(){(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(function(){window.desenharConectores&&window.desenharConectores();});});</script>
+</body></html>

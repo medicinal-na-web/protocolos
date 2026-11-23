@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Portal do Prescritor — Medicinal</title>
+<style>html,body{margin:0;height:100%}body{background:#eef2f7;font-family:system-ui,-apple-system,sans-serif;color:#51607a;display:grid;place-items:center}@media(prefers-color-scheme:dark){body{background:#0d1420;color:#9fb0c7}}</style>
+</head><body>
+<div id="l">Carregando o portal…</div>
+<script>
+// Carregador mínimo: o app vem da Edge Function portal-app (servido do repositório).
+// Atualizações do portal são publicadas pelo Supabase — este arquivo nunca precisa mudar.
+(function(){
+  var URL="https://uahbcelcjmjcljogfilh.supabase.co/functions/v1/portal-app";
+  var ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVhaGJjZWxjam1qY2xqb2dmaWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ1ODUzNTcsImV4cCI6MjEwMDE2MTM1N30.NoBkIgAjlziShwm0NQopOrymahzqQSWXXSldQahfNJs";
+  fetch(URL+"?t="+Date.now(),{headers:{apikey:ANON}})
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.text(); })
+    .then(function(h){ document.open(); document.write(h); document.close(); })
+    .catch(function(){ document.getElementById("l").textContent="Falha ao carregar o portal. Recarregue a página."; });
+})();
+</script>
+</body></html>
