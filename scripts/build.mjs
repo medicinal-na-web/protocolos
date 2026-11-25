@@ -114,7 +114,7 @@ async function renderizar(slug) {
     <div class="capa-faixa">
       <div class="sobretitulo">Guia de Formulações</div>
       <h1>${esc(p.titulo)}</h1>
-      ${p.medico ? `<div class="medico">Protocolo ${esc(p.medico)}</div>` : ""}
+      ${p.medico ? `<div class="medico">${esc(p.medico)}</div>` : ""}
       <div class="selo-branco"></div>
     </div>
     <div class="capa-imagem" style="background-image:url('${ctx.artes}/${esc(p.capa)}');background-position:${p.capa_posicao || "center top"}"></div>

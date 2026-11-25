@@ -11,7 +11,7 @@
 # - Vitamina D3: não encontrada na tabela ativos (GER-04)
 
 titulo: Bem-Estar na Menopausa
-medico: Dr. Luiz          # aparece na capa ("Protocolo Dr. Luiz") e no cabeçalho das páginas
+medico: Dr. Luiz          # aparece na capa e no cabeçalho das páginas
 cor:
   escura: "#7a1f4b"
   clara: "#e2879f"
