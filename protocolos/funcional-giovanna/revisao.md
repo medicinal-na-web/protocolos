@@ -54,3 +54,10 @@ Status: **rascunho para apresentação**, publicado no Portal do Prescritor como
 8. Fichas com `status_ficha = pendente` em vários ativos-base (Zn, Cu, K2, P5P, NAC etc.): sem dose min/máx cadastrada.
 9. A capa no portal reaproveita a imagem do protocolo NAD+. Trocar quando houver arte própria.
 10. Para liberar à prescritora: cadastrá-la no Portal (`entrega.prescritor`) e inserir `entrega.protocolo_acesso ('funcional-giovanna', <id>)`.
+
+## Marcação ✚ (ajuste de 25/11/2026)
+
+O ✚ indica ativo que a prescritora **ainda não usa naquela fórmula**. Nas 4 fórmulas novas, a combinação é nova, mas ela já
+prescreve quase todos os ativos em outras fórmulas: glutamina 30×, Fibregum 5×, CoreBiome 2×, StomaZinc 3×, berberina 8×,
+Crominex 12×, ácido lipoico 18×, Mg L-treonato 43×, teanina 35×, colina 16×, P5P 57×, Mg inositol 10×, 5-HTP 10×,
+fosfatidilserina 4×, ALCAR 2× e bacopa 1×. Só **Morosil®** e **açafrão (Crocus sativus)** nunca aparecem no histórico dela, e só eles mantêm o ✚.
