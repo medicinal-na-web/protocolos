@@ -75,6 +75,7 @@ body {
   max-width: 130mm;
   line-height: 1.1;
 }
+.capa-faixa .medico { margin-top: 3mm; font-size: 12pt; font-weight: 500; letter-spacing: 0.3pt; }
 .capa-faixa .selo-branco {
   position: absolute;
   right: 18mm;

@@ -26,6 +26,7 @@ alguma página passou da área útil.
 
 1. Copie `protocolos/disbiose/` para `protocolos/<novo>/`.
 2. Edite o `protocolo.yaml`:
+   - `medico` (opcional): nome do prescritor; aparece na capa como "Protocolo Dr. Fulano" e no cabeçalho das páginas.
    - `cor.escura` / `cor.clara`: cor do protocolo (degradê da capa, selos IN/OUT, selo do canto, logo da capa).
    - `qr`: link do "Copie a fórmula aqui" (padrão `https://medicinal.vip/protoc_<Tema>?r=qr`).
    - `paginas`: cada página é uma lista de blocos, na ordem em que aparecem.

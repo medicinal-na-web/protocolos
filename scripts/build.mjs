@@ -114,6 +114,7 @@ async function renderizar(slug) {
     <div class="capa-faixa">
       <div class="sobretitulo">Guia de Formulações</div>
       <h1>${esc(p.titulo)}</h1>
+      ${p.medico ? `<div class="medico">Protocolo ${esc(p.medico)}</div>` : ""}
       <div class="selo-branco"></div>
     </div>
     <div class="capa-imagem" style="background-image:url('${ctx.artes}/${esc(p.capa)}');background-position:${p.capa_posicao || "center top"}"></div>
@@ -138,7 +139,7 @@ async function renderizar(slug) {
     }
     paginas.push(`<section class="pagina interna">
       <div class="cabecalho">
-        <span class="nome">${esc(p.titulo)}</span>
+        <span class="nome">${esc(p.titulo)}${p.medico ? ` · ${esc(p.medico)}` : ""}</span>
         <div class="marca"><img src="../marca/logo-azul.png"><span>GUIA DE FORMULAÇÕES</span></div>
       </div>
       <div class="conteudo">${blocos.join("\n")}</div>
@@ -148,7 +149,7 @@ async function renderizar(slug) {
 
   return `<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8">
-<title>Guia de Formulações — ${esc(p.titulo)}</title>
+<title>Guia de Formulações — ${esc(p.titulo)}${p.medico ? ` — ${esc(p.medico)}` : ""}</title>
 <link rel="stylesheet" href="../template/guia.css">
 <style>:root{--tema-escura:${p.cor.escura};--tema-clara:${p.cor.clara};--mascara-selo:${dataUri("marca/selo.png")};--mascara-logo:${dataUri("marca/logo-mono.png")};}</style>
 </head><body>
