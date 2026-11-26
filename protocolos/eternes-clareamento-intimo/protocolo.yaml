@@ -9,6 +9,7 @@
 #   F3 hidratante (TP2, uso externo) → Ácido hialurônico em pó (5690) 0,5% + Madecassoside (8616) 0,2%
 #   (promestrieno: sem estoque · genisteína e S-equol: retirados por serem isoflavonas de soja)
 #   BioEcolia (8376) 1% incluída no F1 e no F3 a pedido da prescritora
+#   F4 cápsula   (TP1)  → Exsynutriment 100 mg + Bio-Arct, Glycoxil, vitamina C, manganês (protocolo Biotec); S-equol 10 mg opcional
 # RASCUNHO para revisão do prescritor/farmacêutico. Ver revisao.md.
 
 titulo: ETERNES CLUB - Clareamento Íntimo
@@ -17,7 +18,7 @@ parceiro:
   nome: Eternes Club
   cabecalho: Clareamento Íntimo
   assinatura: Dra. Mariana Amalia
-  lema: Um ritual de cuidado íntimo em três tempos, para uniformizar o tom, preservar o equilíbrio e devolver viço à pele mais sensível do corpo.
+  lema: Um ritual de cuidado íntimo em quatro tempos, para uniformizar o tom, preservar o equilíbrio e devolver viço à pele mais sensível do corpo.
 capa_titulo: [Clareamento, Íntimo]
 cor:
   escura: "#80003d"
@@ -30,7 +31,7 @@ paginas:
         titulo: O Ritual
         paragrafos:
           - A pele da **região íntima** é mais fina, mais úmida e mais reativa que a do rosto. O escurecimento da virilha, da vulva e do períneo vem do **atrito**, da **depilação**, das **alterações hormonais** e da **inflamação de baixo grau**. Por isso, o cuidado precisa clarear **sem agredir**, respeitando o **pH ácido** e a microbiota da região.
-          - O protocolo segue três tempos, **purificar**, **clarear** e **revitalizar**, que se completam e podem ser usados juntos desde o primeiro dia.
+          - O protocolo segue quatro tempos, **purificar**, **clarear**, **revitalizar** e **nutrir**: três cuidados de pele e uma cápsula que trata o tecido **de dentro para fora**. Todos se completam e podem começar juntos desde o primeiro dia.
     - espaco: 4
     - formula:
         etapa: { numero: "01", nome: Purificar }
@@ -112,11 +113,36 @@ paginas:
         paragrafos:
           - 'O **D-pantenol** e a **vitamina E** reforçam a barreira e protegem o tecido, e a **aroeira** acalma com ação **anti-inflamatória e antimicrobiana**. A fórmula é **livre de hormônios e de fitoestrogênios**.'
 
-  # Página 5 — orientações
+  # Página 5 — 04 Nutrir (cápsula oral)
+  - - formula:
+        etapa: { numero: "04", nome: Nutrir }
+        nome: Cápsula Matriz Íntima
+        subtitulo: colágeno de dentro para fora
+        via: IN
+        periodo: dia
+        ativos:
+          - { nome: Exsynutriment®, dose: 100mg, destaque: true }
+          - { nome: Bio-Arct®, dose: 50mg, destaque: true }
+          - { nome: Glycoxil®, dose: 50mg, destaque: true }
+          - { nome: Vitamina C, dose: 120mg }
+          - { nome: Manganês quelado, dose: 2mg }
+        modo_de_uso: Tomar 1 cápsula pela manhã, em uso contínuo.
+    - destaques:
+        - nome: Exsynutriment®
+          texto: '**Silício orgânico** estabilizado em colágeno marinho. Estimula a produção de **colágeno**, **elastina** e proteoglicanos, devolvendo **firmeza e espessura** aos tecidos da região íntima.'
+        - nome: Bio-Arct®
+          texto: Biomassa de alga vermelha do Ártico que **aumenta a energia celular** (ATP) e freia as enzimas que **degradam o colágeno**.
+        - nome: Glycoxil®
+          texto: Protege o colágeno da **glicação**, o enrijecimento causado pelo açúcar, e favorece o **trofismo** dos tecidos urinários e ginecológicos.
+    - texto:
+        paragrafos:
+          - 'A **vitamina C** e o **manganês** são cofatores indispensáveis para formar colágeno. **Opcional, a critério médico:** para mulheres na peri e pós-menopausa, sem contraindicação a fitoestrogênios, acrescentar **S-equol 10 mg** à cápsula.'
+
+  # Página 6 — orientações
   - - texto:
         titulo: O cuidado no dia a dia
         paragrafos:
-          - '**Manhã:** sabonete íntimo no banho e, em seguida, o creme revitalizante na vulva.'
+          - '**Manhã:** sabonete íntimo no banho e, em seguida, o creme revitalizante na vulva. Tomar a cápsula com o café da manhã.'
           - '**Noite:** sabonete íntimo e, com a pele seca, o creme clareador nas áreas escurecidas. O creme revitalizante pode ser reaplicado à noite nos lábios, se houver ressecamento.'
           - Os primeiros resultados no tom da pele aparecem entre **4 e 8 semanas**, e o resultado pleno entre **3 e 4 meses**. A hidratação e o conforto melhoram já nas **primeiras semanas** de creme revitalizante.
     - texto:
@@ -129,4 +155,4 @@ paginas:
         titulo: Atenção
         paragrafos:
           - Suspender o uso se houver **ardor persistente**, vermelhidão ou descamação intensa. Não usar sobre **feridas**, fissuras ou durante **infecção vaginal** ativa.
-          - Todas as fórmulas são de **uso externo** e **livres de hormônios**. Em gestação e amamentação, usar apenas com orientação médica.
+          - Os cuidados de pele são de **uso externo** e todas as fórmulas são **livres de hormônios**. O S-equol opcional é um fitoestrogênio derivado da soja. Em gestação e amamentação, usar apenas com orientação médica.
